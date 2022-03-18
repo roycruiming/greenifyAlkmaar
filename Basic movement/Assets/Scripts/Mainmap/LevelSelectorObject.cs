@@ -5,7 +5,8 @@ using UnityEngine;
 public class LevelSelectorObject : MonoBehaviour
 {
 
-    public string levelName;
+    public string levelNameDutch;
+    public string levelNameEnglish;
     public int index;
     public int isActive = 0;
     float posX = 0;

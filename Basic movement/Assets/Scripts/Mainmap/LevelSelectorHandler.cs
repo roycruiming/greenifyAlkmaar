@@ -63,10 +63,11 @@ public class LevelSelectorHandler : MonoBehaviour
 
             //move level info container
             levelInfoContainer.transform.position = new Vector3(indexObject.transform.position.x - 25, levelInfoContainer.transform.position.y, indexObject.transform.position.z + 207);
-            SetLevelName(indexObject.GetComponent<LevelSelectorObject>().levelName);
-            //move camera static with selection
-            // GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-            // mainCamera.transform.position = new Vector3(levelSelectorOutline.transform.position.x, mainCamera.transform.position.y, mainCamera.transform.position.z);
+            if(GlobalGameHandler.GetInstance().currentLanguage == Language.Dutch) SetLevelName(indexObject.GetComponent<LevelSelectorObject>().levelNameDutch);
+            else if(GlobalGameHandler.GetInstance().currentLanguage == Language.English) SetLevelName(indexObject.GetComponent<LevelSelectorObject>().levelNameEnglish);
+
+            GlobalGameHandler.SwitchLanguage();
+
         }
         //else return null;
     }
