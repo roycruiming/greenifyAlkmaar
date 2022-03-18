@@ -51,7 +51,7 @@ public class PauseMenu : MonoBehaviour
     public void ExitLevel()
     {
         Debug.Log("Go to level select");
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
     }
 
     public void ExitGame()
