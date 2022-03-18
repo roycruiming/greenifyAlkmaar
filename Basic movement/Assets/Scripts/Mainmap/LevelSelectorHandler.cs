@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelSelectorHandler : MonoBehaviour
 {
-    int currentLevelIndex;
+    public int currentLevelIndex;
     GameObject[] levelObjects;
     GameObject levelSelectorOutline;
     GameObject levelInfoContainer;
@@ -50,6 +50,7 @@ public class LevelSelectorHandler : MonoBehaviour
     }
 
     private void GetAndSetLevelSelectorByIndex(int index) {
+        GameObject.Find("MainMapCharacter").GetComponent<MainMapCharacter>().AddPath(index);
         GameObject indexObject = null;
         foreach(GameObject g in this.levelObjects) {
             if(g.GetComponent<LevelSelectorObject>().index == index) {
@@ -65,9 +66,6 @@ public class LevelSelectorHandler : MonoBehaviour
             levelInfoContainer.transform.position = new Vector3(indexObject.transform.position.x - 25, levelInfoContainer.transform.position.y, indexObject.transform.position.z + 207);
             if(GlobalGameHandler.GetInstance().currentLanguage == Language.Dutch) SetLevelName(indexObject.GetComponent<LevelSelectorObject>().levelNameDutch);
             else if(GlobalGameHandler.GetInstance().currentLanguage == Language.English) SetLevelName(indexObject.GetComponent<LevelSelectorObject>().levelNameEnglish);
-
-            GlobalGameHandler.SwitchLanguage();
-
         }
         //else return null;
     }

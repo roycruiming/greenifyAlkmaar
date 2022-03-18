@@ -24,6 +24,7 @@ public class GlobalGameHandler
     //call this function to change the language of the game.
     public static void SwitchLanguage() {
         GlobalGameHandler h = GlobalGameHandler.GetInstance();
+        
         if(h.currentLanguage == Language.Dutch) h.currentLanguage = Language.English;
         else h.currentLanguage = Language.Dutch;
     }
