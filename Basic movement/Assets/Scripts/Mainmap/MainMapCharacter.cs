@@ -48,35 +48,49 @@ public class MainMapCharacter : MonoBehaviour
         MoveToWayPoint();
     }
     public void MoveToWayPoint() {
-        // Transform target = GameObject.Find("level-selector-outline").transform;
-        // Vector3 targetPos = new Vector3(target.position.x + offsetX, transform.position.y, transform.position.z);
-        // Vector3 smoothPos = Vector3.Lerp(transform.position, targetPos, cameraSpeed * Time.deltaTime);
-        // transform.position = smoothPos;
         if(Path.Count > 0) {
+            //check if the currentIndex is leveltargetIndex if so skip the whole path and clear it
+            // if(currentIndex == targetIndex) {
+            //     Path.Clear();
+            //     targetWaypoint = null;
+            // }
+
             //decide if the waypoint has been reached and set the next waypoint
             if(targetWaypoint == null) targetWaypoint = Path[0];
 
             //decide if there are alot of waypoints so increase the speed of the character until less waypoints are present
+            //get the total of waypoints that exist
+            int totalOfWayPoints = allWaypointObjects.Count;
+            int amountOfCurrentWaypoints = Path.Count;
+            if(amountOfCurrentWaypoints > (totalOfWayPoints * 2)) this.characterSpeed = 400;
+            else if(amountOfCurrentWaypoints > totalOfWayPoints) this.characterSpeed = 200;
+            else if(amountOfCurrentWaypoints > (totalOfWayPoints / 2)) this.characterSpeed = 160;
+            else this.characterSpeed = 110; //default
 
-            //start moving the character
+            //move the character
             Vector3 targetPos = new Vector3(targetWaypoint.x, transform.position.y, targetWaypoint.z);
             Vector3 smoothPos = Vector3.MoveTowards(transform.position, targetPos, characterSpeed * Time.deltaTime);
             transform.position = smoothPos;
             isMoving = true;
+            //end move character
+            //turn character facing towards waypoint
+            transform.LookAt(new Vector3(targetWaypoint.x, targetWaypoint.y, targetWaypoint.z));
+            //
+
 
             //check if the waypoint has been reached if so set the next waypoint
             //Debug.Log("Target x , z :" + targetWaypoint.x + " " + targetWaypoint.y);
             //Debug.Log("Own x , z :" + transform.position.x + " " + transform.position.x);
             Vector3 difference = transform.position - new Vector3(targetWaypoint.x, transform.position.y, targetWaypoint.z);
-            Debug.Log(difference);
             bool reachedDestination;
-            if(difference.x <= 10.5 && difference.z <= 10.5) reachedDestination = true;
+            //math abs make the number positive so going forward or backwards doesn't make a difference
+            if(Mathf.Abs(difference.x) <= 5.5 && Mathf.Abs(difference.z) <= 5.5) reachedDestination = true;
             else reachedDestination = false;
             
             if(reachedDestination) {
-                currentWaypoint = Path[0]; //never used
-                currentIndex = Path[0].index;
-                Path.RemoveAt(0);
+                if(Path.Count > 0) currentWaypoint = Path[0]; //never used
+                if(Path.Count > 0) currentIndex = Path[0].index;
+                if(Path.Count > 0) Path.RemoveAt(0);
                 targetWaypoint = null;
             }
         }
@@ -101,8 +115,9 @@ public class MainMapCharacter : MonoBehaviour
         }
         else
         {
-            for (int i = currentIndex; i > targetIndex; i--)
+            for (int i = currentIndex; i >= targetIndex; i--)
             {
+                Debug.Log(i);
                 Path.Add(allWaypointObjects[i]);
             }
         }
@@ -110,7 +125,10 @@ public class MainMapCharacter : MonoBehaviour
 
     private int findWayPointByLevelIndex(int index) {
         foreach(MainmapWaypoint m in this.allWaypointObjects) {
-            if(m.isLevel && m.levelIndex == index) return m.index;
+            if(m.isLevel && m.levelIndex == index) {
+                Debug.Log("Levelindex = " + m.index);
+                return m.index;
+            }
         }
 
         return -1;
