@@ -6,24 +6,31 @@ using UnityEngine;
 public class MainMapCharacter : MonoBehaviour
 {
 
-    int currentWaypoint;
+    MainmapWaypoint currentWaypoint;
     List<MainmapWaypoint> Path;
     int targetIndex;
     int currentIndex;
-    public float characterSpeed = 1;
+    float characterSpeed;
     bool directionIsForward;
+    bool isMoving;
+    MainmapWaypoint targetWaypoint;
 
     List<MainmapWaypoint> allWaypointObjects;
 
     public void Awake() {
+        //default position is the meent level index 0
         Path = new List<MainmapWaypoint>();
         targetIndex = 0; //moet nog dynamisch maken
         currentIndex = 0;
-        currentWaypoint = 0;
+        isMoving = false;
+        characterSpeed = 110;
+        
 
         allWaypointObjects = new List<MainmapWaypoint>(GameObject.FindObjectsOfType<MainmapWaypoint>());
         allWaypointObjects = allWaypointObjects.OrderBy(x => x.index).ToList(); //sort the list by index
         directionIsForward = true;
+
+        currentWaypoint = allWaypointObjects[this.findWayPointByLevelIndex(0)];
     }
     // Start is called before the first frame update
     void Start()
@@ -34,20 +41,46 @@ public class MainMapCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveToWayPoint();
+        
     }
 
+    void FixedUpdate() {
+        MoveToWayPoint();
+    }
     public void MoveToWayPoint() {
         // Transform target = GameObject.Find("level-selector-outline").transform;
         // Vector3 targetPos = new Vector3(target.position.x + offsetX, transform.position.y, transform.position.z);
         // Vector3 smoothPos = Vector3.Lerp(transform.position, targetPos, cameraSpeed * Time.deltaTime);
         // transform.position = smoothPos;
         if(Path.Count > 0) {
-            Vector3 targetPos = new Vector3(Path[0].x,transform.position.y,Path[0].z);
-            Vector3 smoothPos = Vector3.Lerp(transform.position, targetPos, characterSpeed * Time.deltaTime);
+            //decide if the waypoint has been reached and set the next waypoint
+            if(targetWaypoint == null) targetWaypoint = Path[0];
+
+            //decide if there are alot of waypoints so increase the speed of the character until less waypoints are present
+
+            //start moving the character
+            Vector3 targetPos = new Vector3(targetWaypoint.x, transform.position.y, targetWaypoint.z);
+            Vector3 smoothPos = Vector3.MoveTowards(transform.position, targetPos, characterSpeed * Time.deltaTime);
             transform.position = smoothPos;
-            Path.RemoveAt(0);
+            isMoving = true;
+
+            //check if the waypoint has been reached if so set the next waypoint
+            //Debug.Log("Target x , z :" + targetWaypoint.x + " " + targetWaypoint.y);
+            //Debug.Log("Own x , z :" + transform.position.x + " " + transform.position.x);
+            Vector3 difference = transform.position - new Vector3(targetWaypoint.x, transform.position.y, targetWaypoint.z);
+            Debug.Log(difference);
+            bool reachedDestination;
+            if(difference.x <= 10.5 && difference.z <= 10.5) reachedDestination = true;
+            else reachedDestination = false;
+            
+            if(reachedDestination) {
+                currentWaypoint = Path[0]; //never used
+                currentIndex = Path[0].index;
+                Path.RemoveAt(0);
+                targetWaypoint = null;
+            }
         }
+
     }
 
     public void AddPath(int levelIndex) {

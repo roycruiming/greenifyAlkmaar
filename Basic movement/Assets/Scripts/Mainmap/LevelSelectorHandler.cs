@@ -34,15 +34,14 @@ public class LevelSelectorHandler : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
             if((currentLevelIndex + 1) < levelObjects.GetLength(0)) {
-                Debug.Log("right");
+                //Debug.Log("right");
                 this.currentLevelIndex = this.currentLevelIndex + 1;
                 GetAndSetLevelSelectorByIndex(currentLevelIndex);
             }
         }
         else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
-            Debug.Log(levelObjects.GetLength(0));
             if((currentLevelIndex - 1) > -1) {
-                Debug.Log("Left");
+                //Debug.Log("Left");
                 this.currentLevelIndex = this.currentLevelIndex - 1;
                 GetAndSetLevelSelectorByIndex(currentLevelIndex);
             }
