@@ -23,7 +23,7 @@ public class MainMapCharacter : MonoBehaviour
         targetIndex = 0; //moet nog dynamisch maken
         currentIndex = 0;
         isMoving = false;
-        characterSpeed = 110;
+        characterSpeed = 160;
         
 
         allWaypointObjects = new List<MainmapWaypoint>(GameObject.FindObjectsOfType<MainmapWaypoint>());
@@ -62,10 +62,12 @@ public class MainMapCharacter : MonoBehaviour
             //get the total of waypoints that exist
             int totalOfWayPoints = allWaypointObjects.Count;
             int amountOfCurrentWaypoints = Path.Count;
-            if(amountOfCurrentWaypoints > (totalOfWayPoints * 2)) this.characterSpeed = 400;
-            else if(amountOfCurrentWaypoints > totalOfWayPoints) this.characterSpeed = 200;
-            else if(amountOfCurrentWaypoints > (totalOfWayPoints / 2)) this.characterSpeed = 160;
-            else this.characterSpeed = 110; //default
+            if(amountOfCurrentWaypoints > (totalOfWayPoints * 2)) this.characterSpeed = 480;
+            else if(amountOfCurrentWaypoints > totalOfWayPoints) this.characterSpeed = 280;
+            else if(amountOfCurrentWaypoints > (totalOfWayPoints / 2)) this.characterSpeed = 220;
+            else if(amountOfCurrentWaypoints > (totalOfWayPoints / 3)) this.characterSpeed = 200;
+            else if(amountOfCurrentWaypoints > (totalOfWayPoints / 4)) this.characterSpeed = 180;
+            else this.characterSpeed = 160; //default
 
             //move the character
             Vector3 targetPos = new Vector3(targetWaypoint.x, transform.position.y, targetWaypoint.z);
@@ -89,7 +91,7 @@ public class MainMapCharacter : MonoBehaviour
             
             if(reachedDestination) {
                 if(Path.Count > 0) currentWaypoint = Path[0]; //never used
-                if(Path.Count > 0) currentIndex = Path[0].index;
+                if(Path.Count > 0) currentIndex = Path[Path.Count - 1].index;
                 if(Path.Count > 0) Path.RemoveAt(0);
                 targetWaypoint = null;
             }
