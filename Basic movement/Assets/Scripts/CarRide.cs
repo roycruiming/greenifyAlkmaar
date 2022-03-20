@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class CarRide : MonoBehaviour
 {
-
-    public float angleBetween = 0.0f;
     public Transform target;
+    public float speed;
 
     void Update()
     {
-        Vector3 targetDir = target.position - transform.position;
-        angleBetween = Vector3.Angle(transform.forward, targetDir);
+        Vector3 a = transform.position;
+        Vector3 b = target.position;
+        transform.position = Vector3.MoveTowards(a, b, speed);
+
+        Destroy(gameObject, 11f);
     }
+
+    
+
+    
 }
