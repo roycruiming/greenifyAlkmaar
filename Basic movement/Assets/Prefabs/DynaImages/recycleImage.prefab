@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1144575330714992283}
   - component: {fileID: 8545949628810819453}
   - component: {fileID: 5751567448649770302}
+  - component: {fileID: -1165189261514744033}
   m_Layer: 5
   m_Name: recycleImage
   m_TagString: Untagged
@@ -74,3 +75,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-1165189261514744033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8602550309026053308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7355cb6a7c7c7cc4b8e230156b0aa246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0

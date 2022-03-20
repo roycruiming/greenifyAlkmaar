@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8549134723400904236}
   - component: {fileID: 1143833379931940810}
   - component: {fileID: 3933706883856971145}
+  - component: {fileID: -3926730581821290900}
   m_Layer: 5
   m_Name: factoryImage
   m_TagString: Untagged
@@ -64,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 91ed6d1c4de09254b8d58b1b852487c4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd63085f51402bc488f26c61429da6dc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -74,3 +75,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-3926730581821290900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019111365301316619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7355cb6a7c7c7cc4b8e230156b0aa246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: 0
