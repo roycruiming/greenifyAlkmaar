@@ -76,7 +76,8 @@ public class MainMapCharacter : MonoBehaviour
             isMoving = true;
             //end move character
             //turn character facing towards waypoint
-            transform.LookAt(new Vector3(targetWaypoint.x, targetWaypoint.y, targetWaypoint.z));
+            transform.rotation = Quaternion.LookRotation(targetPos);
+            //transform.LookAt(new Vector3(targetWaypoint.x, targetWaypoint.y, targetWaypoint.z));
             //
 
 
