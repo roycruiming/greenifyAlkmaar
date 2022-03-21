@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject MainMenuUI;
+    public GameObject HelpMenu;
 
     public void StartGame()
     {
@@ -16,6 +17,7 @@ public class MainMenu : MonoBehaviour
     public void Tutorial()
     {
         Debug.Log("Open Tutorial");
+        HelpMenu.SetActive(true);
     }
 
     public void Options()

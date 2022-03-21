@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
     public string ExitTo = "";
 
     public GameObject PauseMenuUI;
+    public GameObject HelpMenu;
+
 
     // Update is called once per frame
     void Update()
@@ -42,11 +44,14 @@ public class PauseMenu : MonoBehaviour
     public void Options()
     {
         Debug.Log("Go to options");
+
     }
 
     public void Help()
     {
        Debug.Log("Go to help");
+       HelpMenu.SetActive(true);
+       PauseMenuUI.SetActive(false);
     }
 
     public void ExitLevel()
