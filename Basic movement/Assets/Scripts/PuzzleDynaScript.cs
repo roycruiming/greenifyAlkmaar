@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PuzzleDynaScript : MonoBehaviour
 {
@@ -10,11 +11,17 @@ public class PuzzleDynaScript : MonoBehaviour
     public GameObject windmillSprite;
     public GameObject solarSprite;
 
+    public Button option1, option2, option3, option4;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(loadSequence());
+
+        GameObject[] mainSpriteList = createSpriteList();
+
+        InitializeButtons(CalculateAnswer(mainSpriteList));
+
+        StartCoroutine(loadSequence(mainSpriteList));
     }
 
     // Update is called once per frame
@@ -23,9 +30,97 @@ public class PuzzleDynaScript : MonoBehaviour
 
     }
 
-    IEnumerator loadSequence()
+    void InitializeButtons(int answer)
     {
-        GameObject[] listToShow = createSpriteList();
+        Dictionary<Button, int> buttonValues = new Dictionary<Button, int>();
+
+        buttonValues.Add(option1, 0);
+        buttonValues.Add(option2, 0);
+        buttonValues.Add(option3, 0);
+        buttonValues.Add(option4, 0);
+
+        //Initialize the checks for doubles
+        bool option1Doubles = buttonValues[option1] == buttonValues[option2] || buttonValues[option1] == buttonValues[option3] || buttonValues[option1] == buttonValues[option4];
+        bool option2Doubles = buttonValues[option2] == buttonValues[option3] || buttonValues[option2] == buttonValues[option4];
+        bool option3Doubles = buttonValues[option3] == buttonValues[option4];
+
+        //Check if any option has gained the right answer AND if none of them are doubles
+        while ((buttonValues[option1] != answer && buttonValues[option2] != answer && buttonValues[option3] != answer && buttonValues[option4] != answer) && (!option1Doubles || !option2Doubles || !option3Doubles)) {
+            //try a certain combination
+            buttonValues[option1] = Random.Range(0, 5);
+            buttonValues[option2] = Random.Range(0, 5);
+            buttonValues[option3] = Random.Range(0, 5);
+            buttonValues[option4] = Random.Range(0, 5);
+
+            //Refresh the double checks for the loop
+            option1Doubles = buttonValues[option1] == buttonValues[option2] || buttonValues[option1] == buttonValues[option3] || buttonValues[option1] == buttonValues[option4];
+            option2Doubles = buttonValues[option2] == buttonValues[option3] || buttonValues[option2] == buttonValues[option4];
+            option3Doubles = buttonValues[option3] == buttonValues[option4];
+        }
+
+        Button correctButton = option1;
+
+        foreach(KeyValuePair<Button, int> option in buttonValues)
+        {
+            if (option.Value == answer)
+            {
+                correctButton = option.Key;
+            }
+        }
+
+        CreateButtons(buttonValues, correctButton);
+
+    }
+
+    void CreateButtons(Dictionary<Button, int> buttons, Button correctButton)
+    {
+        option1.transform.GetChild(0).GetComponent<Text>().text = buttons[option1].ToString();
+        option1.onClick.AddListener(() => OptionClicked(correctButton, option1));
+
+        option2.transform.GetChild(0).GetComponent<Text>().text = buttons[option2].ToString();
+        option2.onClick.AddListener(() => OptionClicked(correctButton, option2));
+
+        option3.transform.GetChild(0).GetComponent<Text>().text = buttons[option3].ToString();
+        option3.onClick.AddListener(() => OptionClicked(correctButton, option3));
+        
+        option4.transform.GetChild(0).GetComponent<Text>().text = buttons[option4].ToString();
+        option4.onClick.AddListener(() => OptionClicked(correctButton, option4));
+    }
+
+    void OptionClicked(Button answer, Button option)
+    {
+        if (answer == option)
+        {
+            //Success get thing!
+        } else
+        {
+            PickWrongAnswer();
+        }
+    }
+
+    void PickWrongAnswer()
+    {
+
+    }
+
+    int CalculateAnswer(GameObject[] spriteList)
+    {
+        int sustainableAmount = 0;
+
+        foreach(GameObject sprite in spriteList)
+        {
+            if (sprite.GetComponent<DynamicImageController>().energy == EnergyType.Sustainable)
+            {
+                sustainableAmount += 1;
+            }
+        }
+
+        return sustainableAmount;
+    }
+
+
+    IEnumerator loadSequence(GameObject[] listToShow)
+    {
         
         createImage(listToShow[0]);
         yield return new WaitForSeconds(1f);
@@ -74,4 +169,10 @@ public class PuzzleDynaScript : MonoBehaviour
         testImage.transform.SetParent(transform, false);
         testImage.transform.SetSiblingIndex(4);
     }
+}
+
+
+public enum EnergyType
+{
+    Sustainable, Limited
 }

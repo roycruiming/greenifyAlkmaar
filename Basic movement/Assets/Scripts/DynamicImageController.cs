@@ -6,6 +6,8 @@ public class DynamicImageController : MonoBehaviour
 {
     // Start is called before the first frame update
     public float timer = 0;
+    public EnergyType energy;
+
     void Start()
     {
     }
@@ -23,4 +25,5 @@ public class DynamicImageController : MonoBehaviour
 
 
     }
+
 }
