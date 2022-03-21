@@ -34,10 +34,10 @@ public class PuzzleDynaScript : MonoBehaviour
     {
         Dictionary<Button, int> buttonValues = new Dictionary<Button, int>();
 
-        buttonValues.Add(option1, 0);
-        buttonValues.Add(option2, 0);
-        buttonValues.Add(option3, 0);
-        buttonValues.Add(option4, 0);
+        buttonValues.Add(option1, 6);
+        buttonValues.Add(option2, 6);
+        buttonValues.Add(option3, 6);
+        buttonValues.Add(option4, 6);
 
         //Initialize the checks for doubles
         bool option1Doubles = false;
@@ -57,7 +57,9 @@ public class PuzzleDynaScript : MonoBehaviour
 
             //Refresh the double checks for the loop
             option1Doubles = buttonValues[option1] == buttonValues[option2] || buttonValues[option1] == buttonValues[option3] || buttonValues[option1] == buttonValues[option4];
+            
             option2Doubles = buttonValues[option2] == buttonValues[option3] || buttonValues[option2] == buttonValues[option4];
+
             option3Doubles = buttonValues[option3] == buttonValues[option4];
 
         }
@@ -170,7 +172,7 @@ public class PuzzleDynaScript : MonoBehaviour
 
     void createImage(GameObject spriteToSpawn)
     {
-        GameObject testImage = Instantiate(spriteToSpawn, new Vector3(105, 0, 0), Quaternion.identity) as GameObject;
+        GameObject testImage = Instantiate(spriteToSpawn, new Vector3(105, 0, 0), Quaternion.identity, transform) as GameObject;
         
         testImage.transform.SetParent(transform, false);
         testImage.transform.SetSiblingIndex(4);
