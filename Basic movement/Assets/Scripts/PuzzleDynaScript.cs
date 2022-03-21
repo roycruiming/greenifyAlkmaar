@@ -40,12 +40,19 @@ public class PuzzleDynaScript : MonoBehaviour
         buttonValues.Add(option4, 0);
 
         //Initialize the checks for doubles
-        bool option1Doubles = buttonValues[option1] == buttonValues[option2] || buttonValues[option1] == buttonValues[option3] || buttonValues[option1] == buttonValues[option4];
-        bool option2Doubles = buttonValues[option2] == buttonValues[option3] || buttonValues[option2] == buttonValues[option4];
-        bool option3Doubles = buttonValues[option3] == buttonValues[option4];
+        bool option1Doubles = false;
+        bool option2Doubles = false;
+        bool option3Doubles = false;
+
 
         //Check if any option has gained the right answer AND if none of them are doubles
-        while ((buttonValues[option1] != answer && buttonValues[option2] != answer && buttonValues[option3] != answer && buttonValues[option4] != answer) && (!option1Doubles || !option2Doubles || !option3Doubles)) {
+        while ((buttonValues[option1] != answer && buttonValues[option2] != answer && buttonValues[option3] != answer && buttonValues[option4] != answer) || option1Doubles || option2Doubles || option3Doubles) {
+
+            Debug.Log(option1Doubles);
+            Debug.Log(option2Doubles);
+            Debug.Log(option3Doubles);
+            Debug.Log("bwuh");
+
             //try a certain combination
             buttonValues[option1] = Random.Range(0, 5);
             buttonValues[option2] = Random.Range(0, 5);
@@ -56,6 +63,10 @@ public class PuzzleDynaScript : MonoBehaviour
             option1Doubles = buttonValues[option1] == buttonValues[option2] || buttonValues[option1] == buttonValues[option3] || buttonValues[option1] == buttonValues[option4];
             option2Doubles = buttonValues[option2] == buttonValues[option3] || buttonValues[option2] == buttonValues[option4];
             option3Doubles = buttonValues[option3] == buttonValues[option4];
+
+            Debug.Log(option1Doubles);
+            Debug.Log(option2Doubles);
+            Debug.Log(option3Doubles);
         }
 
         Button correctButton = option1;
@@ -139,7 +150,7 @@ public class PuzzleDynaScript : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            switch(Random.Range(1, 5))
+            switch(Random.Range(1, 6))
             {
                 case 1:
                     spriteList[i] = windmillSprite;
