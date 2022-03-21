@@ -25,6 +25,7 @@ public abstract class ItemObject : ScriptableObject
 	public string description;
 	public int permittedAmount; 
 	public Sprite icon; 
+	 
 
 
 
