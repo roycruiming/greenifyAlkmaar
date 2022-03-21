@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+    public string ExitTo = "";
 
     public GameObject PauseMenuUI;
 
@@ -51,7 +52,8 @@ public class PauseMenu : MonoBehaviour
     public void ExitLevel()
     {
         Debug.Log("Go to level select");
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(ExitTo);
     }
 
     public void ExitGame()
