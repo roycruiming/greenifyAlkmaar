@@ -48,10 +48,6 @@ public class PuzzleDynaScript : MonoBehaviour
         //Check if any option has gained the right answer AND if none of them are doubles
         while ((buttonValues[option1] != answer && buttonValues[option2] != answer && buttonValues[option3] != answer && buttonValues[option4] != answer) || option1Doubles || option2Doubles || option3Doubles) {
 
-            Debug.Log(option1Doubles);
-            Debug.Log(option2Doubles);
-            Debug.Log(option3Doubles);
-            Debug.Log("bwuh");
 
             //try a certain combination
             buttonValues[option1] = Random.Range(0, 5);
@@ -64,9 +60,6 @@ public class PuzzleDynaScript : MonoBehaviour
             option2Doubles = buttonValues[option2] == buttonValues[option3] || buttonValues[option2] == buttonValues[option4];
             option3Doubles = buttonValues[option3] == buttonValues[option4];
 
-            Debug.Log(option1Doubles);
-            Debug.Log(option2Doubles);
-            Debug.Log(option3Doubles);
         }
 
         Button correctButton = option1;
@@ -102,9 +95,11 @@ public class PuzzleDynaScript : MonoBehaviour
     {
         if (answer == option)
         {
+            Debug.Log("vico");
             //Success get thing!
         } else
         {
+            Debug.Log("ono");
             PickWrongAnswer();
         }
     }
