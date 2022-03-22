@@ -44,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
         float h = horizontalSpeed * Input.GetAxis("Mouse X");
         transform.Rotate(0, h, 0);
 
+
+
         //jumping
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
