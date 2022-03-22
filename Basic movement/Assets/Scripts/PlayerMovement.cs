@@ -23,8 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.visible = false;
 
         //jump
         rb = GetComponent<Rigidbody>();
@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
         // mouse turning
         float h = horizontalSpeed * Input.GetAxis("Mouse X");
         transform.Rotate(0, h, 0);
+
+
 
         //jumping
 

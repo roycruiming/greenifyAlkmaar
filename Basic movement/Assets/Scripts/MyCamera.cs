@@ -22,15 +22,16 @@ public class MyCamera : MonoBehaviour
     {
         Rigidbody body = this.GetComponent<Rigidbody>();
 
-        //Vector3 diff = transform.position - (target.transform.position + targetMovementOffset);
-        // Vector3 vel = body.velocity;
+        print(transform.name);
+        print(target.transform.name);
 
-        //Vector3 force = (diff * -springForce) - (vel * springDamper);
+        //transform.position + 100;
+        float vertical = Input.GetAxis("Mouse Y") * 5; 
 
-        //body.AddForce(force);
+        transform.Rotate(vertical, 0, 0); 
 
-        //transform.Position(cameraPositoin);
-        transform.LookAt(target.transform.position /*+ targetLookAtOffset*/);
+        
+        transform.LookAt(target.transform);
     }
 }
 
