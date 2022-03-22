@@ -28,4 +28,9 @@ public class TextTranslationScript : MonoBehaviour
             else this.GetComponent<TextMeshProUGUI>().text = this.textEnglish;
         }
     }
+
+    public string getText() {
+        if(GlobalGameHandler.GetInstance().currentLanguage == Language.Dutch) return this.textDutch;
+        else return this.textEnglish;
+    }
 }
