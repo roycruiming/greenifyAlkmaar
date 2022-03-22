@@ -17,7 +17,7 @@ public class inventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inventory.Container.Count > 0) {
+        if (inventory.Container.Count > 0) {     
             print("updating ui");
             Sprite icon = inventory.Container[0].item.icon;
             print(this.gameObject.name);
