@@ -18,7 +18,7 @@ public class DynamicImageController : MonoBehaviour
         timer += Time.deltaTime;
         GetComponent<RectTransform>().anchoredPosition += new Vector2(-0.3f, 0);
 
-        if (timer > 1.95)
+        if (timer > 2)
         {
             Destroy(gameObject);
         }

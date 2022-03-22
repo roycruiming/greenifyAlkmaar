@@ -22,7 +22,7 @@ public class PuzzleDynaScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ActivatePuzzle();
     }
 
     // Update is called once per frame
@@ -49,13 +49,15 @@ public class PuzzleDynaScript : MonoBehaviour
         player.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        activeCamera = Instantiate(puzzleCam, transform.parent, false);
+        activeCamera = Instantiate(puzzleCam, new Vector3(245f, 300f, -545f), Quaternion.identity);
+        activeCamera.transform.SetParent(transform, false);
         transform.GetComponent<Canvas>().worldCamera = activeCamera;
     }
 
     IEnumerator LeaveCam()
     {
-        yield return new WaitForSeconds(2f);
+        Debug.Log("hi");
+        yield return new WaitForSeconds(1f);
         player.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -131,12 +133,12 @@ public class PuzzleDynaScript : MonoBehaviour
         if (answer == option)
         {
             GameObject.Find("QuestionText").GetComponent<Text>().text = "That is correct! Congratulations!";
-            LeaveCam();
+            StartCoroutine(LeaveCam());
             //Success get thing!
         } else
         {
             GameObject.Find("QuestionText").GetComponent<Text>().text = "That is sadly incorrect, but please try again!";
-            LeaveCam();
+            StartCoroutine(LeaveCam());
         }
     }
     
