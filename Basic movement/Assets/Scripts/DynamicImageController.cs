@@ -15,10 +15,10 @@ public class DynamicImageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        GetComponent<RectTransform>().anchoredPosition += new Vector2(-0.3f, 0);
+        timer += 1;
+        GetComponent<RectTransform>().anchoredPosition += new Vector2(-0.6f, 0);
 
-        if (timer > 2)
+        if (timer > 350)
         {
             Destroy(gameObject);
         }

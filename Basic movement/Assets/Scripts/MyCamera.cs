@@ -22,8 +22,8 @@ public class MyCamera : MonoBehaviour
     {
         Rigidbody body = this.GetComponent<Rigidbody>();
 
-        print(transform.name);
-        print(target.transform.name);
+        //print(transform.name);
+        //print(target.transform.name);
 
         //transform.position + 100;
         float vertical = Input.GetAxis("Mouse Y") * 5; 

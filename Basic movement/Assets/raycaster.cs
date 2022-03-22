@@ -9,14 +9,14 @@ public class raycaster : MonoBehaviour
 
     public int rayLength;
     public LayerMask layerMask;
-    public Text textUI;
+    public Text textUI = null;
      
 
 
     void Start()
     {
-        textUI.text = ""; 
-        textUI.gameObject.SetActive(false); 
+        //textUI.text = ""; 
+        //textUI.gameObject.SetActive(false); 
 
     }
 
@@ -29,7 +29,7 @@ public class raycaster : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
-
+            Debug.Log("visual");
             OnScreenDescription description
                 = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
 
@@ -39,9 +39,16 @@ public class raycaster : MonoBehaviour
             }
 
             if (Input.GetKeyDown(KeyCode.F)) {
-                Destroy(hitInfo.collider.gameObject);  
-                this.gameObject.GetComponent<InventoryScript>().doshit(hitInfo.collider);
-           
+                Debug.Log("physical");
+                if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube"))
+                {
+                    hitInfo.collider.transform.GetChild(1).GetComponent<PuzzleDynaScript>().ActivatePuzzle();
+                }
+                else
+                {
+                    Destroy(hitInfo.collider.gameObject);
+                    this.gameObject.GetComponent<InventoryScript>().doshit(hitInfo.collider);
+                }
             }
             
             
@@ -54,9 +61,14 @@ public class raycaster : MonoBehaviour
         }
         else
         {
-            textUI.gameObject.SetActive(false); 
+            Debug.Log(hitInfo);
+            if (textUI != null)
+            {
+                textUI.gameObject.SetActive(false);
 
-            Debug.DrawLine(ray.origin, ray.origin + ray.direction * rayLength, Color.green);
+            }
+
+           // Debug.DrawLine(ray.origin, ray.origin + ray.direction * rayLength, Color.green);
         }
 
     }
