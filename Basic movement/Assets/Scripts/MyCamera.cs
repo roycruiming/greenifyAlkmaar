@@ -4,36 +4,33 @@ using UnityEngine;
 
 public class MyCamera : MonoBehaviour
 {
-    public GameObject cameraPositoin;
-    public GameObject target;
+    public float cameraSmoothingFactor = 1;
+    public float lookUpMax;
+    public float lookUpMin;
 
-    public Vector3 targetMovementOffset;
-    public Vector3 targetLookAtOffset;
+    private Quaternion camRotation;
 
-    public float springForce;
-    public float springDamper;
 
     void Start()
     {
-        //
+        camRotation = transform.localRotation;
     }
 
     void FixedUpdate()
     {
+        Rigidbody body = this.GetComponent<Rigidbody>();
 
-        float vertical = Input.GetAxis("Mouse Y") * 3;
 
-        if (transform.rotation.eulerAngles.x > 10 || transform.rotation.eulerAngles < -10)
-        {
-            print("cap here");
-        }
+        camRotation.x += Input.GetAxis("Mouse Y") * cameraSmoothingFactor * (-1);
 
-        else {
-            print(transform.rotation.x);
-        }
+        camRotation.x = Mathf.Clamp(camRotation.x, lookUpMin, lookUpMax);
 
+        transform.localRotation = Quaternion.Euler(camRotation.x, camRotation.y, camRotation.z);
 
 
     }
 }
+
+
+
 
