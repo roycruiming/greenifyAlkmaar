@@ -22,7 +22,7 @@ public class PuzzleDynaScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ActivatePuzzle();
+        
     }
 
     // Update is called once per frame
@@ -31,9 +31,11 @@ public class PuzzleDynaScript : MonoBehaviour
 
     }
 
-    void ActivatePuzzle()
+    public void ActivatePuzzle()
     {
         InitiatalizeCam();
+
+        transform.GetChild(1).GetComponent<Text>().text = "How many Sustainable Energy solutions did you see?";
 
         GameObject[] mainSpriteList = createSpriteList();
 
@@ -132,12 +134,12 @@ public class PuzzleDynaScript : MonoBehaviour
     {
         if (answer == option)
         {
-            GameObject.Find("QuestionText").GetComponent<Text>().text = "That is correct! Congratulations!";
+            transform.GetChild(1).GetComponent<Text>().text = "That is correct! Congratulations!";
             StartCoroutine(LeaveCam());
             //Success get thing!
         } else
         {
-            GameObject.Find("QuestionText").GetComponent<Text>().text = "That is sadly incorrect, but please try again!";
+            transform.GetChild(1).GetComponent<Text>().text = "That is sadly incorrect, but please try again!";
             StartCoroutine(LeaveCam());
         }
     }
