@@ -9,6 +9,9 @@ public class raycaster : MonoBehaviour
 
     public int rayLength;
     public LayerMask layerMask;
+    //public MonoBehaviour script;
+
+
     //public Text textUI;
      
 
@@ -39,8 +42,9 @@ public class raycaster : MonoBehaviour
             //}
 
             if (Input.GetKeyDown(KeyCode.F)) {
-                Destroy(hitInfo.collider.gameObject);  
-                this.gameObject.GetComponent<InventoryScript>().doshit(hitInfo.collider);
+                //Destroy(hitInfo.collider.gameObject);  
+                //this.gameObject.GetComponent<InventoryScript>().doshit(hitInfo.collider);
+
            
             }
             
