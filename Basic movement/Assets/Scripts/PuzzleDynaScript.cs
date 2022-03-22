@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class PuzzleDynaScript : MonoBehaviour
 {
+    public Camera puzzleCam;
+
+    public GameObject player;
+
     public GameObject recycleSprite;
     public GameObject gasSprite;
     public GameObject factorySprite;
@@ -13,15 +17,12 @@ public class PuzzleDynaScript : MonoBehaviour
 
     public Button option1, option2, option3, option4;
 
+    protected Camera activeCamera;
+
     // Start is called before the first frame update
     void Start()
     {
-
-        GameObject[] mainSpriteList = createSpriteList();
-
-        InitializeButtons(CalculateAnswer(mainSpriteList));
-
-        StartCoroutine(loadSequence(mainSpriteList));
+        
     }
 
     // Update is called once per frame
@@ -30,6 +31,38 @@ public class PuzzleDynaScript : MonoBehaviour
 
     }
 
+    void ActivatePuzzle()
+    {
+        InitiatalizeCam();
+
+        GameObject[] mainSpriteList = createSpriteList();
+
+        InitializeButtons(CalculateAnswer(mainSpriteList));
+
+        StartCoroutine(loadSequence(mainSpriteList));
+
+    }
+
+    //CAMERAS
+    void InitiatalizeCam()
+    {
+        player.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        activeCamera = Instantiate(puzzleCam, transform.parent, false);
+        transform.GetComponent<Canvas>().worldCamera = activeCamera;
+    }
+
+    IEnumerator LeaveCam()
+    {
+        yield return new WaitForSeconds(2f);
+        player.SetActive(true);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Destroy(activeCamera);
+    }
+
+    //BUTTONS
     void InitializeButtons(int answer)
     {
         Dictionary<Button, int> buttonValues = new Dictionary<Button, int>();
@@ -97,20 +130,16 @@ public class PuzzleDynaScript : MonoBehaviour
     {
         if (answer == option)
         {
-            Debug.Log("vico");
+            GameObject.Find("QuestionText").GetComponent<Text>().text = "That is correct! Congratulations!";
+            LeaveCam();
             //Success get thing!
         } else
         {
-            Debug.Log("ono");
-            PickWrongAnswer();
+            GameObject.Find("QuestionText").GetComponent<Text>().text = "That is sadly incorrect, but please try again!";
+            LeaveCam();
         }
     }
-
-    void PickWrongAnswer()
-    {
-
-    }
-
+    
     int CalculateAnswer(GameObject[] spriteList)
     {
         int sustainableAmount = 0;
@@ -125,8 +154,8 @@ public class PuzzleDynaScript : MonoBehaviour
 
         return sustainableAmount;
     }
-
-
+    
+    //ICONS
     IEnumerator loadSequence(GameObject[] listToShow)
     {
         
@@ -172,7 +201,7 @@ public class PuzzleDynaScript : MonoBehaviour
 
     void createImage(GameObject spriteToSpawn)
     {
-        GameObject testImage = Instantiate(spriteToSpawn, new Vector3(105, 0, 0), Quaternion.identity, transform) as GameObject;
+        GameObject testImage = Instantiate(spriteToSpawn, new Vector3(105, 0, 0), Quaternion.identity) as GameObject;
         
         testImage.transform.SetParent(transform, false);
         testImage.transform.SetSiblingIndex(4);
