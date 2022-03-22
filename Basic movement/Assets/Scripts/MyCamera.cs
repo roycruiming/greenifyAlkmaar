@@ -20,18 +20,20 @@ public class MyCamera : MonoBehaviour
 
     void FixedUpdate()
     {
-        Rigidbody body = this.GetComponent<Rigidbody>();
 
-        print(transform.name);
-        print(target.transform.name);
+        float vertical = Input.GetAxis("Mouse Y") * 3;
 
-        //transform.position + 100;
-        float vertical = Input.GetAxis("Mouse Y") * 5; 
+        if (transform.rotation.eulerAngles.x > 10 || transform.rotation.eulerAngles < -10)
+        {
+            print("cap here");
+        }
 
-        transform.Rotate(vertical, 0, 0); 
+        else {
+            print(transform.rotation.x);
+        }
 
-        
-        transform.LookAt(target.transform);
+
+
     }
 }
 

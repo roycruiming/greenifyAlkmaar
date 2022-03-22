@@ -9,14 +9,14 @@ public class raycaster : MonoBehaviour
 
     public int rayLength;
     public LayerMask layerMask;
-    public Text textUI;
+    //public Text textUI;
      
 
 
     void Start()
     {
-        textUI.text = ""; 
-        textUI.gameObject.SetActive(false); 
+        //textUI.text = ""; 
+        //textUI.gameObject.SetActive(false); 
 
     }
 
@@ -33,10 +33,10 @@ public class raycaster : MonoBehaviour
             OnScreenDescription description
                 = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
 
-            if (textUI != null && description != null) {
-                textUI.gameObject.SetActive(true);
-                textUI.text = description.textToDisplay; 
-            }
+            //if (textUI != null && description != null) {
+            //    textUI.gameObject.SetActive(true);
+            //    textUI.text = description.textToDisplay; 
+            //}
 
             if (Input.GetKeyDown(KeyCode.F)) {
                 Destroy(hitInfo.collider.gameObject);  
@@ -54,7 +54,7 @@ public class raycaster : MonoBehaviour
         }
         else
         {
-            textUI.gameObject.SetActive(false); 
+            //textUI.gameObject.SetActive(false); 
 
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * rayLength, Color.green);
         }
