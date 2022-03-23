@@ -65,14 +65,19 @@ public class PuzzleDynaScript : MonoBehaviour
         transform.GetComponent<Canvas>().worldCamera = activeCamera;
     }
 
-    IEnumerator LeaveCam()
+    IEnumerator LeaveCam(bool cleared)
     {
         StopCoroutine(loadCoroutine);
         yield return new WaitForSeconds(1f);
         player.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Destroy(activeCamera);
+
+        Color clear = new Color(0.05f,0.9f,0f);
+        
+        gameObject.transform.parent.GetComponent<Renderer>().material.color = clear;
+
+        Destroy(this.gameObject);
     }
 
     //BUTTONS
@@ -146,12 +151,13 @@ public class PuzzleDynaScript : MonoBehaviour
             transform.GetChild(1).GetComponent<Text>().text = "That is correct! Congratulations!";
             //arrow.objectivesCounter++;
             arrow.DeleteItemInList(valueTest);
-            StartCoroutine(LeaveCam());
+
+            StartCoroutine(LeaveCam(true));
             //Success get thing!
         } else
         {
             transform.GetChild(1).GetComponent<Text>().text = "That is sadly incorrect, but please try again!";
-            StartCoroutine(LeaveCam());
+            StartCoroutine(LeaveCam(false));
         }
     }
     
