@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using System.Linq; 
 
 public class raycaster : MonoBehaviour
 {
@@ -9,18 +10,20 @@ public class raycaster : MonoBehaviour
 
     public int rayLength;
     public LayerMask layerMask;
-    public Text textUI = null;
+    public Text textUI; 
+
      
 
 
     void Start()
     {
-        //textUI.text = ""; 
-        //textUI.gameObject.SetActive(false); 
-
+        if (textUI != null) {
+            textUI.text = ""; 
+            textUI.gameObject.SetActive(false); 
+        }
     }
 
-    // Update is called once per frame
+
     void Update()
     {
 
@@ -29,6 +32,7 @@ public class raycaster : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
+      
             OnScreenDescription description
                 = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
 
@@ -38,24 +42,24 @@ public class raycaster : MonoBehaviour
             }
 
             if (Input.GetKeyDown(KeyCode.F)) {
+
                 if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube"))
                 {
                     hitInfo.collider.transform.GetChild(1).GetComponent<PuzzleDynaScript>().ActivatePuzzle();
                 }
+                else if (hitInfo.collider.gameObject.CompareTag("SolarSpot")) {
+                    InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault(); 
+                    if (infslot != null) {
+                        hitInfo.collider.transform.GetComponent<SolarSpot>().DoShit(infslot);
+                        this.gameObject.GetComponent<InventoryScript>().Clear(); 
+                    }
+                }
                 else
                 {
-                    Destroy(hitInfo.collider.gameObject);
-                    this.gameObject.GetComponent<InventoryScript>().doshit(hitInfo.collider);
+                
+                    this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
                 }
             }
-            
-            
-
-
-            //Debug.DrawLine(ray.origin, hitInfo.point, Color.red);
-            
-
-
         }
         else
         {
@@ -65,7 +69,7 @@ public class raycaster : MonoBehaviour
 
             }
 
-           // Debug.DrawLine(ray.origin, ray.origin + ray.direction * rayLength, Color.green);
+            }
         }
 
     }

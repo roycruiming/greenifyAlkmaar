@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,82 +8,55 @@ public class InventoryScript : MonoBehaviour
 
     public IntventoryObject inventory;
 
-    public void doshit(Collider other)
+    public void AddOrSwap(Collider other)
     {
-        Destroy(other.gameObject);
+
+        
+
         var item = other.GetComponent<Item>();
+        other.gameObject.SetActive(false); 
+        
+
+        item.item.setprefab(other.gameObject); 
 
         if (inventory.AddItem(item.item, 1))
         {
-            Destroy(other.gameObject);
+            inventory.Container[0].item.setprefab(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         else
         {
 
-            GameObject i = inventory.Container[0].item.prefab;
-            inventory.Container.Clear();
-            inventory.AddItem(item.item, 1);
-            Destroy(other.gameObject);
+            //NORMAAL SWAPTE DIT, MAAR ik heb mn script gesloopt,
+            //en IN DE PoC hoeft dit niet nog niet te werken 
 
-            Vector3 position = other.transform.position;
-            UnityEngine.Quaternion quat = other.transform.rotation;
-            Instantiate(i, position, quat);
+            //GameObject i = inventory.Container[0].item.getprefab(); 
+            //inventory.Container.Clear();
+            //inventory.AddItem(item.item, 1);
+            //other.gameObject.SetActive(false); 
+
+            //Vector3 position = other.transform.position;
+            //position.y = 0f; 
+            //UnityEngine.Quaternion quat = other.transform.rotation;
+            //Instantiate(i, position, quat);
         }
 
     }
 
 
 
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-      
-        Destroy(other.gameObject);
-
-        //other.
-
-        var item = other.GetComponent<Item>();
 
 
   
-        //other.gameObject
-
-        if (inventory.AddItem(item.item, 1))
-        {
-            Destroy(other.gameObject);
-        }
-        else {
-           
-            GameObject i = inventory.Container[0].item.prefab;
-            inventory.Container.Clear();
-            inventory.AddItem(item.item, 1);
-            Destroy(other.gameObject);
-            Vector3 position = other.transform.position;
-
-            GameObject player = GameObject.Find("CubeMe"); 
-
-            Vector3 playerPos = player.transform.position;
-            Vector3 playerDirection = player.transform.forward;
-            Quaternion playerRotation = player.transform.rotation;
-            float spawnDistance = 10;
-
-            Vector3 spawnPos = playerPos + playerDirection * spawnDistance;
-
-            //Vector3 x = new Vector3(position.x + 10, position.y, position.z + 10);
-            UnityEngine.Quaternion quat = other.transform.rotation;
-            Instantiate(i, spawnPos, quat);
-        }
-
-
-
-
-    }
 
     private void OnApplicationQuit()
     {
         inventory.Container.Clear(); 
+    }
+
+    public void Clear()
+    {
+        inventory.Container.Clear();
     }
 }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "noname", menuName = "Inventory System/Items/Consumable")]
-public class ConsumableItemObject : ItemObject
+public class ConsumableItem : ItemObject
 {
     public void Awake()
     {
