@@ -17,11 +17,22 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 jump;
     public float jumpForce = 2.0f;
-    public bool isGrounded;
+    public bool isGrounded = true;
     Rigidbody rb;
+
+    public LayerMask groundLayers;
+
+    public SphereCollider col;
 
     public DirectionalArrow arrow;
 
+
+
+    void OnCollisionStay()
+    {
+        
+        isGrounded = true;
+    }
 
     private void Start()
     {
@@ -31,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
         //jump
         rb = GetComponent<Rigidbody>();
         jump = new Vector3(0.0f, 2.0f, 0.0f);
+
+        col = GetComponent < SphereCollider>();
 
         
     }
@@ -56,19 +69,18 @@ public class PlayerMovement : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
 
-       
 
 
 
         //jumping
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
 
             rb.AddForce(jump * jumpForce, ForceMode.Impulse);
             isGrounded = false;
 
-     
+
         }
 
         // shoot bullets
@@ -99,10 +111,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void OnCollisionStay()
+
+    private bool IsGrounded()
     {
-        isGrounded = true;
+        return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), col.radius * .9f, groundLayers);
+        
     }
-
-
 }

@@ -972,7 +972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39602989}
   - component: {fileID: 39602990}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DirectionalArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26244,7 +26244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 683054833}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41469,7 +41469,7 @@ GameObject:
   - component: {fileID: 1180618278}
   - component: {fileID: 1180618277}
   - component: {fileID: 1180618276}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59050,6 +59050,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1880688530700179105, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1880688530936509998, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -59064,6 +59069,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688530936509999, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1880688531002799128, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
@@ -59120,10 +59130,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1880688531002799131, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: jumpForce
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688531002799131, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: groundLayers.m_Bits
+      value: 311
+      objectReference: {fileID: 0}
     - target: {fileID: 1880688531002799132, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
       propertyPath: m_Name
       value: CubeMe
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688531002799132, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688531002799135, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688531002799135, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688531083473186, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1880688531856238968, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
@@ -59160,6 +59200,21 @@ PrefabInstance:
       propertyPath: rotationAnkerObject
       value: 
       objectReference: {fileID: 683054832}
+    - target: {fileID: 1880688531856238972, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688532014967413, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688532083800900, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea83514f5fc1c5b4db4f689b9d949992, type: 3}
 --- !u!1001 &1624899940
@@ -62471,6 +62526,19 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1624810037}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &1721424884
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721424875}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1721439042
 GameObject:
   m_ObjectHideFlags: 0
@@ -79594,7 +79662,7 @@ GameObject:
   - component: {fileID: 1959574505}
   - component: {fileID: 1959574504}
   - component: {fileID: 1959574503}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82910,7 +82978,7 @@ GameObject:
   - component: {fileID: 2070331945}
   - component: {fileID: 2070331944}
   - component: {fileID: 2070331943}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
