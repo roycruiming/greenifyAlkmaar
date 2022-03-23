@@ -10,6 +10,11 @@ public class SolarSpot : MonoBehaviour
 
         if (this.gameObject.name == "PlaceHerePanelSpot1" || this.gameObject.name == "PlaceHerePanelSpot2" && infslot.item.name == "SOLAR") {
             GameObject obj = GameObject.Find("Cube (1)");
+
+            if (this.gameObject.name == "PlaceHerePanelSpot2") { 
+                
+                obj = GameObject.Find("Cube (2)");  }
+
             GameObject child = obj.transform.Find("Smoke").gameObject;
             child.SetActive(false);
             Vector3 pos = gameObject.transform.position;

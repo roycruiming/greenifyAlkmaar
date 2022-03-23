@@ -27,15 +27,18 @@ public class InventoryScript : MonoBehaviour
         else
         {
 
-            GameObject i = inventory.Container[0].item.getprefab(); 
-            inventory.Container.Clear();
-            inventory.AddItem(item.item, 1);
-            other.gameObject.SetActive(false); 
+            //NORMAAL SWAPTE DIT, MAAR ik heb mn script gesloopt,
+            //en IN DE PoC hoeft dit niet nog niet te werken 
 
-            Vector3 position = other.transform.position;
-            position.y = 0f; 
-            UnityEngine.Quaternion quat = other.transform.rotation;
-            Instantiate(i, position, quat);
+            //GameObject i = inventory.Container[0].item.getprefab(); 
+            //inventory.Container.Clear();
+            //inventory.AddItem(item.item, 1);
+            //other.gameObject.SetActive(false); 
+
+            //Vector3 position = other.transform.position;
+            //position.y = 0f; 
+            //UnityEngine.Quaternion quat = other.transform.rotation;
+            //Instantiate(i, position, quat);
         }
 
     }
