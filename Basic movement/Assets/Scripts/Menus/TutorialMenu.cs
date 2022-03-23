@@ -11,9 +11,15 @@ public class TutorialMenu : MonoBehaviour
     public GameObject WhatDoIDoUI;
 
     public GameObject Player;
-    public float StartX;
-    public float StartY;
-    public float StartZ;
+    public Vector3 StartPosition;
+
+    void Start()
+    {
+      if(Player)
+      {
+        StartPosition = Player.transform.position;
+      }
+    }
 
     public void close()
     {
@@ -27,10 +33,12 @@ public class TutorialMenu : MonoBehaviour
     public void stuck()
     {
         Debug.Log("Respawn player");
-        Player.transform.position = new Vector3(StartX, StartY, StartZ);
+        Cursor.lockState = CursorLockMode.Locked;
+        Player.transform.position = StartPosition;
         Time.timeScale = 1f;
         PauseMenuUI.SetActive(false);
         HelpMenuUI.SetActive(false);
+        Debug.Log(Cursor.lockState);
     }
 
     public void controls()
