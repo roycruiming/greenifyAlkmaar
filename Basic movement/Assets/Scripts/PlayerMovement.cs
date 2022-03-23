@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     float range = 10f;
     public Transform dest;
+    public Transform glitchSpwan;
 
     public float moveSpeed;
 
@@ -17,9 +18,19 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 jump;
     public float jumpForce = 2.0f;
-    public bool isGrounded;
+    public bool isGrounded = true;
     Rigidbody rb;
 
+    public LayerMask groundLayers;
+
+    public SphereCollider col;
+
+
+    void OnCollisionStay()
+    {
+        
+        isGrounded = true;
+    }
 
     private void Start()
     {
@@ -29,26 +40,39 @@ public class PlayerMovement : MonoBehaviour
         //jump
         rb = GetComponent<Rigidbody>();
         jump = new Vector3(0.0f, 2.0f, 0.0f);
+
+        col = GetComponent < SphereCollider>();
+
+        
     }
     void Update()
     {
-        // wasd movement
-        float movement = Time.deltaTime * moveSpeed;
+        if(PauseMenu.GameIsPaused == false)
+        {
+            // wasd movement
+            float movement = Time.deltaTime * moveSpeed;
 
-        float x = Input.GetAxis("Horizontal") * movement;
-        float y = Input.GetAxis("Vertical") * movement;
+            float x = Input.GetAxis("Horizontal") * movement;
+            float y = Input.GetAxis("Vertical") * movement;
 
-        transform.Translate(new Vector3(x, 0f, y));
+            transform.Translate(new Vector3(x, 0f, y));
 
-        // mouse turning
-        float h = horizontalSpeed * Input.GetAxis("Mouse X");
-        transform.Rotate(0, h, 0);
+            // mouse turning
+            float h = horizontalSpeed * Input.GetAxis("Mouse X");
+            transform.Rotate(0, h, 0);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
 
 
 
         //jumping
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
 
             rb.AddForce(jump * jumpForce, ForceMode.Impulse);
@@ -80,13 +104,16 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.DrawLine(transform.position, dest.position);
 
-
+        if(transform.position.y < 0)
+        {
+            transform.position = glitchSpwan.transform.position;
+        }
     }
 
-    void OnCollisionStay()
+
+    private bool IsGrounded()
     {
-        isGrounded = true;
+        return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), col.radius * .9f, groundLayers);
+        
     }
-
-
 }

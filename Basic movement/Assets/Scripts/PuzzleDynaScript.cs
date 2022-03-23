@@ -15,6 +15,10 @@ public class PuzzleDynaScript : MonoBehaviour
     public GameObject windmillSprite;
     public GameObject solarSprite;
 
+    public int valueTest;
+
+    public DirectionalArrow arrow;
+
     public Button option1, option2, option3, option4;
 
     protected Camera activeCamera;
@@ -135,6 +139,8 @@ public class PuzzleDynaScript : MonoBehaviour
         if (answer == option)
         {
             transform.GetChild(1).GetComponent<Text>().text = "That is correct! Congratulations!";
+            //arrow.objectivesCounter++;
+            arrow.DeleteItemInList(valueTest);
             StartCoroutine(LeaveCam());
             //Success get thing!
         } else

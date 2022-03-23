@@ -10,6 +10,11 @@ public class TutorialMenu : MonoBehaviour
     public GameObject HowToPlayUI;
     public GameObject WhatDoIDoUI;
 
+    public GameObject Player;
+    public float StartX;
+    public float StartY;
+    public float StartZ;
+
     public void close()
     {
         Debug.Log("Close Help");
@@ -22,6 +27,10 @@ public class TutorialMenu : MonoBehaviour
     public void stuck()
     {
         Debug.Log("Respawn player");
+        Player.transform.position = new Vector3(StartX, StartY, StartZ);
+        Time.timeScale = 1f;
+        PauseMenuUI.SetActive(false);
+        HelpMenuUI.SetActive(false);
     }
 
     public void controls()

@@ -8,6 +8,7 @@ public class MyCamera : MonoBehaviour
     public float lookUpMax;
     public float lookUpMin;
 
+
     private Quaternion camRotation;
 
 
@@ -20,12 +21,18 @@ public class MyCamera : MonoBehaviour
     {
         Rigidbody body = this.GetComponent<Rigidbody>();
 
+        if (PauseMenu.GameIsPaused == false)
+        {
+            camRotation.x += Input.GetAxis("Mouse Y") * cameraSmoothingFactor * (-1);
 
-        camRotation.x += Input.GetAxis("Mouse Y") * cameraSmoothingFactor * (-1);
+            camRotation.x = Mathf.Clamp(camRotation.x, lookUpMin, lookUpMax);
 
-        camRotation.x = Mathf.Clamp(camRotation.x, lookUpMin, lookUpMax);
+            transform.localRotation = Quaternion.Euler(camRotation.x, camRotation.y, camRotation.z);
+        }
+        else 
+        {
 
-        transform.localRotation = Quaternion.Euler(camRotation.x, camRotation.y, camRotation.z);
+        }
 
 
     }
