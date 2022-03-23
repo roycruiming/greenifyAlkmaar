@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     Rigidbody rb;
 
+    public DirectionalArrow arrow;
+
 
     private void Start()
     {
@@ -29,20 +31,32 @@ public class PlayerMovement : MonoBehaviour
         //jump
         rb = GetComponent<Rigidbody>();
         jump = new Vector3(0.0f, 2.0f, 0.0f);
+
+        
     }
     void Update()
     {
-        // wasd movement
-        float movement = Time.deltaTime * moveSpeed;
+        if(PauseMenu.GameIsPaused == false)
+        {
+            // wasd movement
+            float movement = Time.deltaTime * moveSpeed;
 
-        float x = Input.GetAxis("Horizontal") * movement;
-        float y = Input.GetAxis("Vertical") * movement;
+            float x = Input.GetAxis("Horizontal") * movement;
+            float y = Input.GetAxis("Vertical") * movement;
 
-        transform.Translate(new Vector3(x, 0f, y));
+            transform.Translate(new Vector3(x, 0f, y));
 
-        // mouse turning
-        float h = horizontalSpeed * Input.GetAxis("Mouse X");
-        transform.Rotate(0, h, 0);
+            // mouse turning
+            float h = horizontalSpeed * Input.GetAxis("Mouse X");
+            transform.Rotate(0, h, 0);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+       
 
 
 
@@ -53,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
 
             rb.AddForce(jump * jumpForce, ForceMode.Impulse);
             isGrounded = false;
+
+     
         }
 
         // shoot bullets
