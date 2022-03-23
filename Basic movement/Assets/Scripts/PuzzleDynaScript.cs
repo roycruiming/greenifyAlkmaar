@@ -162,7 +162,7 @@ public class PuzzleDynaScript : MonoBehaviour
     //ICONS
     IEnumerator loadSequence(GameObject[] listToShow)
     {
-        
+        yield return new WaitForSeconds(2f);
         createImage(listToShow[0]);
         yield return new WaitForSeconds(1f);
         createImage(listToShow[1]);

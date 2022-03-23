@@ -29,7 +29,6 @@ public class raycaster : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
-            Debug.Log("visual");
             OnScreenDescription description
                 = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
 
@@ -39,7 +38,6 @@ public class raycaster : MonoBehaviour
             }
 
             if (Input.GetKeyDown(KeyCode.F)) {
-                Debug.Log("physical");
                 if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube"))
                 {
                     hitInfo.collider.transform.GetChild(1).GetComponent<PuzzleDynaScript>().ActivatePuzzle();
@@ -61,7 +59,6 @@ public class raycaster : MonoBehaviour
         }
         else
         {
-            Debug.Log(hitInfo);
             if (textUI != null)
             {
                 textUI.gameObject.SetActive(false);
