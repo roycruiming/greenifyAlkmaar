@@ -7,7 +7,7 @@ public class DirectionalArrow : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> target;
-    public static int objectivesCounter = 0;
+    public int objectivesCounter = 0;
 
 
 
@@ -16,10 +16,12 @@ public class DirectionalArrow : MonoBehaviour
         Vector3 targetPosition = target[objectivesCounter].transform.position;
         targetPosition.y = transform.position.y;
         transform.LookAt(targetPosition);
+
+        if(objectivesCounter > target.Count)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
-    public void NextObjective()
-    { 
-        objectivesCounter++;
-    }
+
 }
