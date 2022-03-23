@@ -15,7 +15,6 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GameIsPaused);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused)
@@ -30,6 +29,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         PauseMenuUI.SetActive(false);
         if (HelpMenu)
         {
@@ -41,6 +41,7 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
+        Cursor.lockState = CursorLockMode.None;
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -64,6 +65,7 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Go to level select");
         GameIsPaused = false;
         Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(ExitTo);
     }
 
