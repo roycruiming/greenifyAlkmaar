@@ -51,20 +51,19 @@ public class raycaster : MonoBehaviour
                     InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault(); 
                     if (infslot != null) {
                         hitInfo.collider.transform.GetComponent<SolarSpot>().DoShit(infslot);
+                        this.gameObject.GetComponent<InventoryScript>().Clear(); 
                     }
                 }
                 else
                 {
-                    Destroy(hitInfo.collider.gameObject);
-                    this.gameObject.GetComponent<InventoryScript>().doshit(hitInfo.collider);
+                
+                    this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
                 }
             }
         }
         else
         {
-
-            print("wtf"); 
-
+ 
             if (textUI != null)
             {
                 textUI.gameObject.SetActive(false);

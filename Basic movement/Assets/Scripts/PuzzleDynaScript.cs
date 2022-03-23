@@ -140,7 +140,9 @@ public class PuzzleDynaScript : MonoBehaviour
 
             switch (transform.parent.name) {
                 case "Cube":
-                    print("");   //fix doos 
+                    GameObject doos = GameObject.Find("Cube");
+                    GameObject rook = doos.transform.Find("Smoke").gameObject;
+                    rook.SetActive(false);  //fix doos 
                     break;
                 case "Cube (1)": // spawn solar panel, highlight positie, spawn een ster wanneer gedaan
                     print("");

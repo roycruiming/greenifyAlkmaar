@@ -18,17 +18,23 @@ public enum ItemType
 
 public abstract class ItemObject : ScriptableObject
 {
-	public GameObject prefab;
+	GameObject prefab;
 	public ItemType type;
 	public new string name;
-	[TextArea(15,20)]
+	[TextArea(15, 20)]
 	public string description;
-	public int permittedAmount; 
-	public Sprite icon; 
-	 
+	public int permittedAmount;
+	public Sprite icon;
 
+	public GameObject getprefab() {
+		return prefab; 
+	}
 
-
+	public void setprefab(GameObject _prefab) {
+		this.prefab = _prefab; 
+	
+	}
 }
+
 
 

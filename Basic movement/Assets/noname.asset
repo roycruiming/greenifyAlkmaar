@@ -10,7 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: inventory
-  m_EditorClassIdentifier: Assembly-CSharp::IntventoryObject
-  amountOfSlots: 1
-  Container: []
+  m_Name: noname
+  m_EditorClassIdentifier: Assembly-CSharp::StorableItemObject
+  prefab: {fileID: 0}
+  type: 0
+  name: 
+  description: 
+  permittedAmount: 0
+  icon: {fileID: 0}

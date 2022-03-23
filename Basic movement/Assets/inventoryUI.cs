@@ -30,11 +30,13 @@ public class inventoryUI : MonoBehaviour
             }
 
             image.sprite = icon; 
-           
 
+        }
 
-
-
+        else
+        {
+            Image image  =  this.gameObject.GetComponent<Image>();
+            Destroy(image); 
         }
 
        
