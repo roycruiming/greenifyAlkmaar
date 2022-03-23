@@ -24,8 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
     public SphereCollider col;
 
-    public DirectionalArrow arrow;
-
 
     void OnCollisionStay()
     {
@@ -78,7 +76,6 @@ public class PlayerMovement : MonoBehaviour
 
             rb.AddForce(jump * jumpForce, ForceMode.Impulse);
             isGrounded = false;
-            //arrow.objectivesCounter++;
         }
 
         // shoot bullets
