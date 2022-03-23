@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class DirectionalArrow : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private List<GameObject> target;
+    private int objectivesCounter = 0;
+
+
+
+    private void Update()
     {
-        
+        Vector3 targetPosition = target[objectivesCounter].transform.position;
+        targetPosition.y = transform.position.y;
+        transform.LookAt(targetPosition);
     }
 }
