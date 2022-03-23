@@ -23,6 +23,8 @@ public class PuzzleDynaScript : MonoBehaviour
 
     protected Camera activeCamera;
 
+    protected IEnumerator loadCoroutine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,7 @@ public class PuzzleDynaScript : MonoBehaviour
 
     public void ActivatePuzzle()
     {
+
         InitiatalizeCam();
 
         transform.GetChild(1).GetComponent<Text>().text = "How many Sustainable Energy solutions did you see?";
@@ -45,7 +48,8 @@ public class PuzzleDynaScript : MonoBehaviour
 
         InitializeButtons(CalculateAnswer(mainSpriteList));
 
-        StartCoroutine(loadSequence(mainSpriteList));
+        loadCoroutine = loadSequence(mainSpriteList);
+        StartCoroutine(loadCoroutine);
 
     }
 
@@ -55,19 +59,25 @@ public class PuzzleDynaScript : MonoBehaviour
         player.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+
         activeCamera = Instantiate(puzzleCam, new Vector3(245f, 300f, -545f), Quaternion.identity);
         activeCamera.transform.SetParent(transform, false);
         transform.GetComponent<Canvas>().worldCamera = activeCamera;
     }
 
-    IEnumerator LeaveCam()
+    IEnumerator LeaveCam(bool cleared)
     {
-        Debug.Log("hi");
+        StopCoroutine(loadCoroutine);
         yield return new WaitForSeconds(1f);
         player.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Destroy(activeCamera);
+
+        Color clear = new Color(0.05f,0.9f,0f);
+        
+        gameObject.transform.parent.GetComponent<Renderer>().material.color = clear;
+
+        Destroy(this.gameObject);
     }
 
     //BUTTONS
@@ -141,12 +151,13 @@ public class PuzzleDynaScript : MonoBehaviour
             transform.GetChild(1).GetComponent<Text>().text = "That is correct! Congratulations!";
             //arrow.objectivesCounter++;
             arrow.DeleteItemInList(valueTest);
-            StartCoroutine(LeaveCam());
+
+            StartCoroutine(LeaveCam(true));
             //Success get thing!
         } else
         {
             transform.GetChild(1).GetComponent<Text>().text = "That is sadly incorrect, but please try again!";
-            StartCoroutine(LeaveCam());
+            StartCoroutine(LeaveCam(false));
         }
     }
     
@@ -215,6 +226,11 @@ public class PuzzleDynaScript : MonoBehaviour
         
         testImage.transform.SetParent(transform, false);
         testImage.transform.SetSiblingIndex(4);
+    }
+
+    void ClearPuzzle()
+    {
+
     }
 }
 
