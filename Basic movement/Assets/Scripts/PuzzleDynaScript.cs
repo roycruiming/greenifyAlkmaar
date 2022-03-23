@@ -144,6 +144,71 @@ public class PuzzleDynaScript : MonoBehaviour
         option4.onClick.AddListener(() => OptionClicked(correctButton, option4));
     }
 
+    void PuzzleVictory() {
+        switch (transform.parent.name)
+        {
+            case "Cube 0":
+                GameObject doos = GameObject.Find("Cube 0");
+                GameObject rook = doos.transform.Find("Smoke").gameObject;
+                rook.SetActive(false);  //fix doos 
+                break;
+            case "Cube 1": // spawn solar panel, highlight positie, spawn een ster wanneer gedaan
+                print("");
+                break;
+            case "Cube 2": // spawn solar panel, highlight positie, spawn een ster wanneer gedaan
+                print("");
+                break;
+            case "Cube 3": // laat windmolen draaien 
+                {
+                    GameObject obj = GameObject.Find("Cube 3");
+                    GameObject child = obj.transform.Find("Smoke").gameObject;
+                    child.SetActive(false);
+
+                    GameObject mill = GameObject.Find("Windmill (3)");
+                    GameObject wiek = mill.transform.Find("Wiek").gameObject;
+                    wiek.GetComponent<AnimationsScript>().isAnimated = true;
+
+                    GameObject mill2 = GameObject.Find("Windmill (4)");
+                    GameObject wiek2 = mill2.transform.Find("Wiek").gameObject;
+                    wiek2.GetComponent<AnimationsScript>().isAnimated = true;
+
+                    GameObject mill3 = GameObject.Find("Windmill (5)");
+                    GameObject wiek3 = mill3.transform.Find("Wiek").gameObject;
+                    wiek3.GetComponent<AnimationsScript>().isAnimated = true;
+
+                    GameObject mill4 = GameObject.Find("Windmill (6)");
+                    GameObject wiek4 = mill4.transform.Find("Wiek").gameObject;
+                    wiek4.GetComponent<AnimationsScript>().isAnimated = true;
+
+
+
+                }
+                break;
+            case "Cube 4":
+                { // laat windmolen draaien 
+                    GameObject obj2 = GameObject.Find("Cube 4");
+                    GameObject child2 = obj2.transform.Find("Smoke").gameObject;
+                    child2.SetActive(false);
+
+                    GameObject mill5 = GameObject.Find("Windmill (1)");
+                    GameObject wiek5 = mill5.transform.Find("Wiek").gameObject;
+                    wiek5.GetComponent<AnimationsScript>().isAnimated = true;
+
+                    GameObject mill6 = GameObject.Find("Windmill (2)");
+                    GameObject wiek6 = mill6.transform.Find("Wiek").gameObject;
+                    wiek6.GetComponent<AnimationsScript>().isAnimated = true;
+
+
+
+                }
+                break;
+            default:
+                print("something went very wrong");
+                break;
+
+        }
+    }
+
     void OptionClicked(Button answer, Button option)
     {
         if (answer == option)
@@ -152,70 +217,12 @@ public class PuzzleDynaScript : MonoBehaviour
             //arrow.objectivesCounter++;
             arrow.DeleteItemInList(valueTest);
 
+            PuzzleVictory(); 
+
             StartCoroutine(LeaveCam(true));
             //Success get thing!
 
-            switch (transform.parent.name) {
-                case "Cube":
-                    GameObject doos = GameObject.Find("Cube");
-                    GameObject rook = doos.transform.Find("Smoke").gameObject;
-                    rook.SetActive(false);  //fix doos 
-                    break;
-                case "Cube (1)": // spawn solar panel, highlight positie, spawn een ster wanneer gedaan
-                    print("");
-                    break;
-                case "Cube (2)": // spawn solar panel, highlight positie, spawn een ster wanneer gedaan
-                    print("");
-                    break;
-                case "Cube (3)": // laat windmolen draaien 
-                    {
-                        GameObject obj = GameObject.Find("Cube (3)");
-                        GameObject child = obj.transform.Find("Smoke").gameObject;
-                        child.SetActive(false);
-
-                        GameObject mill = GameObject.Find("Windmill (3)");
-                        GameObject wiek = mill.transform.Find("Wiek").gameObject;
-                        wiek.GetComponent<AnimationsScript>().isAnimated = true;
-
-                        GameObject mill2 = GameObject.Find("Windmill (4)");
-                        GameObject wiek2 = mill2.transform.Find("Wiek").gameObject;
-                        wiek2.GetComponent<AnimationsScript>().isAnimated = true;
-
-                        GameObject mill3 = GameObject.Find("Windmill (5)");
-                        GameObject wiek3 = mill3.transform.Find("Wiek").gameObject;
-                        wiek3.GetComponent<AnimationsScript>().isAnimated = true;
-
-                        GameObject mill4 = GameObject.Find("Windmill (6)");
-                        GameObject wiek4 = mill4.transform.Find("Wiek").gameObject;
-                        wiek4.GetComponent<AnimationsScript>().isAnimated = true;
-
-
-
-                    }
-                    break;
-                case "Cube (4)":
-                    { // laat windmolen draaien 
-                        GameObject obj2 = GameObject.Find("Cube (4)");
-                        GameObject child2 = obj2.transform.Find("Smoke").gameObject;
-                        child2.SetActive(false);
-
-                        GameObject mill5 = GameObject.Find("Windmill (1)");
-                        GameObject wiek5 = mill5.transform.Find("Wiek").gameObject;
-                        wiek5.GetComponent<AnimationsScript>().isAnimated = true;
-
-                        GameObject mill6 = GameObject.Find("Windmill (2)");
-                        GameObject wiek6 = mill6.transform.Find("Wiek").gameObject;
-                        wiek6.GetComponent<AnimationsScript>().isAnimated = true;
-
-
-
-                    }
-                    break;
-                default:
-                   print("something went very wrong");
-                    break; 
-
-            }
+            
 
         } else
         {
