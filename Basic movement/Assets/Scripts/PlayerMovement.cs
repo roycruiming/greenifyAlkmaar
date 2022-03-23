@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     float range = 10f;
     public Transform dest;
+    public Transform glitchSpwan;
 
     public float moveSpeed;
 
@@ -103,7 +104,10 @@ public class PlayerMovement : MonoBehaviour
 
         //Debug.DrawLine(transform.position, dest.position);
 
-
+        if(transform.position.y < 0)
+        {
+            transform.position = glitchSpwan.transform.position;
+        }
     }
 
 

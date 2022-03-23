@@ -11759,6 +11759,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1898983058}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &265352541 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1880688530936509998, guid: ea83514f5fc1c5b4db4f689b9d949992,
+    type: 3}
+  m_PrefabInstance: {fileID: 1624810037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &267632148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59669,17 +59675,22 @@ PrefabInstance:
     - target: {fileID: 1880688530936509998, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.356
+      value: -0.171
       objectReference: {fileID: 0}
     - target: {fileID: 1880688530936509998, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.056
+      value: -0.084
       objectReference: {fileID: 0}
     - target: {fileID: 1880688530936509998, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.2
+      value: 5.673
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688530936509999, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_Name
+      value: glitchSpawn
       objectReference: {fileID: 0}
     - target: {fileID: 1880688530936509999, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
@@ -59743,9 +59754,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1880688531002799131, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
+      propertyPath: arrow
+      value: 
+      objectReference: {fileID: 39602989}
+    - target: {fileID: 1880688531002799131, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
       propertyPath: jumpForce
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1880688531002799131, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: glitchSpwan
+      value: 
+      objectReference: {fileID: 265352541}
     - target: {fileID: 1880688531002799131, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
       propertyPath: groundLayers.m_Bits
