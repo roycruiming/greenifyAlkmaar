@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PuzzleDynaScript : MonoBehaviour
 {
@@ -21,9 +22,12 @@ public class PuzzleDynaScript : MonoBehaviour
 
     public Button option1, option2, option3, option4;
 
+    public TextMeshPro disabledText;
+
     protected Camera activeCamera;
 
     protected IEnumerator loadCoroutine;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +43,10 @@ public class PuzzleDynaScript : MonoBehaviour
 
     public void ActivatePuzzle()
     {
+        if(disabledText != null)
+        {
+            Destroy(disabledText);
+        }
 
         InitiatalizeCam();
 
