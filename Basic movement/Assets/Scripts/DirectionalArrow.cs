@@ -12,8 +12,7 @@ public class DirectionalArrow : MonoBehaviour
     public GameObject arrow;
     public Text textUi;
 
-
-
+    [System.Obsolete]
     private void Update()
     {
         //Arrow points to next objective
@@ -26,7 +25,7 @@ public class DirectionalArrow : MonoBehaviour
         //Destroy if all objects are done
         if (objectivesCounter == 5)
         {
-            Destroy(arrow.gameObject);
+            arrow.gameObject.active = false;
         }
     }
 
