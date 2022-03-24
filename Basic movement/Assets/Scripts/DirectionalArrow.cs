@@ -25,7 +25,8 @@ public class DirectionalArrow : MonoBehaviour
         //Destroy if all objects are done
         if (objectivesCounter == 5)
         {
-            arrow.gameObject.active = false;
+            //arrow.gameObject.active = false;
+            arrow.transform.position = new Vector3(100, 100, 100);
         }
     }
 
