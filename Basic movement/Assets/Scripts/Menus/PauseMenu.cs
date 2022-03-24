@@ -33,11 +33,12 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        PauseMenuUI.SetActive(false);
-        if (HelpMenu)
+        
+        foreach(Transform child in transform)
         {
-          HelpMenu.SetActive(false);
+            child.gameObject.SetActive(false);
         }
+
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
