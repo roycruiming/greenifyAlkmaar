@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using TMPro;
 
 public class LevelSelectorHandler : MonoBehaviour
 {
@@ -61,9 +62,10 @@ public class LevelSelectorHandler : MonoBehaviour
             //get the current levelselectorObject
             GameObject selectedLevel = this.getGameObjectByIndex(this.currentLevelIndex);
             LevelSelectorObject currentLevelInfo = selectedLevel.GetComponent<LevelSelectorObject>();
+
             if(currentLevelInfo.isUnlocked) {
                 //launch scene because level is unlocked and user pressed the correct button
-                if(currentLevelInfo != null) SceneManager.LoadScene(currentLevelInfo.levelScene.name);
+                if(currentLevelInfo != null) SceneManager.LoadScene("DeMeent");
             }
         }
     }

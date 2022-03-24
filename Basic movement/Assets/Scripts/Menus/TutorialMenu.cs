@@ -36,6 +36,7 @@ public class TutorialMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Player.transform.position = StartPosition;
         Time.timeScale = 1f;
+        PauseMenu.GameIsPaused = false;
         PauseMenuUI.SetActive(false);
         HelpMenuUI.SetActive(false);
         Debug.Log(Cursor.lockState);

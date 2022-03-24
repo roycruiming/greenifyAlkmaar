@@ -17,11 +17,14 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+
             if (GameIsPaused)
             {
+                Cursor.visible = false;
                 Resume();
             } else
             {
+                Cursor.visible = true;
                 Pause();
             }
         }
