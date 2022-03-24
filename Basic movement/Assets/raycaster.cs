@@ -55,7 +55,7 @@ public class raycaster : MonoBehaviour
                         this.gameObject.GetComponent<InventoryScript>().Clear(); 
                     }
                 }
-                else
+                else if (hitInfo.collider.gameObject.CompareTag("SolarPanel")) 
                 {
                 
                     this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
