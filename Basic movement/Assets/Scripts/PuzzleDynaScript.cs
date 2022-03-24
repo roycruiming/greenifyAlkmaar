@@ -105,10 +105,10 @@ public class PuzzleDynaScript : MonoBehaviour
 
 
             //try a certain combination
-            buttonValues[option1] = Random.Range(0, 5);
-            buttonValues[option2] = Random.Range(0, 5);
-            buttonValues[option3] = Random.Range(0, 5);
-            buttonValues[option4] = Random.Range(0, 5);
+            buttonValues[option1] = Random.Range(0, 6);
+            buttonValues[option2] = Random.Range(0, 6);
+            buttonValues[option3] = Random.Range(0, 6);
+            buttonValues[option4] = Random.Range(0, 6);
 
             //Refresh the double checks for the loop
             option1Doubles = buttonValues[option1] == buttonValues[option2] || buttonValues[option1] == buttonValues[option3] || buttonValues[option1] == buttonValues[option4];
