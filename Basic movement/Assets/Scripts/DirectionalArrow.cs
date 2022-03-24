@@ -24,7 +24,7 @@ public class DirectionalArrow : MonoBehaviour
         textUi.text = objectivesCounter.ToString() + "/5";
 
         //Destroy if all objects are done
-        if (objectivesCounter == 1)
+        if (objectivesCounter == 5)
         {
             Destroy(arrow.gameObject);
         }

@@ -87,12 +87,12 @@ public class PlayerMovement : MonoBehaviour
         }*/
 
         // restart game
-        if (Input.GetKeyDown(KeyCode.R))
+/*        if (Input.GetKeyDown(KeyCode.R))
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
             Application.LoadLevel(0);
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
