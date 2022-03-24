@@ -14,10 +14,13 @@ public class InventoryScript : MonoBehaviour
         
 
         var item = other.GetComponent<Item>();
-        
-        
 
-        item.item.setprefab(other.gameObject); 
+        if (item.item.getprefab() == null) {
+            item.item.setprefab(other.gameObject);
+
+        }        
+
+       
 
         if (inventory.AddItem(item.item, 1))
         {
