@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dest: {fileID: 0}
+  glitchSpwan: {fileID: 0}
   moveSpeed: 5
   horizontalSpeed: 2
   verticalSpeed: 2
@@ -123,6 +124,10 @@ MonoBehaviour:
   jump: {x: 0, y: 2.61, z: 0}
   jumpForce: 2
   isGrounded: 0
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  col: {fileID: 0}
 --- !u!54 &8708186483603492040
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -168,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac6d1590d484174c97c1a0b1f1a2470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 8c86af3f5b25a1b49a26080830bf0063, type: 2}
+  inventory: {fileID: 11400000, guid: b2d5887a800b95545ad9368076a2bec8, type: 2}
 --- !u!1 &8708186483770018288
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,12 +301,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3039e9467ac79204083dee580edfba07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPositoin: {fileID: 0}
-  target: {fileID: 8708186483603492046}
-  targetMovementOffset: {x: 0, y: 10, z: 5}
-  targetLookAtOffset: {x: 0, y: 0, z: 0}
-  springForce: 2
-  springDamper: 2
+  cameraSmoothingFactor: 1
+  lookUpMax: 0
+  lookUpMin: 0
 --- !u!114 &8708186484607865257
 MonoBehaviour:
   m_ObjectHideFlags: 0
