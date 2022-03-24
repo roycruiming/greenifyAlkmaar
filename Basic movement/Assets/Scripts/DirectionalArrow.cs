@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DirectionalArrow : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class DirectionalArrow : MonoBehaviour
     [SerializeField]
     private List<GameObject> target;
     public int objectivesCounter = 0;
+    public GameObject arrow;
+    public Text textUi;
 
 
 
@@ -18,19 +21,20 @@ public class DirectionalArrow : MonoBehaviour
         targetPosition.y = transform.position.y;
         transform.LookAt(targetPosition);
 
-        //Destroy is all objects are done
-        if(objectivesCounter > target.Count)
+        textUi.text = objectivesCounter.ToString() + "/5";
+
+        //Destroy if all objects are done
+        if (objectivesCounter == 1)
         {
-            Destroy(this.gameObject);
+            Destroy(arrow.gameObject);
         }
     }
 
     public void DeleteItemInList(int valueTest)
     {
-        //target.RemoveAt(valueTest);
-        //target.Remove.name("Cube" + valueTest);
         target.RemoveAll(x => x.name =="Cube "+valueTest);
-       
+        objectivesCounter++;
+
     }
 
 
