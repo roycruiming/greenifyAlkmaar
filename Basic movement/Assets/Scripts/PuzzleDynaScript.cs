@@ -22,7 +22,7 @@ public class PuzzleDynaScript : MonoBehaviour
 
     public Button option1, option2, option3, option4;
 
-    public TextMeshPro disabledText;
+    
 
     protected Camera activeCamera;
 
@@ -43,10 +43,6 @@ public class PuzzleDynaScript : MonoBehaviour
 
     public void ActivatePuzzle()
     {
-        if(disabledText != null)
-        {
-            Destroy(disabledText);
-        }
 
         InitiatalizeCam();
 
