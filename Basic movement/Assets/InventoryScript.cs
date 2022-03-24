@@ -14,7 +14,7 @@ public class InventoryScript : MonoBehaviour
         
 
         var item = other.GetComponent<Item>();
-        other.gameObject.SetActive(false); 
+        
         
 
         item.item.setprefab(other.gameObject); 
