@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class raycaster : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class raycaster : MonoBehaviour
 
     public int rayLength;
     public LayerMask layerMask;
-    //public Text textUI;
     public InventoryController inventoryController;
 
 
@@ -21,70 +21,38 @@ public class raycaster : MonoBehaviour
     }
 
 
-
-    void Start()
-    {
-        //if (textUI != null) {
-        //    textUI.text = "";
-        //    textUI.gameObject.SetActive(false);
-        //}
-    }
-
-
     void Update()
     {
 
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hitInfo;
 
+        //als de raycast een object raakt met de juiste layermask
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
 
-            //OnScreenDescription description
-            //    = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
-
-            //if (textUI != null && description != null) {
-            //    textUI.gameObject.SetActive(true);
-            //    textUI.text = description.textToDisplay;
-            //}
-
+            //en de speler drukt op f
             if (Input.GetKeyDown(KeyCode.F)) {
 
-                //hitInfo.collider.GetComponent<Item>(); 
-
-
-
-
- //               if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube") && hitInfo.collider.transform.GetChild(1).gameObject.activeInHierarchy)
- //               {                    
- //                   hitInfo.collider.transform.GetChild(1).GetComponent<PuzzleDynaScript>().ActivatePuzzle();
- //               }
-
-                //               else if (hitInfo.collider.gameObject.CompareTag("SolarSpot")) {
-                //                   //InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault(); 
-                //                   //if (infslot != null) {
-                //                   //    hitInfo.collider.transform.GetComponent<SolarSpot>().DoShit(infslot);
-                //                   //    this.gameObject.GetComponent<InventoryScript>().Clear(); 
-                ////                   }
-                //               }
-                //               else if (hitInfo.collider.gameObject.CompareTag("SolarPanel")) 
-                //               {
-
-                //                   //this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
-                //               }
-                //           }
+                //zoek naar de ItemHolder Component en haal hier het item uit
+                Item itemToStore = hitInfo.collider.gameObject.GetComponent<ItemHolder>().item;
+                //sla het gameobject op in het item 
+                itemToStore.setGameObject(hitInfo.collider.gameObject);
+                //voeg het item toe en ontvang het item dat in de inventory zat, of null indien de inventory leeg was
+                Item previouslyStoredItem = inventoryController.AddItemAndReturnPreviousOrNull(itemToStore);
+                //als de speler een item terug, verruil dit item met het vorige. 
+                if (previouslyStoredItem != null) {
+                    PositionItemOnMap(previouslyStoredItem, );
+                }
             }
-            //else
-            //{
-            //    if (textUI != null)
-            //    {
-            //        textUI.gameObject.SetActive(false);
 
-            //    }
-
-            //}
         }
 
+    }
+
+    private void PositionItemOnMap(Item currentOnMap, NextOnMap)
+    {
+        print("done"); 
     }
 }
     

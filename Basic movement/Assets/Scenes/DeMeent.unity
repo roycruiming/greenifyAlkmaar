@@ -1826,7 +1826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c51d15a9a8184f46bce0001ecd6b4e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 4e38de9e7fb723e4a825f9fe0ee6280e, type: 2}
 --- !u!114 &60144829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1906,6 +1905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41188b3b2c32dd4891f4cf6e8ef2646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 782e21a26900ba943a932a7ae2961609, type: 2}
 --- !u!1 &63873962 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000010315956650, guid: 1560075f917727c46a8546367a2f3132,
@@ -11670,7 +11670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c51d15a9a8184f46bce0001ecd6b4e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 4e38de9e7fb723e4a825f9fe0ee6280e, type: 2}
 --- !u!114 &208210519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77382,8 +77381,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
-  textUI: {fileID: 72441451}
-  inventory: {fileID: 0}
+  inventoryController: {fileID: 0}
 --- !u!4 &1721424883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1880688531002799128, guid: ea83514f5fc1c5b4db4f689b9d949992,

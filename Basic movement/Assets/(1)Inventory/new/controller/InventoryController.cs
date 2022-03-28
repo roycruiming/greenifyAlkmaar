@@ -10,13 +10,19 @@ public class InventoryController : MonoBehaviour
         this.inventory = _inventory; 
     }
 
-    private void AddItem(Item item) {
-        inventory.item = item;     
+    // Adds an item, returns previous item, 
+    public Item AddItemAndReturnPreviousOrNull(Item _item) {
+        Item toReturn = inventory.item; 
+        inventory.item = _item;
+        return toReturn; 
     }
 
-    private Item GetItem() {
+    public Item GetItem() {
         return inventory.item; 
+    }
 
+    public void ClearInventory() {
+        inventory.item = null;     
     }
 
 
