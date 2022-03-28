@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DynamicImageController : MonoBehaviour
+public class MovingIconModel : MonoBehaviour
 {
     // Start is called before the first frame update
     public float timer = 0;
