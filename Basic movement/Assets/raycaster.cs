@@ -60,6 +60,11 @@ public class raycaster : MonoBehaviour
                 
                     this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
                 }
+
+                else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
+                {
+                    //krijg je dan textbalk met meer info
+                }
             }
         }
         else
