@@ -63,7 +63,13 @@ public class raycaster : MonoBehaviour
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {
-                    //krijg je dan textbalk met meer info
+                    //object is gamehelper so showcase this message in the HUD
+                    //get the information text from the object and send it to the controller
+                    if(hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null) {
+                        //find the hudcontroller object and call the ShowcaseMessage function with the informationHelper message
+                        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(hitInfo.collider.gameObject.GetComponent<InformationHelper>().informationText);
+                    }
+
                 }
             }
         }
