@@ -10,7 +10,11 @@ public class DirectionalArrow : MonoBehaviour
     private List<GameObject> target;
     public int objectivesCounter = 0;
     public GameObject arrow;
-    public Text textUi;
+    public Text TextUiCounter;
+    public Text GameTimer;
+    private float secondsTimer;
+    private int minutemark;
+
 
     [System.Obsolete]
     private void Update()
@@ -20,7 +24,7 @@ public class DirectionalArrow : MonoBehaviour
         targetPosition.y = transform.position.y;
         transform.LookAt(targetPosition);
 
-        textUi.text = objectivesCounter.ToString() + "/5";
+        TextUiCounter.text = objectivesCounter.ToString() + "/5";
 
         //Destroy if all objects are done
         if (objectivesCounter == 5)
@@ -28,8 +32,20 @@ public class DirectionalArrow : MonoBehaviour
             //arrow.gameObject.active = false;
             arrow.transform.position = new Vector3(100, 100, 100);
         }
+
+
+        //timer in game.
+        secondsTimer += Time.deltaTime;
+        if(secondsTimer > 59.45)
+        {
+            secondsTimer = 0;
+            minutemark++;
+        }
+        GameTimer.text = minutemark + ":" + Mathf.Round(secondsTimer);
     }
 
+
+    //delete item in list for objectives. 
     public void DeleteItemInList(int valueTest)
     {
         target.RemoveAll(x => x.name =="Cube "+valueTest);
