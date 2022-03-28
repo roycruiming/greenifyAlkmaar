@@ -10,11 +10,45 @@ public class InventoryController : MonoBehaviour
         this.inventory = _inventory; 
     }
 
+
+    public void ReplaceWorldAndInventory(Item itemToStore)
+    {
+        Item previouslyStoredItem = AddItemToInventoryAndReturnPreviousOrNull(itemToStore);
+
+        if (previouslyStoredItem != null)
+        {
+            ReplaceGameObjects(itemToStore.GetGameObject(), previouslyStoredItem.GetGameObject());
+        }
+
+        else {
+            ReplaceGameObjects(itemToStore.GetGameObject(), null); 
+        }
+
+
+        
+    }
+
+    private void ReplaceGameObjects(GameObject replacedItem, GameObject replacementItem)
+    {
+        replacedItem.SetActive(false);
+
+        if (replacementItem != null)
+        {
+            Vector3 replacedPosition = replacedItem.transform.position;
+            UnityEngine.Quaternion replacedQuaternion = replacedItem.transform.rotation;
+            replacementItem.transform.position = replacedPosition;
+            replacementItem.transform.rotation = replacedQuaternion;
+            replacementItem.SetActive(true);
+        }
+    }
+
+
     // Adds an item, returns previous item, 
-    public Item AddItemAndReturnPreviousOrNull(Item _item) {
-        Item toReturn = inventory.item; 
+    public Item AddItemToInventoryAndReturnPreviousOrNull(Item _item)
+    {
+        Item toReturn = inventory.item;
         inventory.item = _item;
-        return toReturn; 
+        return toReturn;
     }
 
     public Item GetItem() {

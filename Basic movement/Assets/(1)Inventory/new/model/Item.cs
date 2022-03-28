@@ -5,25 +5,28 @@ using UnityEngine;
 
 
 
-[CreateAssetMenu(menuName = "inventory/storable item")]
-public class Item : ScriptableObject
+//[CreateAssetMenu(menuName = "inventory/storable item")]
+public class Item : MonoBehaviour
 {
+
+
     private GameObject GameObject;
 
     public Sprite HudImage;
 
+    //private Transform InitPos; 
 
-    
+    private void Awake()      
+    {
+        this.GameObject = this.gameObject;
+        //this.InitPos = this.gameObject.transform; 
+    }
 
     public GameObject GetGameObject() {
-
         return this.GameObject; 
     }
 
     public void setGameObject(GameObject g) {
         this.GameObject = g;
     }
-
-    
-
 }

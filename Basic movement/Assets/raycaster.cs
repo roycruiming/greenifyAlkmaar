@@ -35,24 +35,28 @@ public class raycaster : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F)) {
 
                 //zoek naar de ItemHolder Component en haal hier het item uit
-                Item itemToStore = hitInfo.collider.gameObject.GetComponent<ItemHolder>().item;
-                //sla het gameobject op in het item 
-                itemToStore.setGameObject(hitInfo.collider.gameObject);
+                Item itemToStore = hitInfo.collider.gameObject.GetComponent<Item>();
                 //voeg het item toe en ontvang het item dat in de inventory zat, of null indien de inventory leeg was
-                Item previouslyStoredItem = inventoryController.AddItemAndReturnPreviousOrNull(itemToStore);
-                //als de speler een item terug, verruil dit item met het vorige. 
-                if (previouslyStoredItem != null) {
-                    PositionItemOnMap(previouslyStoredItem, );
-                }
+                inventoryController.ReplaceWorldAndInventory(itemToStore); 
+                
+                
             }
 
         }
 
     }
 
-    private void PositionItemOnMap(Item currentOnMap, NextOnMap)
+    private void ReplaceItemWithItem(GameObject replacedItem, Item replacementItem)
     {
-        print("done"); 
+        replacedItem.SetActive(false);   
+
+        if (replacementItem != null) {
+            Vector3 replacedPosition = replacedItem.transform.position;
+            UnityEngine.Quaternion replacedQuaternion = replacedItem.transform.rotation;
+            replacementItem.GetGameObject().transform.position = replacedPosition;
+            replacementItem.GetGameObject().transform.rotation = replacedQuaternion;
+            replacementItem.GetGameObject().SetActive(true); 
+        }
     }
 }
     
