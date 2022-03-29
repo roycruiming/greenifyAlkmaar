@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
-using System;
+using System.Linq; 
 
 public class raycaster : MonoBehaviour
 {
@@ -11,52 +10,85 @@ public class raycaster : MonoBehaviour
 
     public int rayLength;
     public LayerMask layerMask;
-    public InventoryController inventoryController;
+    public Text textUI; 
+
+     
 
 
-    private void Awake()
+    void Start()
     {
-        Inventory inv = new Inventory();
-        inventoryController = new InventoryController(inv);
+        if (textUI != null) {
+            textUI.text = ""; 
+            textUI.gameObject.SetActive(false); 
+        }
     }
 
 
-    void Update()
+    async void Update()
     {
 
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hitInfo;
 
-        //als de raycast een object raakt met de juiste layermask
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
+      
+            OnScreenDescription description
+                = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
 
-            //en de speler drukt op f
-            if (Input.GetKeyDown(KeyCode.F)) {
-
-                //zoek naar de ItemHolder Component en haal hier het item uit
-                Item itemToStore = hitInfo.collider.gameObject.GetComponent<Item>();
-                //voeg het item toe en ontvang het item dat in de inventory zat, of null indien de inventory leeg was
-                inventoryController.ReplaceWorldAndInventory(itemToStore); 
-                
-                
+            if (textUI != null && description != null) {
+                textUI.gameObject.SetActive(true);
+                textUI.text = description.textToDisplay; 
             }
 
+            if (Input.GetKeyDown(KeyCode.F)) {
+
+                if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube") && hitInfo.collider.transform.GetChild(1).gameObject.activeInHierarchy)
+                {                    
+                    hitInfo.collider.transform.GetChild(1).GetComponent<PuzzleDynaScript>().ActivatePuzzle();
+                }
+
+                else if (hitInfo.collider.gameObject.CompareTag("SolarSpot")) {
+                    InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault(); 
+                    if (infslot != null) {
+                        hitInfo.collider.transform.GetComponent<SolarSpot>().DoShit(infslot);
+                        this.gameObject.GetComponent<InventoryScript>().Clear(); 
+                    }
+                }
+                else if (hitInfo.collider.gameObject.CompareTag("SolarPanel")) 
+                {
+                
+                    this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
+                    if(GameObject.FindWithTag("HUDCanvas") != null) {
+                        //find the hudcontroller object and call the ShowcaseMessage a tutorial message
+                        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage("Good job you have found a Solarpanel! Find the spot where it should be placed.");
+                    }
+                }
+
+                else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
+                {
+                    //object is gamehelper so showcase this message in the HUD
+                    //get the information text from the object and send it to the controller
+                    if(hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null) {
+                        //find the hudcontroller object and call the ShowcaseMessage function with the informationHelper message
+                        InformationHelper senderInfo = hitInfo.collider.gameObject.GetComponent<InformationHelper>();
+                        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.informationText, senderInfo, new List<string> { "test test test", "vier vijf zes", "acht negen tien" });
+                    }
+
+                }
+            }
+        }
+        else
+        {
+            if (textUI != null)
+            {
+                textUI.gameObject.SetActive(false);
+
+            }
+
+            }
         }
 
     }
 
-    private void ReplaceItemWithItem(GameObject replacedItem, Item replacementItem)
-    {
-        replacedItem.SetActive(false);   
-
-        if (replacementItem != null) {
-            Vector3 replacedPosition = replacedItem.transform.position;
-            UnityEngine.Quaternion replacedQuaternion = replacedItem.transform.rotation;
-            replacementItem.GetGameObject().transform.position = replacedPosition;
-            replacementItem.GetGameObject().transform.rotation = replacedQuaternion;
-            replacementItem.GetGameObject().SetActive(true); 
-        }
-    }
-}
     
