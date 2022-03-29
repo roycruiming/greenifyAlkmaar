@@ -21,6 +21,8 @@ public class HUDController : MonoBehaviour
     private InformationHelper currentInformationHelper;
     private bool hidingPopUpContainer = false;
 
+    private bool cancelHidingProgress = false;
+
     public void Awake() {
         this.HudCanvas = GameObject.FindWithTag("HUDCanvas");
         this.PopUpMessageContainer = HudCanvas.transform.Find("PopUpMessageContainer").gameObject;
@@ -30,6 +32,10 @@ public class HUDController : MonoBehaviour
 
     public void ShowcaseMessage(string messageText, InformationHelper senderInfo = null, List<string> senderMessageSequence = null) {
         bool useMessageText = false;
+        this.cancelHidingProgress = true;
+
+        this.clearMessageSequence(); //clear old message sequence if it exists
+ 
         if(senderMessageSequence != null && senderMessageSequence.Count > 0) {
             //multiple messages have to be shown
             //set the first messageText as the messageSequence, so ignore initial Message text
@@ -68,6 +74,10 @@ public class HUDController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void clearMessageSequence() {
+        this.messageSequence = null;
     }
     
     private void setCharacterArrays(string text) {
@@ -111,7 +121,10 @@ public class HUDController : MonoBehaviour
                 //initiate the timer to not display the popup message anymore
                 if(this.PopUpMessageContainer.activeSelf == true) { //popupmessage is still displayed so initiate the process to hide it or showcase the next message sequence
                     if(this.messageSequence != null && this.messageSequence.Count > 0)  StartCoroutine( NextPopUpMessage()); //show the next message from the message sequence
-                    else if(hidingPopUpContainer == false) StartCoroutine(HidePopUpMessage()); //hide the message container
+                    else if(hidingPopUpContainer == false) {
+                        this.cancelHidingProgress = false;
+                        StartCoroutine(HidePopUpMessage()); //hide the message container 
+                    }
                 }
             }
         }
@@ -146,22 +159,24 @@ public class HUDController : MonoBehaviour
         hidingPopUpContainer = true;
         //yield on a new YieldInstruction that waits for 5 seconds.
         yield return new WaitForSeconds(4);
+        if(cancelHidingProgress == false) {
+            this.toBePrintedCharacters = new char[4];
+            this.currentlyPrintedCharacters = new char[4];
+            this.PopUpMessageContainer.SetActive(false); //hide popup message container
 
-        this.toBePrintedCharacters = new char[4];
-        this.currentlyPrintedCharacters = new char[4];
-        this.PopUpMessageContainer.SetActive(false); //hide popup message container
+            //hide image block
+            this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
 
-        //hide image block
-        this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
+            //reset the sprite character icon to the default mascot
+            this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load("Sprites/mascotte") as Sprite;
 
-        //reset the sprite character icon to the default mascot
-        this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load("Sprites/mascotte") as Sprite;
+            //reset the message sequence list
+            this.messageSequence = null;
 
-        //reset the message sequence list
-        this.messageSequence = null;
-
-        //reset current information helper to null
-        this.currentInformationHelper = null;
+            //reset current information helper to null
+            this.currentInformationHelper = null;
+        }
+        else this.cancelHidingProgress = false;
     }
 
 
