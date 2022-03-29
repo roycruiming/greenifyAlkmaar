@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     public GameObject HelpMenu;
     public GameObject MainButtons;
     public GameObject StartButtons;
+    public GameObject SettingMenu;
 
     public void StartGame()
     {
@@ -22,7 +23,7 @@ public class MainMenu : MonoBehaviour
 
     public void Options()
     {
-        Debug.Log("Open Options");
+        SettingMenu.SetActive(true);
     }
 
     public void ExitGame()

@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseMenuUI;
     public GameObject HelpMenu;
     public GameObject HUD;
+    public GameObject SettingMenu;
 
 
     // Update is called once per frame
@@ -55,8 +56,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Options()
     {
-        Debug.Log("Go to options");
-
+        SwitchVisbility(SettingMenu, true);
     }
 
     public void Help()
