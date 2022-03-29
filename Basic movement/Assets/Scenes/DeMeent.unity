@@ -27652,6 +27652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   informationText: dit is ene laadpaal
+  spriteToShow: {fileID: 0}
 --- !u!65 &670098206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28655,7 +28656,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53db040e7d5dd4f44b6fd7032c8301f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  informationText: Dit is een zonnepaneel
+  informationText: Hey! Let me teach you something, this icon on the left is called
+    a windturbine, these windturbines can create energy for our houses because of
+    the wind. These are environmental friendly solutions!
+  spriteToShow: {fileID: 21300000, guid: 9df9535f3e7da2443927d42b6057a6e5, type: 3}
 --- !u!65 &707999719
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32655,6 +32659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   informationText: Dit is een zonnepaneel
+  spriteToShow: {fileID: 0}
 --- !u!65 &852833803
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54055,6 +54060,81 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dd3aa5743d43e64d9f8693bd3d26b20, type: 3}
+--- !u!1 &1480438982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1480438983}
+  - component: {fileID: 1480438985}
+  - component: {fileID: 1480438984}
+  m_Layer: 5
+  m_Name: PopUpImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1480438983
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480438982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1556745635}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -361, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1480438984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480438982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1480438985
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480438982}
+  m_CullTransparentMesh: 1
 --- !u!4 &1482180157 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8073079150079247676, guid: f048ecd1c9e056542b4c3d5762043fe6,
@@ -55299,6 +55379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335fe983bc0818542b038bfffb3bf1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HudCanvas: {fileID: 0}
+  PopUpMessageContainer: {fileID: 0}
 --- !u!1 &1525751593
 GameObject:
   m_ObjectHideFlags: 0
@@ -61639,6 +61721,7 @@ RectTransform:
   - {fileID: 838042739}
   - {fileID: 1410846460}
   - {fileID: 1147266943}
+  - {fileID: 1480438983}
   m_Father: {fileID: 1521116932}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

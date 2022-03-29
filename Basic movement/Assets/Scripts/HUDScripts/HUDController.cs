@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUDController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class HUDController : MonoBehaviour
     private char[] toBePrintedCharacters;
     private char[] currentlyPrintedCharacters;
 
+    private List<string> messageSequence;
+
     public GameObject HudCanvas; //find the hudcanvas is in the current scene
     public GameObject PopUpMessageContainer; //get the popupmessage container from the hudcanvas
     private bool hidingPopUpContainer = false;
@@ -21,19 +24,42 @@ public class HUDController : MonoBehaviour
         this.PopUpMessageContainer = HudCanvas.transform.Find("PopUpMessageContainer").gameObject;
     }
 
-    public void ShowcaseMessage(string messageText) {
+    public void ShowcaseMessage(string messageText, InformationHelper senderInfo = null, List<string> messageSequence = null) {
+        if(messageSequence != null && messageSequence.Count > 0) {
+            //multiple messages have to be shown
+            //set the first messageText as the messageSequence, so ignore initial Message text
+            messageText = messageSequence[0];
+        }
+
+
         if(this.HudCanvas != null && this.PopUpMessageContainer != null) {
             if(this.PopUpMessageContainer.activeSelf == false) this.PopUpMessageContainer.SetActive(true); //displays the popupmessage container
             this.hidingPopUpContainer = false;
 
+            //two options for this function, one is that it just displays a message with the mascot in the screen
+            //other option is that the game object is being readed and if it contains an sprite display this sprite also
+            if(senderInfo == null) this.setCharacterArrays(messageText);
+            else {
+                this.setCharacterArrays(senderInfo.informationText); //set text
+                //show sprite if it is set
+                if(senderInfo.spriteToShow != null) {
+                    GameObject spriteElement = this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject;
+                    spriteElement.SetActive(true); //show image UI element
+                    spriteElement.GetComponent<Image>().sprite = senderInfo.spriteToShow; //set the sprite image
+                }
+                //change icon of the character who is talking the message
+                if(senderInfo.characterIcon != null) {
+                    this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = senderInfo.characterIcon;
+                }
+            }
+        }
+    }
+    
+    private void setCharacterArrays(string text) {
             //set the characters that have to be printed letter by letter
-            this.toBePrintedCharacters = messageText.ToCharArray();
+            this.toBePrintedCharacters = text.ToCharArray();
             this.currentlyPrintedCharacters = new char[this.toBePrintedCharacters.GetLength(0)];
             this.EmptyCurrentlyPrintedCharacters(); //refresh the currently pritned characters list
-
-            //set the pop up message text
-            //this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().text = messageText;
-        }
     }
 
     private void EmptyCurrentlyPrintedCharacters() {
@@ -97,5 +123,11 @@ public class HUDController : MonoBehaviour
         this.toBePrintedCharacters = new char[4];
         this.currentlyPrintedCharacters = new char[4];
         this.PopUpMessageContainer.SetActive(false); //hide popup message container
+
+        //hide image block
+        this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
+
+        //reset the sprite character icon to the default mascot
+        this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load("Sprites/mascotte") as Sprite;
     }
 }

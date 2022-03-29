@@ -59,6 +59,10 @@ public class raycaster : MonoBehaviour
                 {
                 
                     this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
+                    if(GameObject.FindWithTag("HUDCanvas") != null) {
+                        //find the hudcontroller object and call the ShowcaseMessage a tutorial message
+                        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage("Good job you have found a Solarpanel! Find the spot where it should be placed.");
+                    }
                 }
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
@@ -67,7 +71,8 @@ public class raycaster : MonoBehaviour
                     //get the information text from the object and send it to the controller
                     if(hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null) {
                         //find the hudcontroller object and call the ShowcaseMessage function with the informationHelper message
-                        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(hitInfo.collider.gameObject.GetComponent<InformationHelper>().informationText);
+                        InformationHelper senderInfo = hitInfo.collider.gameObject.GetComponent<InformationHelper>();
+                        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.informationText, senderInfo);
                     }
 
                 }

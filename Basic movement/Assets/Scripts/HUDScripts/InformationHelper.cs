@@ -6,6 +6,10 @@ public class InformationHelper : MonoBehaviour
 {
 
     public string informationText;
+    
+    public Sprite characterIcon;
+    public Sprite spriteToShow; 
+    
 
     // Start is called before the first frame update
     void Awake()
