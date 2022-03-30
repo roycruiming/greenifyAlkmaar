@@ -53,10 +53,10 @@ public class InventoryController : MonoBehaviour
              replacementItem.transform.position = pos; 
  
             //AngleRotation
-            itemToReplace.transform.LookAt(lookat);
-            Vector3 angles = itemToReplace.transform.eulerAngles;
-            Vector3 onlyYaxisAngles = new Vector3(0f, angles.y + itemToReplace.rotationOffsetY, 0f); ;
-            itemToReplace.gameObject.transform.eulerAngles = onlyYaxisAngles;
+            replacementItem.transform.LookAt(lookat);
+            Vector3 angles = replacementItem.transform.eulerAngles;
+            Vector3 onlyYaxisAngles = new Vector3(0f, angles.y + replacementItem.rotationOffsetY, 0f); ;
+            replacementItem.gameObject.transform.eulerAngles = onlyYaxisAngles;
             replacementItem.gameObject.SetActive(true);
         }
     }
