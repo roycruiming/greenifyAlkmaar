@@ -10715,6 +10715,50 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: fd1514f24408906428a7b63b25289ea5, type: 3}
+--- !u!1 &215903983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 215903984}
+  - component: {fileID: 215903985}
+  m_Layer: 9
+  m_Name: cutscene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &215903984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215903983}
+  m_LocalRotation: {x: -0, y: 0.98251235, z: -0, w: 0.18619737}
+  m_LocalPosition: {x: -85.8, y: 7.14, z: -5.9}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children:
+  - {fileID: 789978992}
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &215903985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215903983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e62eba6ea10e541ba9cd62f1997775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &215937072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000010315956650, guid: 1560075f917727c46a8546367a2f3132,
@@ -12103,7 +12147,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1521116932}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -27844,6 +27888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   informationText: dit is ene laadpaal
+  characterIcon: {fileID: 0}
   spriteToShow: {fileID: 0}
 --- !u!65 &670098206
 BoxCollider:
@@ -28851,6 +28896,7 @@ MonoBehaviour:
   informationText: Hey! Let me teach you something, this icon on the left is called
     a windturbine, these windturbines can create energy for our houses because of
     the wind. These are environmental friendly solutions!
+  characterIcon: {fileID: 0}
   spriteToShow: {fileID: 21300000, guid: 9df9535f3e7da2443927d42b6057a6e5, type: 3}
 --- !u!65 &707999719
 BoxCollider:
@@ -31116,6 +31162,109 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd7967a473bbbca4a83cf83b44fb7bb6, type: 3}
+--- !u!1 &789978991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 789978992}
+  - component: {fileID: 789978995}
+  - component: {fileID: 789978994}
+  - component: {fileID: 789978993}
+  m_Layer: 9
+  m_Name: CutsceneCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &789978992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789978991}
+  m_LocalRotation: {x: 0.092629895, y: -0.82935005, z: 0.17628972, w: 0.5220347}
+  m_LocalPosition: {x: 131.7, y: 95.8, z: 190.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 215903984}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 22.9, y: -115.24, z: 1.892}
+--- !u!95 &789978993
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789978991}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4ac15919aaadb0a47ad76f86dadbcf80, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!81 &789978994
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789978991}
+  m_Enabled: 1
+--- !u!20 &789978995
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789978991}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &791867050
 GameObject:
   m_ObjectHideFlags: 0
@@ -31678,7 +31827,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1521116932}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32946,6 +33095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   informationText: Dit is een zonnepaneel
+  characterIcon: {fileID: 0}
   spriteToShow: {fileID: 0}
 --- !u!65 &852833803
 BoxCollider:
@@ -62014,7 +62164,7 @@ RectTransform:
   - {fileID: 1147266943}
   - {fileID: 1480438983}
   m_Father: {fileID: 1521116932}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -63622,6 +63772,21 @@ PrefabInstance:
       propertyPath: rotationAnkerObject
       value: 
       objectReference: {fileID: 683054832}
+    - target: {fileID: 1880688531856238969, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688531856238969, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880688531856238969, guid: ea83514f5fc1c5b4db4f689b9d949992,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -11.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1880688531856238972, guid: ea83514f5fc1c5b4db4f689b9d949992,
         type: 3}
       propertyPath: m_Layer
@@ -63852,7 +64017,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1521116932}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -67318,7 +67483,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 256
-  textUI: {fileID: 72441451}
+  textUI: {fileID: 0}
 --- !u!4 &1721424883 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1880688531002799128, guid: ea83514f5fc1c5b4db4f689b9d949992,

@@ -218,7 +218,7 @@ public class PuzzleDynaScript : MonoBehaviour
         if (answer == option)
         {
             transform.GetChild(1).GetComponent<Text>().text = "That is correct! Congratulations!";
-            //arrow.objectivesCounter++;
+
             arrow.DeleteItemInList(valueTest);
 
             PuzzleVictory(); 
