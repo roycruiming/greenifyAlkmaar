@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TranslationObject : MonoBehaviour
 {
@@ -33,6 +34,13 @@ public class TranslationObject : MonoBehaviour
         {
             Debug.Log("TextMesh");
             GetComponent<TextMesh>().text = GlobalGameHandler.GetTextByDictionaryKey(this.translationKey);
+        }
+
+        //check if component is TMPro.TextMeshProUGUI component
+        if (GetComponent<Text>() != null)
+        {
+            Debug.Log("Text");
+            GetComponent<Text>().text = GlobalGameHandler.GetTextByDictionaryKey(this.translationKey);
         }
     }
 

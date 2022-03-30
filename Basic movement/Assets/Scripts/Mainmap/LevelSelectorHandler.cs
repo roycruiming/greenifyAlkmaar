@@ -115,7 +115,7 @@ public class LevelSelectorHandler : MonoBehaviour
 
         //if level is locked set the text from press 'E' to play naar niks
         //gets the text in the right language
-        if(selectedLevelInfo.isUnlocked) this.pressButTextObj.GetComponent<UnityEngine.UI.Text>().text = this.pressButTextObj.GetComponent<TextTranslationScript>().getText();
+        if(selectedLevelInfo.isUnlocked) this.pressButTextObj.GetComponent<UnityEngine.UI.Text>().text = GlobalGameHandler.GetTextByDictionaryKey("press e to play");
         else {
             string lockedLevelText = "";
              //if(GlobalGameHandler.GetInstance().currentLanguage == Language.Dutch) lockedLevelText = "Level is nog niet unlocked";

@@ -23,7 +23,7 @@ public class GlobalGameHandler : MonoBehaviour
             instance = this; 
             instance.languages = new List<string>();
             instance.translationDictionary = new List<KeyValuePair<string,string>>();
-            instance.currentLanguage = "english";
+            instance.currentLanguage = "nederlands";
             DontDestroyOnLoad(this);
             InitTranslationDictionary();
         }
