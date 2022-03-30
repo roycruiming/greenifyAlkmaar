@@ -2763,8 +2763,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4aedc81f4a95342bf7e788435f35c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textDutch: Druk 'E' om te spelen
-  textEnglish: Press 'E' to play
 --- !u!114 &256375052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2777,7 +2775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d05a4ad1cd40524ab194533f59cc807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationKey: back
+  translationKey: press e to play
 --- !u!4 &265419713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8486655151723287883, guid: cf28a4dd9a1a5b948a40dd44a4392f11,
@@ -3291,8 +3289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589365e514220e04e998e15f4a84da4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelNameDutch: Grote Sint Laurenskerk
-  levelNameEnglish: Great Sint Laurenschurch
+  levelNameKey: great sint laurens church
   index: 1
   isActive: 0
   levelScene: {fileID: 0}
@@ -10996,8 +10993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589365e514220e04e998e15f4a84da4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelNameDutch: De Meent
-  levelNameEnglish: The Meent
+  levelNameKey: the meent
   index: 0
   isActive: 1
   levelScene: {fileID: 102900000, guid: 59128df4891fc364eadbfbdb60e8a7f7, type: 3}
@@ -12117,8 +12113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589365e514220e04e998e15f4a84da4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelNameDutch: Huis met de kogel
-  levelNameEnglish: House with the bullet
+  levelNameKey: house with the bullet
   index: 2
   isActive: 0
   levelScene: {fileID: 0}

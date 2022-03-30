@@ -59,7 +59,7 @@ public class HUDController : MonoBehaviour
             else {
                 this.currentInformationHelper = senderInfo;
                 if(useMessageText == true) this.setCharacterArrays(messageText); //use the senderMessageSequence text instead of sender.info text
-                else this.setCharacterArrays(senderInfo.informationText); //set text
+                else this.setCharacterArrays(GlobalGameHandler.GetTextByDictionaryKey(senderInfo.informationTextDictionaryKey)); //set text
                 
                 
                 //show sprite if it is set
