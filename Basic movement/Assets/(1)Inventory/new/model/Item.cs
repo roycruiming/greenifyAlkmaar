@@ -10,13 +10,17 @@ public class Item : MonoBehaviour
 {
 
     public float rotationOffsetY = 0;
-    public float heightOffsetY = 0; 
+    private float heightOffsetY; 
 
     private GameObject GameObject;
 
     public Sprite HudImage;
 
     //private Transform InitPos; 
+
+    public float getHeightOffsetY() {
+        return heightOffsetY;     
+    }
 
     private void Awake()      
     {

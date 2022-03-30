@@ -49,7 +49,7 @@ public class InventoryController : MonoBehaviour
             //positioning 
              replacementItem.transform.position = itemToReplace.transform.position;
              Vector3 pos = replacementItem.transform.position;
-             pos.y =  replacementItem.heightOffsetY;
+             pos.y = replacementItem.getHeightOffsetY();
              replacementItem.transform.position = pos; 
  
             //AngleRotation
