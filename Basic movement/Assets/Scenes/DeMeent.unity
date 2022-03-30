@@ -29925,7 +29925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53db040e7d5dd4f44b6fd7032c8301f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  informationText: dit is ene laadpaal
+  informationTextDictionaryKey: 
   characterIcon: {fileID: 0}
   spriteToShow: {fileID: 0}
 --- !u!65 &670098206
@@ -31012,9 +31012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53db040e7d5dd4f44b6fd7032c8301f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  informationText: Hey! Let me teach you something, this icon on the left is called
-    a windturbine, these windturbines can create energy for our houses because of
-    the wind. These are environmental friendly solutions!
+  informationTextDictionaryKey: wind turbine basic explanation
   characterIcon: {fileID: 0}
   spriteToShow: {fileID: 21300000, guid: 9df9535f3e7da2443927d42b6057a6e5, type: 3}
 --- !u!65 &707999719
@@ -35566,7 +35564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53db040e7d5dd4f44b6fd7032c8301f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  informationText: Dit is een zonnepaneel
+  informationTextDictionaryKey: 
   characterIcon: {fileID: 0}
   spriteToShow: {fileID: 0}
 --- !u!65 &852833803
@@ -45788,8 +45786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4aedc81f4a95342bf7e788435f35c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textDutch: 
-  textEnglish: 
 --- !u!4 &1113113483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8486655151723287883, guid: cf28a4dd9a1a5b948a40dd44a4392f11,
