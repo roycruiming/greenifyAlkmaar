@@ -7,27 +7,43 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject MainMenuUI;
     public GameObject HelpMenu;
+    public GameObject MainButtons;
+    public GameObject StartButtons;
+    public GameObject SettingMenu;
 
     public void StartGame()
     {
-        Debug.Log("Start the game!");
-        SceneManager.LoadScene("Mainmap-Scene");
+        SwitchVisibility(StartButtons, MainButtons);
     }
 
     public void Tutorial()
     {
-        Debug.Log("Open Tutorial");
         HelpMenu.SetActive(true);
     }
 
     public void Options()
     {
-        Debug.Log("Open Options");
+        SettingMenu.SetActive(true);
     }
 
     public void ExitGame()
     {
-        Debug.Log("Exit game");
         Application.Quit();
+    }
+
+    public void Singleplayer()
+    {
+        SceneManager.LoadScene("Mainmap-Scene");
+    }
+
+    public void BackToMainMenu()
+    {
+        SwitchVisibility(MainButtons, StartButtons);
+    }
+
+    void SwitchVisibility(GameObject object1, GameObject object2)
+    {
+        object1.SetActive(true);
+        object2.SetActive(false);
     }
 }
