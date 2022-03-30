@@ -36,8 +36,16 @@ public class raycaster : MonoBehaviour
 
                 //zoek naar de ItemHolder Component en haal hier het item uit
                 Item itemToStore = hitInfo.collider.gameObject.GetComponent<Item>();
-                //voeg het item toe en ontvang het item dat in de inventory zat, of null indien de inventory leeg was
-                inventoryController.ReplaceWorldAndInventory(itemToStore); 
+
+                //Transform t  = gameObject.transform.LookAt(;
+
+               
+                
+
+                //itemToStore.transform.LookAt(this.transform);
+                inventoryController.ReplaceWorldAndInventory(itemToStore, this.transform);
+
+               
                 
                 
             }
@@ -46,17 +54,6 @@ public class raycaster : MonoBehaviour
 
     }
 
-    private void ReplaceItemWithItem(GameObject replacedItem, Item replacementItem)
-    {
-        replacedItem.SetActive(false);   
-
-        if (replacementItem != null) {
-            Vector3 replacedPosition = replacedItem.transform.position;
-            UnityEngine.Quaternion replacedQuaternion = replacedItem.transform.rotation;
-            replacementItem.GetGameObject().transform.position = replacedPosition;
-            replacementItem.GetGameObject().transform.rotation = replacedQuaternion;
-            replacementItem.GetGameObject().SetActive(true); 
-        }
-    }
+   
 }
     

@@ -11,34 +11,53 @@ public class InventoryController : MonoBehaviour
     }
 
 
-    public void ReplaceWorldAndInventory(Item itemToStore)
+    public void ReplaceWorldAndInventory(Item itemToStore, Transform lookAt)
     {
+        //TODO: CLEAN UP THIS CODE
+
+        
+
+
+
         Item previouslyStoredItem = AddItemToInventoryAndReturnPreviousOrNull(itemToStore);
+       
+        //float x = itemToStore.heightOffsetY - previouslyStoredItem.heightOffsetY;
+
+
 
         if (previouslyStoredItem != null)
         {
-            ReplaceGameObjects(itemToStore.GetGameObject(), previouslyStoredItem.GetGameObject());
+            ReplaceGameObjects(itemToStore, previouslyStoredItem, lookAt);
         }
-
         else {
-            ReplaceGameObjects(itemToStore.GetGameObject(), null); 
+            ReplaceGameObjects(itemToStore, null, lookAt); 
         }
 
 
         
     }
 
-    private void ReplaceGameObjects(GameObject replacedItem, GameObject replacementItem)
+    private void ReplaceGameObjects(Item  itemToReplace, Item replacementItem, Transform lookat)
     {
-        replacedItem.SetActive(false);
+        itemToReplace.gameObject.SetActive(false);
 
         if (replacementItem != null)
         {
-            Vector3 replacedPosition = replacedItem.transform.position;
-            UnityEngine.Quaternion replacedQuaternion = replacedItem.transform.rotation;
-            replacementItem.transform.position = replacedPosition;
-            replacementItem.transform.rotation = replacedQuaternion;
-            replacementItem.SetActive(true);
+
+
+
+            //positioning 
+             replacementItem.transform.position = itemToReplace.transform.position;
+             Vector3 pos = replacementItem.transform.position;
+             pos.y =  replacementItem.heightOffsetY;
+             replacementItem.transform.position = pos; 
+ 
+            //AngleRotation
+            itemToReplace.transform.LookAt(lookat);
+            Vector3 angles = itemToReplace.transform.eulerAngles;
+            Vector3 onlyYaxisAngles = new Vector3(0f, angles.y + itemToReplace.rotationOffsetY, 0f); ;
+            itemToReplace.gameObject.transform.eulerAngles = onlyYaxisAngles;
+            replacementItem.gameObject.SetActive(true);
         }
     }
 

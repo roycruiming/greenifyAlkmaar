@@ -9,6 +9,8 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
 
+    public float rotationOffsetY = 0;
+    public float heightOffsetY = 0; 
 
     private GameObject GameObject;
 
@@ -19,6 +21,7 @@ public class Item : MonoBehaviour
     private void Awake()      
     {
         this.GameObject = this.gameObject;
+        this.heightOffsetY = this.gameObject.transform.position.y; 
         //this.InitPos = this.gameObject.transform; 
     }
 
