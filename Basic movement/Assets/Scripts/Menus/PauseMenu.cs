@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject PauseMenuUI;
     public GameObject HelpMenu;
+    public GameObject HUD;
+    public GameObject SettingMenu;
 
 
     // Update is called once per frame
@@ -38,13 +40,14 @@ public class PauseMenu : MonoBehaviour
         {
             child.gameObject.SetActive(false);
         }
-
+        SwitchVisbility(HUD, true);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
     void Pause()
     {
+        SwitchVisbility(HUD, false);
         Cursor.lockState = CursorLockMode.None;
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
@@ -53,20 +56,17 @@ public class PauseMenu : MonoBehaviour
 
     public void Options()
     {
-        Debug.Log("Go to options");
-
+        SwitchVisbility(SettingMenu, true);
     }
 
     public void Help()
     {
-       Debug.Log("Go to help");
-       HelpMenu.SetActive(true);
-       PauseMenuUI.SetActive(false);
+       SwitchVisbility(HelpMenu,true);
+       SwitchVisbility(PauseMenuUI, false);
     }
 
     public void ExitLevel()
     {
-        Debug.Log("Go to level select");
         GameIsPaused = false;
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
@@ -75,7 +75,14 @@ public class PauseMenu : MonoBehaviour
 
     public void ExitGame()
     {
-        Debug.Log("Exit game");
         Application.Quit();
+    }
+
+    void SwitchVisbility(GameObject panel, bool visbility)
+    {
+        if(panel)
+        {
+            panel.SetActive(visbility);
+        }
     }
 }
