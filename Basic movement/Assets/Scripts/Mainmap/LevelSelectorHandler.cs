@@ -29,6 +29,7 @@ public class LevelSelectorHandler : MonoBehaviour
             this.pressButTextObj = GameObject.Find("PressButtToPlay");
         }
 
+
         // if(levelSelectorOutline != null) {
         //     Debug.Log("gevonden92)");
         // }
@@ -80,8 +81,8 @@ public class LevelSelectorHandler : MonoBehaviour
 
             //move level info container
             levelInfoContainer.transform.position = new Vector3(indexObject.transform.position.x - 25, levelInfoContainer.transform.position.y, indexObject.transform.position.z + 207);
-            if(GlobalGameHandler.GetInstance().currentLanguage == Language.Dutch) SetLevelName(selectedLevelInfo.levelNameDutch);
-            else if(GlobalGameHandler.GetInstance().currentLanguage == Language.English) SetLevelName(selectedLevelInfo.levelNameEnglish);
+
+            SetLevelName(selectedLevelInfo.levelNameEnglish);
 
             //handle the visual state of the unlocked/locked level
             this.lockedOrUnlockedVisualStateHandler(selectedLevelInfo, indexObject);
@@ -117,8 +118,8 @@ public class LevelSelectorHandler : MonoBehaviour
         if(selectedLevelInfo.isUnlocked) this.pressButTextObj.GetComponent<UnityEngine.UI.Text>().text = this.pressButTextObj.GetComponent<TextTranslationScript>().getText();
         else {
             string lockedLevelText = "";
-             if(GlobalGameHandler.GetInstance().currentLanguage == Language.Dutch) lockedLevelText = "Level is nog niet unlocked";
-             else lockedLevelText = "Level is not unlocked yet";
+             //if(GlobalGameHandler.GetInstance().currentLanguage == Language.Dutch) lockedLevelText = "Level is nog niet unlocked";
+             lockedLevelText = "Level is not unlocked yet";
 
              this.pressButTextObj.GetComponent<UnityEngine.UI.Text>().text = lockedLevelText;
         }

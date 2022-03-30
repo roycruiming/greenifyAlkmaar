@@ -24,7 +24,7 @@ public class raycaster : MonoBehaviour
     }
 
 
-    async void Update()
+    void Update()
     {
 
         Ray ray = new Ray(transform.position, transform.forward);
@@ -57,7 +57,6 @@ public class raycaster : MonoBehaviour
                 }
                 else if (hitInfo.collider.gameObject.CompareTag("SolarPanel")) 
                 {
-                
                     this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
                     if(GameObject.FindWithTag("HUDCanvas") != null) {
                         //find the hudcontroller object and call the ShowcaseMessage a tutorial message
