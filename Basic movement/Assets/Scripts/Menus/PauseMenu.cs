@@ -11,23 +11,27 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseMenuUI;
     public GameObject HelpMenu;
 
+    public DirectionalArrow arrow;
+
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
 
-            if (GameIsPaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Cursor.visible = false;
-                Resume();
-            } else
-            {
-                Cursor.visible = true;
-                Pause();
+
+                if (GameIsPaused)
+                {
+                    Cursor.visible = false;
+                    Resume();
+                } else
+                {
+                    Cursor.visible = true;
+                    Pause();
+                }
             }
-        }
+        
     }
 
     public void Resume()

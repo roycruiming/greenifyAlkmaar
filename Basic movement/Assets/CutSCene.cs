@@ -19,24 +19,23 @@ public class CutSCene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
-
+        //start cutscene
         MainCamera.gameObject.SetActive(false);
-        Object.Destroy(cutscene, 15.0f);
         children = gameObject.GetComponentsInChildren<Transform>();
         arrow.GameTimer.gameObject.SetActive(false);
         arrow.TextUiCounter.gameObject.SetActive(false);
+        Object.Destroy(cutscene, 28.0f);
 
-        if(messageDisplay == false)
+
+        if (messageDisplay == false)
         {
             messageDisplay = true;
             if (GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>() != null)
             {
                 GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, new List<string> {
-                "testeeadsasdasdasd",
-                "sadsadasdsaasddad dasdasdasd dadsdad"
+                "Welkom in Alkmaar, we zijn hier bij de meent. Deze ijsbaan heeft 940 zonnepanelen en deze hebben een opbrengst van 300.000 kwh (kilowatt uur) per jaar.",
+                "Dit staat gelijk aan het stroomverbruik van 100 huishoudens. Echter werken de zonnepanelen nu niet, zoek rond in het level naar oplossingen! ",
+                "Veel succes!"
                 });
             }
         }

@@ -14,6 +14,7 @@ public class MyCamera : MonoBehaviour
 
     void Start()
     {
+        this.gameObject.SetActive(false);
         camRotation = transform.localRotation;
     }
 

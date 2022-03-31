@@ -12,6 +12,8 @@ public class DirectionalArrow : MonoBehaviour
     private List<GameObject> target;
     public int objectivesCounter = 0;
     public GameObject arrow;
+    public GameObject blackBarArroundScoreScreen;
+    public SubmitScore sendscore;
     public Text TextUiCounter;
     public Text GameTimer;
     public Text GameDone;
@@ -21,22 +23,27 @@ public class DirectionalArrow : MonoBehaviour
     public int minutemark;
     public Button back;
     private int totalObjectives;
+    public bool gameFinnished = false;
 
+    public dreamloLeaderBoard dreamlo;
 
     [System.Obsolete]
 
 
     private void Awake()
     {
+        //sendscore.SubmitScores("Hermans", 500);
         GameDone.text = "";
         gameEndTime.text = "";
         gameEndScore.text = "";
         totalObjectives = target.Count;
+        blackBarArroundScoreScreen.gameObject.SetActive(false);
     }
     private void Update()
     {
+        
         //Arrow points to next objective
-        if (target.Count >= 1)
+        if (target.Count >= 5)
         {
             Vector3 targetPosition = target[0].transform.position;
             targetPosition.y = transform.position.y;
@@ -46,14 +53,17 @@ public class DirectionalArrow : MonoBehaviour
         //when game is finnished
         else
         {
+            //sendscore.SubmitScores("Herman", 500);
             Cursor.lockState = CursorLockMode.None;
             arrow.transform.position = new Vector3(100, 100, 100);
             Time.timeScale = 0;
+            blackBarArroundScoreScreen.gameObject.SetActive(true);
             GameDone.text = "Gefeliciteerd!";
             gameEndScore.text = objectivesCounter.ToString() + "/"+ totalObjectives;
             gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
             back.gameObject.SetActive(true);
-            
+            gameFinnished = true;
+
         }
 
 
