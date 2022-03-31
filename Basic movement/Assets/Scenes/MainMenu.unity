@@ -351,6 +351,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240892023}
   m_CullTransparentMesh: 0
+--- !u!114 &265431714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 895904895638954248, guid: 513cf155c23ec314a8f46b8328216c67,
+    type: 3}
+  m_PrefabInstance: {fileID: 895904896801927046}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0b652f32a2cc243917e4028fa0f046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &287047720
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,6 +2222,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 895904896801927046}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1725740820 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 895904896169400464, guid: 513cf155c23ec314a8f46b8328216c67,
+    type: 3}
+  m_PrefabInstance: {fileID: 895904896801927046}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725740818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f826c8deeebcff4488ebe76366970e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1729250823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2943,6 +2967,51 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1938832882}
     m_Modifications:
+    - target: {fileID: 895904895638954248, guid: 513cf155c23ec314a8f46b8328216c67,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 895904895638954248, guid: 513cf155c23ec314a8f46b8328216c67,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1725740820}
+    - target: {fileID: 895904895638954248, guid: 513cf155c23ec314a8f46b8328216c67,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetLanguage
+      objectReference: {fileID: 0}
+    - target: {fileID: 895904895638954250, guid: 513cf155c23ec314a8f46b8328216c67,
+        type: 3}
+      propertyPath: m_Name
+      value: LanguageDropdown
+      objectReference: {fileID: 0}
+    - target: {fileID: 895904896169400464, guid: 513cf155c23ec314a8f46b8328216c67,
+        type: 3}
+      propertyPath: LanguageSelect
+      value: 
+      objectReference: {fileID: 265431714}
+    - target: {fileID: 895904896169400464, guid: 513cf155c23ec314a8f46b8328216c67,
+        type: 3}
+      propertyPath: LanguageDropdown
+      value: 
+      objectReference: {fileID: 265431714}
+    - target: {fileID: 895904896169400464, guid: 513cf155c23ec314a8f46b8328216c67,
+        type: 3}
+      propertyPath: languages.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 895904896169400464, guid: 513cf155c23ec314a8f46b8328216c67,
+        type: 3}
+      propertyPath: languages.Array.data[0]
+      value: Dutch
+      objectReference: {fileID: 0}
+    - target: {fileID: 895904896169400464, guid: 513cf155c23ec314a8f46b8328216c67,
+        type: 3}
+      propertyPath: languages.Array.data[1]
+      value: English
+      objectReference: {fileID: 0}
     - target: {fileID: 895904896169400468, guid: 513cf155c23ec314a8f46b8328216c67,
         type: 3}
       propertyPath: m_Name

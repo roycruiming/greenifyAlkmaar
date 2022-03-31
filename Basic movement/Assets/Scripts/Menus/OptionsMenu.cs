@@ -8,31 +8,30 @@ public class OptionsMenu : MonoBehaviour
 {
 
     public AudioMixer audioMixer;
-    public Dropdown resolutionDropdown;
+    public Dropdown LanguageDropdown;
     public GameObject optionMenu;
 
-    Resolution[] resolutions;
+    public string LanguageSelected;
+    int LanguageSelectedIndex;
+    public List<string> languages;
+
 
     void Start()
     {
-        resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-        int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
+      LanguageSelected = GlobalGameHandler.GetInstance().currentLanguage.ToString();
+      Debug.Log(LanguageSelected);
+      LanguageDropdown.ClearOptions();
 
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-            }
+      for (int i = 0; i < languages.Count; i++)
+      {
+        if(languages[i] == LanguageSelected)
+        {
+          LanguageSelectedIndex = i;
         }
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
-        resolutionDropdown.RefreshShownValue();
+      }
+      LanguageDropdown.AddOptions(languages);
+      LanguageDropdown.value = LanguageSelectedIndex;
+      LanguageDropdown.RefreshShownValue();
     }
 
     public void SetVolume(float volume)
@@ -40,15 +39,14 @@ public class OptionsMenu : MonoBehaviour
         audioMixer.SetFloat("volume", volume);
     }
 
+    public void SetLanguage(int WantedLanguage)
+    {
+      Debug.Log(languages[WantedLanguage]);
+    }
+
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
-    }
-
-    public void SetResolution(int resolutionIndex)
-    {
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
     public void CloseOptions()
