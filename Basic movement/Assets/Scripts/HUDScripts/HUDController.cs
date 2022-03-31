@@ -67,7 +67,10 @@ public class HUDController : MonoBehaviour
             //two options for this function, one is that it just displays a message with the mascot in the screen
             //other option is that the game object is being readed and if it contains an sprite display this sprite also
             if(senderInfo == null) {
+                //just a message is going to be displayed with the default mascotte icon and PopUpImage should be hidden
                 this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
+                this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
+                
                 this.setCharacterArrays(messageText);
             }
             else {
@@ -81,6 +84,7 @@ public class HUDController : MonoBehaviour
                     spriteElement.SetActive(true); //show image UI element
                     spriteElement.GetComponent<Image>().sprite = senderInfo.spriteToShow; //set the sprite image
                 }
+                else this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
                 //change icon of the character who is talking the message
                 if(senderInfo.characterIcon != null) {
                     Debug.Log("Set character icon");
