@@ -25,7 +25,7 @@ public class GlobalGameHandler : MonoBehaviour
             instance.languages = new List<string>();
             instance.translationDictionary = new List<KeyValuePair<string,string>>();
             instance.currentLanguage = "nederlands";
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(this.gameObject);
             InitTranslationDictionary();
         }
     }
