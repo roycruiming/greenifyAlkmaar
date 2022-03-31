@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using System.IO;
 using UnityEngine;
@@ -44,6 +45,17 @@ public class GlobalGameHandler : MonoBehaviour
         }
 
         return "ERROR WORD NOT FOUND";
+    }
+
+    public static List<string> GetSentencesByDictionaryKey(string key) {
+        string keyWithLanguage = key + "_" + instance.currentLanguage;
+        string sentence = "";
+        foreach(KeyValuePair<string,string> pair in instance.translationDictionary) {
+            if(pair.Key == keyWithLanguage) sentence = pair.Value;
+        }
+
+        if(sentence.Contains(";")) return sentence.Split(';').ToList(); //sentences are splitted by ';' character
+        else return new List<string> { sentence };
     }
 
     private static void AddTranslationWord(string key, string value) {

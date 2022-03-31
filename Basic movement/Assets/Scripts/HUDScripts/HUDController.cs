@@ -16,6 +16,8 @@ public class HUDController : MonoBehaviour
     private char[] toBePrintedCharacters;
     private char[] currentlyPrintedCharacters;
 
+    private double messageBoxMaxChars = 160;
+
     private List<string> messageSequence;
 
     public GameObject HudCanvas; //find the hudcanvas is in the current scene
@@ -92,7 +94,7 @@ public class HUDController : MonoBehaviour
         int messageTotalCharCount = this.toBePrintedCharacters.GetLength(0);
 
         //if characters are 80 or above add 2 extra seconds reading time
-        if(messageTotalCharCount >= 80) { 
+        if(messageTotalCharCount >= this.messageBoxMaxChars / 2) { 
             this.hidePopUpGroupWaitingTime = this.hidePopUpGroupWaitingTime + 2f; 
             this.nextMessageWaitingTime = this.nextMessageWaitingTime + 1.2f;
         } 
@@ -124,6 +126,7 @@ public class HUDController : MonoBehaviour
                 //print next character and add it to the currentlypritnedcharacters list
                 for(int i = 0; i < this.toBePrintedCharacters.GetLength(0); i++) {
                     if(this.toBePrintedCharacters[i] != currentlyPrintedCharacters[i]) {
+                        //set next text
                         this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().text = ""; //empty the current text popup message
                         currentlyPrintedCharacters[i] = toBePrintedCharacters[i]; //set the characters equal so the function knows this character is displayed
                         TextMeshProUGUI textMeshObject = this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>();
