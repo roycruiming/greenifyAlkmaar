@@ -66,13 +66,15 @@ public class HUDController : MonoBehaviour
 
             //two options for this function, one is that it just displays a message with the mascot in the screen
             //other option is that the game object is being readed and if it contains an sprite display this sprite also
-            if(senderInfo == null) this.setCharacterArrays(messageText);
+            if(senderInfo == null) {
+                this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
+                this.setCharacterArrays(messageText);
+            }
             else {
                 this.currentInformationHelper = senderInfo;
                 if(useMessageText == true) this.setCharacterArrays(messageText); //use the senderMessageSequence text instead of sender.info text
                 else this.setCharacterArrays(GlobalGameHandler.GetTextByDictionaryKey(senderInfo.informationTextDictionaryKey)); //set text
                 
-                Debug.Log(this.toBePrintedCharacters.GetLength(0));
                 //show sprite if it is set
                 if(senderInfo.spriteToShow != null) {
                     GameObject spriteElement = this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject;
@@ -81,12 +83,25 @@ public class HUDController : MonoBehaviour
                 }
                 //change icon of the character who is talking the message
                 if(senderInfo.characterIcon != null) {
+                    Debug.Log("Set character icon");
                     this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = senderInfo.characterIcon;
                 }
+                else this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
             }
 
-            calculateExtraReadingTime();
+            //if the message contains alot of characters
+            this.calculateMessageFontSize(this.toBePrintedCharacters.GetLength(0));
+
+            //calculateExtraReadingTime();
         }
+    }
+
+    private void calculateMessageFontSize(int characters) {
+        //160 is the basis of what fits with fontsize 36
+        Debug.Log("Chars count: " + characters);
+        if(characters < this.messageBoxMaxChars) this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().fontSize = 36;
+        else if(characters > this.messageBoxMaxChars && characters <= 240) this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().fontSize = 26;
+        else if(characters > this.messageBoxMaxChars && characters <= 300) this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().fontSize = 22;
     }
 
     private void calculateExtraReadingTime() {
@@ -95,7 +110,7 @@ public class HUDController : MonoBehaviour
 
         //if characters are 80 or above add 2 extra seconds reading time
         if(messageTotalCharCount >= this.messageBoxMaxChars / 2) { 
-            this.hidePopUpGroupWaitingTime = this.hidePopUpGroupWaitingTime + 2f; 
+            this.hidePopUpGroupWaitingTime = this.hidePopUpGroupWaitingTime + 2f; //bugged keeps setting it to the infinite
             this.nextMessageWaitingTime = this.nextMessageWaitingTime + 1.2f;
         } 
     }
@@ -180,13 +195,16 @@ public class HUDController : MonoBehaviour
             this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
 
             //reset the sprite character icon to the default mascot
-            this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load("Sprites/mascotte") as Sprite;
+            this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
 
             //reset the message sequence list
             this.messageSequence = null;
 
             //reset current information helper to null
             this.currentInformationHelper = null;
+
+            //reset font size
+            this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().fontSize = 36;
 
             //reset waiting times for hiding and next message
             this.nextMessageWaitingTime = 2f; //default value is 2f
