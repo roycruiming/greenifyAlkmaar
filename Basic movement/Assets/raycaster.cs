@@ -48,7 +48,7 @@ public class raycaster : MonoBehaviour
                     hitInfo.collider.transform.GetChild(1).GetComponent<PuzzleDynaScript>().ActivatePuzzle();
                 }
 
-                else if (hitInfo.collider.gameObject.CompareTag("SolarSpot")) {
+                /*else if (hitInfo.collider.gameObject.CompareTag("SolarSpot")) {
                     InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault(); 
                     if (infslot != null) {
                         hitInfo.collider.transform.GetComponent<SolarSpot>().DoShit(infslot);
@@ -62,7 +62,7 @@ public class raycaster : MonoBehaviour
                         //find the hudcontroller object and call the ShowcaseMessage a tutorial message
                         GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage("Good job you have found a Solarpanel! Find the spot where it should be placed.");
                     }
-                }
+                }*/
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {

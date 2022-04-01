@@ -1,5 +1,4 @@
 using UnityEngine.UI;
-using LootLocker.Requests;
 using UnityEngine;
 
 public class LeaderboardController : MonoBehaviour
@@ -9,7 +8,7 @@ public class LeaderboardController : MonoBehaviour
 
     private void Start()
     {
-        LootLockerSDKManager.StartSession("player", (response) =>
+        /*//LootLockerSDKManager.StartSession("player", (response) =>
         {
             if (response.success)
             {
@@ -19,14 +18,14 @@ public class LeaderboardController : MonoBehaviour
             {
                 Debug.Log("Failed");
             }
-        });
+        });*/
     }
 
 
     public void SubmitScore()
     {
-        LootLockerSDKManager.SubmitScore(MemberID.text, int.Parse(PlayerScore.text), ID, (response) =>
-        {
+        //LootLockerSDKManager.SubmitScore(MemberID.text, int.Parse(PlayerScore.text), ID, (response) =>
+        /*{
             if (response.success)
             {
                 Debug.Log("Succes");
@@ -35,6 +34,6 @@ public class LeaderboardController : MonoBehaviour
             {
                 Debug.Log("Failed");
             }
-        });
+        });*/
     }
 }
