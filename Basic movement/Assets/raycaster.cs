@@ -11,7 +11,8 @@ public class raycaster : MonoBehaviour
 
     public int rayLength;
     public LayerMask layerMask;
-    public InventoryController inventoryController;
+    private InventoryController inventoryController;
+
 
 
     private void Awake()
@@ -32,28 +33,13 @@ public class raycaster : MonoBehaviour
         {
 
             //en de speler drukt op f
-            if (Input.GetKeyDown(KeyCode.F)) {
+           if (Input.GetKeyDown(KeyCode.F)) {
+                Item item = hitInfo.collider.gameObject.GetComponent<Item>();
+                if (item == null) { return; }
 
-                //zoek naar de ItemHolder Component en haal hier het item uit
-                Item itemToStore = hitInfo.collider.gameObject.GetComponent<Item>();
-
-                //Transform t  = gameObject.transform.LookAt(;
-
-               
-                
-
-                //itemToStore.transform.LookAt(this.transform);
-                inventoryController.ReplaceWorldAndInventory(itemToStore, this.transform);
-
-               
-                
-                
+                inventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, this.transform);   
             }
-
         }
-
-    }
-
-   
+    }  
 }
     
