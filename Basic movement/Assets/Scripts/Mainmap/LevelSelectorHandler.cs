@@ -29,6 +29,7 @@ public class LevelSelectorHandler : MonoBehaviour
             this.pressButTextObj = GameObject.Find("PressButtToPlay");
         }
 
+
         // if(levelSelectorOutline != null) {
         //     Debug.Log("gevonden92)");
         // }
@@ -80,8 +81,8 @@ public class LevelSelectorHandler : MonoBehaviour
 
             //move level info container
             levelInfoContainer.transform.position = new Vector3(indexObject.transform.position.x - 25, levelInfoContainer.transform.position.y, indexObject.transform.position.z + 207);
-            if(GlobalGameHandler.GetInstance().currentLanguage == Language.Dutch) SetLevelName(selectedLevelInfo.levelNameDutch);
-            else if(GlobalGameHandler.GetInstance().currentLanguage == Language.English) SetLevelName(selectedLevelInfo.levelNameEnglish);
+
+            SetLevelName(selectedLevelInfo.levelNameKey);
 
             //handle the visual state of the unlocked/locked level
             this.lockedOrUnlockedVisualStateHandler(selectedLevelInfo, indexObject);
@@ -114,18 +115,13 @@ public class LevelSelectorHandler : MonoBehaviour
 
         //if level is locked set the text from press 'E' to play naar niks
         //gets the text in the right language
-        if(selectedLevelInfo.isUnlocked) this.pressButTextObj.GetComponent<UnityEngine.UI.Text>().text = this.pressButTextObj.GetComponent<TextTranslationScript>().getText();
-        else {
-            string lockedLevelText = "";
-             if(GlobalGameHandler.GetInstance().currentLanguage == Language.Dutch) lockedLevelText = "Level is nog niet unlocked";
-             else lockedLevelText = "Level is not unlocked yet";
-
-             this.pressButTextObj.GetComponent<UnityEngine.UI.Text>().text = lockedLevelText;
-        }
+        if(selectedLevelInfo.isUnlocked) this.pressButTextObj.GetComponent<UnityEngine.UI.Text>().text = GlobalGameHandler.GetTextByDictionaryKey("press e to play");
+        else this.pressButTextObj.GetComponent<UnityEngine.UI.Text>().text = GlobalGameHandler.GetTextByDictionaryKey("level is not unlocked yet"); //level is locked
+        
     }   
 
-    private void SetLevelName(string name) {
-        GameObject.Find("LevelNameDisplay").GetComponent<UnityEngine.UI.Text>().text = name;
+    private async void SetLevelName(string nameKey) {
+        GameObject.Find("LevelNameDisplay").GetComponent<UnityEngine.UI.Text>().text = GlobalGameHandler.GetTextByDictionaryKey(nameKey);
     }
 
     // Update is called once per frame

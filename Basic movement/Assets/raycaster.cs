@@ -24,7 +24,7 @@ public class raycaster : MonoBehaviour
     }
 
 
-    async void Update()
+    void Update()
     {
 
         Ray ray = new Ray(transform.position, transform.forward);
@@ -57,7 +57,6 @@ public class raycaster : MonoBehaviour
                 }
                 else if (hitInfo.collider.gameObject.CompareTag("SolarPanel")) 
                 {
-                
                     this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
                     if(GameObject.FindWithTag("HUDCanvas") != null) {
                         //find the hudcontroller object and call the ShowcaseMessage a tutorial message
@@ -72,7 +71,8 @@ public class raycaster : MonoBehaviour
                     if(hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null) {
                         //find the hudcontroller object and call the ShowcaseMessage function with the informationHelper message
                         InformationHelper senderInfo = hitInfo.collider.gameObject.GetComponent<InformationHelper>();
-                        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.informationText, senderInfo, new List<string> { "test test test", "vier vijf zes", "acht negen tien" });
+                        if(senderInfo.keyTextIsSentence == false) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo);
+                        else GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo, senderInfo.GetMultipleTranslatedSentences());
                     }
 
                 }
