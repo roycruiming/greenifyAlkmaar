@@ -18,7 +18,7 @@ public class PuzzleDynaScript : MonoBehaviour
 
     public int valueTest;
 
-    public DirectionalArrow arrow;
+    public ObjectivesController objCon;
 
     public Button option1, option2, option3, option4;
 
@@ -32,7 +32,7 @@ public class PuzzleDynaScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        objCon = FindObjectOfType<ObjectivesController>();
     }
 
     // Update is called once per frame
@@ -219,7 +219,7 @@ public class PuzzleDynaScript : MonoBehaviour
         {
             transform.GetChild(1).GetComponent<Text>().text = "That is correct! Congratulations!";
 
-            arrow.DeleteItemInList(valueTest);
+            objCon.DeleteItemInList(valueTest);
 
             PuzzleVictory(); 
 

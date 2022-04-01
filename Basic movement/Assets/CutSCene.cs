@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CutSCene : MonoBehaviour
 {
-
+    public ObjectivesController objCon;
     public GameObject cutscene;
     public GameObject MainCamera;
     public DirectionalArrow arrow;
@@ -14,7 +14,10 @@ public class CutSCene : MonoBehaviour
     private bool messageDisplay = false;
 
 
-
+    private void Start()
+    {
+        objCon = FindObjectOfType<ObjectivesController>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,8 +25,8 @@ public class CutSCene : MonoBehaviour
         //start cutscene
         MainCamera.gameObject.SetActive(false);
         children = gameObject.GetComponentsInChildren<Transform>();
-        arrow.GameTimer.gameObject.SetActive(false);
-        arrow.TextUiCounter.gameObject.SetActive(false);
+        objCon.GameTimer.gameObject.SetActive(false);
+        objCon.TextUiCounter.gameObject.SetActive(false);
         Object.Destroy(cutscene, 28.0f);
 
 
@@ -45,14 +48,14 @@ public class CutSCene : MonoBehaviour
         {
             if(timerBool == false)
             {
-                arrow.SetTimerToNul();
+                objCon.SetTimerToNul();
                 timerBool = true;
             }
             else
             {
                 MainCamera.gameObject.SetActive(true);
-                arrow.GameTimer.gameObject.SetActive(true);
-                arrow.TextUiCounter.gameObject.SetActive(true);
+                objCon.GameTimer.gameObject.SetActive(true);
+                objCon.TextUiCounter.gameObject.SetActive(true);
             }
             
 
