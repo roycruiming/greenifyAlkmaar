@@ -5,6 +5,19 @@ using UnityEngine.UI;
 
 public class MovingIconButtonController : MonoBehaviour
 {
+    public Camera puzzleCam;
+
+    public GameObject player;
+
+    public GameObject recycleSprite;
+    public GameObject gasSprite;
+    public GameObject factorySprite;
+    public GameObject windmillSprite;
+    public GameObject solarSprite;
+
+    public int valueTest;
+
+    public ObjectivesController objCon;
 
     public Button option1, option2, option3, option4;
 
@@ -16,13 +29,13 @@ public class MovingIconButtonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        objCon = FindObjectOfType<ObjectivesController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void InitializeButtons(int answer)
@@ -135,7 +148,7 @@ public class MovingIconButtonController : MonoBehaviour
             case "Cube 0":
                 GameObject doos = GameObject.Find("Cube 0");
                 GameObject rook = doos.transform.Find("Smoke").gameObject;
-                rook.SetActive(false);  //fix doos 
+                rook.SetActive(false);  //fix doos
                 break;
             //Solar panel in the housing district
             case "Cube 1": // spawn solar panel
@@ -174,7 +187,7 @@ public class MovingIconButtonController : MonoBehaviour
                 break;
             //Windmills behind the Meent
             case "Cube 4":
-                { // laat windmolen draaien 
+                { // laat windmolen draaien
                     GameObject obj2 = GameObject.Find("Cube 4");
                     GameObject child2 = obj2.transform.Find("Smoke").gameObject;
                     child2.SetActive(false);
@@ -198,6 +211,42 @@ public class MovingIconButtonController : MonoBehaviour
         }
     }
 
-    
+    void OptionClicked(Button answer, Button option)
+    {
+        if (answer == option)
+        {
+            transform.GetChild(1).GetComponent<Text>().text = "That is correct! Congratulations!";
+
+            objCon.DeleteItemInList(valueTest);
+
+            PuzzleVictory();
+
+            StartCoroutine(LeaveCam(true));
+            //Success get thing!
+
+
+
+        } else
+        {
+            transform.GetChild(1).GetComponent<Text>().text = "That is sadly incorrect, but please try again!";
+            StartCoroutine(LeaveCam(false));
+        }
+    }
+
+    int CalculateAnswer(GameObject[] spriteList)
+    {
+        int sustainableAmount = 0;
+
+        foreach(GameObject sprite in spriteList)
+        {
+            if (sprite.GetComponent<DynamicImageController>().energy == EnergyType.Sustainable)
+            {
+                sustainableAmount += 1;
+            }
+        }
+
+        return sustainableAmount;
+    }
+
 
 }

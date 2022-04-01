@@ -14,6 +14,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject SettingMenu;
     public GameObject PuzzleCanvas;
 
+    public DirectionalArrow arrow;
+
 
     // Update is called once per frame
     void Update()
@@ -30,62 +32,61 @@ public class PauseMenu : MonoBehaviour
                 Cursor.visible = true;
                 Pause();
             }
+
         }
     }
 
-    public void Resume()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-
-        foreach(Transform child in transform)
+        public void Resume()
         {
-            child.gameObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            SwitchVisbility(HUD, true);
+            Time.timeScale = 1f;
+            GameIsPaused = false;
         }
-        SwitchVisbility(HUD, true);
-        SwitchVisbility(PuzzleCanvas, true);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
-    }
 
-    void Pause()
-    {
-        SwitchVisbility(HUD, false);
-        SwitchVisbility(PuzzleCanvas, false);
-        Cursor.lockState = CursorLockMode.None;
-        PauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-    }
-
-    public void Options()
-    {
-        SwitchVisbility(SettingMenu, true);
-    }
-
-    public void Help()
-    {
-       SwitchVisbility(HelpMenu,true);
-       SwitchVisbility(PauseMenuUI, false);
-    }
-
-    public void ExitLevel()
-    {
-        GameIsPaused = false;
-        Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.None;
-        SceneManager.LoadScene(ExitTo);
-    }
-
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
-
-    void SwitchVisbility(GameObject panel, bool visbility)
-    {
-        if(panel)
+        void Pause()
         {
-            panel.SetActive(visbility);
+            SwitchVisbility(HUD, false);
+            Cursor.lockState = CursorLockMode.None;
+            PauseMenuUI.SetActive(true);
+            Time.timeScale = 0f;
+            GameIsPaused = true;
         }
-    }
+
+        public void Options()
+        {
+            SwitchVisbility(SettingMenu, true);
+        }
+
+        public void Help()
+        {
+            SwitchVisbility(HelpMenu, true);
+            SwitchVisbility(PauseMenuUI, false);
+        }
+
+        public void ExitLevel()
+        {
+            GameIsPaused = false;
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene(ExitTo);
+        }
+
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
+
+        void SwitchVisbility(GameObject panel, bool visbility)
+        {
+            if (panel)
+            {
+                panel.SetActive(visbility);
+            }
+        }
 }
