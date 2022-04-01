@@ -38,6 +38,14 @@ public class GlobalGameHandler : MonoBehaviour
         instance.languages.Add(languageName);
     }
 
+    public static void ChangeLanguage(string languageName) {
+        if(instance.languages.Contains(languageName)) instance.currentLanguage = languageName;
+    }
+
+    public static List<string> GetLanguagesList() {
+        return instance.languages;
+    }
+
     public static string GetTextByDictionaryKey(string key) {
         string keyWithLanguage = key + "_" + instance.currentLanguage;
         foreach(KeyValuePair<string,string> pair in instance.translationDictionary) {
@@ -115,6 +123,7 @@ public class GlobalGameHandler : MonoBehaviour
     }
 }
 
+//remove this at some point
 public enum Language {
     Dutch, English
 }
