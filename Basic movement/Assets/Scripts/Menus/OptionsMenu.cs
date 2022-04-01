@@ -18,20 +18,20 @@ public class OptionsMenu : MonoBehaviour
 
     void Start()
     {
-      LanguageSelected = GlobalGameHandler.GetInstance().currentLanguage.ToString();
-      Debug.Log(LanguageSelected);
-      LanguageDropdown.ClearOptions();
+      //LanguageSelected = GlobalGameHandler.GetInstance().currentLanguage.ToString();
+      //Debug.Log(LanguageSelected);
+      //LanguageDropdown.ClearOptions();
 
-      for (int i = 0; i < languages.Count; i++)
-      {
-        if(languages[i] == LanguageSelected)
-        {
-          LanguageSelectedIndex = i;
-        }
-      }
-      LanguageDropdown.AddOptions(languages);
-      LanguageDropdown.value = LanguageSelectedIndex;
-      LanguageDropdown.RefreshShownValue();
+    //  for (int i = 0; i < languages.Count; i++)
+    //  {
+    //    if(languages[i] == LanguageSelected)
+    //    {
+    //      LanguageSelectedIndex = i;
+    //    }
+    //  }
+    //  LanguageDropdown.AddOptions(languages);
+    //  LanguageDropdown.value = LanguageSelectedIndex;
+    //  LanguageDropdown.RefreshShownValue();
     }
 
     public void SetVolume(float volume)
