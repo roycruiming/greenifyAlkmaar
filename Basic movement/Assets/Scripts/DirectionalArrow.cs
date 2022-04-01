@@ -13,6 +13,8 @@ public class DirectionalArrow : MonoBehaviour
     public int objectivesCounter = 0;
     public GameObject arrow;
     public GameObject blackBarArroundScoreScreen;
+    public GameObject nameInput;
+    public GameObject nameInputBar;
     public SubmitScore submitscore;
     public Text TextUiCounter;
     public Text GameTimer;
@@ -37,6 +39,9 @@ public class DirectionalArrow : MonoBehaviour
         gameEndScore.text = "";
         totalObjectives = target.Count;
         blackBarArroundScoreScreen.gameObject.SetActive(false);
+        nameInput.gameObject.SetActive(false);
+        nameInputBar.gameObject.SetActive(false);
+
     }
     private void Update()
     {
@@ -57,14 +62,16 @@ public class DirectionalArrow : MonoBehaviour
             arrow.transform.position = new Vector3(100, 100, 100);
             Time.timeScale = 0;
             blackBarArroundScoreScreen.gameObject.SetActive(true);
+            nameInput.gameObject.SetActive(true);
+            nameInputBar.gameObject.SetActive(true);
             GameDone.text = "Gefeliciteerd!";
             gameEndScore.text = objectivesCounter.ToString() + "/"+ totalObjectives;
             gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
             back.gameObject.SetActive(true);
             gameFinnished = true;
-            SubmitScore.AddNewHighscore("Herman", 5000);
-
+            
         }
+
 
 
         TextUiCounter.text = objectivesCounter.ToString() + "/5";
@@ -80,7 +87,7 @@ public class DirectionalArrow : MonoBehaviour
         }
         GameTimer.text = minutemark + ":" + Mathf.Round(secondsTimer);
 
-
+        
         
     }
 
@@ -100,6 +107,17 @@ public class DirectionalArrow : MonoBehaviour
     }
 
 
+    private int calculatescore()
+    {
+        int score = minutemark * 200;
+        int score2 = Mathf.RoundToInt(secondsTimer) * score;
+        return score2;
+    }
 
+    public void SubmitAndExit()
+    {
+        SubmitScore.AddNewHighscore(nameInput.GetComponent<Text>().text, 690/*calculatescore()*/);
+        SceneManager.LoadScene(2);
+    }
 
 }
