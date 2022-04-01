@@ -13,6 +13,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject HUD;
     public GameObject SettingMenu;
 
+    public DirectionalArrow arrow;
+
 
     // Update is called once per frame
     void Update()
@@ -29,7 +31,7 @@ public class PauseMenu : MonoBehaviour
                 Cursor.visible = true;
                 Pause();
             }
-        }
+        
     }
 
     public void Resume()
