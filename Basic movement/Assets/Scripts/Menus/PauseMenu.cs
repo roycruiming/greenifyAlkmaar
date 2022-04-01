@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject HelpMenu;
     public GameObject HUD;
     public GameObject SettingMenu;
+    public GameObject PuzzleCanvas;
 
 
     // Update is called once per frame
@@ -35,12 +36,13 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        
+
         foreach(Transform child in transform)
         {
             child.gameObject.SetActive(false);
         }
         SwitchVisbility(HUD, true);
+        SwitchVisbility(PuzzleCanvas, true);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -48,6 +50,7 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         SwitchVisbility(HUD, false);
+        SwitchVisbility(PuzzleCanvas, false);
         Cursor.lockState = CursorLockMode.None;
         PauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
