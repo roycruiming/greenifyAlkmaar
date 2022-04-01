@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq; 
+using System.Linq;
+using System;
 
 public class raycaster : MonoBehaviour
 {
@@ -10,17 +11,14 @@ public class raycaster : MonoBehaviour
 
     public int rayLength;
     public LayerMask layerMask;
-    public Text textUI; 
-
-     
+    private InventoryController inventoryController;
 
 
-    void Start()
+
+    private void Awake()
     {
-        if (textUI != null) {
-            textUI.text = ""; 
-            textUI.gameObject.SetActive(false); 
-        }
+        Inventory inv = new Inventory();
+        inventoryController = new InventoryController(inv);
     }
 
 
@@ -30,18 +28,14 @@ public class raycaster : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hitInfo;
 
+        //als de raycast een object raakt met de juiste layermask
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
-      
-            OnScreenDescription description
-                = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
 
-            if (textUI != null && description != null) {
-                textUI.gameObject.SetActive(true);
-                textUI.text = description.textToDisplay; 
-            }
-
-            if (Input.GetKeyDown(KeyCode.F)) {
+            //en de speler drukt op f
+           if (Input.GetKeyDown(KeyCode.F)) {
+                Item item = hitInfo.collider.gameObject.GetComponent<Item>();
+                if (item == null) { return; }
 
                 if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube") && hitInfo.collider.transform.GetChild(1).gameObject.activeInHierarchy)
                 {                    
@@ -85,10 +79,7 @@ public class raycaster : MonoBehaviour
                 textUI.gameObject.SetActive(false);
 
             }
-
-            }
         }
-
-    }
-
+    }  
+}
     

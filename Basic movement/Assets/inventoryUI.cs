@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class inventoryUI : MonoBehaviour
 {
 
-    public IntventoryObject inventory; 
+    //public IntventoryObject inventory; 
 
     // Start is called before the first frame update
     void Start()
@@ -17,27 +17,27 @@ public class inventoryUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inventory.Container.Count > 0) {     
-            print("updating ui");
-            Sprite icon = inventory.Container[0].item.icon;
-            print(this.gameObject.name);
+        //if (inventory.Container.Count > 0) {     
+        //    print("updating ui");
+        //    Sprite icon = inventory.Container[0].item.icon;
+        //    print(this.gameObject.name);
 
-            Image image = this.gameObject.GetComponent<Image>();
+        //    Image image = this.gameObject.GetComponent<Image>();
 
-            if (image == null) {
-                this.gameObject.AddComponent<Image>();
-                image = this.gameObject.GetComponent<Image>(); 
-            }
+        //    if (image == null) {
+        //        this.gameObject.AddComponent<Image>();
+        //        image = this.gameObject.GetComponent<Image>(); 
+        //    }
 
-            image.sprite = icon; 
+        //    image.sprite = icon; 
 
-        }
+        //}
 
-        else
-        {
-            Image image  =  this.gameObject.GetComponent<Image>();
-            Destroy(image); 
-        }
+        //else
+        //{
+        //    Image image  =  this.gameObject.GetComponent<Image>();
+        //    Destroy(image); 
+        //}
 
        
         

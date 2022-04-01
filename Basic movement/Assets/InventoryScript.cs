@@ -3,46 +3,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryScript : MonoBehaviour
+
+
+
+
+
+
+
+public class Inventory2 : MonoBehaviour
 {
 
-    public IntventoryObject inventory;
+    private Item item; 
+
 
     public void AddOrSwap(Collider other)
     {
 
+       
+                
+
+
+
+
         
 
-        var item = other.GetComponent<Item>();
+        //var item = other.GetComponent<Item>();
 
-        if (item.item.getprefab() == null) {
-            item.item.setprefab(other.gameObject);
+        //if (item.item.getprefab() == null) {
+        //    item.item.setprefab(other.gameObject);
 
-        }        
+        //}        
 
        
 
-        if (inventory.AddItem(item.item, 1))
-        {
-            inventory.Container[0].item.setprefab(other.gameObject);
-            other.gameObject.SetActive(false);
-        }
-        else
-        {
+        //if (inventory.AddItem(item.item, 1))
+        //{
+        //    inventory.Container[0].item.setprefab(other.gameObject);
+        //    other.gameObject.SetActive(false);
+        //}
+        //else
+        //{
 
-            //NORMAAL SWAPTE DIT, MAAR ik heb mn script gesloopt,
-            //en IN DE PoC hoeft dit niet nog niet te werken 
+        //    //NORMAAL SWAPTE DIT, MAAR ik heb mn script gesloopt,
+        //    //en IN DE PoC hoeft dit niet nog niet te werken 
 
-            //GameObject i = inventory.Container[0].item.getprefab(); 
-            //inventory.Container.Clear();
-            //inventory.AddItem(item.item, 1);
-            //other.gameObject.SetActive(false); 
+        //    //GameObject i = inventory.Container[0].item.getprefab(); 
+        //    //inventory.Container.Clear();
+        //    //inventory.AddItem(item.item, 1);
+        //    //other.gameObject.SetActive(false); 
 
-            //Vector3 position = other.transform.position;
-            //position.y = 0f; 
-            //UnityEngine.Quaternion quat = other.transform.rotation;
-            //Instantiate(i, position, quat);
-        }
+        //    //Vector3 position = other.transform.position;
+        //    //position.y = 0f; 
+        //    //UnityEngine.Quaternion quat = other.transform.rotation;
+        //    //Instantiate(i, position, quat);
+        //}
 
     }
 
@@ -52,15 +66,15 @@ public class InventoryScript : MonoBehaviour
 
   
 
-    private void OnApplicationQuit()
-    {
-        inventory.Container.Clear(); 
-    }
+    //private void OnApplicationQuit()
+    //{
+    //    //inventory.Container.Clear(); 
+    //}
 
-    public void Clear()
-    {
-        inventory.Container.Clear();
-    }
+    //public void Clear()
+    //{
+    //    //inventory.Container.Clear();
+    //}
 }
 
 
