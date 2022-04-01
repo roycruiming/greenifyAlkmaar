@@ -47,7 +47,7 @@ public class DirectionalArrow : MonoBehaviour
     {
         
         //Arrow points to next objective
-        if (target.Count >= 5)
+        if (target.Count >= 1)
         {
             Vector3 targetPosition = target[0].transform.position;
             targetPosition.y = transform.position.y;
