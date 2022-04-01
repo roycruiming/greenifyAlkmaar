@@ -13,7 +13,7 @@ public class DirectionalArrow : MonoBehaviour
     public int objectivesCounter = 0;
     public GameObject arrow;
     public GameObject blackBarArroundScoreScreen;
-    public SubmitScore sendscore;
+    public SubmitScore submitscore;
     public Text TextUiCounter;
     public Text GameTimer;
     public Text GameDone;
@@ -32,7 +32,6 @@ public class DirectionalArrow : MonoBehaviour
 
     private void Awake()
     {
-        //sendscore.SubmitScores("Hermans", 500);
         GameDone.text = "";
         gameEndTime.text = "";
         gameEndScore.text = "";
@@ -53,7 +52,7 @@ public class DirectionalArrow : MonoBehaviour
         //when game is finnished
         else
         {
-            //sendscore.SubmitScores("Herman", 500);
+            
             Cursor.lockState = CursorLockMode.None;
             arrow.transform.position = new Vector3(100, 100, 100);
             Time.timeScale = 0;
@@ -63,6 +62,7 @@ public class DirectionalArrow : MonoBehaviour
             gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
             back.gameObject.SetActive(true);
             gameFinnished = true;
+            SubmitScore.AddNewHighscore("Herman", 5000);
 
         }
 
@@ -81,7 +81,7 @@ public class DirectionalArrow : MonoBehaviour
         GameTimer.text = minutemark + ":" + Mathf.Round(secondsTimer);
 
 
-
+        
     }
 
 
@@ -99,10 +99,7 @@ public class DirectionalArrow : MonoBehaviour
         minutemark = 0;
     }
 
-/*    public void StartTimer()
-    {
 
-    }*/
 
 
 }

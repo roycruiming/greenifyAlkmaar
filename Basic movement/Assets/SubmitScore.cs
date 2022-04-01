@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class SubmitScore : MonoBehaviour
 {
-	public Text scorelist;
-    public dreamloLeaderBoard dreamlo;
+
 
     const string privateCode = "CWbGB-vmdUukd35Xm-FDbgK7fNBqKjKUu9XQeqAYP9pQ";
     const string publicCode = "624573208f40bc123c45e13e";
     const string webURL = "http://dreamlo.com/lb/";
 
     public Highscore[] highscoresList;
+    static SubmitScore instance;
     DiscplayHighscores highscoresDisplay;
 
 
@@ -24,16 +24,36 @@ public class SubmitScore : MonoBehaviour
         {
             username = _username;
             score = _score;
-
         }
     }
 
-    private void Awake()
+    public void Awake()
     {
+        
         highscoresDisplay = GetComponent<DiscplayHighscores>();
-        //DownloadHighScores();
+        instance = this;
     }
 
+    public static void AddNewHighscore(string username, int score)
+    {
+        instance.StartCoroutine(instance.UploadNewHighscore(username, score));
+        Debug.Log(username);
+    }
+
+    IEnumerator UploadNewHighscore(string username, int score)
+    {
+        WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(username) + "/" + score);
+        yield return www;
+
+        if (string.IsNullOrEmpty(www.error))
+        {
+            print("Upload Succesful");
+        }
+        else
+        {
+            print("Error Uploading" + www.error);
+        }
+    }
 
     public void DownloadHighScores()
     {
@@ -73,6 +93,6 @@ public class SubmitScore : MonoBehaviour
 
 		public void SubmitScores(string name, int result)
     {
-        dreamlo.AddScore(name, result);
+        //dreamlo.AddScore(name, result);
     }
 }
