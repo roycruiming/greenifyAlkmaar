@@ -107,16 +107,17 @@ public class DirectionalArrow : MonoBehaviour
     }
 
 
-    private int calculatescore()
-    {
-        int score = minutemark * 200;
-        int score2 = Mathf.RoundToInt(secondsTimer) * score;
-        return score2;
-    }
+
 
     public void SubmitAndExit()
     {
-        SubmitScore.AddNewHighscore(nameInput.GetComponent<Text>().text, 690/*calculatescore()*/);
+        int secondsFinal = (int)Mathf.Round(secondsTimer);
+        int result = minutemark  * 100;
+        SubmitScore.AddNewHighscore(nameInput.GetComponent<Text>().text, result + secondsFinal);
+        
+
+
+        
         SceneManager.LoadScene(2);
     }
 

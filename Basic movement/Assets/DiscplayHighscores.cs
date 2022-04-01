@@ -8,6 +8,7 @@ public class DiscplayHighscores : MonoBehaviour
 
     public Text[] highscoreText;
     SubmitScore submitScore;
+    int counter = 10;
 
 
 
@@ -15,7 +16,8 @@ public class DiscplayHighscores : MonoBehaviour
     {
         for (int i =0; i < highscoreText.Length; i++)
         {
-            highscoreText[i].text = i + 1 + ". Fetching...";
+            highscoreText[i].text = counter + ". Fetching...";
+            counter--;
         }
 
         submitScore = GetComponent<SubmitScore>();
@@ -25,9 +27,12 @@ public class DiscplayHighscores : MonoBehaviour
 
     public void OnHighscoresDownload(SubmitScore.Highscore[] highscoreList)
     {
+        counter = 10;
         for (int i = 0; i < highscoreText.Length; i++)
         {
-            highscoreText[i].text = i + 1 + ". ";
+            
+            highscoreText[i].text = counter + ". ";
+            counter--;
             if(highscoreList.Length > i)
             {
                 highscoreText[i].text += highscoreList[i].username + " - " + highscoreList[i].score;
