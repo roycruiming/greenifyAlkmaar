@@ -27,7 +27,7 @@ public class CutSCene : MonoBehaviour
         children = gameObject.GetComponentsInChildren<Transform>();
         objCon.GameTimer.gameObject.SetActive(false);
         objCon.TextUiCounter.gameObject.SetActive(false);
-        Object.Destroy(cutscene, 28.0f);
+        Object.Destroy(cutscene, 2.0f);
 
 
         if (messageDisplay == false)
@@ -42,7 +42,7 @@ public class CutSCene : MonoBehaviour
                 });
             }
         }
-       
+
 
         if (children.Length == 1 )
         {
@@ -57,10 +57,10 @@ public class CutSCene : MonoBehaviour
                 objCon.GameTimer.gameObject.SetActive(true);
                 objCon.TextUiCounter.gameObject.SetActive(true);
             }
-            
+
 
 
         }
-        
+
     }
 }

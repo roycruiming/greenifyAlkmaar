@@ -20,15 +20,8 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
     Sprite LastSprite;
     public static bool IsPlaying = false;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-           StartPuzzle(5);
-        }
-    }
 
-    void StartPuzzle(int difficulty)
+    public void StartPuzzle(int difficulty)
     {
         IsPlaying = true;
         Cursor.visible = true;
@@ -107,8 +100,8 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
 
         IsPlaying = false;
         Cursor.visible = false;
-        
-        Destroy(gameObject);
+
+        PuzzlePanel.SetActive(false);
    }
 
 

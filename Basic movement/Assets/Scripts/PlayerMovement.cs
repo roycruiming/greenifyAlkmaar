@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if(!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying)
+        if(!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying)
         {
             // wasd movement
             float movement = Time.deltaTime * moveSpeed;
