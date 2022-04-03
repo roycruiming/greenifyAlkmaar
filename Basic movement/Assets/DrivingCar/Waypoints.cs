@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,7 @@ public class Waypoints : MonoBehaviour
     {
 
 
-        print("ffs");
+        //print("ffs");
 
         foreach (Transform t in transform) {
             Gizmos.color = Color.blue;
@@ -38,5 +39,21 @@ public class Waypoints : MonoBehaviour
         
     }
 
+    public Transform GetNextWayPoint(Transform currentWaypoint)
+    {
+        if (currentWaypoint == null){
+            return transform.GetChild(0);
+        }
 
+        if (currentWaypoint.GetSiblingIndex() < transform.childCount - 1)
+        {
+            return transform.GetChild(currentWaypoint.GetSiblingIndex() + 1);
+        }
+        else {
+            return transform.GetChild(0);
+        }
+
+
+        
+    }
 }
