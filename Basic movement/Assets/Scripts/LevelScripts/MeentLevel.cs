@@ -75,10 +75,13 @@ public class MeentLevel : MonoBehaviour, LevelBasis
             
             //iniate the camera switch
             GameObject animationCamera = this.FindObject(GameObject.Find("cutscenesHolder"), "Phase" + (this.progressionPhase + 1) +  "Cutscene");
-            this.SwitchCamera(animationCamera, this.mainCamera);
-            //start animation
-            if(animationCamera.GetComponent<Animation>().Play("Phase" + (this.progressionPhase + 1) + "-Progression-The-Meent")) animationCamera.GetComponent<Animation>().Play("Phase" + (this.progressionPhase + 1) + "-Progression-The-Meent");
-        
+            if(animationCamera != null) {
+                this.SwitchCamera(animationCamera, this.mainCamera);
+                //start animation
+                if(animationCamera.GetComponent<Animation>().Play("Phase" + (this.progressionPhase + 1) + "-Progression-The-Meent")) animationCamera.GetComponent<Animation>().Play("Phase" + (this.progressionPhase + 1) + "-Progression-The-Meent");
+                //set popup message
+                if(GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>() != null) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null, GlobalGameHandler.GetSentencesByDictionaryKey("the meent text phase " + (progressionPhase + 1)));
+            }
         }
     }
 
