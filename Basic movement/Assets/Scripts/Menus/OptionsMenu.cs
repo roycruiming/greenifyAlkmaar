@@ -15,12 +15,20 @@ public class OptionsMenu : MonoBehaviour
     int LanguageSelectedIndex;
     List<string> languages;
 
-
+    //zet de juiste values in dropdown
     void Start()
     {
       languages = GlobalGameHandler.GetLanguagesList();
       LanguageDropdown.ClearOptions();
       LanguageDropdown.AddOptions(languages);
+
+      for (int i = 0; i < languages.Count; i++)
+      {
+        if(languages[i] == GlobalGameHandler.GetCurrentLanguage())
+        {
+          LanguageDropdown.value = i;
+        }
+      }
     }
 
     public void SetVolume(float volume)

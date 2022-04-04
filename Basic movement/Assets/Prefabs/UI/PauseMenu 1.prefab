@@ -3877,7 +3877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: acbbf39d3dd28be4ab2d62a6d054c44a, type: 2}
-  LanguageDropdown: {fileID: 0}
+  LanguageDropdown: {fileID: 3247945851405552133}
   optionMenu: {fileID: 3247945850874852249}
   LanguageSelected: 
 --- !u!1 &3247945850981339957
@@ -4168,7 +4168,7 @@ GameObject:
   - component: {fileID: 3247945851405552132}
   - component: {fileID: 3247945851405552133}
   m_Layer: 5
-  m_Name: ResolutionDropdown
+  m_Name: LanguageDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4292,8 +4292,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3247945850874852253}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
-        m_MethodName: SetResolution
-        m_Mode: 0
+        m_MethodName: SetLanguage
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

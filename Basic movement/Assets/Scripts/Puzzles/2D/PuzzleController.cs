@@ -13,17 +13,21 @@ public class PuzzleController : MonoBehaviour
 
   void Update()
   {
+      //Als de speler op enter drukt en nu nog geen puzzel speelt
       if (Input.GetKeyDown(KeyCode.Return) && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying)
       {
         SelectedPuzzle = Random.Range(0, Puzzles.Count);
 
+        //set elke puzzel op inactief
         for(int i = 0; i < PuzzleCanvas.transform.childCount; i++)
         {
            PuzzleCanvas.transform.GetChild(i).gameObject.SetActive(false);
         }
 
+        //set alleen de juiste puzzle op actief
         Puzzles[SelectedPuzzle].gameObject.SetActive(true);
 
+        //welke puzzel speel je en welk script hoort daarbij
         switch (Puzzles[SelectedPuzzle].name.ToString())
         {
           case "CleanPuzzle":

@@ -20,11 +20,12 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDr
 
     }
 
-
+    //als de speler er op klikt
     public void OnBeginDrag(PointerEventData eventData) {
         lastMousePosition = eventData.position;
     }
 
+    //tijdens het slepen
     public void OnDrag(PointerEventData eventData) {
         Vector2 curremtMousePosition = eventData.position;
         Vector2 diff = curremtMousePosition - lastMousePosition;
@@ -44,6 +45,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDr
         lastMousePosition = curremtMousePosition;
     }
 
+    //wanneer de speler het object lost laat
     public void OnEndDrag(PointerEventData eventData) {
         if (toOrginal){
             transform.localPosition = orginalPosition;

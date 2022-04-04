@@ -22,6 +22,8 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     bool MovingFinished = false;
     List<int> Values = new List<int>();
 
+
+    //start van de puzzel
     public void StartPuzzle(int difficulty)
     {
         IsPlaying = true;
@@ -38,6 +40,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
         StartCoroutine(StartMovingIcons());
     }
 
+    //berekent een random antwoord en maakt de icons aan
     void CalculateAnswer()
     {
       for(int i = 0; i < PuzzleDifficulty; i++)
@@ -56,6 +59,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       Debug.Log("Answer: " + Answer);
     }
 
+    //zet de knoppen op de juist waarde van laag -> hoog
     void SetButtonValues()
     {
       Values.Add(Answer);
@@ -71,6 +75,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       }
     }
 
+    //geeft random value
     void AddRandomValue()
     {
       int rand = Random.Range(1,PuzzleDifficulty + 1);
@@ -81,6 +86,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       }
     }
 
+    //maakt de icons aan en zet juiste sprite
     void SetIcons(List<Sprite> Icons)
     {
       GameObject NewObj = new GameObject();
@@ -97,12 +103,14 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       NewObj.SetActive(false);
     }
 
+    //laat de icons 1 voor 1 bewegen
     IEnumerator StartMovingIcons()
     {
       yield return new WaitForSeconds(3);
       StartCoroutine(MoveIcons());
     }
 
+    //beweegt de icons
     IEnumerator MoveIcons()
     {
       yield return new WaitForSeconds(1);
@@ -116,6 +124,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       }
     }
 
+    //als een knop wordt ingedrukt
     public void ButtonPress(Button button)
     {
       if (!IsButtonPressed && MovingFinished)
@@ -125,6 +134,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       }
     }
 
+    //checkt antwoord of klopt
     void CheckAnswer(string GivenAnswer)
     {
       if(Answer.ToString() == GivenAnswer)
@@ -135,18 +145,21 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       }
     }
 
+    //als antwoord correct is
     void Correct()
     {
       Text.text = "That was the correct answer!";
       StartCoroutine(ClosePuzzle());
     }
 
+    //als antwoord fout is
     void Wrong()
     {
       Text.text = "That was incorrect unfortunatly, please try again.";
       StartCoroutine(ClosePuzzle());
     }
 
+    //puzzel sluiten
     IEnumerator ClosePuzzle()
     {
       yield return new WaitForSeconds(5);
