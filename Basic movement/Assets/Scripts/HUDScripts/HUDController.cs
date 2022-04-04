@@ -86,10 +86,7 @@ public class HUDController : MonoBehaviour
                 }
                 else this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
                 //change icon of the character who is talking the message
-                if(senderInfo.characterIcon != null) {
-                    Debug.Log("Set character icon");
-                    this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = senderInfo.characterIcon;
-                }
+                if(senderInfo.characterIcon != null) this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = senderInfo.characterIcon;
                 else this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
             }
 
@@ -102,7 +99,7 @@ public class HUDController : MonoBehaviour
 
     private void calculateMessageFontSize(int characters) {
         //160 is the basis of what fits with fontsize 36
-        Debug.Log("Chars count: " + characters);
+        //Debug.Log("Chars count: " + characters);
         if(characters < this.messageBoxMaxChars) this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().fontSize = 36;
         else if(characters > this.messageBoxMaxChars && characters <= 240) this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().fontSize = 26;
         else if(characters > this.messageBoxMaxChars && characters <= 300) this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().fontSize = 22;
