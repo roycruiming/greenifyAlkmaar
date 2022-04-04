@@ -96,6 +96,12 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
     }
 
     IEnumerator StopPuzzle(){
+      PercentCompleted = 0;
+      PercentAmount = 0;
+      AmountCompleted = 0;
+      TotalTrash = 0;
+
+
         yield return new WaitForSeconds(5);
 
         IsPlaying = false;
