@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandler {
+public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
     private Vector2 lastMousePosition;
     private float x, y, z;
 
@@ -10,16 +10,20 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDr
 
     public bool toOrginal;
 
-    private Vector3 orginalPosition;
+    public Vector3 orginalPosition;
 
-    CleanSolarPanelPuzzle PuzzleScript;
+    DragPuzzle PuzzleScript;
 
     private void Start() {
         orginalPosition = transform.localPosition;
-        PuzzleScript = GameObject.FindGameObjectWithTag("CleanPuzzle").GetComponent<CleanSolarPanelPuzzle>();
 
     }
 
+    public DragAndDrop Init(DragPuzzle connectedPuzzle)
+    {
+        PuzzleScript = connectedPuzzle;
+        return this;
+    }
 
     public void OnBeginDrag(PointerEventData eventData) {
         lastMousePosition = eventData.position;
@@ -45,13 +49,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDr
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        if (toOrginal){
-            transform.localPosition = orginalPosition;
-        }
-        if(transform.position.x > (PuzzleScript.transform.position.x + 200) || transform.position.x < (PuzzleScript.transform.position.x - 200) || transform.position.y < (PuzzleScript.transform.position.y - 200) || transform.position.y > (PuzzleScript.transform.position.y + 200))
-        {
-          PuzzleScript.UpdateProgress();
-          Destroy(gameObject);
-        }
+        PuzzleScript.EndDragAction(this);
     }
 }

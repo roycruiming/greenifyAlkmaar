@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CleanSolarPanelPuzzle : MonoBehaviour
+public class CleanSolarPanelPuzzle : MonoBehaviour, DragPuzzle
 {
 
     public GameObject PuzzlePanel;
@@ -47,7 +47,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
         NewImage.sprite = SpriteSources[Random.Range(0, SpriteSources.Count)];
 
         NewObj.AddComponent<BoxCollider2D>();
-        NewObj.AddComponent<DragAndDrop>();
+        NewObj.AddComponent<DragAndDrop>().Init(this);
 
         NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);
         NewObj.transform.position = ParentPanel.transform.position;
@@ -104,6 +104,18 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
         PuzzlePanel.SetActive(false);
    }
 
+    public void EndDragAction(DragAndDrop currentObject)
+    {
+        if (currentObject.toOrginal)
+        {
+            transform.localPosition = currentObject.orginalPosition;
+        }
+        if (transform.position.x > (currentObject.transform.position.x + 200) || transform.position.x < (currentObject.transform.position.x - 200) || transform.position.y < (currentObject.transform.position.y - 200) || transform.position.y > (currentObject.transform.position.y + 200))
+        {
+            UpdateProgress();
+            Destroy(gameObject);
+        }
+    }
 
 
 }
