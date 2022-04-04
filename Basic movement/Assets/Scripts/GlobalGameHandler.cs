@@ -27,6 +27,7 @@ public class GlobalGameHandler : MonoBehaviour
             instance.currentLanguage = "nederlands";
             DontDestroyOnLoad(this.gameObject);
             InitTranslationDictionary();
+            print(instance.translationDictionary.Count);
         }
     }
 
