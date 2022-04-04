@@ -54,7 +54,6 @@ public class GlobalGameHandler : MonoBehaviour
         string keyWithLanguage = key + "_" + instance.currentLanguage;
         foreach(KeyValuePair<string,string> pair in instance.translationDictionary) {
             if(pair.Key == keyWithLanguage) return pair.Value;
-            
         }
 
         return "ERROR WORD NOT FOUND";
