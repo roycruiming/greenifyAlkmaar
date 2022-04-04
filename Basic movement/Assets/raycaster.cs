@@ -52,10 +52,16 @@ public class raycaster : MonoBehaviour
 
                 Item item = hitInfo.collider.gameObject.GetComponent<Item>();
                 if (item != null) {
-                    InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);                                 
-     
-              
+                    InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);                                            
                 }
+
+                Chest chest = hitInfo.collider.gameObject.GetComponent<Chest>();
+                if (chest != null) {
+                    Item key = InventoryController.GetItem();
+                    if (!chest.OpenChest(key)) return;
+                    InventoryController.ClearInventory();
+                }
+            
 
 
 
