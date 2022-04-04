@@ -42,7 +42,7 @@ public class CutSCene : MonoBehaviour
                 });
             }
         }
-       
+
 
         if (children.Length == 1 )
         {
@@ -57,10 +57,10 @@ public class CutSCene : MonoBehaviour
                 objCon.GameTimer.gameObject.SetActive(true);
                 objCon.TextUiCounter.gameObject.SetActive(true);
             }
-            
+
 
 
         }
-        
+
     }
 }

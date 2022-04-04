@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionStay()
     {
-        
+
         isGrounded = true;
     }
 
@@ -43,11 +43,11 @@ public class PlayerMovement : MonoBehaviour
 
         col = GetComponent < SphereCollider>();
 
-        
+
     }
     void Update()
     {
-        if(PauseMenu.GameIsPaused == false)
+        if(!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying)
         {
             // wasd movement
             float movement = Time.deltaTime * moveSpeed;
@@ -99,10 +99,10 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 15f;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift)) 
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             moveSpeed = 5f;
-        } 
+        }
 
         //Debug.DrawLine(transform.position, dest.position);
 
@@ -116,6 +116,6 @@ public class PlayerMovement : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), col.radius * .9f, groundLayers);
-        
+
     }
 }

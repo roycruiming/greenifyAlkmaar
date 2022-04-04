@@ -1,0 +1,168 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
+public class HowmanyDidYouSeePuzzle : MonoBehaviour
+{
+    public List<Text> ButtonText;
+    public List<Sprite> DirtyIcons;
+    public List<Sprite> CleanIcons;
+    public GameObject PuzzlePanel;
+    public GameObject ParentPanel;
+    public Text Text;
+
+    public static bool IsPlaying = false;
+
+    int Answer;
+    int PuzzleDifficulty;
+    int IconIndex;
+    bool IsButtonPressed = false;
+    bool MovingFinished = false;
+    List<int> Values = new List<int>();
+
+    public void StartPuzzle(int difficulty)
+    {
+        IsPlaying = true;
+        Cursor.visible = true;
+
+        Text.text = "Howmany green solutions do you see?";
+
+        PuzzlePanel.SetActive(true);
+
+        PuzzleDifficulty = difficulty;
+
+        CalculateAnswer();
+        SetButtonValues();
+        StartCoroutine(StartMovingIcons());
+    }
+
+    void CalculateAnswer()
+    {
+      for(int i = 0; i < PuzzleDifficulty; i++)
+      {
+        switch (Random.Range(0,2))
+        {
+          case 0:
+            SetIcons(DirtyIcons);
+            break;
+          case 1:
+            SetIcons(CleanIcons);
+            Answer += 1;
+            break;
+        }
+      }
+      Debug.Log("Answer: " + Answer);
+    }
+
+    void SetButtonValues()
+    {
+      Values.Add(Answer);
+      for(int i = 0; i < 3; i++)
+      {
+        AddRandomValue();
+      }
+      Values.Sort();
+
+      for(int i = 0; i < 4; i++)
+      {
+        ButtonText[i].text = Values[i].ToString();
+      }
+    }
+
+    void AddRandomValue()
+    {
+      int rand = Random.Range(1,PuzzleDifficulty + 1);
+      if (Values.Contains(rand)){
+        AddRandomValue();
+      } else {
+        Values.Add(rand);
+      }
+    }
+
+    void SetIcons(List<Sprite> Icons)
+    {
+      GameObject NewObj = new GameObject();
+      NewObj.name = "Icon";
+
+      Image NewImage = NewObj.AddComponent<Image>();
+      NewImage.sprite = Icons[Random.Range(0, Icons.Count)];
+      NewImage.color = new Color32(255, 255, 255, 255);
+      NewObj.AddComponent<SlidingIcon>();
+
+      NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);
+      NewObj.transform.position = ParentPanel.transform.position;
+      NewObj.transform.Translate(new Vector3(250, 0, 0));
+      NewObj.SetActive(false);
+    }
+
+    IEnumerator StartMovingIcons()
+    {
+      yield return new WaitForSeconds(3);
+      StartCoroutine(MoveIcons());
+    }
+
+    IEnumerator MoveIcons()
+    {
+      yield return new WaitForSeconds(1);
+      if(IconIndex < ParentPanel.transform.childCount)
+      {
+        ParentPanel.transform.GetChild(IconIndex).gameObject.SetActive(true);
+        IconIndex += 1;
+        StartCoroutine(MoveIcons());
+      } else {
+        MovingFinished = true;
+      }
+    }
+
+    public void ButtonPress(Button button)
+    {
+      if (!IsButtonPressed && MovingFinished)
+      {
+        IsButtonPressed = true;
+        CheckAnswer(button.GetComponentInChildren<Text>().text);
+      }
+    }
+
+    void CheckAnswer(string GivenAnswer)
+    {
+      if(Answer.ToString() == GivenAnswer)
+      {
+        Correct();
+      } else {
+        Wrong();
+      }
+    }
+
+    void Correct()
+    {
+      Text.text = "That was the correct answer!";
+      StartCoroutine(ClosePuzzle());
+    }
+
+    void Wrong()
+    {
+      Text.text = "That was incorrect unfortunatly, please try again.";
+      StartCoroutine(ClosePuzzle());
+    }
+
+    IEnumerator ClosePuzzle()
+    {
+      yield return new WaitForSeconds(5);
+
+      IsPlaying = false;
+      Cursor.visible = false;
+      IsButtonPressed = false;
+      Answer = 0;
+      PuzzleDifficulty = 0;
+      IconIndex = 0;
+      MovingFinished = false;
+      Values.Clear();
+      for(int i = 0; i < ParentPanel.transform.childCount; i++)
+      {
+         Destroy(ParentPanel.transform.GetChild(i).gameObject);
+      }
+      PuzzlePanel.SetActive(false);
+    }
+}

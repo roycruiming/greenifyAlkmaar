@@ -10,7 +10,6 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject PauseMenuUI;
     public GameObject HelpMenu;
-    public GameObject HUD;
     public GameObject SettingMenu;
 
     public DirectionalArrow arrow;
@@ -43,14 +42,12 @@ public class PauseMenu : MonoBehaviour
             {
                 child.gameObject.SetActive(false);
             }
-            SwitchVisbility(HUD, true);
             Time.timeScale = 1f;
             GameIsPaused = false;
         }
 
         void Pause()
         {
-            SwitchVisbility(HUD, false);
             Cursor.lockState = CursorLockMode.None;
             PauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
@@ -59,13 +56,13 @@ public class PauseMenu : MonoBehaviour
 
         public void Options()
         {
-            SwitchVisbility(SettingMenu, true);
+            SwitchVisibility(SettingMenu, true);
         }
 
         public void Help()
         {
-            SwitchVisbility(HelpMenu, true);
-            SwitchVisbility(PauseMenuUI, false);
+            SwitchVisibility(HelpMenu, true);
+            SwitchVisibility(PauseMenuUI, false);
         }
 
         public void ExitLevel()
@@ -81,14 +78,11 @@ public class PauseMenu : MonoBehaviour
             Application.Quit();
         }
 
-        void SwitchVisbility(GameObject panel, bool visbility)
+        void SwitchVisibility(GameObject panel, bool visbility)
         {
             if (panel)
             {
                 panel.SetActive(visbility);
             }
         }
-} 
-
-
-
+}
