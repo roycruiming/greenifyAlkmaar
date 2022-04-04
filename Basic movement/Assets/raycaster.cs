@@ -42,7 +42,6 @@ public class raycaster : MonoBehaviour
             }
 
             if (Input.GetKeyDown(KeyCode.F)) {
-
                 if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube") && hitInfo.collider.transform.GetChild(1).gameObject.activeInHierarchy)
                 {
                     //hitInfo.collider.transform.GetChild(1).GetComponent<PuzzleDynaScript>().ActivatePuzzle();
@@ -66,6 +65,7 @@ public class raycaster : MonoBehaviour
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {
+                    Debug.Log("Inside");
                     //test remove
                     GameObject.Find("LevelObject").GetComponent<MeentLevel>().showcaseLevelProgression();
                     //remove till here
