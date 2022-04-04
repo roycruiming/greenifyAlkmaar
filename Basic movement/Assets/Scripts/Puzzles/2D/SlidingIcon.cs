@@ -6,10 +6,10 @@ public class SlidingIcon : MonoBehaviour
 {
   int x;
 
-    void Update()
+    void FixedUpdate()
     {
-      transform.Translate(new Vector3(-1, 0, 0));
-      if (x >= 500)
+      transform.Translate(new Vector3(-5, 0, 0));
+      if (x >= 90)
       {
         gameObject.SetActive(false);
       } else {

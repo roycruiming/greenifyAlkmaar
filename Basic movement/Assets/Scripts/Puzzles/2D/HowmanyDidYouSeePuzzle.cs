@@ -155,6 +155,10 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       Cursor.visible = false;
       IsButtonPressed = false;
       Answer = 0;
+      PuzzleDifficulty = 0;
+      IconIndex = 0;
+      MovingFinished = false;
+      Values.Clear();
       for(int i = 0; i < ParentPanel.transform.childCount; i++)
       {
          Destroy(ParentPanel.transform.GetChild(i).gameObject);
