@@ -5,28 +5,16 @@ using UnityEngine;
 
 
 
-//[CreateAssetMenu(menuName = "inventory/storable item")]
 public class Item : MonoBehaviour
 {
-
-
-    private GameObject GameObject;
-
+    public float RotationOffsetY = 0;
+    public float HeightOffsetY;
+    public bool OverwriteHeightOffsetByInitialItemPosition = true;
     public Sprite HudImage;
-
-    //private Transform InitPos; 
 
     private void Awake()      
     {
-        this.GameObject = this.gameObject;
-        //this.InitPos = this.gameObject.transform; 
+        if (OverwriteHeightOffsetByInitialItemPosition) { HeightOffsetY = gameObject.transform.position.y; } 
     }
 
-    public GameObject GetGameObject() {
-        return this.GameObject; 
-    }
-
-    public void setGameObject(GameObject g) {
-        this.GameObject = g;
-    }
 }
