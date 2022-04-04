@@ -43,13 +43,16 @@ public class raycaster : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F)) {
 
-                if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube") && hitInfo.collider.transform.GetChild(1).gameObject.activeInHierarchy)
+                if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube"))
                 {
-                    //hitInfo.collider.transform.GetChild(1).GetComponent<PuzzleDynaScript>().ActivatePuzzle();
+                  if(hitInfo.collider.gameObject.GetComponent<PuzzleController>())
+                  {
+                    hitInfo.collider.gameObject.GetComponent<PuzzleController>().StartAPuzzle();
+                  }
                 }
 
                 /*else if (hitInfo.collider.gameObject.CompareTag("SolarSpot")) {
-                    InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault(); 
+                    InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault();
                     if (infslot != null) {
                         hitInfo.collider.transform.GetComponent<SolarSpot>().DoShit(infslot);
                         this.gameObject.GetComponent<InventoryScript>().Clear();

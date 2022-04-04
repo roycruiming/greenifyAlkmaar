@@ -43,7 +43,7 @@ public class ObjectivesController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -57,7 +57,7 @@ public class ObjectivesController : MonoBehaviour
             minutemark++;
         }
         GameTimer.text = minutemark + ":" + Mathf.Round(secondsTimer);
-        
+
         // Set how mutch objectives are done
         TextUiCounter.text = objectivesCounter.ToString() + "/5";
 

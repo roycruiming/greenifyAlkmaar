@@ -29,7 +29,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
         IsPlaying = true;
         Cursor.visible = true;
 
-        Text.text = "Howmany green solutions do you see?";
+        Text.text =   GlobalGameHandler.GetTextByDictionaryKey("howmany did you see");
 
         PuzzlePanel.SetActive(true);
 
@@ -148,14 +148,14 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     //als antwoord correct is
     void Correct()
     {
-      Text.text = "That was the correct answer!";
+      Text.text =  GlobalGameHandler.GetTextByDictionaryKey("correct answer");
       StartCoroutine(ClosePuzzle());
     }
 
     //als antwoord fout is
     void Wrong()
     {
-      Text.text = "That was incorrect unfortunatly, please try again.";
+      Text.text =  GlobalGameHandler.GetTextByDictionaryKey("incorrect answer");
       StartCoroutine(ClosePuzzle());
     }
 

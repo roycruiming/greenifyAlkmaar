@@ -16,14 +16,16 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
     int PercentAmount;
     int AmountCompleted;
     int TotalTrash;
+    string ParentName;
     Color32 PercentColor;
     Sprite LastSprite;
     public static bool IsPlaying = false;
 
 
     //start van de puzzle
-    public void StartPuzzle(int difficulty)
+    public void StartPuzzle(int difficulty, string Name)
     {
+        ParentName = Name;
         IsPlaying = true;
         Cursor.visible = true;
 
@@ -113,6 +115,8 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
         Cursor.visible = false;
 
         PuzzlePanel.SetActive(false);
+
+        GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted();
    }
 
 

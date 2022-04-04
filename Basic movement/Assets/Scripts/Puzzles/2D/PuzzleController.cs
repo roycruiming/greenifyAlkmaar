@@ -9,13 +9,11 @@ public class PuzzleController : MonoBehaviour
   public List<GameObject> Puzzles;
   public int PuzzleDifficulty = 3;
   int SelectedPuzzle;
-  string CorrectScript;
+  public static bool PuzzleDone = false;
 
-  void Update()
+  public void StartAPuzzle()
   {
       //Als de speler op enter drukt en nu nog geen puzzel speelt
-      if (Input.GetKeyDown(KeyCode.Return) && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying)
-      {
         SelectedPuzzle = Random.Range(0, Puzzles.Count);
 
         //set elke puzzel op inactief
@@ -31,13 +29,19 @@ public class PuzzleController : MonoBehaviour
         switch (Puzzles[SelectedPuzzle].name.ToString())
         {
           case "CleanPuzzle":
-            Puzzles[SelectedPuzzle].GetComponent<CleanSolarPanelPuzzle>().StartPuzzle(PuzzleDifficulty);
+            Puzzles[SelectedPuzzle].GetComponent<CleanSolarPanelPuzzle>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
           case "HowmanyPuzzle":
             Puzzles[SelectedPuzzle].GetComponent<HowmanyDidYouSeePuzzle>().StartPuzzle(PuzzleDifficulty);
             break;
         }
+  }
 
-      }
+
+  public void PuzzleCompleted()
+  {
+    transform.Find("Smoke").gameObject.SetActive(false);
+    gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+    ObjectivesController.DeleteItemInList(this);
   }
 }
