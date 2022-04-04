@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PuzzleController : MonoBehaviour
 {
   public GameObject PuzzleCanvas;
-    public Transform LevelObject;
+  public ObjectivesController objectivesController;
   public List<GameObject> Puzzles;
   public int PuzzleDifficulty = 3;
   int SelectedPuzzle;
@@ -33,7 +33,7 @@ public class PuzzleController : MonoBehaviour
             Puzzles[SelectedPuzzle].GetComponent<CleanSolarPanelPuzzle>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
           case "HowmanyPuzzle":
-            Puzzles[SelectedPuzzle].GetComponent<HowmanyDidYouSeePuzzle>().StartPuzzle(PuzzleDifficulty);
+            Puzzles[SelectedPuzzle].GetComponent<HowmanyDidYouSeePuzzle>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
         }
   }
@@ -43,6 +43,6 @@ public class PuzzleController : MonoBehaviour
   {
     transform.Find("Smoke").gameObject.SetActive(false);
     gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-    ObjectivesController.DeleteItemInList(this);
+    objectivesController.DeleteItemInList(this);
   }
 }

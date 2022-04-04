@@ -20,12 +20,14 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     int IconIndex;
     bool IsButtonPressed = false;
     bool MovingFinished = false;
+    string ParentName;
     List<int> Values = new List<int>();
 
 
     //start van de puzzel
-    public void StartPuzzle(int difficulty)
+    public void StartPuzzle(int difficulty, string Name)
     {
+        ParentName = Name;
         IsPlaying = true;
         Cursor.visible = true;
 
@@ -177,5 +179,6 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
          Destroy(ParentPanel.transform.GetChild(i).gameObject);
       }
       PuzzlePanel.SetActive(false);
+      GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted();
     }
 }
