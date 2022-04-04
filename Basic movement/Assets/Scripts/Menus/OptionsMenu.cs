@@ -13,25 +13,14 @@ public class OptionsMenu : MonoBehaviour
 
     public string LanguageSelected;
     int LanguageSelectedIndex;
-    public List<string> languages;
+    List<string> languages;
 
 
     void Start()
     {
-      //LanguageSelected = GlobalGameHandler.GetInstance().currentLanguage.ToString();
-      //Debug.Log(LanguageSelected);
-      //LanguageDropdown.ClearOptions();
-
-    //  for (int i = 0; i < languages.Count; i++)
-    //  {
-    //    if(languages[i] == LanguageSelected)
-    //    {
-    //      LanguageSelectedIndex = i;
-    //    }
-    //  }
-    //  LanguageDropdown.AddOptions(languages);
-    //  LanguageDropdown.value = LanguageSelectedIndex;
-    //  LanguageDropdown.RefreshShownValue();
+      languages = GlobalGameHandler.GetLanguagesList();
+      LanguageDropdown.ClearOptions();
+      LanguageDropdown.AddOptions(languages);
     }
 
     public void SetVolume(float volume)
@@ -39,9 +28,10 @@ public class OptionsMenu : MonoBehaviour
         audioMixer.SetFloat("volume", volume);
     }
 
-    public void SetLanguage(int WantedLanguage)
+    public void SetLanguage()
     {
-      Debug.Log(languages[WantedLanguage]);
+      Debug.Log(languages[LanguageDropdown.value]);
+      GlobalGameHandler.ChangeLanguage(languages[LanguageDropdown.value]);
     }
 
     public void SetFullscreen(bool isFullscreen)
