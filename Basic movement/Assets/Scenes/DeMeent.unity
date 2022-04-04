@@ -53486,12 +53486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d84019e5f300846bef567d1a7b58a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target:
-  - {fileID: 1403928115}
-  - {fileID: 1730954512}
-  - {fileID: 1049986364}
-  - {fileID: 2038018952}
-  - {fileID: 1947499634}
+  targets: []
   objectivesCounter: 0
   secondsTimer: 0
   minutemark: 0
@@ -61777,6 +61772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PuzzleCanvas: {fileID: 1768195145}
+  LevelObject: {fileID: 0}
   Puzzles:
   - {fileID: 405857617}
   PuzzleDifficulty: 8
@@ -102426,7 +102422,7 @@ GameObject:
   - component: {fileID: 1824339451676179}
   - component: {fileID: 1824339451676178}
   m_Layer: 0
-  m_Name: MaleFreeSimpleMovement1
+  m_Name: MainCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102444,21 +102440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe5c6cf70529694c8da633e0cf6b5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
-  dest: {fileID: 0}
-  glitchSpwan: {fileID: 0}
-  moveSpeed: 0
-  horizontalSpeed: 2
-  verticalSpeed: 2
-  projectile: {fileID: 0}
-  firingPointOffset: {x: 1, y: 1, z: 1}
-  jump: {x: 0, y: 0, z: 0}
-  jumpForce: 2
-  isGrounded: 1
-  rb: {fileID: 0}
-  groundLayers:
-    m_Bits: 0
-  col: {fileID: 0}
 --- !u!114 &1824339451676179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102958,7 +102939,7 @@ Transform:
   m_GameObject: {fileID: 1824339451676177}
   m_LocalRotation: {x: -0, y: 0.98251235, z: -0, w: 0.18619737}
   m_LocalPosition: {x: -47.31, y: 0.66, z: -12.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4742320191181105}
   - {fileID: 4138921193230431}
@@ -103560,7 +103541,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880688530249321289}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18999898, y: 0.45000005, z: -5.624999}
+  m_LocalPosition: {x: 0.18999898, y: 1.41, z: -5.624999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1880688531467637787}
@@ -103933,22 +103914,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe5c6cf70529694c8da633e0cf6b5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
-  dest: {fileID: 1880688532307162261}
-  glitchSpwan: {fileID: 1880688531467637787}
-  moveSpeed: 5
-  horizontalSpeed: 2
-  verticalSpeed: 2
-  projectile: {fileID: 8939028033185487747, guid: 6df614f6ff8642049b3197fa21040f7d,
-    type: 3}
-  firingPointOffset: {x: 0, y: 1, z: 0}
-  jump: {x: 0, y: 2.61, z: 0}
-  jumpForce: 4
-  isGrounded: 0
-  rb: {fileID: 0}
-  groundLayers:
-    m_Bits: 311
-  col: {fileID: 0}
 --- !u!54 &1880688531534911023
 Rigidbody:
   m_ObjectHideFlags: 0
