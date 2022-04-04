@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ObjectivesController : MonoBehaviour
 {
 
-    public List<GameObject> target;
+    public List<PuzzleController> targets;
     public int objectivesCounter = 0;
     private int totalObjectives;
 
@@ -29,14 +30,17 @@ public class ObjectivesController : MonoBehaviour
 
     public void Awake()
     {
+        targets = Resources.FindObjectsOfTypeAll<PuzzleController>().ToList();
         GameDone.text = "";
         gameEndTime.text = "";
         gameEndScore.text = "";
-        totalObjectives = target.Count;
+        totalObjectives = targets.Count;
         blackBarArroundScoreScreen.gameObject.SetActive(false);
         nameInput.gameObject.SetActive(false);
         nameInputBar.gameObject.SetActive(false);
         back.gameObject.SetActive(false);
+
+
 
     }
 
@@ -63,7 +67,7 @@ public class ObjectivesController : MonoBehaviour
 
 
         //when objectivesList == emtpy - game is finnished
-        if(target.Count == 4)
+        if(targets.Count == 4)
         {
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
@@ -78,9 +82,9 @@ public class ObjectivesController : MonoBehaviour
         }
     }
 
-    public void DeleteItemInList(int valueTest)
+    public void DeleteItemInList(PuzzleController resolvedTask)
     {
-        target.RemoveAll(x => x.name == "Cube " + valueTest);
+        targets.Remove(resolvedTask);
         objectivesCounter++;
 
     }
