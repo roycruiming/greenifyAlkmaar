@@ -35,11 +35,7 @@ public class CutSCene : MonoBehaviour
             messageDisplay = true;
             if (GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>() != null)
             {
-                GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, new List<string> {
-                "Welkom in Alkmaar, we zijn hier bij de meent. Deze ijsbaan heeft 940 zonnepanelen en deze hebben een opbrengst van 300.000 kwh (kilowatt uur) per jaar.",
-                "Dit staat gelijk aan het stroomverbruik van 100 huishoudens. Echter werken de zonnepanelen nu niet, zoek rond in het level naar oplossingen! ",
-                "Veel succes!"
-                });
+                GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey("Test1"));
             }
         }
 
