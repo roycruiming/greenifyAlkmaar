@@ -7,7 +7,6 @@ public class CutSCene : MonoBehaviour
     public ObjectivesController objCon;
     public GameObject cutscene;
     public GameObject MainCamera;
-    public DirectionalArrow arrow;
 
     private Transform[] children;
     private bool timerBool = false;
@@ -27,16 +26,20 @@ public class CutSCene : MonoBehaviour
         children = gameObject.GetComponentsInChildren<Transform>();
         objCon.GameTimer.gameObject.SetActive(false);
         objCon.TextUiCounter.gameObject.SetActive(false);
-        Object.Destroy(cutscene, 2.0f);
+        Object.Destroy(cutscene, 28.0f);
 
+        if (Input.GetKey("p"))
+        {
+            Object.Destroy(cutscene);
+
+        }
 
         if (messageDisplay == false)
         {
             messageDisplay = true;
             if (GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>() != null)
             {
-                GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(
-                GlobalGameHandler.GetTextByDictionaryKey("back"));
+                GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("back"));
             }
         }
 

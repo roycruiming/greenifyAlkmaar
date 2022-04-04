@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PuzzleController : MonoBehaviour
 {
   public GameObject PuzzleCanvas;
+    public Transform LevelObject;
   public List<GameObject> Puzzles;
   public int PuzzleDifficulty = 3;
   int SelectedPuzzle;

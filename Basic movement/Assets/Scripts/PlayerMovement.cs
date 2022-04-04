@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -80,19 +80,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // shoot bullets
-        /*if (Input.GetKeyDown(KeyCode.Mouse0))
+        *//*if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             GameObject bullet = Instantiate(projectile, transform.position + firingPointOffset, Quaternion.identity) as GameObject;
             bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 3000);
-        }*/
+        }*//*
 
         // restart game
-/*        if (Input.GetKeyDown(KeyCode.R))
+*//*        if (Input.GetKeyDown(KeyCode.R))
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
             Application.LoadLevel(0);
-        }*/
+        }*//*
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -119,3 +119,4 @@ public class PlayerMovement : MonoBehaviour
 
     }
 }
+*/
