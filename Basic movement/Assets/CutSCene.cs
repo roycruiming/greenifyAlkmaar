@@ -26,7 +26,7 @@ public class CutSCene : MonoBehaviour
         children = gameObject.GetComponentsInChildren<Transform>();
         objCon.GameTimer.gameObject.SetActive(false);
         objCon.TextUiCounter.gameObject.SetActive(false);
-        Object.Destroy(cutscene, 28.0f);
+        Object.Destroy(cutscene, 2.0f);
 
         if (Input.GetKey("p"))
         {
