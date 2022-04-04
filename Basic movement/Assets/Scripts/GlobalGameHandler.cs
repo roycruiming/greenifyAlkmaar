@@ -46,6 +46,10 @@ public class GlobalGameHandler : MonoBehaviour
         return instance.languages;
     }
 
+    public static string GetCurrentLanguage() {
+        return instance.currentLanguage;
+    }
+
     public static string GetTextByDictionaryKey(string key) {
         string keyWithLanguage = key + "_" + instance.currentLanguage;
         foreach(KeyValuePair<string,string> pair in instance.translationDictionary) {

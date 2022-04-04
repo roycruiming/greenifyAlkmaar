@@ -8,6 +8,8 @@ public class TranslationObject : MonoBehaviour
 {
     public string translationKey;
 
+    private bool updateOnce = false;
+
     void Start()
     {
         //check of text os TextMesh3d component
@@ -42,6 +44,17 @@ public class TranslationObject : MonoBehaviour
             Debug.Log("Text");
             GetComponent<Text>().text = GlobalGameHandler.GetTextByDictionaryKey(this.translationKey);
         }
+    }
+
+    void Update() {
+        if(this.updateOnce) {
+            this.Start();
+            this.updateOnce = false;
+        }
+    }
+
+    public void UpdateOnce() {
+        this.updateOnce = true;
     }
 
 }
