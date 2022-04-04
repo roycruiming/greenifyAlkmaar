@@ -12614,7 +12614,6 @@ MonoBehaviour:
   objCon: {fileID: 1182227932}
   cutscene: {fileID: 789978991}
   MainCamera: {fileID: 1880688530249321289}
-  arrow: {fileID: 0}
 --- !u!1 &215937072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000010315956650, guid: 1560075f917727c46a8546367a2f3132,
@@ -47665,7 +47664,7 @@ PrefabInstance:
     - target: {fileID: 8486655151723287883, guid: cf28a4dd9a1a5b948a40dd44a4392f11,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.199837
+      value: 35.13
       objectReference: {fileID: 0}
     - target: {fileID: 8486655151723287883, guid: cf28a4dd9a1a5b948a40dd44a4392f11,
         type: 3}
@@ -47675,7 +47674,7 @@ PrefabInstance:
     - target: {fileID: 8486655151723287883, guid: cf28a4dd9a1a5b948a40dd44a4392f11,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -44.960716
+      value: -44.51
       objectReference: {fileID: 0}
     - target: {fileID: 8486655151723287883, guid: cf28a4dd9a1a5b948a40dd44a4392f11,
         type: 3}
@@ -53616,7 +53615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d84019e5f300846bef567d1a7b58a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: []
+  targets: []
   objectivesCounter: 0
   secondsTimer: 0
   minutemark: 0
@@ -61902,6 +61901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PuzzleCanvas: {fileID: 1768195145}
+  objectivesController: {fileID: 0}
   Puzzles:
   - {fileID: 405857617}
   PuzzleDifficulty: 8
@@ -104288,11 +104288,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4609726843590300034, guid: 16eba97bf6775c04fb5e0b8980d655ec,
-        type: 3}
-      propertyPath: m_Name
-      value: SolarPanel (23)
-      objectReference: {fileID: 0}
     - target: {fileID: 2860243345778549373, guid: b5d0e6bd02c3c5448b6e9f600667256c,
         type: 3}
       propertyPath: m_TagString
@@ -104352,6 +104347,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609726843590300034, guid: 16eba97bf6775c04fb5e0b8980d655ec,
+        type: 3}
+      propertyPath: m_Name
+      value: SolarPanel (23)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5d0e6bd02c3c5448b6e9f600667256c, type: 3}
