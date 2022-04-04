@@ -66,6 +66,10 @@ public class raycaster : MonoBehaviour
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {
+                    //test remove
+                    GameObject.Find("LevelObject").GetComponent<MeentLevel>().showcaseLevelProgression();
+                    //remove till here
+
                     //object is gamehelper so showcase this message in the HUD
                     //get the information text from the object and send it to the controller
                     if(hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null) {
