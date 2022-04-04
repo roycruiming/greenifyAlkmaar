@@ -50,6 +50,18 @@ public class raycaster : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F)) {
 
+                Item item = hitInfo.collider.gameObject.GetComponent<Item>();
+                if (item != null) {
+                                 
+     
+              
+                }
+
+
+
+
+
+
 
 
                 if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube") && hitInfo.collider.transform.GetChild(1).gameObject.activeInHierarchy)
