@@ -52,7 +52,7 @@ public class raycaster : MonoBehaviour
 
                 Item item = hitInfo.collider.gameObject.GetComponent<Item>();
                 if (item != null) {
-                                 
+                    InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);                                 
      
               
                 }
