@@ -68,7 +68,6 @@ public class raycaster : MonoBehaviour
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {
-                    Debug.Log("Inside");
                     //test remove
                     GameObject.Find("LevelObject").GetComponent<MeentLevel>().showcaseLevelProgression();
                     //remove till here

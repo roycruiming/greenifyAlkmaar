@@ -27,7 +27,6 @@ public class GlobalGameHandler : MonoBehaviour
             instance.currentLanguage = "nederlands";
             DontDestroyOnLoad(this.gameObject);
             InitTranslationDictionary();
-            print(instance.translationDictionary.Count);
         }
     }
 
@@ -55,9 +54,14 @@ public class GlobalGameHandler : MonoBehaviour
         string keyWithLanguage = key + "_" + instance.currentLanguage;
         foreach(KeyValuePair<string,string> pair in instance.translationDictionary) {
             if(pair.Key == keyWithLanguage) return pair.Value;
+            
         }
 
         return "ERROR WORD NOT FOUND";
+    }
+
+    private static void debugIets() {
+        foreach(KeyValuePair<string,string> pair in instance.translationDictionary) print("Key = " + pair.Key + ", Value = " + pair.Value);
     }
 
     public static List<string> GetSentencesByDictionaryKey(string key) {
