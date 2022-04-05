@@ -61,7 +61,15 @@ public class raycaster : MonoBehaviour
                     if (!chest.OpenChest(key)) return;
                     InventoryController.ClearInventory();
                 }
-            
+
+                DoorsOpener doors = hitInfo.collider.gameObject.GetComponent<DoorsOpener>();
+                if (doors != null)
+                {
+                    Item key = InventoryController.GetItem();
+                    if (!doors.OpenDoors(key)) return;
+                    InventoryController.ClearInventory();
+                }
+
 
 
 

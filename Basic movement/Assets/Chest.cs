@@ -12,7 +12,7 @@ public class Chest : MonoBehaviour
     
 
     public bool OpenChest(Item item) {
-
+        if (item == null) return false; 
         if (!item.unlockAbles.Contains(this.gameObject)) return false; 
 
 
