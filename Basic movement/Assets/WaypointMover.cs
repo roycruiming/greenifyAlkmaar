@@ -37,7 +37,7 @@ public class WaypointMover : MonoBehaviour
     }
 
     private void lookat(Transform current) {
-        print(current.name);
+       // print(current.name);
         transform.LookAt(current);
         
         transform.transform.rotation *= Quaternion.Euler(0, -90, 0);
@@ -63,7 +63,7 @@ public class WaypointMover : MonoBehaviour
 
         else
         {
-            print("something else det");
+            
         }
 
 

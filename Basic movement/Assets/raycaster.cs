@@ -12,6 +12,7 @@ public class raycaster : MonoBehaviour
     public LayerMask layerMask;
     public Text textUI;
 
+    private InventoryController InventoryController; 
 
 
 
@@ -21,6 +22,12 @@ public class raycaster : MonoBehaviour
             textUI.text = "";
             textUI.gameObject.SetActive(false);
         }
+    }
+
+
+    private void Awake()
+    {
+        InventoryController = new InventoryController(new Inventory()); 
     }
 
 
@@ -42,6 +49,27 @@ public class raycaster : MonoBehaviour
             }
 
             if (Input.GetKeyDown(KeyCode.F)) {
+
+                Item item = hitInfo.collider.gameObject.GetComponent<Item>();
+                if (item != null) {
+                    InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);                                            
+                }
+
+                Chest chest = hitInfo.collider.gameObject.GetComponent<Chest>();
+                if (chest != null) {
+                    Item key = InventoryController.GetItem();
+                    if (!chest.OpenChest(key)) return;
+                    InventoryController.ClearInventory();
+                }
+            
+
+
+
+
+
+
+
+
                 if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube") && hitInfo.collider.transform.GetChild(1).gameObject.activeInHierarchy)
                 {
                   if(hitInfo.collider.gameObject.GetComponent<PuzzleController>())
