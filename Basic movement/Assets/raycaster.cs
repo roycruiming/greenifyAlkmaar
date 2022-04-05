@@ -70,21 +70,24 @@ public class raycaster : MonoBehaviour
                     InventoryController.ClearInventory();
                 }
 
-
-
-
-
-
-
-
-
-                if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube") && hitInfo.collider.transform.GetChild(1).gameObject.activeInHierarchy)
-                {
-                  if(hitInfo.collider.gameObject.GetComponent<PuzzleController>())
-                  {
+                PuzzleController puzzleController = hitInfo.collider.gameObject.GetComponent<PuzzleController>();
+                if (puzzleController != null && hitInfo.collider.transform.GetChild(0).gameObject.activeInHierarchy) {
                     hitInfo.collider.gameObject.GetComponent<PuzzleController>().StartAPuzzle();
-                  }
                 }
+
+                SolarSpot solarSpot = hitInfo.collider.GetComponent<SolarSpot>();
+                Item item3 = InventoryController.GetItem();
+                if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null) {
+                    solarSpot.DoShit(item3);
+                    InventoryController.ClearInventory();                    
+                }
+
+        
+
+
+
+
+
 
                 /*else if (hitInfo.collider.gameObject.CompareTag("SolarSpot")) {
                     InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault();
@@ -106,10 +109,11 @@ public class raycaster : MonoBehaviour
                 {
                     //object is gamehelper so showcase this message in the HUD
                     //get the information text from the object and send it to the controller
-                    if(hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null) {
+                    if (hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null)
+                    {
                         //find the hudcontroller object and call the ShowcaseMessage function with the informationHelper message
                         InformationHelper senderInfo = hitInfo.collider.gameObject.GetComponent<InformationHelper>();
-                        if(senderInfo.keyTextIsSentence == false) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo);
+                        if (senderInfo.keyTextIsSentence == false) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo);
                         else GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo, senderInfo.GetMultipleTranslatedSentences());
                     }
                     //test remove
