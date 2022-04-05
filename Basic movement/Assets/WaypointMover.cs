@@ -50,7 +50,7 @@ public class WaypointMover : MonoBehaviour
     {
         
 
-        if (collision.gameObject == GameObject.Find("CubeMe"))
+        if (collision.gameObject == GameObject.Find("MainCharacter"))
         {
             float speed = 600;
             //rigidBody.isKinematic = false;
