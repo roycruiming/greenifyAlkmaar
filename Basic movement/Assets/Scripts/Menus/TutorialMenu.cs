@@ -30,6 +30,7 @@ public class TutorialMenu : MonoBehaviour
         }
     }
 
+    //teleporteert de speler naar het begin
     public void stuck()
     {
         Debug.Log("Respawn player");

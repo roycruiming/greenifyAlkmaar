@@ -72,11 +72,14 @@ public class raycaster : MonoBehaviour
 
                 if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube") && hitInfo.collider.transform.GetChild(1).gameObject.activeInHierarchy)
                 {
-                    //hitInfo.collider.transform.GetChild(1).GetComponent<PuzzleDynaScript>().ActivatePuzzle();
+                  if(hitInfo.collider.gameObject.GetComponent<PuzzleController>())
+                  {
+                    hitInfo.collider.gameObject.GetComponent<PuzzleController>().StartAPuzzle();
+                  }
                 }
 
                 /*else if (hitInfo.collider.gameObject.CompareTag("SolarSpot")) {
-                    InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault(); 
+                    InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault();
                     if (infslot != null) {
                         hitInfo.collider.transform.GetComponent<SolarSpot>().DoShit(infslot);
                         this.gameObject.GetComponent<InventoryScript>().Clear();
@@ -101,7 +104,9 @@ public class raycaster : MonoBehaviour
                         if(senderInfo.keyTextIsSentence == false) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo);
                         else GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo, senderInfo.GetMultipleTranslatedSentences());
                     }
-
+                    //test remove
+                    GameObject.Find("LevelObject").GetComponent<MeentLevel>().showcaseLevelProgression();
+                    //remove till here
                 }
             }
         }

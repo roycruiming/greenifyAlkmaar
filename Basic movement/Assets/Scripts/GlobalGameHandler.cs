@@ -46,6 +46,10 @@ public class GlobalGameHandler : MonoBehaviour
         return instance.languages;
     }
 
+    public static string GetCurrentLanguage() {
+        return instance.currentLanguage;
+    }
+
     public static string GetTextByDictionaryKey(string key) {
         string keyWithLanguage = key + "_" + instance.currentLanguage;
         foreach(KeyValuePair<string,string> pair in instance.translationDictionary) {
@@ -53,6 +57,10 @@ public class GlobalGameHandler : MonoBehaviour
         }
 
         return "ERROR WORD NOT FOUND";
+    }
+
+    private static void debugIets() {
+        foreach(KeyValuePair<string,string> pair in instance.translationDictionary) print("Key = " + pair.Key + ", Value = " + pair.Value);
     }
 
     public static List<string> GetSentencesByDictionaryKey(string key) {
