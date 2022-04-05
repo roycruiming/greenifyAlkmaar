@@ -79499,6 +79499,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2294ac72b60f4da46974d1f746b56439, type: 3}
+--- !u!1 &1595253391 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5944595198322558138, guid: 15880f7ecbc72a44b9f59a5db83b4ffd,
+    type: 3}
+  m_PrefabInstance: {fileID: 5944595197963107790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1596156455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8073079150079247676, guid: f048ecd1c9e056542b4c3d5762043fe6,
@@ -107562,6 +107568,7 @@ GameObject:
   - component: {fileID: 2038018956}
   - component: {fileID: 2038018955}
   - component: {fileID: 2038018954}
+  - component: {fileID: 2038018957}
   m_Layer: 8
   m_Name: Cube 3
   m_TagString: ObjectiveCube
@@ -107646,6 +107653,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038018952}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2038018957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038018952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba43c7f51745c645807265baaa164c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PuzzleCanvas: {fileID: 1768195145}
+  objectivesController: {fileID: 0}
+  Puzzles:
+  - {fileID: 1595253391}
+  PuzzleDifficulty: 3
 --- !u!1001 &2041139354
 PrefabInstance:
   m_ObjectHideFlags: 0
