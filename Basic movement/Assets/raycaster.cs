@@ -82,29 +82,6 @@ public class raycaster : MonoBehaviour
                     InventoryController.ClearInventory();                    
                 }
 
-        
-
-
-
-
-
-
-                /*else if (hitInfo.collider.gameObject.CompareTag("SolarSpot")) {
-                    InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault();
-                    if (infslot != null) {
-                        hitInfo.collider.transform.GetComponent<SolarSpot>().DoShit(infslot);
-                        this.gameObject.GetComponent<InventoryScript>().Clear();
-                    }
-                }
-                else if (hitInfo.collider.gameObject.CompareTag("SolarPanel"))
-                {
-                    this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
-                    if(GameObject.FindWithTag("HUDCanvas") != null) {
-                        //find the hudcontroller object and call the ShowcaseMessage a tutorial message
-                        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage("Good job you have found a Solarpanel! Find the spot where it should be placed.");
-                    }
-                }*/
-
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {
                     //object is gamehelper so showcase this message in the HUD

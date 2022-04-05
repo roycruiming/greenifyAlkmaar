@@ -97,6 +97,22 @@ public class HUDController : MonoBehaviour
         }
     }
 
+    public void SimulateUnlock() {
+        if(this.HudCanvas.transform.Find("UnlocksContainer") != null) {
+            GameObject unlocksContainer = this.HudCanvas.transform.Find("UnlocksContainer").gameObject;
+
+            if(unlocksContainer.activeSelf == false) unlocksContainer.SetActive(true);
+
+            unlocksContainer.transform.Find("unlock_1").GetComponent<FadeInOutScript>().StartFading();
+            unlocksContainer.transform.Find("unlock_2").GetComponent<FadeInOutScript>().StartFading();
+
+            unlocksContainer.transform.Find("unlock_2").transform.Find("Coints_Amount").GetComponent<UnityEngine.UI.Text>().text = "220";
+        }
+
+
+
+    }
+
     private void calculateMessageFontSize(int characters) {
         //160 is the basis of what fits with fontsize 36
         //Debug.Log("Chars count: " + characters);
@@ -195,6 +211,9 @@ public class HUDController : MonoBehaviour
             //hide image block
             this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
 
+            //remove later!!! hide temporary unlocks:
+            this.TemporaryUnlocksHide();
+
             //reset the sprite character icon to the default mascot
             this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
 
@@ -213,6 +232,13 @@ public class HUDController : MonoBehaviour
 
         }
         else this.cancelHidingProgress = false;
+    }
+
+    private void TemporaryUnlocksHide() {
+            GameObject unlocksContainer = this.HudCanvas.transform.Find("UnlocksContainer").gameObject;
+            unlocksContainer.transform.Find("unlock_1").GetComponent<FadeInOutScript>().StartFadingOut();
+            unlocksContainer.transform.Find("unlock_2").GetComponent<FadeInOutScript>().StartFadingOut();
+            unlocksContainer.transform.Find("unlock_2").transform.Find("Coints_Amount").GetComponent<UnityEngine.UI.Text>().text = "";
     }
 
 

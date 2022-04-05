@@ -73,6 +73,9 @@ public class MeentLevel : MonoBehaviour, LevelBasis
             allPhaseObjects = allPhaseObjectsList[progressionPhase];
             this.blinkProgressObjects = true;
             
+            //fake simulation unlocks
+            SimulateUnlockItem();
+
             //iniate the camera switch
             GameObject animationCamera = this.FindObject(GameObject.Find("cutscenesHolder"), "Phase" + (this.progressionPhase + 1) +  "Cutscene");
             if(animationCamera != null) {
@@ -82,6 +85,13 @@ public class MeentLevel : MonoBehaviour, LevelBasis
                 //set popup message
                 if(GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>() != null) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null, GlobalGameHandler.GetSentencesByDictionaryKey("the meent text phase " + (progressionPhase + 1)));
             }
+        }
+    }
+
+    private void SimulateUnlockItem() {
+        HUDController hudController = GameObject.Find("HUDCanvas").GetComponent<HUDController>();
+        if(hudController != null) {
+            hudController.SimulateUnlock();
         }
     }
 
