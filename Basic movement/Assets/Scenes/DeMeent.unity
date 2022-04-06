@@ -50278,6 +50278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Box: {fileID: 1730954512}
+  objCon: {fileID: 0}
 --- !u!23 &1014781508
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -60042,7 +60043,7 @@ GameObject:
   - component: {fileID: 1182227932}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60060,6 +60061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets: []
+  solarPanels: []
+  solarPanelsSpot: []
   objectivesCounter: 0
   secondsTimer: 0
   minutemark: 0
@@ -82864,6 +82867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Box: {fileID: 1730954512}
+  objCon: {fileID: 0}
 --- !u!23 &1637438146
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -86616,6 +86620,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   textUI: {fileID: 0}
+  objCon: {fileID: 0}
 --- !u!135 &1721424884
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -113931,6 +113936,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   textUI: {fileID: 0}
+  objCon: {fileID: 0}
 --- !u!1 &1826567590346047
 GameObject:
   m_ObjectHideFlags: 0
