@@ -9,6 +9,8 @@ public class ObjectivesController : MonoBehaviour
 {
 
     public List<PuzzleController> targets;
+    public List<Item> solarPanels;
+    public List<GameObject> solarPanelsSpot;
     public int objectivesCounter = 0;
     private int totalObjectives;
 
@@ -31,14 +33,22 @@ public class ObjectivesController : MonoBehaviour
     public void Awake()
     {
         targets = Resources.FindObjectsOfTypeAll<PuzzleController>().ToList();
+        solarPanels = Resources.FindObjectsOfTypeAll<Item>().ToList();
+        solarPanelsSpot = GameObject.FindGameObjectsWithTag("SolarSpot").ToList();
         GameDone.text = "";
         gameEndTime.text = "";
         gameEndScore.text = "";
-        totalObjectives = targets.Count;
         blackBarArroundScoreScreen.gameObject.SetActive(false);
         nameInput.gameObject.SetActive(false);
         nameInputBar.gameObject.SetActive(false);
         back.gameObject.SetActive(false);
+
+        solarPanels.Remove(solarPanels[2]);
+        solarPanels.Remove(solarPanels[2]);
+        solarPanels.Remove(solarPanels[2]);
+        solarPanels.Remove(solarPanels[2]);
+
+        totalObjectives = targets.Count + solarPanels.Count;
 
 
 
@@ -53,6 +63,14 @@ public class ObjectivesController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        for (var i = solarPanelsSpot.Count - 1; i > -1; i--)
+        {
+            if (solarPanelsSpot[i] == null)
+                solarPanelsSpot.RemoveAt(i);
+        }
+
         //timer in game.
         secondsTimer += Time.deltaTime;
         if (secondsTimer > 59.45)
@@ -67,7 +85,7 @@ public class ObjectivesController : MonoBehaviour
 
 
         //when objectivesList == emtpy - game is finnished
-        if(targets.Count == 0)
+        if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
         {
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
@@ -85,6 +103,21 @@ public class ObjectivesController : MonoBehaviour
     public void DeleteItemInList(PuzzleController resolvedTask)
     {
         targets.Remove(resolvedTask);
+        objectivesCounter++;
+
+    }
+
+    public void DeleteItemInListSolar(Item solarpanels)
+    {
+
+        solarPanels.Remove(solarpanels);
+        //objectivesCounter++;
+
+    }
+
+    public void DeleteItemInListSolarSpot(GameObject solarpanelsSpot)
+    {
+        solarPanelsSpot.Remove(solarpanelsSpot);
         objectivesCounter++;
 
     }

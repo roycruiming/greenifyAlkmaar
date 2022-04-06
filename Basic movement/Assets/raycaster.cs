@@ -11,6 +11,7 @@ public class raycaster : MonoBehaviour
     public int rayLength;
     public LayerMask layerMask;
     public Text textUI;
+    public GameObject objCon;
 
     private InventoryController InventoryController; 
 
@@ -22,6 +23,8 @@ public class raycaster : MonoBehaviour
             textUI.text = "";
             textUI.gameObject.SetActive(false);
         }
+
+        objCon = GameObject.FindGameObjectWithTag("GameController");
     }
 
 
@@ -51,7 +54,8 @@ public class raycaster : MonoBehaviour
 
                 Item item = hitInfo.collider.gameObject.GetComponent<Item>();
                 if (item != null) {
-                    InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);                                            
+                    InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);
+                    objCon.GetComponent<ObjectivesController>().DeleteItemInListSolar(hitInfo.collider.gameObject.GetComponent<Item>());
                 }
 
                 Chest chest = hitInfo.collider.gameObject.GetComponent<Chest>();

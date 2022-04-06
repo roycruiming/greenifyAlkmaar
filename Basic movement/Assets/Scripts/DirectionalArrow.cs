@@ -28,9 +28,29 @@ public class DirectionalArrow : MonoBehaviour
             transform.LookAt(targetPosition);
 
         }
-        else
+        else if(objCon.solarPanels.Count == 2 && objCon.solarPanelsSpot.Count == 2)
         {
-            
+            Vector3 targetPosition = objCon.solarPanels[0].transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
+        }
+        else if(objCon.solarPanels.Count == 1 && objCon.solarPanelsSpot.Count == 2)
+        {
+            Vector3 targetPosition = objCon.solarPanelsSpot[0].transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
+        }
+        else if (objCon.solarPanels.Count == 1 && objCon.solarPanelsSpot.Count == 1)
+        {
+            Vector3 targetPosition = objCon.solarPanels[0].transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
+        }
+        else if (objCon.solarPanels.Count == 0 && objCon.solarPanelsSpot.Count == 1)
+        {
+            Vector3 targetPosition = objCon.solarPanelsSpot[0].transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
         }
     }
 }

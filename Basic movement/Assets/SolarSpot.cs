@@ -10,6 +10,13 @@ public class SolarSpot : MonoBehaviour
 
     public GameObject Box;
 
+    public GameObject objCon;
+
+    private void Start()
+    {
+        objCon = GameObject.FindGameObjectWithTag("GameController");
+    }
+
     public void DoShit(Item item)
     {
 
@@ -33,6 +40,8 @@ public class SolarSpot : MonoBehaviour
         itemGameObject.transform.position = new Vector3(itemGameObject.transform.position.x, itemGameObject.transform.position.y - 4, itemGameObject.transform.position.z);
         itemGameObject.GetComponent<BoxCollider>().enabled = false;
         itemGameObject.SetActive(true);
+
+        objCon.GetComponent<ObjectivesController>().DeleteItemInListSolar(item);
 
         //Box.Find("Smoke").gameObject.SetActive(false);
 
