@@ -33,13 +33,12 @@ public class raycaster : MonoBehaviour
 
     void Update()
     {
-
+        
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hitInfo;
 
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
-
             OnScreenDescription description
                 = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
 

@@ -26,7 +26,7 @@ public class CutSCene : MonoBehaviour
         children = gameObject.GetComponentsInChildren<Transform>();
         objCon.GameTimer.gameObject.SetActive(false);
         objCon.TextUiCounter.gameObject.SetActive(false);
-        Object.Destroy(cutscene, 2.0f);
+        Object.Destroy(cutscene, 20.0f);
 
         if (Input.GetKey("p"))
         {
@@ -39,7 +39,8 @@ public class CutSCene : MonoBehaviour
             messageDisplay = true;
             if (GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>() != null)
             {
-                GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("back"));
+                GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey("intro de meent"));
+
             }
         }
 

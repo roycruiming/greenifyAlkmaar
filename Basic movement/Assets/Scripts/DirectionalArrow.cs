@@ -28,5 +28,9 @@ public class DirectionalArrow : MonoBehaviour
             transform.LookAt(targetPosition);
 
         }
+        else
+        {
+            
+        }
     }
 }
