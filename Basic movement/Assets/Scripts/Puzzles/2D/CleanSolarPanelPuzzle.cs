@@ -108,12 +108,12 @@ public class CleanSolarPanelPuzzle : MonoBehaviour, DragPuzzle
     {
         if (currentObject.toOrginal)
         {
-            transform.localPosition = currentObject.orginalPosition;
+            currentObject.transform.localPosition = currentObject.orginalPosition;
         }
         if (transform.position.x > (currentObject.transform.position.x + 200) || transform.position.x < (currentObject.transform.position.x - 200) || transform.position.y < (currentObject.transform.position.y - 200) || transform.position.y > (currentObject.transform.position.y + 200))
         {
             UpdateProgress();
-            Destroy(gameObject);
+            Destroy(currentObject.gameObject);
         }
     }
 

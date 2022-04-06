@@ -13,16 +13,7 @@ public class SunBeam : MonoBehaviour
     GameObject beamObject;
     void Start()
     {
-        beamObject = new GameObject();
-        beamObject.name = "Beam";
 
-        Image beamImage = beamObject.AddComponent<Image>();
-        beamImage.sprite = beamSprite;
-
-        beamObject.transform.SetParent(home.transform);
-        beamObject.transform.position = new Vector3(0, 0, 0);
-
-        beamObject.SetActive(true);
 
         
 
@@ -31,9 +22,7 @@ public class SunBeam : MonoBehaviour
         // Update is called once per frame
     void Update()
     {
-        home.transform.localScale += new Vector3(0, 1, 0);
-
-
+        
 
     }
 }

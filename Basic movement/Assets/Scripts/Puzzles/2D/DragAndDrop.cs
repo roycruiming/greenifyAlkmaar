@@ -16,7 +16,6 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void Start() {
         orginalPosition = transform.localPosition;
-
     }
 
     public DragAndDrop Init(DragPuzzle connectedPuzzle)
