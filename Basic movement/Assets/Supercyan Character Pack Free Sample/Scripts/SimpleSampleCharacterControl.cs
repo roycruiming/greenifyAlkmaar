@@ -40,9 +40,10 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     private float m_minJumpInterval = 0.25f;
     private bool m_jumpInput = false;
 
-    private bool m_isGrounded;
+    public static bool m_isGrounded;
 
     private List<Collider> m_collisions = new List<Collider>();
+
 
     private void Awake()
     {
@@ -140,6 +141,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     {
         if (!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying)
         {
+
             float v = Input.GetAxis("Vertical");
             float h1 = Input.GetAxis("Horizontal");
             float h = Input.GetAxis("Mouse X");
@@ -157,17 +159,23 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                 v *= m_walkScale;
             }
 
+            
+
             m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
             m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
             m_currentH1 = Mathf.Lerp(m_currentH1, h1, Time.deltaTime * m_interpolation);
+            
 
             transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
             transform.position += transform.right * m_currentH1 * m_moveSpeed * Time.deltaTime;
             transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
 
+
             m_animator.SetFloat("MoveSpeed", m_currentV);
 
             JumpingAndLanding();
+
+
         }
         else
         {
