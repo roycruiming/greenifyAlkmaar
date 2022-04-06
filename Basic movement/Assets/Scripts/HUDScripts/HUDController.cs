@@ -212,7 +212,7 @@ public class HUDController : MonoBehaviour
             this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
 
             //remove later!!! hide temporary unlocks:
-            this.TemporaryUnlocksHide();
+            //this.TemporaryUnlocksHide();
 
             //reset the sprite character icon to the default mascot
             this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");

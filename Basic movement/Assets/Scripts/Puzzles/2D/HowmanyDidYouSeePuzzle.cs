@@ -80,7 +80,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     //geeft random value
     void AddRandomValue()
     {
-      int rand = Random.Range(1,PuzzleDifficulty + 1);
+      int rand = Random.Range(1,PuzzleDifficulty +1);
       if (Values.Contains(rand)){
         AddRandomValue();
       } else {

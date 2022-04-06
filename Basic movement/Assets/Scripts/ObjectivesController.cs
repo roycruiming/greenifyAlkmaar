@@ -63,7 +63,7 @@ public class ObjectivesController : MonoBehaviour
         GameTimer.text = minutemark + ":" + Mathf.Round(secondsTimer);
 
         // Set how mutch objectives are done
-        TextUiCounter.text = objectivesCounter.ToString() + "/5";
+        TextUiCounter.text = objectivesCounter.ToString() + "/" + totalObjectives;
 
 
         //when objectivesList == emtpy - game is finnished

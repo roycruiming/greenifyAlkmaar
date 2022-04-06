@@ -92,9 +92,7 @@ public class raycaster : MonoBehaviour
                         if (senderInfo.keyTextIsSentence == false) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo);
                         else GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo, senderInfo.GetMultipleTranslatedSentences());
                     }
-                    //test remove
-                    GameObject.Find("LevelObject").GetComponent<MeentLevel>().showcaseLevelProgression();
-                    //remove till here
+                    
                 }
             }
         }
