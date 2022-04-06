@@ -102,6 +102,6 @@ public class ObjectivesController : MonoBehaviour
         int result = minutemark * 100;
         SubmitScore.AddNewHighscore(nameInput.GetComponent<Text>().text, result + secondsFinal);
 
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 }
