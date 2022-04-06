@@ -50,7 +50,8 @@ public class InventoryController : MonoBehaviour
     }
 
     public void ClearInventory() {
-        Inventory.item = null;     
+        Inventory.item = null;
+        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().RemoveImage(); 
     }
 
 

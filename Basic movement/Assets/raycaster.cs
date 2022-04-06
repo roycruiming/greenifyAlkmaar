@@ -54,9 +54,16 @@ public class raycaster : MonoBehaviour
 
                 Item item = hitInfo.collider.gameObject.GetComponent<Item>();
                 if (item != null) {
+                    if (item.HudImage != null)
+                    {
+                        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().SetInventorySprite(item.HudImage);
+                    }
+
                     InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);
                     objCon.GetComponent<ObjectivesController>().DeleteItemInListSolar(hitInfo.collider.gameObject.GetComponent<Item>());
                 }
+
+
 
                 Chest chest = hitInfo.collider.gameObject.GetComponent<Chest>();
                 if (chest != null) {

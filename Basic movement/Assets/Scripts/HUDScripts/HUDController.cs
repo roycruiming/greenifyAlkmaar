@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -97,6 +98,19 @@ public class HUDController : MonoBehaviour
             //calculateExtraReadingTime();
         }
     }
+
+    public void SetInventorySprite(Sprite hudImage)
+    {
+        Transform panel = gameObject.transform.Find("InventoryPanel");   
+        if (panel.GetComponent<Image>() == null) panel.gameObject.AddComponent<Image>();
+        panel.GetComponent<Image>().sprite = hudImage;     
+    }
+
+    public void RemoveImage() {
+       Image image =  this.gameObject.transform.Find("InventoryPanel").GetComponent<Image>();
+        Destroy(image); 
+    }
+
 
     public void SimulateUnlock() {
         if(this.HudCanvas.transform.Find("UnlocksContainer") != null) {
