@@ -44,5 +44,6 @@ public class PuzzleController : MonoBehaviour
     transform.Find("Smoke").gameObject.SetActive(false);
     gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
     objectivesController.DeleteItemInList(this);
+        
   }
 }

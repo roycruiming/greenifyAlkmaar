@@ -5,21 +5,28 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
 
-    CharacterController cc;
+    public AudioSource walkSound;
     // Start is called before the first frame update
     void Start()
     {
-        cc = GetComponent<CharacterController>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(SimpleSampleCharacterControl.m_isGrounded);
-        
-        if (SimpleSampleCharacterControl.m_isGrounded == true && cc.velocity.magnitude > 2f && GetComponent<AudioSource>().isPlaying == false)
+        if(Input.GetKeyDown(KeyCode.W) && SimpleSampleCharacterControl.m_isGrounded == true)
         {
-            GetComponent<AudioSource>().Play();
+            walkSound.Play();
         }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            walkSound.Stop();
+        }
+        if(SimpleSampleCharacterControl.m_isGrounded == false)
+        {
+            walkSound.Stop();
+        }
+
     }
 }
