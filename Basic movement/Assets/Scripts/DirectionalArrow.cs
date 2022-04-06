@@ -21,12 +21,36 @@ public class DirectionalArrow : MonoBehaviour
     private void Update()
     {
         //Arrow points to next objective
-        if (objCon.target.Count >= 1)
+        if (objCon.targets.Count >= 1)
         {
-            Vector3 targetPosition = objCon.target[0].transform.position;
+            Vector3 targetPosition = objCon.targets[0].transform.position;
             targetPosition.y = transform.position.y;
             transform.LookAt(targetPosition);
 
+        }
+        else if(objCon.solarPanels.Count == 2 && objCon.solarPanelsSpot.Count == 2)
+        {
+            Vector3 targetPosition = objCon.solarPanels[0].transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
+        }
+        else if(objCon.solarPanels.Count == 1 && objCon.solarPanelsSpot.Count == 2)
+        {
+            Vector3 targetPosition = objCon.solarPanelsSpot[0].transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
+        }
+        else if (objCon.solarPanels.Count == 1 && objCon.solarPanelsSpot.Count == 1)
+        {
+            Vector3 targetPosition = objCon.solarPanels[0].transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
+        }
+        else if (objCon.solarPanels.Count == 0 && objCon.solarPanelsSpot.Count == 1)
+        {
+            Vector3 targetPosition = objCon.solarPanelsSpot[0].transform.position;
+            targetPosition.y = transform.position.y;
+            transform.LookAt(targetPosition);
         }
     }
 }

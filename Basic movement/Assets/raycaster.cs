@@ -11,7 +11,9 @@ public class raycaster : MonoBehaviour
     public int rayLength;
     public LayerMask layerMask;
     public Text textUI;
+    public GameObject objCon;
 
+    private InventoryController InventoryController; 
 
 
 
@@ -21,18 +23,25 @@ public class raycaster : MonoBehaviour
             textUI.text = "";
             textUI.gameObject.SetActive(false);
         }
+
+        objCon = GameObject.FindGameObjectWithTag("GameController");
+    }
+
+
+    private void Awake()
+    {
+        InventoryController = new InventoryController(new Inventory()); 
     }
 
 
     void Update()
     {
-
+        
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hitInfo;
 
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
-
             OnScreenDescription description
                 = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
 
@@ -43,38 +52,51 @@ public class raycaster : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F)) {
 
-                if (hitInfo.collider.gameObject.CompareTag("ObjectiveCube") && hitInfo.collider.transform.GetChild(1).gameObject.activeInHierarchy)
-                {
-                    //hitInfo.collider.transform.GetChild(1).GetComponent<PuzzleDynaScript>().ActivatePuzzle();
+                Item item = hitInfo.collider.gameObject.GetComponent<Item>();
+                if (item != null) {
+                    InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);
+                    objCon.GetComponent<ObjectivesController>().DeleteItemInListSolar(hitInfo.collider.gameObject.GetComponent<Item>());
                 }
 
-                /*else if (hitInfo.collider.gameObject.CompareTag("SolarSpot")) {
-                    InventorySlot infslot = gameObject.GetComponent<InventoryScript>().inventory.Container.FirstOrDefault(); 
-                    if (infslot != null) {
-                        hitInfo.collider.transform.GetComponent<SolarSpot>().DoShit(infslot);
-                        this.gameObject.GetComponent<InventoryScript>().Clear();
-                    }
+                Chest chest = hitInfo.collider.gameObject.GetComponent<Chest>();
+                if (chest != null) {
+                    Item key = InventoryController.GetItem();
+                    if (!chest.OpenChest(key)) return;
+                    InventoryController.ClearInventory();
                 }
-                else if (hitInfo.collider.gameObject.CompareTag("SolarPanel"))
+
+                DoorsOpener doors = hitInfo.collider.gameObject.GetComponent<DoorsOpener>();
+                if (doors != null)
                 {
-                    this.gameObject.GetComponent<InventoryScript>().AddOrSwap(hitInfo.collider);
-                    if(GameObject.FindWithTag("HUDCanvas") != null) {
-                        //find the hudcontroller object and call the ShowcaseMessage a tutorial message
-                        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage("Good job you have found a Solarpanel! Find the spot where it should be placed.");
-                    }
-                }*/
+                    Item key = InventoryController.GetItem();
+                    if (!doors.OpenDoors(key)) return;
+                    InventoryController.ClearInventory();
+                }
+
+                PuzzleController puzzleController = hitInfo.collider.gameObject.GetComponent<PuzzleController>();
+                if (puzzleController != null && hitInfo.collider.transform.GetChild(0).gameObject.activeInHierarchy) {
+                    hitInfo.collider.gameObject.GetComponent<PuzzleController>().StartAPuzzle();
+                }
+
+                SolarSpot solarSpot = hitInfo.collider.GetComponent<SolarSpot>();
+                Item item3 = InventoryController.GetItem();
+                if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null) {
+                    solarSpot.DoShit(item3);
+                    InventoryController.ClearInventory();                    
+                }
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {
                     //object is gamehelper so showcase this message in the HUD
                     //get the information text from the object and send it to the controller
-                    if(hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null) {
+                    if (hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null)
+                    {
                         //find the hudcontroller object and call the ShowcaseMessage function with the informationHelper message
                         InformationHelper senderInfo = hitInfo.collider.gameObject.GetComponent<InformationHelper>();
-                        if(senderInfo.keyTextIsSentence == false) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo);
+                        if (senderInfo.keyTextIsSentence == false) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo);
                         else GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo, senderInfo.GetMultipleTranslatedSentences());
                     }
-
+                    
                 }
             }
         }

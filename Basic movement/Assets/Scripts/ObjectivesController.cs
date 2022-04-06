@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ObjectivesController : MonoBehaviour
 {
 
-    public List<GameObject> target;
+    public List<PuzzleController> targets;
+    public List<Item> solarPanels;
+    public List<GameObject> solarPanelsSpot;
     public int objectivesCounter = 0;
     private int totalObjectives;
+
+    private bool testPhaseBooleanVerticalSlice = false; //remove in later stage!
 
     public float secondsTimer;
     public int minutemark;
@@ -29,26 +34,46 @@ public class ObjectivesController : MonoBehaviour
 
     public void Awake()
     {
+        targets = Resources.FindObjectsOfTypeAll<PuzzleController>().ToList();
+        solarPanels = Resources.FindObjectsOfTypeAll<Item>().ToList();
+        solarPanelsSpot = GameObject.FindGameObjectsWithTag("SolarSpot").ToList();
         GameDone.text = "";
         gameEndTime.text = "";
         gameEndScore.text = "";
-        totalObjectives = target.Count;
         blackBarArroundScoreScreen.gameObject.SetActive(false);
         nameInput.gameObject.SetActive(false);
         nameInputBar.gameObject.SetActive(false);
         back.gameObject.SetActive(false);
+
+        solarPanels.Remove(solarPanels[2]);
+        solarPanels.Remove(solarPanels[2]);
+        solarPanels.Remove(solarPanels[2]);
+        solarPanels.Remove(solarPanels[2]);
+
+        totalObjectives = targets.Count + solarPanels.Count;
+
+
 
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
+        for (var i = solarPanelsSpot.Count - 1; i > -1; i--)
+        {
+            if (solarPanelsSpot[i] == null)
+                solarPanelsSpot.RemoveAt(i);
+            objectivesCounter++;
+        }
+
         //timer in game.
         secondsTimer += Time.deltaTime;
         if (secondsTimer > 59.45)
@@ -56,14 +81,14 @@ public class ObjectivesController : MonoBehaviour
             secondsTimer = 0;
             minutemark++;
         }
-        GameTimer.text = minutemark + ":" + Mathf.Round(secondsTimer);
-        
+        GameTimer.text = minutemark.ToString("00") + ":" + Mathf.Round(secondsTimer).ToString("00");
+
         // Set how mutch objectives are done
-        TextUiCounter.text = objectivesCounter.ToString() + "/5";
+        TextUiCounter.text = objectivesCounter.ToString() + "/" + totalObjectives;
 
 
         //when objectivesList == emtpy - game is finnished
-        if(target.Count == 4)
+        if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
         {
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
@@ -78,9 +103,28 @@ public class ObjectivesController : MonoBehaviour
         }
     }
 
-    public void DeleteItemInList(int valueTest)
+    public void DeleteItemInList(PuzzleController resolvedTask)
     {
-        target.RemoveAll(x => x.name == "Cube " + valueTest);
+        targets.Remove(resolvedTask);
+        objectivesCounter++;
+        //check if half of the tasks have been completed if so showcase the level progression
+        if(objectivesCounter >= (this.totalObjectives/2) && testPhaseBooleanVerticalSlice == false) {
+            testPhaseBooleanVerticalSlice = true;
+            GameObject.Find("LevelObject").GetComponent<MeentLevel>().showcaseLevelProgression();
+        }
+    }
+
+    public void DeleteItemInListSolar(Item solarpanels)
+    {
+
+        solarPanels.Remove(solarpanels);
+        //objectivesCounter++;
+
+    }
+
+    public void DeleteItemInListSolarSpot(GameObject solarpanelsSpot)
+    {
+        solarPanelsSpot.Remove(solarpanelsSpot);
         objectivesCounter++;
 
     }
@@ -98,6 +142,6 @@ public class ObjectivesController : MonoBehaviour
         int result = minutemark * 100;
         SubmitScore.AddNewHighscore(nameInput.GetComponent<Text>().text, result + secondsFinal);
 
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
 }

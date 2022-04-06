@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public List<GameObject> unlockAbles;
+
     public float RotationOffsetY = 0;
     public float HeightOffsetY;
     public bool OverwriteHeightOffsetByInitialItemPosition = true;

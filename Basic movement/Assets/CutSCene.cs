@@ -7,7 +7,6 @@ public class CutSCene : MonoBehaviour
     public ObjectivesController objCon;
     public GameObject cutscene;
     public GameObject MainCamera;
-    public DirectionalArrow arrow;
 
     private Transform[] children;
     private bool timerBool = false;
@@ -27,19 +26,21 @@ public class CutSCene : MonoBehaviour
         children = gameObject.GetComponentsInChildren<Transform>();
         objCon.GameTimer.gameObject.SetActive(false);
         objCon.TextUiCounter.gameObject.SetActive(false);
-        Object.Destroy(cutscene, 2.0f);
+        Object.Destroy(cutscene, 20.0f);
 
+        if (Input.GetKey("p"))
+        {
+            Object.Destroy(cutscene);
+
+        }
 
         if (messageDisplay == false)
         {
             messageDisplay = true;
             if (GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>() != null)
             {
-                GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, new List<string> {
-                "Welkom in Alkmaar, we zijn hier bij de meent. Deze ijsbaan heeft 940 zonnepanelen en deze hebben een opbrengst van 300.000 kwh (kilowatt uur) per jaar.",
-                "Dit staat gelijk aan het stroomverbruik van 100 huishoudens. Echter werken de zonnepanelen nu niet, zoek rond in het level naar oplossingen! ",
-                "Veel succes!"
-                });
+                GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey("intro de meent"));
+
             }
         }
 

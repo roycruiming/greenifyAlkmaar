@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
 
         }
     }
-
+        //laat het spel verder gaan
         public void Resume()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -46,6 +46,7 @@ public class PauseMenu : MonoBehaviour
             GameIsPaused = false;
         }
 
+        //zet het spel op pauze
         void Pause()
         {
             Cursor.lockState = CursorLockMode.None;

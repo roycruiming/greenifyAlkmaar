@@ -16,13 +16,16 @@ public class CleanSolarPanelPuzzle : MonoBehaviour, DragPuzzle
     int PercentAmount;
     int AmountCompleted;
     int TotalTrash;
+    string ParentName;
     Color32 PercentColor;
     Sprite LastSprite;
     public static bool IsPlaying = false;
 
 
-    public void StartPuzzle(int difficulty)
+    //start van de puzzle
+    public void StartPuzzle(int difficulty, string Name)
     {
+        ParentName = Name;
         IsPlaying = true;
         Cursor.visible = true;
 
@@ -36,6 +39,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour, DragPuzzle
         PuzzlePanel.SetActive(true);
     }
 
+    //maakt alle images aan die de speler moet slepen
     void CreateImages(int amount)
     {
       for(int i = 0; i < amount; i++)
@@ -56,6 +60,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour, DragPuzzle
       }
     }
 
+    //update de efficientie text met kleur
     void ChangeText(int number)
     {
       if(PercentText) {
@@ -75,7 +80,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour, DragPuzzle
 
     }
 
-
+    //als de speler een stukje afval van het zonnepaneel haalt wordt deze uitgevoerd
     public void UpdateProgress(){
       PercentCompleted += PercentAmount;
       ChangeText(PercentCompleted);
@@ -84,6 +89,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour, DragPuzzle
       CheckCompletion();
     }
 
+    //wordt gekeken of de speler klaar is
     void CheckCompletion()
     {
       if (AmountCompleted == TotalTrash)
@@ -95,13 +101,22 @@ public class CleanSolarPanelPuzzle : MonoBehaviour, DragPuzzle
       }
     }
 
+    //stopt en reset de puzzel
     IEnumerator StopPuzzle(){
+      PercentCompleted = 0;
+      PercentAmount = 0;
+      AmountCompleted = 0;
+      TotalTrash = 0;
+
+
         yield return new WaitForSeconds(5);
 
         IsPlaying = false;
         Cursor.visible = false;
 
         PuzzlePanel.SetActive(false);
+
+        GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted();
    }
 
     public void EndDragAction(DragAndDrop currentObject)

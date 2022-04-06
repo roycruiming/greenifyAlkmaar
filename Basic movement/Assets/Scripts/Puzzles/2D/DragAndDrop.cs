@@ -28,6 +28,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         lastMousePosition = eventData.position;
     }
 
+    //tijdens het slepen
     public void OnDrag(PointerEventData eventData) {
         Vector2 curremtMousePosition = eventData.position;
         Vector2 diff = curremtMousePosition - lastMousePosition;
@@ -47,6 +48,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         lastMousePosition = curremtMousePosition;
     }
 
+    //wanneer de speler het object lost laat
     public void OnEndDrag(PointerEventData eventData) {
         PuzzleScript.EndDragAction(this);
     }
