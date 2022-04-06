@@ -67,7 +67,7 @@ public class ObjectivesController : MonoBehaviour
 
 
         //when objectivesList == emtpy - game is finnished
-        if(targets.Count == 4)
+        if(targets.Count == 0)
         {
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
