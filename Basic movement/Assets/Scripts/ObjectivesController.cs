@@ -14,6 +14,8 @@ public class ObjectivesController : MonoBehaviour
     public int objectivesCounter = 0;
     private int totalObjectives;
 
+    private bool testPhaseBooleanVerticalSlice = false; //remove in later stage!
+
     public float secondsTimer;
     public int minutemark;
     public Text GameTimer;
@@ -78,7 +80,7 @@ public class ObjectivesController : MonoBehaviour
             secondsTimer = 0;
             minutemark++;
         }
-        GameTimer.text = minutemark + ":" + Mathf.Round(secondsTimer);
+        GameTimer.text = minutemark.ToString("00") + ":" + Mathf.Round(secondsTimer).ToString("00");
 
         // Set how mutch objectives are done
         TextUiCounter.text = objectivesCounter.ToString() + "/" + totalObjectives;
@@ -104,7 +106,11 @@ public class ObjectivesController : MonoBehaviour
     {
         targets.Remove(resolvedTask);
         objectivesCounter++;
-
+        //check if half of the tasks have been completed if so showcase the level progression
+        if(objectivesCounter >= (this.totalObjectives/2) && testPhaseBooleanVerticalSlice == false) {
+            testPhaseBooleanVerticalSlice = true;
+            GameObject.Find("LevelObject").GetComponent<MeentLevel>().showcaseLevelProgression();
+        }
     }
 
     public void DeleteItemInListSolar(Item solarpanels)

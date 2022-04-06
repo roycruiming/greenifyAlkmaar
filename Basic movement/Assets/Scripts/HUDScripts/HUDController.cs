@@ -17,6 +17,7 @@ public class HUDController : MonoBehaviour
     private char[] currentlyPrintedCharacters;
 
     private double messageBoxMaxChars = 160;
+    private bool rewardsAreBeingShown = false;
 
     private List<string> messageSequence;
 
@@ -107,6 +108,8 @@ public class HUDController : MonoBehaviour
             unlocksContainer.transform.Find("unlock_2").GetComponent<FadeInOutScript>().StartFading();
 
             unlocksContainer.transform.Find("unlock_2").transform.Find("Coints_Amount").GetComponent<UnityEngine.UI.Text>().text = "220";
+
+            this.rewardsAreBeingShown = true;
         }
 
 
@@ -212,7 +215,7 @@ public class HUDController : MonoBehaviour
             this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
 
             //remove later!!! hide temporary unlocks:
-            //this.TemporaryUnlocksHide();
+            if(rewardsAreBeingShown == true) this.TemporaryUnlocksHide();
 
             //reset the sprite character icon to the default mascot
             this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
@@ -239,6 +242,8 @@ public class HUDController : MonoBehaviour
             unlocksContainer.transform.Find("unlock_1").GetComponent<FadeInOutScript>().StartFadingOut();
             unlocksContainer.transform.Find("unlock_2").GetComponent<FadeInOutScript>().StartFadingOut();
             unlocksContainer.transform.Find("unlock_2").transform.Find("Coints_Amount").GetComponent<UnityEngine.UI.Text>().text = "";
+
+            this.rewardsAreBeingShown = false;
     }
 
 
