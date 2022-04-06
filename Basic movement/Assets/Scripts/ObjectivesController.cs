@@ -71,6 +71,7 @@ public class ObjectivesController : MonoBehaviour
         {
             if (solarPanelsSpot[i] == null)
                 solarPanelsSpot.RemoveAt(i);
+            objectivesCounter++;
         }
 
         //timer in game.
