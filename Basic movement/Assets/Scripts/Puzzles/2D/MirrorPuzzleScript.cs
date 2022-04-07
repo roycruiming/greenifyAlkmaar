@@ -17,10 +17,13 @@ public class MirrorPuzzleScript : MonoBehaviour, DragPuzzle
 
     public List<GameObject> mirrors;
 
-    public void StartPuzzle(int difficulty)
+    public GameObject parent;
+
+    public void StartPuzzle()
     {
         IsPlaying = true;
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         Debug.Log("what");
 
         DragMirrors(mirrors);

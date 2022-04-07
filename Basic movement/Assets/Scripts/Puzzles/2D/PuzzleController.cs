@@ -35,6 +35,9 @@ public class PuzzleController : MonoBehaviour
           case "HowmanyPuzzle":
             Puzzles[SelectedPuzzle].GetComponent<HowmanyDidYouSeePuzzle>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
+          case "MirrorPuzzle":
+                Puzzles[SelectedPuzzle].GetComponent<MirrorPuzzleScript>().StartPuzzle();
+                break;
         }
   }
 
