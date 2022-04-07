@@ -49,6 +49,8 @@ public class ObjectivesController : MonoBehaviour
         solarPanels.Remove(solarPanels[2]);
         solarPanels.Remove(solarPanels[2]);
         solarPanels.Remove(solarPanels[2]);
+        solarPanels.Remove(solarPanels[2]);
+        solarPanels.Remove(solarPanels[2]);
 
         totalObjectives = targets.Count + solarPanels.Count;
 
@@ -70,8 +72,10 @@ public class ObjectivesController : MonoBehaviour
         for (var i = solarPanelsSpot.Count - 1; i > -1; i--)
         {
             if (solarPanelsSpot[i] == null)
+            {
                 solarPanelsSpot.RemoveAt(i);
-            objectivesCounter++;
+                objectivesCounter++;
+            }
         }
 
         //timer in game.
@@ -84,7 +88,7 @@ public class ObjectivesController : MonoBehaviour
         GameTimer.text = minutemark.ToString("00") + ":" + Mathf.Round(secondsTimer).ToString("00");
 
         // Set how mutch objectives are done
-        TextUiCounter.text = objectivesCounter.ToString() + "/" + totalObjectives;
+        TextUiCounter.text = objectivesCounter + "/" + totalObjectives;
 
 
         //when objectivesList == emtpy - game is finnished
