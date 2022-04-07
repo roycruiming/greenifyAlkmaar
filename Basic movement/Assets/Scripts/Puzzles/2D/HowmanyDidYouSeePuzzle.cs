@@ -165,7 +165,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     //puzzel sluiten
     IEnumerator ClosePuzzle()
     {
-      yield return new WaitForSeconds(5);
+      yield return new WaitForSeconds(1);
 
       IsPlaying = false;
       Cursor.visible = false;
