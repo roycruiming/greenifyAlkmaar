@@ -109,7 +109,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour, DragPuzzle
       TotalTrash = 0;
 
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
 
         IsPlaying = false;
         Cursor.visible = false;
