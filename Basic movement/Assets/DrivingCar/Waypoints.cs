@@ -21,7 +21,6 @@ public class Waypoints : MonoBehaviour
     {
 
 
-        //print("ffs");
 
         foreach (Transform t in transform) {
             Gizmos.color = Color.blue;
