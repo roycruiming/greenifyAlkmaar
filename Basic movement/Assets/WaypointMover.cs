@@ -52,12 +52,9 @@ public class WaypointMover : MonoBehaviour
 
         if (collision.gameObject == GameObject.Find("MainCharacter"))
         {
-            float speed = 600;
-            //rigidBody.isKinematic = false;
+
             Vector3 force = transform.forward;
             force = new Vector3(force.x, 1, force.z);
-            //rigidBody.AddForce(force * speed);
-
             collision.gameObject.GetComponent<Rigidbody>().AddForce(force * 600);
         }
 
