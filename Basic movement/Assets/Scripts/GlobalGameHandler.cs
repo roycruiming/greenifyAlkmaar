@@ -28,15 +28,45 @@ public class GlobalGameHandler : MonoBehaviour
             instance.currentLanguage = "nederlands";
             DontDestroyOnLoad(this.gameObject);
             InitTranslationDictionary();
-            InitUnlockedAbles();
+            InitUnlockAbles();
         }
     }
 
-    private void InitUnlockedAbles() {
-        allUnlockables = new List<Unlockable>();
+    private void InitUnlockAbles() {
+        instance.allUnlockables = new List<Unlockable>();
 
+        PlayerPrefs.DeleteAll(); //just for testing remove later!
 
-        allUnlockables.Add(new Unlockable(0,440,1,"",false));
+        //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
+        instance.allUnlockables.Add(new Unlockable(0,440,1,"test",false,UnlockableType.character)); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
+        instance.allUnlockables.Add(new Unlockable(1,670,1,"test",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(2,550,1,"test",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(3,320,1,"test",false,UnlockableType.character)); 
+
+        // foreach(Unlockable u in allUnlockables) {
+        //     u.exampleImageName = "test";
+        //     u.UpdateInfoToDisk();
+        // }
+    }
+
+    public static List<Unlockable> GetAllUnlockablesInfo() {
+        return instance.allUnlockables;
+    }
+
+    public static List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
+        List<Unlockable> allTypeUnlockables = new List<Unlockable>();
+        
+        for(int i = 0; i < instance.allUnlockables.Count; i++) {
+            Debug.Log("False : " + instance.allUnlockables[i].type + " is not " + uType);
+            if(instance.allUnlockables[i].type == uType) {
+                allTypeUnlockables.Add(instance.allUnlockables[i]);
+                Debug.Log("Added : " + instance.allUnlockables[i]);
+            } 
+        }
+
+        // foreach(Unlockable uInfo in instance.allUnlockables) if(uInfo.type == uType) allTypeUnlockables.Add(uInfo);
+        Debug.Log(allTypeUnlockables.Count + " Return count");
+        return allTypeUnlockables;
     }
 
     public static GlobalGameHandler GetInstance() {
