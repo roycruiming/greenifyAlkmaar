@@ -10,6 +10,7 @@ public class GlobalGameHandler : MonoBehaviour
     public static GlobalGameHandler instance { get; private set; }
 
     private List<KeyValuePair<string,string>> translationDictionary;
+    private List<Unlockable> allUnlockables;
 
     private List<string> languages;
 
@@ -27,7 +28,15 @@ public class GlobalGameHandler : MonoBehaviour
             instance.currentLanguage = "nederlands";
             DontDestroyOnLoad(this.gameObject);
             InitTranslationDictionary();
+            InitUnlockedAbles();
         }
+    }
+
+    private void InitUnlockedAbles() {
+        allUnlockables = new List<Unlockable>();
+
+
+        allUnlockables.Add(new Unlockable(0,440,1,"",false));
     }
 
     public static GlobalGameHandler GetInstance() {
