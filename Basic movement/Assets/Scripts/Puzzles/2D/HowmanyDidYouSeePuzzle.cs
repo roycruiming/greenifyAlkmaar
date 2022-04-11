@@ -143,7 +143,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       {
         Correct();
       } else {
-        Wrong();
+        StartCoroutine(Wrong());
       }
     }
 
@@ -156,10 +156,12 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     }
 
     //als antwoord fout is
-    void Wrong()
+    IEnumerator Wrong()
     {
       Text.text =  GlobalGameHandler.GetTextByDictionaryKey("incorrect answer");
       StartCoroutine(ClosePuzzle());
+      yield return new WaitForSeconds(1);
+      GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey("ask for help"));
     }
 
     //puzzel sluiten
@@ -180,6 +182,5 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
          Destroy(ParentPanel.transform.GetChild(i).gameObject);
       }
       PuzzlePanel.SetActive(false);
-      
     }
 }
