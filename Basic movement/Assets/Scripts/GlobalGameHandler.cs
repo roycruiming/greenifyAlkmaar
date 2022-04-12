@@ -16,6 +16,8 @@ public class GlobalGameHandler : MonoBehaviour
 
     private string currentLanguage;
 
+    private int totalPlayerCoints;
+
     private void Awake() 
     { 
 
@@ -29,24 +31,46 @@ public class GlobalGameHandler : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             InitTranslationDictionary();
             InitUnlockAbles();
+
+            LoadSaveGameInfo();
         }
+    }
+
+    private void LoadSaveGameInfo() {
+        if(PlayerPrefs.HasKey("playerTotalCoints") == false) {
+            PlayerPrefs.SetInt("playerTotalCoints", 0);
+            this.totalPlayerCoints = 0;
+            PlayerPrefs.Save();
+        }
+        else this.totalPlayerCoints = PlayerPrefs.GetInt("playerTotalCoints");
     }
 
     private void InitUnlockAbles() {
         instance.allUnlockables = new List<Unlockable>();
 
-        PlayerPrefs.DeleteAll(); //just for testing remove later!
+        //PlayerPrefs.DeleteAll(); //just for testing remove later!
 
         //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
         instance.allUnlockables.Add(new Unlockable(0,440,1,"test",false,UnlockableType.character)); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
         instance.allUnlockables.Add(new Unlockable(1,670,1,"test",false,UnlockableType.character)); 
         instance.allUnlockables.Add(new Unlockable(2,550,1,"test",false,UnlockableType.character)); 
         instance.allUnlockables.Add(new Unlockable(3,320,1,"test",false,UnlockableType.character)); 
+    }
 
-        // foreach(Unlockable u in allUnlockables) {
-        //     u.exampleImageName = "test";
-        //     u.UpdateInfoToDisk();
-        // }
+    public static int GetTotalPlayerCointsAmount() {
+        return instance.totalPlayerCoints;
+    }
+
+    public static void GivePlayerCoints(int amount) {
+        instance.totalPlayerCoints += amount;
+        PlayerPrefs.SetInt("playerTotalCoints", instance.totalPlayerCoints);
+        PlayerPrefs.Save();
+    }
+
+    public static void LowerPlayerCoints(int amount) {
+        instance.totalPlayerCoints -= amount;
+        PlayerPrefs.SetInt("playerTotalCoints", instance.totalPlayerCoints);
+        PlayerPrefs.Save();
     }
 
     public static List<Unlockable> GetAllUnlockablesInfo() {
@@ -57,15 +81,11 @@ public class GlobalGameHandler : MonoBehaviour
         List<Unlockable> allTypeUnlockables = new List<Unlockable>();
         
         for(int i = 0; i < instance.allUnlockables.Count; i++) {
-            Debug.Log("False : " + instance.allUnlockables[i].type + " is not " + uType);
             if(instance.allUnlockables[i].type == uType) {
                 allTypeUnlockables.Add(instance.allUnlockables[i]);
-                Debug.Log("Added : " + instance.allUnlockables[i]);
             } 
         }
 
-        // foreach(Unlockable uInfo in instance.allUnlockables) if(uInfo.type == uType) allTypeUnlockables.Add(uInfo);
-        Debug.Log(allTypeUnlockables.Count + " Return count");
         return allTypeUnlockables;
     }
 
@@ -129,7 +149,6 @@ public class GlobalGameHandler : MonoBehaviour
             if (file.Contains("meta") == false && file.Contains("csv"))
             {
                 var reader = new StreamReader(File.OpenRead(file));
-                Debug.Log(file);
                 string currentLanguage = null;
                 while(!reader.EndOfStream) {
                     string line = reader.ReadLine();

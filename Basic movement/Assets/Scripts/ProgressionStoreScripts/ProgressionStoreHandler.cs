@@ -17,24 +17,27 @@ public class ProgressionStoreHandler : MonoBehaviour
         this.allUnlockablesInfo = GlobalGameHandler.GetAllUnlockablesInfo();
 
         this.allCharacterUnlocksGameObjects = GameObject.FindGameObjectsWithTag("CharacterUnlockContainer");
-        Debug.Log(allCharacterUnlocksGameObjects.GetLength(0) + " LENGTH");
-
 
         //set all the Unlockedable info into a visual presentation
         this.initCharactersUnlocksPresentation();
+        this.UpdateTotalPlayerCointsUI();
 
     }
 
+    private void UpdateTotalPlayerCointsUI() {
+        this.ProgressionStoreContainer.transform.Find("playerCointsTotal").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
+    }
+
     private void initCharactersUnlocksPresentation() {
-        List<Unlockable> allCharacterUnlockables = GlobalGameHandler.GetAllUnlockablesInfoByType(UnlockableType.character);
-        Debug.Log(allCharacterUnlockables[0] + " COUNT");
+        List<Unlockable> allCharacterUnlockables = GlobalGameHandler.GetAllUnlockablesInfoByType(UnlockableType.character); 
+        //list above returns null for some reason
+        
         for(int i = 0; i < allCharacterUnlockables.Count; i++) setCharacterUnlockableUiElement(allCharacterUnlocksGameObjects[i], allCharacterUnlockables[i]);
     }
 
     private void setCharacterUnlockableUiElement(GameObject UiCharUnlockContainer, Unlockable uInfo) {
-        Debug.Log(UiCharUnlockContainer + "    " + uInfo);
-        UiCharUnlockContainer.transform.Find("Price").GetComponent<TextMeshPro>().text = uInfo.price.ToString(); //allways set the price
-        UiCharUnlockContainer.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Unlock_Images/" + uInfo.exampleImageName);
+        UiCharUnlockContainer.transform.Find("Price").GetComponent<TextMeshProUGUI>().text = uInfo.price.ToString(); //allways set the price
+        UiCharUnlockContainer.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Unlock_Images/" + uInfo.exampleImageName);
 
         if(uInfo.isPurchased) {
             UiCharUnlockContainer.transform.Find("Checkmark-Icon").gameObject.SetActive(true);
@@ -42,7 +45,7 @@ public class ProgressionStoreHandler : MonoBehaviour
             UiCharUnlockContainer.transform.Find("Lock-Icon").gameObject.SetActive(false);
             UiCharUnlockContainer.transform.Find("Unlocked-Overlay").gameObject.SetActive(true);
             UiCharUnlockContainer.transform.Find("Checkmark-Icon").gameObject.SetActive(true);
-            UiCharUnlockContainer.transform.Find("Price").GetComponent<TextMeshPro>().text = GlobalGameHandler.GetTextByDictionaryKey("purchased");
+            UiCharUnlockContainer.transform.Find("Price").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("purchased");
         }
 
         if(uInfo.isUnlocked) {
@@ -51,8 +54,12 @@ public class ProgressionStoreHandler : MonoBehaviour
             UiCharUnlockContainer.transform.Find("Lock-Icon").gameObject.SetActive(false);
         }
         else {
-            UiCharUnlockContainer.transform.Find("Lock-Text").GetComponent<TextMeshPro>().text = "Level " + uInfo.unlockedInLevel;
+            UiCharUnlockContainer.transform.Find("Lock-Text").GetComponent<TextMeshProUGUI>().text = "Level " + uInfo.unlockedInLevel;
         }
+    }
+
+    public void purchaseUnlockable(int unlockableId) {
+        Debug.Log("Inside");
     }
 
     // Update is called once per frame

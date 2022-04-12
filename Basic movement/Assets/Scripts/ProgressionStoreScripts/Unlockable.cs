@@ -70,6 +70,10 @@ public class Unlockable : MonoBehaviour
         this.SaveInfoToDisk();
     }
 
+    public void PurchaseUnlockable() {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
