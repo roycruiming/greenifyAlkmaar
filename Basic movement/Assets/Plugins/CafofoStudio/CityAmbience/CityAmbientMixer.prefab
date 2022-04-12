@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &132280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 431478}
+  - 114: {fileID: 11490372}
+  m_Layer: 0
+  m_Name: CityAmbientMixer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &431478
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132280}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11490372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de51fc0c43cbc76438daf9a5995c4787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnAwake: 1
+  presets:
+  - {fileID: 11400000, guid: 31cba9744fef13a429954b1d6c0663e1, type: 2}
+  - {fileID: 11400000, guid: 46f61dd738a657947b9639528d9bb86c, type: 2}
+  - {fileID: 11400000, guid: 0ca94eb3801db814ebe1f34d5951bed0, type: 2}
+  - {fileID: 11400000, guid: 776eb38cedaf3e74e9c0a375e1af8c15, type: 2}
+  - {fileID: 11400000, guid: eca7e2ed59044eb4b8bce79ec579bc62, type: 2}
+  - {fileID: 11400000, guid: b201fba8f37566348ac00c219864d6a2, type: 2}
+  _traffic:
+    soundName: Traffic
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: Noisy
+    minIntensityLabel: Quiet
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - audioClips:
+      - {fileID: 8300000, guid: 3ba305cf4b9a357469662915ab0df4d4, type: 3}
+      - {fileID: 8300000, guid: 8e387217713a3da42b6b9413b3173f84, type: 3}
+      - {fileID: 8300000, guid: 920df414dbced4f44b06c9b04cc54235, type: 3}
+  _vehicles:
+    soundName: Vehicles
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: Loud
+    minIntensityLabel: Quiet
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - audioClips:
+      - {fileID: 8300000, guid: 34ac4c0739227c94497c6046bdfb3e1c, type: 3}
+      - {fileID: 8300000, guid: 414c1c9fe89b3204785003a2f4cc802d, type: 3}
+      - {fileID: 8300000, guid: 2c9da72231c3fcc44b9a426b109d5625, type: 3}
+  _crowd:
+    soundName: Crowd
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: Large
+    minIntensityLabel: Small
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - audioClips:
+      - {fileID: 8300000, guid: 8d15b8ffb9270764985c679c468156f3, type: 3}
+      - {fileID: 8300000, guid: 980027c93397a26458abd6718c7f895d, type: 3}
+      - {fileID: 8300000, guid: 3f7fe3559810df646bbae3f72e3750b3, type: 3}
+  _construction:
+    soundName: Construction
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: Loud
+    minIntensityLabel: Quiet
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - audioClips:
+      - {fileID: 8300000, guid: 53deb61ff88d5414f8f0d1bf5ae20cbd, type: 3}
+      - {fileID: 8300000, guid: aa1fd1772ff20104187fc4d33ed3f006, type: 3}
+      - {fileID: 8300000, guid: 439c5d70aafca444aaef14a2383bb67e, type: 3}
+  _birds:
+    soundName: Birds
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: A lot
+    minIntensityLabel: Few
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - audioClips:
+      - {fileID: 8300000, guid: b13c8aa8d834f88479d4b83b90a1d144, type: 3}
+      - {fileID: 8300000, guid: 2d41e6e6aa8518f4cb99b80cea2efc39, type: 3}
+      - {fileID: 8300000, guid: f23fea884447adc49955f38e977914cc, type: 3}
+  _rain:
+    soundName: Rain
+    overrideOutputMixer: {fileID: 0}
+    intensity: 0
+    maxIntensityLabel: Strong
+    minIntensityLabel: Soft
+    volumeMultiplier: 1
+    sampleSubElements: []
+    loopSubElements:
+    - audioClips:
+      - {fileID: 8300000, guid: c253332bc2e7bf74c8be2fbe4cbfa3fc, type: 3}
+      - {fileID: 8300000, guid: 675244576ad912e45ad2be9bcbee84d3, type: 3}
+      - {fileID: 8300000, guid: 3c752807abbc93248bd0debe5fab957e, type: 3}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 132280}
+  m_IsPrefabParent: 1
