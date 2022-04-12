@@ -52,9 +52,9 @@ public class GlobalGameHandler : MonoBehaviour
 
         //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
         instance.allUnlockables.Add(new Unlockable(0,440,1,"test",false,UnlockableType.character)); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
-        instance.allUnlockables.Add(new Unlockable(1,670,1,"test",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(1,670,1,"test2",false,UnlockableType.character)); 
         instance.allUnlockables.Add(new Unlockable(2,550,1,"test",false,UnlockableType.character)); 
-        instance.allUnlockables.Add(new Unlockable(3,320,1,"test",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(3,320,1,"test2",false,UnlockableType.character)); 
     }
 
     public static int GetTotalPlayerCointsAmount() {

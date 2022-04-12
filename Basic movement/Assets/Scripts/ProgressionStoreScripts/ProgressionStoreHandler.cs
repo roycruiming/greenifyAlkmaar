@@ -6,58 +6,76 @@ using UnityEngine.UI;
 
 public class ProgressionStoreHandler : MonoBehaviour
 {
-    GameObject ProgressionStoreContainer;
-    GameObject[] allCharacterUnlocksGameObjects;
-
     List<Unlockable> allUnlockablesInfo;
+    List<Unlockable> allCharacterUnlockablesInfo;
+
+    private int currentCharacterShopIndex;
+    private int currentPowerUpShopIndex;
+    private int currentlySelectedCharacterShopId;
+    private int currentlySelectedPowerUpShopId;
     // Start is called before the first frame update
     void Start()
     {
-        this.ProgressionStoreContainer = GameObject.Find("ProgressionStoreUIContainer");
         this.allUnlockablesInfo = GlobalGameHandler.GetAllUnlockablesInfo();
-
-        this.allCharacterUnlocksGameObjects = GameObject.FindGameObjectsWithTag("CharacterUnlockContainer");
-
-        //set all the Unlockedable info into a visual presentation
-        this.initCharactersUnlocksPresentation();
+        this.allCharacterUnlockablesInfo = GlobalGameHandler.GetAllUnlockablesInfoByType(UnlockableType.character);
+        
         this.UpdateTotalPlayerCointsUI();
+    }
 
+    private void SetFirstUnlocksDataAndIndex() {
+        this.currentCharacterShopIndex = 0;
+        this.currentPowerUpShopIndex = 0;
+
+        updateShowcase(this.allCharacterUnlockablesInfo[currentCharacterShopIndex]);
+    }
+
+    public void showcaseNextCharacter() {
+        if(currentCharacterShopIndex + 1 < allCharacterUnlockablesInfo.Count) {
+            this.currentCharacterShopIndex++;
+            updateShowcase(allCharacterUnlockablesInfo[currentCharacterShopIndex]);
+        }
+    }
+
+    public void showcasePreviousCharacter() {
+        if(currentCharacterShopIndex - 1 >= 0) {
+            this.currentCharacterShopIndex--;
+            updateShowcase(allCharacterUnlockablesInfo[currentCharacterShopIndex]);
+        }
+    }
+
+    public void showcaseNextPowerUp() {
+
+    }
+
+    public void showcasePreviousPowerUp() {
+
+    }
+
+    private void updateShowcase(Unlockable unlockInfo) {
+        GameObject containerElement = null;
+        if(unlockInfo.type == UnlockableType.character) containerElement = GameObject.Find("Characters_Showcase_Container");
+        else if(unlockInfo.type == UnlockableType.powerUp) containerElement = GameObject.Find("PowerUps_Showcase_Container");
+
+        if(containerElement != null) {
+            //always set the price, let the purchased info overwrite if needed
+            containerElement.transform.Find("coints_amount_text").GetComponent<TextMeshProUGUI>().text = unlockInfo.price.ToString();
+            containerElement.transform.Find("level_unlock_text").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("unlocked in level") + " " + unlockInfo.unlockedInLevel.ToString();
+            containerElement.transform.Find("showcase_image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Unlock_Images/" + unlockInfo.exampleImageName);
+
+            if(unlockInfo.isPurchased) {
+                containerElement.transform.Find("coints_amount_text").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("purchased");
+                containerElement.transform.Find("lock-icon").gameObject.SetActive(false); 
+            }
+
+            if(unlockInfo.isUnlocked) {
+                containerElement.transform.Find("lock-icon").gameObject.SetActive(true);
+            }
+        }
     }
 
     private void UpdateTotalPlayerCointsUI() {
-        this.ProgressionStoreContainer.transform.Find("playerCointsTotal").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
+        GameObject.Find("playerCointsTotal").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
     }
-
-    private void initCharactersUnlocksPresentation() {
-        List<Unlockable> allCharacterUnlockables = GlobalGameHandler.GetAllUnlockablesInfoByType(UnlockableType.character); 
-        //list above returns null for some reason
-        
-        for(int i = 0; i < allCharacterUnlockables.Count; i++) setCharacterUnlockableUiElement(allCharacterUnlocksGameObjects[i], allCharacterUnlockables[i]);
-    }
-
-    private void setCharacterUnlockableUiElement(GameObject UiCharUnlockContainer, Unlockable uInfo) {
-        UiCharUnlockContainer.transform.Find("Price").GetComponent<TextMeshProUGUI>().text = uInfo.price.ToString(); //allways set the price
-        UiCharUnlockContainer.transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Unlock_Images/" + uInfo.exampleImageName);
-
-        if(uInfo.isPurchased) {
-            UiCharUnlockContainer.transform.Find("Checkmark-Icon").gameObject.SetActive(true);
-            UiCharUnlockContainer.transform.Find("Coin-Icon").gameObject.SetActive(false);
-            UiCharUnlockContainer.transform.Find("Lock-Icon").gameObject.SetActive(false);
-            UiCharUnlockContainer.transform.Find("Unlocked-Overlay").gameObject.SetActive(true);
-            UiCharUnlockContainer.transform.Find("Checkmark-Icon").gameObject.SetActive(true);
-            UiCharUnlockContainer.transform.Find("Price").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("purchased");
-        }
-
-        if(uInfo.isUnlocked) {
-            //is unlocked
-            UiCharUnlockContainer.transform.Find("Lock-Text").gameObject.SetActive(true);
-            UiCharUnlockContainer.transform.Find("Lock-Icon").gameObject.SetActive(false);
-        }
-        else {
-            UiCharUnlockContainer.transform.Find("Lock-Text").GetComponent<TextMeshProUGUI>().text = "Level " + uInfo.unlockedInLevel;
-        }
-    }
-
     public void purchaseUnlockable(int unlockableId) {
         Debug.Log("Inside");
     }
@@ -65,6 +83,6 @@ public class ProgressionStoreHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
