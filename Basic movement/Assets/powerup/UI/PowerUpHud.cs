@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,5 +23,10 @@ public class PowerUpHud : MonoBehaviour
 
         slider.maxValue = stamina;
         slider.value = stamina; 
+    }
+
+    internal void ChangeIcon(Sprite s)
+    {
+        this.transform.Find("Image").GetComponent<Image>().sprite = s; 
     }
 }

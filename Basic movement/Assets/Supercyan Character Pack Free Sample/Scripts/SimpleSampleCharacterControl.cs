@@ -159,12 +159,12 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                 v *= m_walkScale;
             }
 
-            
+
 
             m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
             m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
             m_currentH1 = Mathf.Lerp(m_currentH1, h1, Time.deltaTime * m_interpolation);
-            
+
 
             transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
             transform.position += transform.right * m_currentH1 * m_moveSpeed * Time.deltaTime;
@@ -218,6 +218,19 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         JumpingAndLanding();
     }
 
+    private bool isDoubleJumping = false; 
+
+    public bool DoDoublJump (){
+
+        if (isDoubleJumping == false && !m_isGrounded)
+        {
+            isDoubleJumping = true;
+            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+            return true;
+        }
+        else return false; 
+    }
+
     private void JumpingAndLanding()
     {
         bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
@@ -231,6 +244,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         if (!m_wasGrounded && m_isGrounded)
         {
             m_animator.SetTrigger("Land");
+            isDoubleJumping = false; 
         }
 
         if (!m_isGrounded && m_wasGrounded)
