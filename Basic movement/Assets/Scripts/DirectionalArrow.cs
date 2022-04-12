@@ -20,6 +20,9 @@ public class DirectionalArrow : MonoBehaviour
 
     private void Update()
     {
+       /* if(objCon.targets.Count != 0)
+        {
+
         //Arrow points to next objective
         if (objCon.targets.Count >= 1)
         {
@@ -52,5 +55,7 @@ public class DirectionalArrow : MonoBehaviour
             targetPosition.y = transform.position.y;
             transform.LookAt(targetPosition);
         }
+
+        }*/
     }
 }
