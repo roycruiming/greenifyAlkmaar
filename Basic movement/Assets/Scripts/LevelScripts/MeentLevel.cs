@@ -61,6 +61,10 @@ public class MeentLevel : MonoBehaviour, LevelBasis
         
     }
 
+    public void saveProgress() {
+
+    }
+
     public void taskCompleted() {
         if(completedTasksCount > totalTasksCount/2) showcaseLevelProgression();
     }

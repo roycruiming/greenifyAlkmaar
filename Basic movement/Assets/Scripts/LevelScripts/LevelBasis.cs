@@ -22,4 +22,6 @@ public interface LevelBasis
     void taskCompleted();
 
     void showcaseLevelProgression();
+
+    void saveProgress();
 }
