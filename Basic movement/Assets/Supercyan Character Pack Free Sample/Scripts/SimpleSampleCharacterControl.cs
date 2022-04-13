@@ -139,7 +139,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     private void TankUpdate()
     {
-        if (!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying)
+        if (!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying && !MirrorPuzzleScript.IsPlaying)
         {
 
             float v = Input.GetAxis("Vertical");

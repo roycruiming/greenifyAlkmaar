@@ -19,6 +19,7 @@ public class MirrorPuzzleScript : MonoBehaviour, DragPuzzle
 
     public GameObject parent;
 
+
     public void StartPuzzle()
     {
         IsPlaying = true;
@@ -71,15 +72,19 @@ public class MirrorPuzzleScript : MonoBehaviour, DragPuzzle
 
         foreach (GameObject placement in places)
         {
-            if (placement.GetComponent<Collider>().bounds.Intersects(currentObject.GetComponent<Collider>().bounds))
+            if (placement.GetComponent<BoxCollider2D>().bounds.Intersects(currentObject.GetComponent<BoxCollider2D>().bounds))
             {
-                currentObject.transform.position = placement.transform.position;
-                currentObject.toOrginal = false;
-            }
+                if (!placement.GetComponent<MirrorPlace>().IsFull)
+                {
+                    currentObject.transform.position = placement.transform.position;
+                    currentObject.toOrginal = false;
+                    placement.GetComponent<MirrorPlace>().IsFull = true;
+                }
+            }             
         }
        
         if (currentObject.toOrginal == true) {
-            transform.localPosition = currentObject.orginalPosition;
+            currentObject.transform.localPosition = currentObject.orginalPosition;
         }
     }
 

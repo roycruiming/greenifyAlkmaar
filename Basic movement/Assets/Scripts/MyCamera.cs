@@ -22,7 +22,7 @@ public class MyCamera : MonoBehaviour
     {
         Rigidbody body = this.GetComponent<Rigidbody>();
 
-        if (!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying)
+        if (!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying && !MirrorPuzzleScript.IsPlaying)
         {
             camRotation.x += Input.GetAxis("Mouse Y") * cameraSmoothingFactor * (-1);
 
