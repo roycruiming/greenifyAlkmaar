@@ -139,7 +139,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     private void TankUpdate()
     {
-        if (!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying)
+        if (!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying && !TurnTheTurbnines.IsPlaying)
         {
 
             float v = Input.GetAxis("Vertical");
@@ -159,12 +159,12 @@ public class SimpleSampleCharacterControl : MonoBehaviour
                 v *= m_walkScale;
             }
 
-            
+
 
             m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
             m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
             m_currentH1 = Mathf.Lerp(m_currentH1, h1, Time.deltaTime * m_interpolation);
-            
+
 
             transform.position += transform.forward * m_currentV * m_moveSpeed * Time.deltaTime;
             transform.position += transform.right * m_currentH1 * m_moveSpeed * Time.deltaTime;

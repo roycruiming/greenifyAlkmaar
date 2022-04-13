@@ -35,6 +35,9 @@ public class PuzzleController : MonoBehaviour
           case "HowmanyPuzzle":
             Puzzles[SelectedPuzzle].GetComponent<HowmanyDidYouSeePuzzle>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
+          case "TurnTheTurbine":
+            Puzzles[SelectedPuzzle].GetComponent<TurnTheTurbnines>().StartPuzzle(PuzzleDifficulty, transform.name);
+            break;
         }
   }
 
@@ -44,6 +47,6 @@ public class PuzzleController : MonoBehaviour
     transform.Find("Smoke").gameObject.SetActive(false);
     gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
     objectivesController.DeleteItemInList(this);
-        
+
   }
 }
