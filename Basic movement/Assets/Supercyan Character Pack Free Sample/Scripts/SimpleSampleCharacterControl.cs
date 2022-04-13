@@ -47,15 +47,18 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     public PhotonView view;
 
+    public Camera cam;
+
 
     private void Awake()
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
 
-        if(!view.IsMine && GetComponent<SimpleSampleCharacterControl>() != null)
+       
+        if (!view.IsMine)
         {
-            print(GetComponent<SimpleSampleCharacterControl>());           
+            Destroy(cam);
         }
     }
 
