@@ -55,7 +55,13 @@ public class SimpleSampleCharacterControl : MonoBehaviour
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
 
-       
+        if(!view.IsMine && GetComponent<SimpleSampleCharacterControl>() != null)
+        {
+            
+            Destroy(GetComponent<SimpleSampleCharacterControl>());
+            Destroy(GetComponent<raycaster>());
+            Destroy(GetComponent<DirectionalArrow>());
+        }
         if (!view.IsMine)
         {
             Destroy(cam);
