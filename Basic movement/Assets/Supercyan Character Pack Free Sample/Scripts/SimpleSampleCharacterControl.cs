@@ -50,6 +50,7 @@ public class SimpleSampleCharacterControl : MonoBehaviour
     public Camera cam;
 
 
+
     private void Awake()
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
@@ -164,6 +165,8 @@ public class SimpleSampleCharacterControl : MonoBehaviour
             m_wasGrounded = m_isGrounded;
             m_jumpInput = false;
         }
+
+
     }
 
     private void TankUpdate()

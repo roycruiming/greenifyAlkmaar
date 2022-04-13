@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(PhotonView))]
 public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 {
     public int counter;
@@ -21,11 +22,10 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    //public PhotonView view;
     // Start is called before the first frame update
     void Start()
     {
-        //view = this.GetComponent<PhotonView>();
+
     }
 
     // Update is called once per frame
@@ -33,34 +33,20 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         scherm.text = counter.ToString();
 
-        if (Input.GetKeyDown("k")){
-            counter++;
-            //view.RPC("CounterUp()", RpcTarget.All);
-            print("Neeeeeee");
+        if (Input.GetKeyDown("k"))
+        {
+
+            photonView.RPC("test", RpcTarget.All);
         }
 
-        
+
     }
 
-/*    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    [PunRPC]
+    public void test()
     {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(counter);
-        }
-        if (stream.IsReading)
-        {
-            counter = (int)stream.ReceiveNext();
-        }
-    }*/
-
-
-/*    [PunRPC]
-    public void CounterUp()
-    {
-        print("JAAAAAAA");
-        counter++;  
+        counter++;
     }
-    */
+
 
 }
