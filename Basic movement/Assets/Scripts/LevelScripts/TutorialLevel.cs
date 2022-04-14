@@ -11,13 +11,11 @@ public class TutorialLevel : MonoBehaviour, LevelBasis
     public bool hasPlayedBefore { get; set; }
     public List<GameObject> allPhaseObjects { get; set; }
 
-    private bool treeHasBeenTriggered;
-    private bool arrowHasBeenExplained;
+    private bool treeHasBeenTriggered = false;
+    private bool arrowHasBeenExplained = false;
+    private bool helperHasBeenExplained = false;
 
     public void Awake() {
-        treeHasBeenTriggered = false;
-        arrowHasBeenExplained = false;
-
         hasPlayedBefore = false;
     }
 
@@ -33,6 +31,11 @@ public class TutorialLevel : MonoBehaviour, LevelBasis
     public void showcaseTutorialMessage() {
         if(arrowHasBeenExplained == false) GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,new List<string> {"This arrow here in our levels gives you a direction of where you need to go","The arrow always points towards a task that is not completed yet. If you don't know what to do just follow the arrow."});
         arrowHasBeenExplained = true;
+    }
+
+    public void showcaseGeneralHelperExplanation() {
+        if(helperHasBeenExplained == false) GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,new List<string> {"Whenever you are stuck in a level you can interact with helpers, these helpers are indicated by a blue moving cube above their head.", "Talk with these helpers by pressing 'F'"});
+        helperHasBeenExplained = true;
     }
 
     public void initLevel()

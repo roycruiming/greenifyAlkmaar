@@ -6,6 +6,7 @@ public class hitDetectionObject : MonoBehaviour
 {
     public bool treeFallAction;
     public bool arrowExplanation; 
+    public bool generalHelperExplanation;
 
     private void OnCollisionEnter(Collision other) {
         TutorialLevel tutorialHandler = GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>();
@@ -14,6 +15,7 @@ public class hitDetectionObject : MonoBehaviour
             
             if(treeFallAction) tutorialHandler.triggerTreeFallingDown();
             if(arrowExplanation) tutorialHandler.showcaseTutorialMessage();
+            if(generalHelperExplanation) tutorialHandler.showcaseGeneralHelperExplanation();
         }
     }
 
