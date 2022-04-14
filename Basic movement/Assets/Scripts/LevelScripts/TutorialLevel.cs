@@ -12,9 +12,11 @@ public class TutorialLevel : MonoBehaviour, LevelBasis
     public List<GameObject> allPhaseObjects { get; set; }
 
     private bool treeHasBeenTriggered;
+    private bool arrowHasBeenExplained;
 
     public void Awake() {
         treeHasBeenTriggered = false;
+        arrowHasBeenExplained = false;
 
         hasPlayedBefore = false;
     }
@@ -26,6 +28,11 @@ public class TutorialLevel : MonoBehaviour, LevelBasis
             treeHasBeenTriggered = true;
             GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("tutorial space button"));
         }
+    }
+
+    public void showcaseTutorialMessage() {
+        if(arrowHasBeenExplained == false) GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,new List<string> {"This arrow here in our levels gives you a direction of where you need to go","The arrow always points towards a task that is not completed yet. If you don't know what to do just follow the arrow."});
+        arrowHasBeenExplained = true;
     }
 
     public void initLevel()
@@ -51,7 +58,7 @@ public class TutorialLevel : MonoBehaviour, LevelBasis
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null, new List<string> {"Hello! Welcome I will teach you the basics of playing the game.",  "Use W A S D to move around and the mouse to look around!"});
     }
 
     // Update is called once per frame
