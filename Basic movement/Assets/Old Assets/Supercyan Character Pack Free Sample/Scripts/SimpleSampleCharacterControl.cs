@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class SimpleSampleCharacterControl : MonoBehaviour
 {
@@ -44,56 +45,79 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     private List<Collider> m_collisions = new List<Collider>();
 
+    public PhotonView view;
+
+    public Camera cam;
+
+
 
     private void Awake()
     {
         if (!m_animator) { gameObject.GetComponent<Animator>(); }
         if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
+
+        if(!view.IsMine && GetComponent<SimpleSampleCharacterControl>() != null)
+        {
+            
+            Destroy(GetComponent<SimpleSampleCharacterControl>());
+            Destroy(GetComponent<raycaster>());
+            Destroy(GetComponent<DirectionalArrow>());
+        }
+        if (!view.IsMine)
+        {
+            Destroy(cam);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        ContactPoint[] contactPoints = collision.contacts;
-        for (int i = 0; i < contactPoints.Length; i++)
+        if (view.IsMine)
         {
-            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+            ContactPoint[] contactPoints = collision.contacts;
+            for (int i = 0; i < contactPoints.Length; i++)
             {
-                if (!m_collisions.Contains(collision.collider))
+                if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
                 {
-                    m_collisions.Add(collision.collider);
+                    if (!m_collisions.Contains(collision.collider))
+                    {
+                        m_collisions.Add(collision.collider);
+                    }
+                    m_isGrounded = true;
                 }
-                m_isGrounded = true;
             }
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        ContactPoint[] contactPoints = collision.contacts;
-        bool validSurfaceNormal = false;
-        for (int i = 0; i < contactPoints.Length; i++)
+        if (view.IsMine)
         {
-            if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+            ContactPoint[] contactPoints = collision.contacts;
+            bool validSurfaceNormal = false;
+            for (int i = 0; i < contactPoints.Length; i++)
             {
-                validSurfaceNormal = true; break;
+                if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+                {
+                    validSurfaceNormal = true; break;
+                }
             }
-        }
 
-        if (validSurfaceNormal)
-        {
-            m_isGrounded = true;
-            if (!m_collisions.Contains(collision.collider))
+            if (validSurfaceNormal)
             {
-                m_collisions.Add(collision.collider);
+                m_isGrounded = true;
+                if (!m_collisions.Contains(collision.collider))
+                {
+                    m_collisions.Add(collision.collider);
+                }
             }
-        }
-        else
-        {
-            if (m_collisions.Contains(collision.collider))
+            else
             {
-                m_collisions.Remove(collision.collider);
+                if (m_collisions.Contains(collision.collider))
+                {
+                    m_collisions.Remove(collision.collider);
+                }
+                if (m_collisions.Count == 0) { m_isGrounded = false; }
             }
-            if (m_collisions.Count == 0) { m_isGrounded = false; }
         }
     }
 
@@ -108,38 +132,46 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     private void Update()
     {
-        if (!m_jumpInput && Input.GetKey(KeyCode.Space))
+        if (view.IsMine)
         {
-            m_jumpInput = true;
+            if (!m_jumpInput && Input.GetKey(KeyCode.Space))
+            {
+                m_jumpInput = true;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        m_animator.SetBool("Grounded", m_isGrounded);
-
-        switch (m_controlMode)
+        if (view.IsMine)
         {
-            case ControlMode.Direct:
-                DirectUpdate();
-                break;
+            m_animator.SetBool("Grounded", m_isGrounded);
 
-            case ControlMode.Tank:
-                TankUpdate();
-                break;
+            switch (m_controlMode)
+            {
+                case ControlMode.Direct:
+                    DirectUpdate();
+                    break;
 
-            default:
-                Debug.LogError("Unsupported state");
-                break;
+                case ControlMode.Tank:
+                    TankUpdate();
+                    break;
+
+                default:
+                    Debug.LogError("Unsupported state");
+                    break;
+            }
+
+            m_wasGrounded = m_isGrounded;
+            m_jumpInput = false;
         }
 
-        m_wasGrounded = m_isGrounded;
-        m_jumpInput = false;
+
     }
 
     private void TankUpdate()
     {
-        if (!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying)
+        if (!PauseMenu.GameIsPaused && !CleanSolarPanelPuzzle.IsPlaying && !HowmanyDidYouSeePuzzle.IsPlaying && view.IsMine)
         {
 
             float v = Input.GetAxis("Vertical");
@@ -220,22 +252,25 @@ public class SimpleSampleCharacterControl : MonoBehaviour
 
     private void JumpingAndLanding()
     {
-        bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
-
-        if (jumpCooldownOver && m_isGrounded && m_jumpInput)
+        if (view.IsMine)
         {
-            m_jumpTimeStamp = Time.time;
-            m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
-        }
+            bool jumpCooldownOver = (Time.time - m_jumpTimeStamp) >= m_minJumpInterval;
 
-        if (!m_wasGrounded && m_isGrounded)
-        {
-            m_animator.SetTrigger("Land");
-        }
+            if (jumpCooldownOver && m_isGrounded && m_jumpInput)
+            {
+                m_jumpTimeStamp = Time.time;
+                m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+            }
 
-        if (!m_isGrounded && m_wasGrounded)
-        {
-            m_animator.SetTrigger("Jump");
+            if (!m_wasGrounded && m_isGrounded)
+            {
+                m_animator.SetTrigger("Land");
+            }
+
+            if (!m_isGrounded && m_wasGrounded)
+            {
+                m_animator.SetTrigger("Jump");
+            }
         }
     }
 }
