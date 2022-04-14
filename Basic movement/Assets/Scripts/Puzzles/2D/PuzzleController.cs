@@ -38,6 +38,9 @@ public class PuzzleController : MonoBehaviour
           case "TurnTheTurbine":
             Puzzles[SelectedPuzzle].GetComponent<TurnTheTurbnines>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
+          case "MemoryPuzzle":
+            Puzzles[SelectedPuzzle].GetComponent<MemoryPuzzle>().StartPuzzle(PuzzleDifficulty, transform.name);
+            break;
         }
   }
 
