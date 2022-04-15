@@ -79,9 +79,9 @@ public class GlobalGameHandler : MonoBehaviour
 
     public static Unlockable GetUnlockableById(int unlockableId) {
         for(int i = 0; i < instance.allUnlockables.Count; i++) if(instance.allUnlockables[i].id == unlockableId) { 
-            int returningUn = instance.allUnlockables[i].id;
-            print(returningUn);
-            return null;
+            print(instance.allUnlockables[i].id);
+            Unlockable returningUn = instance.allUnlockables[i];
+            return returningUn; 
         }
         //foreach(Unlockable unlockable in instance.allUnlockables) if(unlockable.id == unlockableId) return unlockable;
 
