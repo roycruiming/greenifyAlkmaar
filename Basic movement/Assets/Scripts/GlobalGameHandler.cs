@@ -27,7 +27,11 @@ public class GlobalGameHandler : MonoBehaviour
             instance = this; 
             instance.languages = new List<string>();
             instance.translationDictionary = new List<KeyValuePair<string,string>>();
-            instance.currentLanguage = "nederlands";
+            if(PlayerPrefs.HasKey("settings_language")) instance.currentLanguage = PlayerPrefs.GetString("settings_language");
+            else {
+                instance.currentLanguage = "english";
+                PlayerPrefs.SetString("settings_language","english");
+            }
             DontDestroyOnLoad(this.gameObject);
             InitTranslationDictionary();
             InitUnlockAbles();
@@ -98,7 +102,10 @@ public class GlobalGameHandler : MonoBehaviour
     }
 
     public static void ChangeLanguage(string languageName) {
-        if(instance.languages.Contains(languageName)) instance.currentLanguage = languageName;
+        if(instance.languages.Contains(languageName)) {
+            instance.currentLanguage = languageName;
+            PlayerPrefs.SetString("settings_language",languageName);
+        }
     }
 
     public static List<string> GetLanguagesList() {
