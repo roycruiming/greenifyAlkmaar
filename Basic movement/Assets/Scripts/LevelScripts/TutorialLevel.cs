@@ -29,12 +29,12 @@ public class TutorialLevel : MonoBehaviour, LevelBasis
     }
 
     public void showcaseTutorialMessage() {
-        if(arrowHasBeenExplained == false) GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,new List<string> {"This arrow here in our levels gives you a direction of where you need to go","The arrow always points towards a task that is not completed yet. If you don't know what to do just follow the arrow."});
+        if(arrowHasBeenExplained == false) GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("tutorial direction arrow"));
         arrowHasBeenExplained = true;
     }
 
     public void showcaseGeneralHelperExplanation() {
-        if(helperHasBeenExplained == false) GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,new List<string> {"Whenever you are stuck in a level you can interact with helpers, these helpers are indicated by a blue moving cube above their head.", "Talk with these helpers by pressing 'F'"});
+        if(helperHasBeenExplained == false) GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("tutorial helper text"));
         helperHasBeenExplained = true;
     }
 
@@ -61,7 +61,7 @@ public class TutorialLevel : MonoBehaviour, LevelBasis
     // Start is called before the first frame update
     void Start()
     {
-        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null, new List<string> {"Hello! Welcome I will teach you the basics of playing the game.",  "Use W A S D to move around and the mouse to look around!"});
+        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null, GlobalGameHandler.GetSentencesByDictionaryKey("tutorial level intro"));
     }
 
     // Update is called once per frame
