@@ -43,7 +43,7 @@ public class HUDController : MonoBehaviour
         InvokeRepeating("PrintTypeMessage",1f,0.08f); //initaite the script to type each message letter by letter if it is set. 0.08 means the interval between typing each letter
     }
 
-    public void ShowcaseMessage(string messageText, InformationHelper senderInfo = null, List<string> senderMessageSequence = null) {
+    public void ShowcaseMessage(string messageText, InformationHelper senderInfo = null, List<string> senderMessageSequence = null, bool fromMessageSequence = false) {
         bool useMessageText = false;
         this.cancelHidingProgress = true;
 
@@ -70,7 +70,7 @@ public class HUDController : MonoBehaviour
             //other option is that the game object is being readed and if it contains an sprite display this sprite also
             if(senderInfo == null) {
                 //just a message is going to be displayed with the default mascotte icon and PopUpImage should be hidden
-                this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
+                if(fromMessageSequence == false) this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
                 this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
                 
                 this.setCharacterArrays(messageText);
@@ -212,7 +212,7 @@ public class HUDController : MonoBehaviour
         hidingPopUpContainer = true; //make the script think it is hidden, other wise it will try to hide it while waiting
         yield return new WaitForSeconds(this.nextMessageWaitingTime);
         hidingPopUpContainer = false;
-        this.ShowcaseMessage("",null,this.messageSequence);
+        this.ShowcaseMessage("",null,this.messageSequence,true);
     }
 
     IEnumerator HidePopUpMessage() //reset all necessary variables and hide the messagepopup hud element
