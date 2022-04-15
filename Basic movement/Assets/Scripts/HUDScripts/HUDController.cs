@@ -30,6 +30,10 @@ public class HUDController : MonoBehaviour
 
     private bool cancelHidingProgress = false;
 
+    private bool showcasingUnlockItem = false;
+
+    private List<Unlockable> showcaseUnlockables = new List<Unlockable>();
+
     public void Awake() {
         this.HudCanvas = GameObject.FindWithTag("HUDCanvas");
         this.PopUpMessageContainer = HudCanvas.transform.Find("PopUpMessageContainer").gameObject;
@@ -109,25 +113,6 @@ public class HUDController : MonoBehaviour
     public void RemoveImage() {
        Image image =  this.gameObject.transform.Find("InventoryPanel").GetComponent<Image>();
         Destroy(image); 
-    }
-
-
-    public void SimulateUnlock() {
-        if(this.HudCanvas.transform.Find("UnlocksContainer") != null) {
-            GameObject unlocksContainer = this.HudCanvas.transform.Find("UnlocksContainer").gameObject;
-
-            if(unlocksContainer.activeSelf == false) unlocksContainer.SetActive(true);
-
-            unlocksContainer.transform.Find("unlock_1").GetComponent<FadeInOutScript>().StartFading();
-            unlocksContainer.transform.Find("unlock_2").GetComponent<FadeInOutScript>().StartFading();
-
-            unlocksContainer.transform.Find("unlock_2").transform.Find("Coints_Amount").GetComponent<UnityEngine.UI.Text>().text = "220";
-
-            this.rewardsAreBeingShown = true;
-        }
-
-
-
     }
 
     private void calculateMessageFontSize(int characters) {
@@ -249,6 +234,74 @@ public class HUDController : MonoBehaviour
 
         }
         else this.cancelHidingProgress = false;
+    }
+
+    public void Update() {
+        if(showcaseUnlockables.Count > 0 && showcasingUnlockItem == false) {
+            showcasingUnlockItem = true;
+            StartCoroutine(ShowcaseUnlockItem());
+        }
+    }
+
+    IEnumerator ShowcaseUnlockItem() {
+        Unlockable unlockableItem = null;
+        if(showcaseUnlockables.Count > 0) unlockableItem = showcaseUnlockables[0];
+
+        GameObject showcaseImage = GameObject.Find("HUDCanvas").transform.Find("RewardsContainer").transform.Find("showcase_unlock_image").gameObject;
+        GameObject textElement = GameObject.Find("HUDCanvas").transform.Find("RewardsContainer").transform.Find("reward-text").gameObject;
+        GameObject backgroundImage = GameObject.Find("HUDCanvas").transform.Find("RewardsContainer").transform.Find("background-image").gameObject;
+
+
+        if(showcaseImage != null) {
+            showcaseImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Unlock_Images/" + unlockableItem.exampleImageName);
+        }
+
+        if(textElement != null) {
+            if(unlockableItem.type == UnlockableType.character) { 
+                textElement.GetComponent<TextMeshProUGUI>().text = "Unlocked new character";
+            }
+            else if(unlockableItem.type == UnlockableType.powerUp) {
+                textElement.GetComponent<TextMeshProUGUI>().text = "Unlocked new power up";
+            }
+        }
+
+        showcaseImage.GetComponent<FadeInOutScript>().StartFading();
+        backgroundImage.GetComponent<FadeInOutScript>().StartFading();
+        textElement.SetActive(true);
+
+
+        
+        yield return new WaitForSeconds(5);
+        textElement.SetActive(false);
+        showcaseImage.GetComponent<FadeInOutScript>().StartFadingOut();
+        backgroundImage.GetComponent<FadeInOutScript>().StartFadingOut();
+
+        yield return new WaitForSeconds(2);
+        showcaseUnlockables.RemoveAt(0);
+        showcasingUnlockItem = false;
+
+    }
+
+    public void AddUnlockableToShowcaseUnlockables(Unlockable unlockableItem) {
+        showcaseUnlockables.Add(unlockableItem);
+    }
+
+    public void SimulateUnlock() {
+        if(this.HudCanvas.transform.Find("UnlocksContainer") != null) {
+            GameObject unlocksContainer = this.HudCanvas.transform.Find("UnlocksContainer").gameObject;
+
+            if(unlocksContainer.activeSelf == false) unlocksContainer.SetActive(true);
+
+            unlocksContainer.transform.Find("unlock_1").GetComponent<FadeInOutScript>().StartFading();
+            unlocksContainer.transform.Find("unlock_2").GetComponent<FadeInOutScript>().StartFading();
+
+            unlocksContainer.transform.Find("unlock_2").transform.Find("Coints_Amount").GetComponent<UnityEngine.UI.Text>().text = "220";
+
+            this.rewardsAreBeingShown = true;
+        }
+
+
+
     }
 
     private void TemporaryUnlocksHide() {

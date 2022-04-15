@@ -55,10 +55,37 @@ public class GlobalGameHandler : MonoBehaviour
         //PlayerPrefs.DeleteAll(); //just for testing remove later!
 
         //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
-        instance.allUnlockables.Add(new Unlockable(0,440,1,"test",false,UnlockableType.character)); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
+        instance.allUnlockables.Add(new Unlockable(0,440,1,"test3",false,UnlockableType.character)); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
         instance.allUnlockables.Add(new Unlockable(1,670,1,"test2",false,UnlockableType.character)); 
         instance.allUnlockables.Add(new Unlockable(2,550,1,"test",false,UnlockableType.character)); 
         instance.allUnlockables.Add(new Unlockable(3,320,1,"test2",false,UnlockableType.character)); 
+    }
+
+    public static void UnlockUnlockable(int unlockableId) {
+        Unlockable unlockableItem = GlobalGameHandler.GetUnlockableById(unlockableId);
+        print(unlockableItem);
+        if(unlockableItem != null) {
+            if(unlockableItem.isUnlocked == false) {
+
+                unlockableItem.isUnlocked = true;
+                //unlockableItem.UpdateInfoToDisk();
+
+                //showcase the unlock
+                HUDController hudController = GameObject.Find("HUDCanvas").GetComponent<HUDController>();
+                if(hudController != null) hudController.AddUnlockableToShowcaseUnlockables(unlockableItem);
+            }
+        }
+    }
+
+    public static Unlockable GetUnlockableById(int unlockableId) {
+        for(int i = 0; i < instance.allUnlockables.Count; i++) if(instance.allUnlockables[i].id == unlockableId) { 
+            int returningUn = instance.allUnlockables[i].id;
+            print(returningUn);
+            return null;
+        }
+        //foreach(Unlockable unlockable in instance.allUnlockables) if(unlockable.id == unlockableId) return unlockable;
+
+        return null;
     }
 
     public static int GetTotalPlayerCointsAmount() {
