@@ -15,15 +15,12 @@ public class MyCamera : MonoBehaviour
 
     private void Awake()
     {
-        if (!view.IsMine && GetComponent<MyCamera>() != null)
-        {
-            Destroy(GetComponent<MyCamera>());
-        }
+        
     }
 
     void Start()
     {
-        this.gameObject.SetActive(false);
+        
         camRotation = transform.localRotation;
     }
 

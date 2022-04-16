@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace Polyperfect.People
 {
     [RequireComponent(typeof(Rigidbody))]
@@ -18,6 +19,18 @@ namespace Polyperfect.People
 
         public bool isGrounded;
 
+
+        private float m_currentH = 0;
+
+        private readonly float m_interpolation = 10;
+
+        [SerializeField] private float m_turnSpeed = 200;
+
+
+   
+        public Camera cam;
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -30,6 +43,7 @@ namespace Polyperfect.People
         // Update is called once per frame
         void Update()
         {
+            
             isGrounded = Grounded();
 
             //Allow the player to move left and right
@@ -52,13 +66,21 @@ namespace Polyperfect.People
             translation *= speed;
             translation = rigidbody.position + translation;
 
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            if (Input.GetKey(KeyCode.Space) && isGrounded)
             {
+                print("JUMP");
                 rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
 
-            float horizontal = Input.GetAxis("Mouse X") * Time.deltaTime;
-            Quaternion rotation = transform.rotation * Quaternion.Euler(0, horizontal * rotateSpeed, 0);
+            //float horizontal = Input.GetAxis("Mouse X") * Time.deltaTime;
+            //Quaternion rotation = transform.rotation * Quaternion.Euler(0, horizontal * rotateSpeed, 0);
+
+            float horizontal = Input.GetAxis("Mouse X");
+
+            m_currentH = Mathf.Lerp(m_currentH, horizontal, Time.deltaTime * m_interpolation);
+
+            transform.Rotate(0, m_currentH * m_turnSpeed * Time.deltaTime, 0);
+
 
             animator.SetFloat("Vertical", vertical, 0.1f, Time.deltaTime);
             animator.SetFloat("Horizontal", horizontalMove, 0.1f, Time.deltaTime);
@@ -66,7 +88,7 @@ namespace Polyperfect.People
             animator.SetFloat("WalkSpeed", animSpeed);
 
             rigidbody.MovePosition(translation);
-            rigidbody.MoveRotation(rotation);
+            //rigidbody.MoveRotation(rotation);
         }
 
         bool Grounded()

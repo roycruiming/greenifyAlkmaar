@@ -10,7 +10,7 @@ public class SpawnPlayers : MonoBehaviour
     private void Start()
     {
         //TODO: spawn player
-        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
+       GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, spawnPoint.rotation);
     }
 
 }
