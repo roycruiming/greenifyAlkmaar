@@ -7,8 +7,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(PhotonView))]
 public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 {
+    public bridgeUp brScript;
     public int counter;
     public Text scherm;
+    public GameObject bridge;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -25,7 +27,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-
+        bridge = GameObject.Find("bridge-road-hill");
+        brScript = GameObject.FindObjectOfType<bridgeUp>();
     }
 
     // Update is called once per frame
@@ -39,6 +42,15 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("test", RpcTarget.All);
         }
 
+        if (brScript.bridgeUps)
+        {
+            bridgeActivate();
+        }
+        else
+        {
+            bridgeDeActivate();
+        }
+
 
     }
 
@@ -48,5 +60,16 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         counter++;
     }
 
+    [PunRPC]
+    public void bridgeActivate()
+    {
+        bridge.SetActive(true);
+    }
+
+    [PunRPC]
+    public void bridgeDeActivate()
+    {
+        bridge.SetActive(false);
+    }
 
 }
