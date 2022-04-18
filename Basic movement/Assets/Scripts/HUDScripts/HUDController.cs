@@ -279,10 +279,10 @@ public class HUDController : MonoBehaviour
 
         if(textElement != null) {
             if(unlockableItem.type == UnlockableType.character) { 
-                textElement.GetComponent<TextMeshProUGUI>().text = "Unlocked new character";
+                textElement.GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("unlocked new character");
             }
             else if(unlockableItem.type == UnlockableType.powerUp) {
-                textElement.GetComponent<TextMeshProUGUI>().text = "Unlocked new power up";
+                textElement.GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("unlocked new powerup");
             }
         }
 

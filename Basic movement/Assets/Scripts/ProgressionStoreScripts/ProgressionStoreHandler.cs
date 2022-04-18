@@ -83,6 +83,7 @@ public class ProgressionStoreHandler : MonoBehaviour
                 if(unlockInfo.type == UnlockableType.character) buyButton.transform.Find("Text").GetComponent<Text>().text = GlobalGameHandler.GetTextByDictionaryKey("select character");
                 //ELSE SELECT POWERUP TEXT ADD LATER ON!!!!
             }
+            else buyButton.transform.Find("Text").GetComponent<Text>().text = GlobalGameHandler.GetTextByDictionaryKey("buy");
 
             if(unlockInfo.isUnlocked) {
                 containerElement.transform.Find("lock-icon").gameObject.SetActive(false);
@@ -102,13 +103,13 @@ public class ProgressionStoreHandler : MonoBehaviour
     IEnumerator showcasePopupMessage(string text, float duration) {
         popUpIsBeingShown = true;
         GameObject.Find("PopUpMessageBackground").GetComponent<FadeInOutScript>().StartFading();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.22f);
         GameObject.Find("PopUpMessageText").GetComponent<TextMeshProUGUI>().text = text;
         yield return new WaitForSeconds(duration);
-        GameObject.Find("PopUpMessageText").GetComponent<TextMeshProUGUI>().text = "";
         GameObject.Find("PopUpMessageBackground").GetComponent<FadeInOutScript>().StartFadingOut();
-        //GameObject.Find("PopUpMessageBackground").GetComponent<FadeInOutScript>().StartFadingOut();
-        yield return new WaitForSeconds(2);
+        GameObject.Find("PopUpMessageBackground").GetComponent<FadeInOutScript>().StartFadingOut();
+        yield return new WaitForSeconds(0.4f);
+        GameObject.Find("PopUpMessageText").GetComponent<TextMeshProUGUI>().text = "";
         popUpIsBeingShown = false;
 
     }
