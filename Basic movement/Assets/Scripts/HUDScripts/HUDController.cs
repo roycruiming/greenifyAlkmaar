@@ -246,6 +246,7 @@ public class HUDController : MonoBehaviour
     public void showcaseAndUnlockUnlockable(int unlockableId) {
         if(GetUnlockableByIdListIndex(unlockableId) != -99 && allUnlockablesInfo[GetUnlockableByIdListIndex(unlockableId)].isUnlocked == false) {
             showcaseUnlockables.Add(allUnlockablesInfo[GetUnlockableByIdListIndex(unlockableId)]);
+            allUnlockablesInfo[GetUnlockableByIdListIndex(unlockableId)].isUnlocked = true;
             allUnlockablesInfo[GetUnlockableByIdListIndex(unlockableId)].UpdateInfoToDisk(); //save unlock to disk
             //print("added " + showcaseUnlockables.Count);
         }
