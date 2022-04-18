@@ -33,12 +33,15 @@ public class HUDController : MonoBehaviour
     private bool showcasingUnlockItem = false;
 
     private List<Unlockable> showcaseUnlockables = new List<Unlockable>();
+    private List<Unlockable> allUnlockablesInfo;
 
     public void Awake() {
         this.HudCanvas = GameObject.FindWithTag("HUDCanvas");
         this.PopUpMessageContainer = HudCanvas.transform.Find("PopUpMessageContainer").gameObject;
         this.messageSequence = null;
         this.currentInformationHelper = null;
+
+        allUnlockablesInfo = GlobalGameHandler.GetInstance().allUnlockables;
     }
 
     // Start is called before the first frame update
@@ -213,9 +216,6 @@ public class HUDController : MonoBehaviour
             //hide image block
             this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
 
-            //remove later!!! hide temporary unlocks:
-            if(rewardsAreBeingShown == true) this.TemporaryUnlocksHide();
-
             //reset the sprite character icon to the default mascot
             this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
 
@@ -241,6 +241,27 @@ public class HUDController : MonoBehaviour
             showcasingUnlockItem = true;
             StartCoroutine(ShowcaseUnlockItem());
         }
+    }
+
+    public void showcaseAndUnlockUnlockable(int unlockableId) {
+        if(GetUnlockableByIdListIndex(unlockableId) != -99 && allUnlockablesInfo[GetUnlockableByIdListIndex(unlockableId)].isUnlocked == false) {
+            showcaseUnlockables.Add(allUnlockablesInfo[GetUnlockableByIdListIndex(unlockableId)]);
+            allUnlockablesInfo[GetUnlockableByIdListIndex(unlockableId)].UpdateInfoToDisk(); //save unlock to disk
+            //print("added " + showcaseUnlockables.Count);
+        }
+    }
+
+    private int GetUnlockableByIdListIndex(int unlockableId) {
+        for(int i = 0; i < allUnlockablesInfo.Count; i++) {
+            print(allUnlockablesInfo[i].price + " " + allUnlockablesInfo[i].exampleImageName + " " + allUnlockablesInfo[i].id);
+            if(allUnlockablesInfo[i].id == unlockableId) { 
+                return i;
+            }
+        }
+            
+         //foreach(Unlockable unlockable in instance.allUnlockables) if(unlockable.id == unlockableId) return unlockable;
+
+        return -99;
     }
 
     IEnumerator ShowcaseUnlockItem() {
@@ -282,36 +303,32 @@ public class HUDController : MonoBehaviour
 
     }
 
-    public void AddUnlockableToShowcaseUnlockables(Unlockable unlockableItem) {
-        showcaseUnlockables.Add(unlockableItem);
-    }
+    // public void SimulateUnlock() {
+    //     if(this.HudCanvas.transform.Find("UnlocksContainer") != null) {
+    //         GameObject unlocksContainer = this.HudCanvas.transform.Find("UnlocksContainer").gameObject;
 
-    public void SimulateUnlock() {
-        if(this.HudCanvas.transform.Find("UnlocksContainer") != null) {
-            GameObject unlocksContainer = this.HudCanvas.transform.Find("UnlocksContainer").gameObject;
+    //         if(unlocksContainer.activeSelf == false) unlocksContainer.SetActive(true);
 
-            if(unlocksContainer.activeSelf == false) unlocksContainer.SetActive(true);
+    //         unlocksContainer.transform.Find("unlock_1").GetComponent<FadeInOutScript>().StartFading();
+    //         unlocksContainer.transform.Find("unlock_2").GetComponent<FadeInOutScript>().StartFading();
 
-            unlocksContainer.transform.Find("unlock_1").GetComponent<FadeInOutScript>().StartFading();
-            unlocksContainer.transform.Find("unlock_2").GetComponent<FadeInOutScript>().StartFading();
+    //         unlocksContainer.transform.Find("unlock_2").transform.Find("Coints_Amount").GetComponent<UnityEngine.UI.Text>().text = "220";
 
-            unlocksContainer.transform.Find("unlock_2").transform.Find("Coints_Amount").GetComponent<UnityEngine.UI.Text>().text = "220";
-
-            this.rewardsAreBeingShown = true;
-        }
+    //         this.rewardsAreBeingShown = true;
+    //     }
 
 
 
-    }
+    // }
 
-    private void TemporaryUnlocksHide() {
-            GameObject unlocksContainer = this.HudCanvas.transform.Find("UnlocksContainer").gameObject;
-            unlocksContainer.transform.Find("unlock_1").GetComponent<FadeInOutScript>().StartFadingOut();
-            unlocksContainer.transform.Find("unlock_2").GetComponent<FadeInOutScript>().StartFadingOut();
-            unlocksContainer.transform.Find("unlock_2").transform.Find("Coints_Amount").GetComponent<UnityEngine.UI.Text>().text = "";
+    // private void TemporaryUnlocksHide() {
+    //         GameObject unlocksContainer = this.HudCanvas.transform.Find("UnlocksContainer").gameObject;
+    //         unlocksContainer.transform.Find("unlock_1").GetComponent<FadeInOutScript>().StartFadingOut();
+    //         unlocksContainer.transform.Find("unlock_2").GetComponent<FadeInOutScript>().StartFadingOut();
+    //         unlocksContainer.transform.Find("unlock_2").transform.Find("Coints_Amount").GetComponent<UnityEngine.UI.Text>().text = "";
 
-            this.rewardsAreBeingShown = false;
-    }
+    //         this.rewardsAreBeingShown = false;
+    // }
 
 
 }

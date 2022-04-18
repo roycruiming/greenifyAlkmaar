@@ -10,7 +10,7 @@ public class GlobalGameHandler : MonoBehaviour
     public static GlobalGameHandler instance { get; private set; }
 
     private List<KeyValuePair<string,string>> translationDictionary;
-    private List<Unlockable> allUnlockables;
+    public List<Unlockable> allUnlockables;
 
     private List<string> languages;
 
@@ -61,32 +61,37 @@ public class GlobalGameHandler : MonoBehaviour
         instance.allUnlockables.Add(new Unlockable(3,320,1,"test2",false,UnlockableType.character)); 
     }
 
-    public static void UnlockUnlockable(int unlockableId) {
-        Unlockable unlockableItem = GlobalGameHandler.GetUnlockableById(unlockableId);
-        print(unlockableItem);
-        if(unlockableItem != null) {
-            if(unlockableItem.isUnlocked == false) {
+    //OLD UNLOCKABLE SCRIPT
+    // public static void UnlockUnlockable(int unlockableId) {
+    //     //for some reason this function below returns me null so create a function that loads info from the player prefs
+    //     Unlockable unlockableItem = GlobalGameHandler.GetUnlockableById(unlockableId);
+        
+    //     print(unlockableItem);
+    //     if(unlockableItem != null) {
+    //         if(unlockableItem.isUnlocked == false) {
 
-                unlockableItem.isUnlocked = true;
-                //unlockableItem.UpdateInfoToDisk();
+    //             unlockableItem.isUnlocked = true;
+    //             unlockableItem.UpdateInfoToDisk();
 
-                //showcase the unlock
-                HUDController hudController = GameObject.Find("HUDCanvas").GetComponent<HUDController>();
-                if(hudController != null) hudController.AddUnlockableToShowcaseUnlockables(unlockableItem);
-            }
-        }
-    }
+    //             //showcase the unlock
+    //             HUDController hudController = GameObject.Find("HUDCanvas").GetComponent<HUDController>();
+    //             if(hudController != null) hudController.AddUnlockableToShowcaseUnlockables(unlockableItem);
+    //         }
+    //     }
+    // }
 
-    public static Unlockable GetUnlockableById(int unlockableId) {
-        for(int i = 0; i < instance.allUnlockables.Count; i++) if(instance.allUnlockables[i].id == unlockableId) { 
-            print(instance.allUnlockables[i].id);
-            Unlockable returningUn = instance.allUnlockables[i];
-            return returningUn; 
-        }
-        //foreach(Unlockable unlockable in instance.allUnlockables) if(unlockable.id == unlockableId) return unlockable;
 
-        return null;
-    }
+    //OLD UNLOCKABLE SCRIPT
+    // public static Unlockable GetUnlockableById(int unlockableId) {
+    //     for(int i = 0; i < instance.allUnlockables.Count; i++) if(instance.allUnlockables[i].id == unlockableId) { 
+    //         print(instance.allUnlockables[i].id);
+    //         Unlockable returningUn = instance.allUnlockables[i];
+    //         return returningUn; 
+    //     }
+    //     //foreach(Unlockable unlockable in instance.allUnlockables) if(unlockable.id == unlockableId) return unlockable;
+
+    //     return null;
+    // }
 
     public static int GetTotalPlayerCointsAmount() {
         return instance.totalPlayerCoints;
