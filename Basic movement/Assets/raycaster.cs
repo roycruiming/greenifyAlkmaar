@@ -34,6 +34,12 @@ public class raycaster : MonoBehaviour
     }
 
 
+    public InventoryController getInvController() {
+        return InventoryController; 
+    
+    }
+
+
     void Update()
     {
         
@@ -72,6 +78,8 @@ public class raycaster : MonoBehaviour
                     InventoryController.ClearInventory();
                 }
 
+
+
                 DoorsOpener doors = hitInfo.collider.gameObject.GetComponent<DoorsOpener>();
                 if (doors != null)
                 {
@@ -85,12 +93,12 @@ public class raycaster : MonoBehaviour
                     hitInfo.collider.gameObject.GetComponent<PuzzleController>().StartAPuzzle();
                 }
 
-                SolarSpot solarSpot = hitInfo.collider.GetComponent<SolarSpot>();
-                Item item3 = InventoryController.GetItem();
-                if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null) {
-                    solarSpot.DoShit(item3);
-                    InventoryController.ClearInventory();                    
-                }
+//                SolarSpot solarSpot = hitInfo.collider.GetComponent<SolarSpot>();
+////                Item item3 = InventoryController.GetItem();
+//                if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null) {
+//                    solarSpot.DoShit(item3);
+//                    InventoryController.ClearInventory();                    
+//                }
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {
