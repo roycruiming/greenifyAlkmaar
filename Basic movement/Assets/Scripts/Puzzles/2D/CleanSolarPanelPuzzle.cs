@@ -116,7 +116,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
 
         PuzzlePanel.SetActive(false);
 
-        GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted();
+        GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
    }
 
 

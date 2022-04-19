@@ -152,7 +152,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     {
       Text.text =  GlobalGameHandler.GetTextByDictionaryKey("correct answer");
       StartCoroutine(ClosePuzzle());
-        GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted();
+        GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
     }
 
     //als antwoord fout is
@@ -180,6 +180,6 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
          Destroy(ParentPanel.transform.GetChild(i).gameObject);
       }
       PuzzlePanel.SetActive(false);
-      
+
     }
 }

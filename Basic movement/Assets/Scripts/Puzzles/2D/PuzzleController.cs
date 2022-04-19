@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+
 
 public class PuzzleController : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class PuzzleController : MonoBehaviour
   public int PuzzleDifficulty = 3;
   int SelectedPuzzle;
   public static bool PuzzleDone = false;
+
 
   public void StartAPuzzle()
   {
@@ -39,11 +42,18 @@ public class PuzzleController : MonoBehaviour
   }
 
 
-  public void PuzzleCompleted()
+  public void PuzzleCompleted(string PuzzleName)
   {
     transform.Find("Smoke").gameObject.SetActive(false);
     gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
     objectivesController.DeleteItemInList(this);
-        
+
+    AnalyticsResult analyticsResult = Analytics.CustomEvent(
+    "PuzzleCompleted",
+    new Dictionary<string, object> {
+      {"Puzzle", PuzzleName},
+      {"Difficulty", PuzzleDifficulty}
+    });
+
   }
 }

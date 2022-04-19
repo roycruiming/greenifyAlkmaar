@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 using System.Linq;
 
 public class ObjectivesController : MonoBehaviour
@@ -31,6 +32,8 @@ public class ObjectivesController : MonoBehaviour
     public Button back;
 
     public bool gameFinnished = false;
+    public string levelName = "De Meent";
+    public bool analyticsSend = false;
     public Canvas puzzleCanvas;
 
     public void Awake()
@@ -108,6 +111,17 @@ public class ObjectivesController : MonoBehaviour
             gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
             back.gameObject.SetActive(true);
             gameFinnished = true;
+
+            if(!analyticsSend){
+              AnalyticsResult analyticsResult = Analytics.CustomEvent(
+                "LevelWin ",
+                new Dictionary<string, object> {
+                  {"level", levelName},
+                  {"time", minutemark + ":" + Mathf.Round(secondsTimer)}
+                  });
+              print(analyticsResult);
+              analyticsSend = true;
+            }
         }
     }
 

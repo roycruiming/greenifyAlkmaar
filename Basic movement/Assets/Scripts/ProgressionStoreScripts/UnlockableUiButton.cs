@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 
 public class UnlockableUiButton : MonoBehaviour
@@ -11,13 +12,13 @@ public class UnlockableUiButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     // public void SetUnlockable(Unlockable unlockable) {
@@ -30,11 +31,17 @@ public class UnlockableUiButton : MonoBehaviour
             if(unlockAble.type == UnlockableType.character) {
                 if(unlockAble.isPurchased == false) {
                     //try to purchase the object
-                    if(GlobalGameHandler.GetTotalPlayerCointsAmount() > unlockAble.price) {
+                    if(GlobalGameHandler.GetTotalPlayerCointsAmount() >= unlockAble.price) {
                         //is able to purchase the object so purchase it
                         GlobalGameHandler.LowerPlayerCoints((int)Math.Ceiling(unlockAble.price));
                         unlockAble.isPurchased = true;
                         unlockAble.UpdateInfoToDisk();
+
+                        AnalyticsResult analyticsResult = Analytics.CustomEvent(
+                          "UnlockablePurchased",
+                          new Dictionary<string, object>{
+                            {"Unlockable", unlockAble.id}
+                        });
                     }
                     else GameObject.Find("ProgressionStoreHandler").GetComponent<ProgressionStoreHandler>().showcasePopUpMessage(GlobalGameHandler.GetTextByDictionaryKey("not enough coints"),4f);
 
@@ -48,7 +55,7 @@ public class UnlockableUiButton : MonoBehaviour
                 else {
                     GlobalGameHandler.ChangeSelectedCharacterByUnlockId(unlockAble.id); //equip the character
                     GameObject.Find("ProgressionStoreHandler").GetComponent<ProgressionStoreHandler>().showcasePopUpMessage(GlobalGameHandler.GetTextByDictionaryKey("succesfully equiped character"),4f);
-                } 
+                }
             }
         }
         else GameObject.Find("ProgressionStoreHandler").GetComponent<ProgressionStoreHandler>().showcasePopUpMessage(GlobalGameHandler.GetTextByDictionaryKey("unlockable not unlocked yet") + unlockAble.unlockedInLevel,4f);
