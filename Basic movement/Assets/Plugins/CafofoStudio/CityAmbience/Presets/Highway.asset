@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f77d21ec4eb2cdf4da0019c8d5d86277, type: 3}
+  m_Name: Highway
+  m_EditorClassIdentifier: 
+  presetName: Highway
+  trafficIntensity: 0.5
+  trafficVolumeMultiplier: 1
+  vehicleIntensity: 1
+  vehicleVolumeMultiplier: 1
+  crowdIntensity: 0
+  crowdVolumeMultiplier: 1
+  constructionIntensity: 0
+  constructionVolumeMultiplier: 1
+  birdsIntensity: 0.5
+  birdsVolumeMultiplier: 1
+  rainIntensity: 0
+  rainVolumeMultiplier: 1

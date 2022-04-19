@@ -31,6 +31,7 @@ public class ObjectivesController : MonoBehaviour
     public Button back;
 
     public bool gameFinnished = false;
+    public Canvas puzzleCanvas;
 
     public void Awake()
     {
@@ -87,15 +88,18 @@ public class ObjectivesController : MonoBehaviour
         }
         GameTimer.text = minutemark.ToString("00") + ":" + Mathf.Round(secondsTimer).ToString("00");
 
-        // Set how mutch objectives are done
+        // Set how many objectives are done
         TextUiCounter.text = objectivesCounter + "/" + totalObjectives;
 
 
-        //when objectivesList == emtpy - game is finnished
+        //when objectivesList == emtpy - game is finished
         if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
         {
-            Cursor.lockState = CursorLockMode.None;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
             Time.timeScale = 0;
+            puzzleCanvas.gameObject.SetActive(false);
+
             blackBarArroundScoreScreen.gameObject.SetActive(true);
             nameInput.gameObject.SetActive(true);
             nameInputBar.gameObject.SetActive(true);
@@ -144,7 +148,7 @@ public class ObjectivesController : MonoBehaviour
     {
         int secondsFinal = (int)Mathf.Round(secondsTimer);
         int result = minutemark * 100;
-        SubmitScore.AddNewHighscore(nameInput.GetComponent<Text>().text, result + secondsFinal);
+        SubmitScore.AddNewHighscore(nameInput.GetComponent<InputField>().text, result + secondsFinal);
 
         SceneManager.LoadScene(3);
     }

@@ -94,6 +94,10 @@ public class raycaster : MonoBehaviour
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {
+                    //remove later
+                    GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(0);
+                    GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(1);
+
                     //object is gamehelper so showcase this message in the HUD
                     //get the information text from the object and send it to the controller
                     if (hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null)
