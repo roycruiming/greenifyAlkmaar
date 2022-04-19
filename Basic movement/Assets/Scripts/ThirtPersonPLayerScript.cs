@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-//[RequireComponent(typeof(Rigidbody))]
-
 public class ThirtPersonPLayerScript : MonoBehaviour
 {
     public float walkSpeed, runSpeed, rotateSpeed, jumpForce, walkAnimationSpeed, runAnimatonSpeed;
@@ -116,7 +114,7 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             translation *= speed;
             translation = rigidbody.position + translation;
 
-            if (Input.GetKey(KeyCode.Space) && isGrounded)
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
                 animator.SetBool("IsJumping", true);
                 isJumping = true;
@@ -138,13 +136,7 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             animator.SetFloat("WalkSpeed", animSpeed);
 
             rigidbody.MovePosition(translation);
-            //rigidbody.MoveRotation(rotation);
 
-           /* camRotation.x += Input.GetAxis("Mouse Y") * cameraSmoothingFactor * (-1);
-
-            camRotation.x = Mathf.Clamp(camRotation.x, lookUpMin, lookUpMax);
-
-            cam.transform.localRotation = Quaternion.Euler(camRotation.x, camRotation.y, camRotation.z);*/
         }
     }
 
