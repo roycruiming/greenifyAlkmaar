@@ -31,15 +31,12 @@ public class LowerTerrainOnImpact : MonoBehaviour
 
     public void SetTerrainOk() {
         SetTerrainHeight();
-    
     }
 
 
     private void SpawnInteractable(Vector3 point)
     {
-        
-        Instantiate(gj, point, Quaternion.identity); 
-        
+        Instantiate(gj, point, Quaternion.identity);    
     }
 
     private void LowerTerrain(Collision collision)
@@ -91,10 +88,7 @@ public class LowerTerrainOnImpact : MonoBehaviour
                 heights[j, i] = 0.0f;
             }
         }
-
         Terrain.terrainData.SetHeights(0, 0, heights);
-
-      
     }
 
 
@@ -119,11 +113,9 @@ public class LowerTerrainOnImpact : MonoBehaviour
         return Terrain.terrainData.GetHeights(0, 0, xRes, yRes);
     }
 
-
     private float GetRange(float f) {
          return f / Terrain.terrainData.size.x * Terrain.terrainData.alphamapWidth;
     }
-
 
     private Vector3 ConvertWorldCoordinatesToTerrainCoordinates(Vector3 worldCoordinates)
     {
