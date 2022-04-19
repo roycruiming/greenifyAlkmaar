@@ -140,11 +140,11 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             rigidbody.MovePosition(translation);
             //rigidbody.MoveRotation(rotation);
 
-            camRotation.x += Input.GetAxis("Mouse Y") * cameraSmoothingFactor * (-1);
+           /* camRotation.x += Input.GetAxis("Mouse Y") * cameraSmoothingFactor * (-1);
 
             camRotation.x = Mathf.Clamp(camRotation.x, lookUpMin, lookUpMax);
 
-            cam.transform.localRotation = Quaternion.Euler(camRotation.x, camRotation.y, camRotation.z);
+            cam.transform.localRotation = Quaternion.Euler(camRotation.x, camRotation.y, camRotation.z);*/
         }
     }
 
