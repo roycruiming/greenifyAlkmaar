@@ -13,7 +13,6 @@ public class TurnTheTurbnines : MonoBehaviour
 
     public GameObject Puzzle;
 
-    public static bool IsPlaying = false;
     private string WindDir = "right";
     private string TurbineLeftDir = "left";
     private string TurbineMiddleDir = "left";
@@ -32,13 +31,12 @@ public class TurnTheTurbnines : MonoBehaviour
     {
       Puzzle.SetActive(true);
       Cursor.visible = true;
-      IsPlaying = true;
       PuzzleDifficulty = Difficulty;
       ParentName = Name;
     }
 
     void FixedUpdate(){
-      if(!IsPuzzleDone && IsPlaying){
+      if(!IsPuzzleDone && PuzzleController.PuzzlePlaying){
         CheckDirection(TurbineLeftDir);
         CheckDirection(TurbineMiddleDir);
         CheckDirection(TurbineRightDir);
@@ -164,7 +162,6 @@ public class TurnTheTurbnines : MonoBehaviour
       yield return new WaitForSeconds(1);
 
       IsPuzzleDone = false;
-      IsPlaying = false;
       Cursor.visible = false;
       Power = 0;
       PuzzleDifficulty = 0;

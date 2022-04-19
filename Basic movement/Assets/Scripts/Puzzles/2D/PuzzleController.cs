@@ -5,12 +5,19 @@ using UnityEngine.UI;
 
 public class PuzzleController : MonoBehaviour
 {
-  public GameObject PuzzleCanvas;
-  public ObjectivesController objectivesController;
+  GameObject PuzzleCanvas;
+  ObjectivesController objectivesController;
   public List<GameObject> Puzzles;
   public int PuzzleDifficulty = 3;
+  public int MoneyRange = 10;
   int SelectedPuzzle;
-  public static bool PuzzleDone = false;
+  public static bool PuzzlePlaying = false;
+
+void Start()
+{
+  PuzzleCanvas = GameObject.Find("PuzzleCanvas");
+}
+
 
   public void StartAPuzzle()
   {
@@ -42,6 +49,8 @@ public class PuzzleController : MonoBehaviour
             Puzzles[SelectedPuzzle].GetComponent<TurnTheTurbnines>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
         }
+
+        PuzzlePlaying = true;
   }
 
 
@@ -52,5 +61,7 @@ public class PuzzleController : MonoBehaviour
     if(objectivesController){
           objectivesController.DeleteItemInList(this);
     }
+    PuzzlePlaying = false;
+    GlobalGameHandler.GivePlayerCoints(Random.Range(MoneyRange / 2, MoneyRange * 2 ));
   }
 }

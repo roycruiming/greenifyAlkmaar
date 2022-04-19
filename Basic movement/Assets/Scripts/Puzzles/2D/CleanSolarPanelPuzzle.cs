@@ -19,14 +19,12 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
     string ParentName;
     Color32 PercentColor;
     Sprite LastSprite;
-    public static bool IsPlaying = false;
 
 
     //start van de puzzle
     public void StartPuzzle(int difficulty, string Name)
     {
         ParentName = Name;
-        IsPlaying = true;
         Cursor.visible = true;
 
         PercentCompleted = Random.Range(3, 24);
@@ -111,7 +109,6 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
 
         yield return new WaitForSeconds(3);
 
-        IsPlaying = false;
         Cursor.visible = false;
 
         PuzzlePanel.SetActive(false);

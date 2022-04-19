@@ -23,17 +23,11 @@ public class MemoryPuzzle : MonoBehaviour
     public GameObject PuzzlePanel;
     public List<Sprite> SpriteSources;
     public GameObject ParentPanel;
-    public static bool IsPlaying = false;
     // Start is called before the first frame update
-    void Start()
-    {
-      StartPuzzle(8, "MemoryPuzzle");
-    }
 
     public void StartPuzzle(int Difficulty, string Name){
       PuzzleDifficulty = 8;
       ParentName = Name;
-      IsPlaying = true;
       Cursor.visible = true;
       setIcons();
       MakeCards();
@@ -154,7 +148,6 @@ public class MemoryPuzzle : MonoBehaviour
       SecondChoice = null;
 
       yield return new WaitForSeconds(5);
-      IsPlaying = false;
       Cursor.visible = false;
       PuzzlePanel.SetActive(false);
       GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted();
