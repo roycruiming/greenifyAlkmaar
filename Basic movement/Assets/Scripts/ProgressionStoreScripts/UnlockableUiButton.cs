@@ -30,7 +30,7 @@ public class UnlockableUiButton : MonoBehaviour
             if(unlockAble.type == UnlockableType.character) {
                 if(unlockAble.isPurchased == false) {
                     //try to purchase the object
-                    if(GlobalGameHandler.GetTotalPlayerCointsAmount() > unlockAble.price) {
+                    if(GlobalGameHandler.GetTotalPlayerCointsAmount() >= unlockAble.price) {
                         //is able to purchase the object so purchase it
                         GlobalGameHandler.LowerPlayerCoints((int)Math.Ceiling(unlockAble.price));
                         unlockAble.isPurchased = true;
