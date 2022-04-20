@@ -13,7 +13,6 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     public GameObject ParentPanel;
     public Text Text;
 
-    public static bool IsPlaying = false;
 
     int Answer;
     int PuzzleDifficulty;
@@ -28,7 +27,6 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     public void StartPuzzle(int difficulty, string Name)
     {
         ParentName = Name;
-        IsPlaying = true;
         Cursor.visible = true;
 
         Text.text =   GlobalGameHandler.GetTextByDictionaryKey("howmany did you see");
@@ -167,7 +165,6 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     {
       yield return new WaitForSeconds(1);
 
-      IsPlaying = false;
       Cursor.visible = false;
       IsButtonPressed = false;
       Answer = 0;
