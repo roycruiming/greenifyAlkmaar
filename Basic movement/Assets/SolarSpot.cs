@@ -37,8 +37,9 @@ public class SolarSpot : MonoBehaviour
         Destroy(gameObject);
         itemGameObject.transform.position = pos;
         itemGameObject.transform.rotation = quat;
-        itemGameObject.transform.position = new Vector3(itemGameObject.transform.position.x, itemGameObject.transform.position.y - 4, itemGameObject.transform.position.z);
+        itemGameObject.transform.position = new Vector3(itemGameObject.transform.position.x, itemGameObject.transform.position.y, itemGameObject.transform.position.z);
         itemGameObject.GetComponent<BoxCollider>().enabled = false;
+        itemGameObject.GetComponent<AnimationScript>().enabled = false;
         itemGameObject.SetActive(true);
 
         objCon.GetComponent<ObjectivesController>().DeleteItemInListSolar(item);
