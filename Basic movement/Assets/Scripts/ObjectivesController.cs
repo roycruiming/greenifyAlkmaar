@@ -103,6 +103,8 @@ public class ObjectivesController : MonoBehaviour
         //ammount of money
         AmmountCoins.text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
 
+
+        this.CheckNextProgressionPhase();
         //when objectivesList == emtpy - game is finished
         /* if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
          {
@@ -133,15 +135,27 @@ public class ObjectivesController : MonoBehaviour
          }*/
     }
 
+    private void CheckNextProgressionPhase() {
+        if(objectivesCounter == 2)  {
+            GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
+        }
+        else if(objectivesCounter == 4) {
+            GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
+        }
+    }
+
     public void DeleteItemInList(PuzzleController resolvedTask)
     {
         targets.Remove(resolvedTask);
         objectivesCounter++;
         //check if half of the tasks have been completed if so showcase the level progression
-        if(objectivesCounter >= (this.totalObjectives/2) && testPhaseBooleanVerticalSlice == false) {
-            testPhaseBooleanVerticalSlice = true;
-            GameObject.Find("LevelObject").GetComponent<MeentLevel>().showcaseLevelProgression();
-        }
+        CheckNextProgressionPhase();
+
+        //old code
+        // if(objectivesCounter >= (this.totalObjectives/2) && testPhaseBooleanVerticalSlice == false) {
+        //     testPhaseBooleanVerticalSlice = true;
+        //     GameObject.Find("LevelObject").GetComponent<MeentLevel>().showcaseLevelProgression();
+        // }
     }
 
 

@@ -29101,7 +29101,7 @@ Animation:
   m_Animation: {fileID: 0}
   m_Animations:
   - {fileID: 0}
-  - {fileID: 7400000, guid: 7b0989d7cbaced74594fc5ab16996a4b, type: 2}
+  - {fileID: 7400000, guid: 1ce19572c4a3bbf4488572386586e57f, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -43504,6 +43504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5b0f8b56ef55f43990fb8091983576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allUnlockables: []
 --- !u!4 &838886809
 Transform:
   m_ObjectHideFlags: 0
@@ -60169,11 +60170,14 @@ MonoBehaviour:
   GameDone: {fileID: 254975965}
   gameEndScore: {fileID: 1629841505}
   gameEndTime: {fileID: 820226738}
+  AmmountCoins: {fileID: 0}
   blackBarArroundScoreScreen: {fileID: 297427982}
   nameInput: {fileID: 17784806}
   nameInputBar: {fileID: 261336688}
   back: {fileID: 1903312081}
   gameFinnished: 0
+  levelName: De Meent
+  analyticsSend: 0
   puzzleCanvas: {fileID: 1768195149}
 --- !u!4 &1182227933
 Transform:
@@ -69399,11 +69403,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba43c7f51745c645807265baaa164c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuzzleCanvas: {fileID: 1768195145}
-  objectivesController: {fileID: 1182227932}
   Puzzles:
   - {fileID: 405857617}
   PuzzleDifficulty: 8
+  MoneyRange: 10
 --- !u!1001 &1404979619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106158,11 +106161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba43c7f51745c645807265baaa164c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuzzleCanvas: {fileID: 1768195145}
-  objectivesController: {fileID: 1182227932}
   Puzzles:
   - {fileID: 2107062644}
   PuzzleDifficulty: 5
+  MoneyRange: 10
 --- !u!1 &1947595880 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000013289884710, guid: f0cf8146888c5ba4ebd406d6a76baeb7,
@@ -110026,11 +110028,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba43c7f51745c645807265baaa164c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PuzzleCanvas: {fileID: 1768195145}
-  objectivesController: {fileID: 1182227932}
   Puzzles:
   - {fileID: 2107062644}
   PuzzleDifficulty: 4
+  MoneyRange: 10
 --- !u!1001 &2041139354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -112238,6 +112239,7 @@ MonoBehaviour:
   PuzzlePanel: {fileID: 376951724}
   ParentPanel: {fileID: 696956971}
   Text: {fileID: 1790417702}
+  objCon: {fileID: 0}
 --- !u!114 &2107062647
 MonoBehaviour:
   m_ObjectHideFlags: 0

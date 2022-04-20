@@ -27,6 +27,22 @@ public class MeentLevel : MonoBehaviour, LevelBasis
 
     public void Awake() {
         initLevel();
+
+        //showcase intro cinematic
+        StartCoroutine(showcaseIntroCutscene());
+    }
+
+    IEnumerator showcaseIntroCutscene() {
+        
+        this.mainCamera.SetActive(false);
+        this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(true);
+        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("intro de meent"));
+        yield return new WaitForSeconds(18);
+
+        this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(false);
+        this.mainCamera.SetActive(true);
+        yield return null;
+
     }
 
     public void initLevel()
@@ -57,9 +73,13 @@ public class MeentLevel : MonoBehaviour, LevelBasis
         //get all phase objects
         //save all phase 1 (index = 0) objects and hide them
         this.allPhaseObjectsList.Add(GameObject.FindGameObjectsWithTag("ProgressPhase1Object").ToList<GameObject>());
+        this.allPhaseObjectsList.Add(GameObject.FindGameObjectsWithTag("ProgressPhase2Object").ToList<GameObject>());
         foreach(GameObject g in this.allPhaseObjectsList[0]) g.SetActive(false);
+        foreach(GameObject g in this.allPhaseObjectsList[1]) g.SetActive(false);
         
     }
+
+
 
     public void saveProgress() {
 
@@ -79,15 +99,32 @@ public class MeentLevel : MonoBehaviour, LevelBasis
             
             //add rewards if needed=
 
-            //iniate the camera switch
-            GameObject animationCamera = this.FindObject(GameObject.Find("cutscenesHolder"), "Phase" + (this.progressionPhase + 1) +  "Cutscene");
-            if(animationCamera != null) {
-                this.SwitchCamera(animationCamera, this.mainCamera);
-                //start animation
-                if(animationCamera.GetComponent<Animation>().Play("Phase" + (this.progressionPhase + 1) + "-Progression-The-Meent")) animationCamera.GetComponent<Animation>().Play("Phase" + (this.progressionPhase + 1) + "-Progression-The-Meent");
-                //set popup message
-                if(GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>() != null) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null, GlobalGameHandler.GetSentencesByDictionaryKey("the meent text phase " + (progressionPhase + 1)));
+            if(progressionPhase == 0) {
+                SwitchCamera(this.cutsceneParent.transform.Find("Progression1Phase").gameObject,this.mainCamera);
+                GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("the meent text phase 1"));
+
+                //reward the player
+                if(GameObject.Find("HUDCAnvas").GetComponent<HUDController>() != null) GameObject.Find("HUDCAnvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(1);
+                GlobalGameHandler.GivePlayerCoints(Random.Range(801,870));
             }
+            else if(progressionPhase == 1) {
+                SwitchCamera(this.cutsceneParent.transform.Find("Progression2Phase").gameObject,this.mainCamera);
+                GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("the meent text phase 2"));
+
+                //reward the player
+                if(GameObject.Find("HUDCAnvas").GetComponent<HUDController>() != null) GameObject.Find("HUDCAnvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(2);
+                GlobalGameHandler.GivePlayerCoints(Random.Range(801,870));
+            }
+
+            // //iniate the camera switch
+            // GameObject animationCamera = this.FindObject(GameObject.Find("cutscenesHolder"), "Phase" + (this.progressionPhase + 1) +  "Cutscene");
+            // if(progressionPhase == 0) {
+            //     this.SwitchCamera(animationCamera, this.mainCamera);
+            //     //start animation
+            //     if(animationCamera.GetComponent<Animation>().Play("Phase" + (this.progressionPhase + 1) + "-Progression-The-Meent")) animationCamera.GetComponent<Animation>().Play("Phase" + (this.progressionPhase + 1) + "-Progression-The-Meent");
+            //     //set popup message
+            //     if(GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>() != null) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null, GlobalGameHandler.GetSentencesByDictionaryKey("the meent text phase " + (progressionPhase + 1)));
+            // }
         }
     }
 
@@ -106,7 +143,7 @@ public class MeentLevel : MonoBehaviour, LevelBasis
         this.objectBlinkCounter++;
 
         if(this.allPhaseObjects != null && this.allPhaseObjects.Count > 0) {
-            setActiveStateObjects(!allPhaseObjects[0].activeSelf); //toggle active self 'blink effect'
+            setActiveStateObjects(!allPhaseObjects[progressionPhase].activeSelf); //toggle active self 'blink effect'
         }
         
         if(this.objectBlinkCounter == this.amountOfBlinks) {
@@ -115,7 +152,8 @@ public class MeentLevel : MonoBehaviour, LevelBasis
             setActiveStateObjects(true);
 
             //switch camera back
-            this.SwitchCamera(this.mainCamera, this.FindObject(GameObject.Find("cutscenesHolder"), "Phase" + (this.progressionPhase + 1) +  "Cutscene"));
+            if(progressionPhase == 0) this.SwitchCamera(this.mainCamera, this.cutsceneParent.transform.Find("Progression1Phase").gameObject);
+            else if(progressionPhase == 1) this.SwitchCamera(this.mainCamera, this.cutsceneParent.transform.Find("Progression2Phase").gameObject);
         }
     }
 

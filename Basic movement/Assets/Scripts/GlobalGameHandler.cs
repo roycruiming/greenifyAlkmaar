@@ -69,16 +69,16 @@ public class GlobalGameHandler : MonoBehaviour
     private void InitUnlockAbles() {
         instance.allUnlockables = new List<Unlockable>();
 
-        //PlayerPrefs.DeleteAll(); //just for testing remove later!
+        PlayerPrefs.DeleteAll(); //just for testing remove later!
 
         //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
         //id price unlockedInLevel imageName unlocked unlockableType isPurchased
-        instance.allUnlockables.Add(new Unlockable(0,440,0,"test3",true,UnlockableType.character, "man_clown")); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
-        instance.allUnlockables.Add(new Unlockable(1,670,0,"test2",true,UnlockableType.character, "man_knight")); 
+        instance.allUnlockables.Add(new Unlockable(0,1644,0,"test3",true,UnlockableType.character, "man_clown")); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
+        instance.allUnlockables.Add(new Unlockable(1,2030,1,"test2",false,UnlockableType.character, "man_knight")); 
         instance.allUnlockables.Add(new Unlockable(2,550,1,"test",false,UnlockableType.character, "man_ninja")); 
-        instance.allUnlockables.Add(new Unlockable(3,320,1,"test2",false,UnlockableType.character)); 
-        instance.allUnlockables.Add(new Unlockable(3,320,1,"test2",false,UnlockableType.character)); 
-        instance.allUnlockables.Add(new Unlockable(4,320,2,"test3",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(3,320,2,"test2",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(3,320,2,"test2",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(4,320,3,"test3",false,UnlockableType.character)); 
 
         //GlobalGameHandler.GivePlayerCoints(794);
     }
@@ -114,6 +114,24 @@ public class GlobalGameHandler : MonoBehaviour
 
         return allTypeUnlockables;
     }
+
+    // public static void UnlockUnlockable(int unlockableId) {
+    //     //for some reason this function below returns me null so create a function that loads info from the player prefs
+    //     Unlockable unlockableItem = GlobalGameHandler.GetUnlockableById(unlockableId);
+        
+    //     print(unlockableItem);
+    //     if(unlockableItem != null) {
+    //         if(unlockableItem.isUnlocked == false) {
+
+    //             unlockableItem.isUnlocked = true;
+    //             unlockableItem.UpdateInfoToDisk();
+
+    //             //showcase the unlock
+    //             HUDController hudController = GameObject.Find("HUDCanvas").GetComponent<HUDController>();
+    //             if(hudController != null) hudController.AddUnlockableToShowcaseUnlockables(unlockableItem);
+    //         }
+    //     }
+    // }
 
     public static GlobalGameHandler GetInstance() {
         return instance;
@@ -219,23 +237,7 @@ public class GlobalGameHandler : MonoBehaviour
 }
 
     //OLD UNLOCKABLE SCRIPT
-    // public static void UnlockUnlockable(int unlockableId) {
-    //     //for some reason this function below returns me null so create a function that loads info from the player prefs
-    //     Unlockable unlockableItem = GlobalGameHandler.GetUnlockableById(unlockableId);
-        
-    //     print(unlockableItem);
-    //     if(unlockableItem != null) {
-    //         if(unlockableItem.isUnlocked == false) {
 
-    //             unlockableItem.isUnlocked = true;
-    //             unlockableItem.UpdateInfoToDisk();
-
-    //             //showcase the unlock
-    //             HUDController hudController = GameObject.Find("HUDCanvas").GetComponent<HUDController>();
-    //             if(hudController != null) hudController.AddUnlockableToShowcaseUnlockables(unlockableItem);
-    //         }
-    //     }
-    // }
 
 
     //OLD UNLOCKABLE SCRIPT

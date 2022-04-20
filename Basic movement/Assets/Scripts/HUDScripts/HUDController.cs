@@ -104,6 +104,7 @@ public class HUDController : MonoBehaviour
 
             //calculateExtraReadingTime();
         }
+        else print("hudcanvas or popupmessage contianer is null");
     }
 
     public void SetInventorySprite(Sprite hudImage)
