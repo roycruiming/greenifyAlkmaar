@@ -13,6 +13,8 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     public GameObject ParentPanel;
     public Text Text;
 
+    public ObjectivesController objCon;
+
 
     int Answer;
     int PuzzleDifficulty;
@@ -26,6 +28,8 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     //start van de puzzel
     public void StartPuzzle(int difficulty, string Name)
     {
+        objCon = FindObjectOfType<ObjectivesController>();
+
         ParentName = Name;
         Cursor.visible = true;
 
@@ -151,6 +155,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       Text.text =  GlobalGameHandler.GetTextByDictionaryKey("correct answer");
       StartCoroutine(ClosePuzzle());
         GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
+
     }
 
     //als antwoord fout is

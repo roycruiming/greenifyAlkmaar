@@ -52,9 +52,6 @@ public class ObjectivesController : MonoBehaviour
 
 
 
-
-
-
         targets = Resources.FindObjectsOfTypeAll<PuzzleController>().ToList();
         solarPanels = Resources.FindObjectsOfTypeAll<Item>().ToList();
         solarPanelsSpot = GameObject.FindGameObjectsWithTag("SolarSpot").ToList();
@@ -80,7 +77,7 @@ public class ObjectivesController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
 
         for (var i = solarPanelsSpot.Count - 1; i > -1; i--)
         {
@@ -146,6 +143,7 @@ public class ObjectivesController : MonoBehaviour
             GameObject.Find("LevelObject").GetComponent<MeentLevel>().showcaseLevelProgression();
         }
     }
+
 
     public void DeleteItemInListSolar(Item solarpanels)
     {

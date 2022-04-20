@@ -9,10 +9,8 @@ public class DirectionalArrow : MonoBehaviour
 {
     public ObjectivesController objCon;
 
-    public GameObject[] objects;
-
     private float oldDistance = 9999;
-    GameObject closetsObject;
+    PuzzleController closetsObject;
 
 
 
@@ -23,27 +21,27 @@ public class DirectionalArrow : MonoBehaviour
     {
         objCon = FindObjectOfType<ObjectivesController>();
 
-        //objects = GameObject.FindGameObjectsWithTag("Objectives");
         
     }
 
     private void Update()
     {
-        objects = GameObject.FindGameObjectsWithTag("Objectives");
 
 
-        if (objects.Length != 0)
+        if (objCon.targets.Count != 0)
         {
-            Vector3 targetPosition = GetClosestObjective(objects).transform.position;
+            //Vector3 targetPosition = GetClosestObjective(objCon.targets).transform.position;
+            Vector3 targetPosition = objCon.targets[0].transform.position;
             targetPosition.y = transform.position.y;
             transform.LookAt(targetPosition);
         }
     }
 
 
-    GameObject GetClosestObjective(GameObject[] objects)
+/*    PuzzleController GetClosestObjective(List<PuzzleController> objects)
     {
-        foreach (GameObject g in objects)
+
+        foreach (PuzzleController g in objects)
         {
             float dist = Vector3.Distance(this.gameObject.transform.position, g.transform.position);
             if (dist < oldDistance)
@@ -53,5 +51,5 @@ public class DirectionalArrow : MonoBehaviour
             }
         }
         return closetsObject;
-    }
+    }*/
 }

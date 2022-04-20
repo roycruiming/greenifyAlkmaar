@@ -11,6 +11,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
     public GameObject ParentPanel;
     public Text PercentText;
 
+
     public int SpreadAmount = 400;
     int PercentCompleted;
     int PercentAmount;
@@ -35,6 +36,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
 
         CreateImages(difficulty);
         PuzzlePanel.SetActive(true);
+
     }
 
     //maakt alle images aan die de speler moet slepen
@@ -94,7 +96,6 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
       {
         PercentCompleted = 100;
         ChangeText(PercentCompleted);
-
         StartCoroutine(StopPuzzle());
       }
     }

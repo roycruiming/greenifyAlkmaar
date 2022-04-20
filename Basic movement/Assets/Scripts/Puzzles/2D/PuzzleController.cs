@@ -18,7 +18,8 @@ public class PuzzleController : MonoBehaviour
 void Start()
 {
   PuzzleCanvas = GameObject.Find("PuzzleCanvas");
-}
+        objectivesController = FindObjectOfType<ObjectivesController>();
+    }
 
 
 
