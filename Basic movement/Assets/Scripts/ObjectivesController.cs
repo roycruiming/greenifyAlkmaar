@@ -25,6 +25,7 @@ public class ObjectivesController : MonoBehaviour
     public Text GameDone;
     public Text gameEndScore;
     public Text gameEndTime;
+    public Text AmmountCoins;
     public GameObject blackBarArroundScoreScreen;
     public GameObject nameInput;
     public GameObject nameInputBar;
@@ -47,6 +48,9 @@ public class ObjectivesController : MonoBehaviour
         nameInputBar = GameObject.Find("EndScore");
         blackBarArroundScoreScreen = GameObject.Find("BlackBar");
         back = GameObject.Find("ExitLevelButton").GetComponent<Button>();
+        AmmountCoins = GameObject.Find("MoneyAmount").GetComponent<Text>();
+
+
 
 
 
@@ -98,6 +102,8 @@ public class ObjectivesController : MonoBehaviour
 
         // Set how many objectives are done
         TextUiCounter.text = objectivesCounter + "/" + totalObjectives;
+
+        //ammount of money
 
 
         //when objectivesList == emtpy - game is finished
