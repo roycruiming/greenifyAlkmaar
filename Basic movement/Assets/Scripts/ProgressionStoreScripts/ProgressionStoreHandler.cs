@@ -38,7 +38,14 @@ public class ProgressionStoreHandler : MonoBehaviour
         if(currentCharacterShopIndex + 1 < allCharacterUnlockablesInfo.Count) {
             this.currentCharacterShopIndex++;
             updateShowcase(allCharacterUnlockablesInfo[currentCharacterShopIndex]);
+            changeShowcaseCharacter(currentCharacterShopIndex);
         }
+    }
+
+    private void changeShowcaseCharacter(int indexCharacterList) {
+        Unlockable unlockableCharacter = this.allCharacterUnlockablesInfo[indexCharacterList];
+
+        
     }
 
     public void showcasePreviousCharacter() {

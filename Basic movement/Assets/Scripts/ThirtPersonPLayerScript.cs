@@ -69,7 +69,7 @@ public class ThirtPersonPLayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (view.IsMine)
+        if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine)
         {
 
 
@@ -141,6 +141,3 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             return Physics.Raycast(transform.position, -Vector3.up, distToGround);
         }
     }
-
-
-

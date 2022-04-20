@@ -13,9 +13,11 @@ public class Unlockable : MonoBehaviour
     public bool isUnlocked;
     public bool isPurchased;
 
+    public string polyPerfectModelName;
+
     public UnlockableType type;
 
-    public Unlockable(int id, float price, int unlockedInLevel, string imageName, bool unlocked, UnlockableType unlockableType, bool isPurchased = false) {
+    public Unlockable(int id, float price, int unlockedInLevel, string imageName, bool unlocked, UnlockableType unlockableType,string polyPerfectModelName = null ,bool isPurchased = false) {
         this.id = id;
 
         if(PlayerPrefs.HasKey(id + "_unlockableInfo") == false) {
@@ -26,6 +28,7 @@ public class Unlockable : MonoBehaviour
             this.isUnlocked = unlocked;
             this.type = unlockableType;
             this.isPurchased = isPurchased; //default false
+            this.polyPerfectModelName = polyPerfectModelName; //null by default.
             if(isPurchased == true) this.isUnlocked = true; //prevent mistakes (error handling)
 
             //Debug.Log("Registered");
@@ -41,6 +44,7 @@ public class Unlockable : MonoBehaviour
             this.isUnlocked = bool.Parse(unlockableInfo[3]);
             this.type = (UnlockableType) int.Parse(unlockableInfo[4]);
             this.isPurchased = bool.Parse(unlockableInfo[5]);
+            this.polyPerfectModelName = unlockableInfo[6]; 
             
             //Debug.Log("From disk");
         }
@@ -57,6 +61,7 @@ public class Unlockable : MonoBehaviour
         unlockableInfoString += '_' + this.isUnlocked.ToString();
         unlockableInfoString += '_' + ((int)this.type).ToString();
         unlockableInfoString += '_' + this.isPurchased.ToString();
+        unlockableInfoString += '_' + this.polyPerfectModelName.ToString();
 
         // string[] splittedStr = unlockableInfoString.Split('_');
         // for(int i = 0; i < splittedStr.GetLength(0); i++) Debug.Log(i + " = " + splittedStr[i]);
