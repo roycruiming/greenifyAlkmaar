@@ -31,6 +31,8 @@ public class TutorialLevel : MonoBehaviour, LevelBasis
     public void showcaseTutorialMessage() {
         if(arrowHasBeenExplained == false) GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("tutorial direction arrow"));
         arrowHasBeenExplained = true;
+        print(GetComponent<DirectionalArrow>());
+        GameObject.Find("3RD Person").GetComponent<ArrowVisible>().arrowVisible = true;
     }
 
     public void showcaseGeneralHelperExplanation() {

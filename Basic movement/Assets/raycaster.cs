@@ -109,6 +109,12 @@ public class raycaster : MonoBehaviour
                     }
                     
                 }
+
+                else if (hitInfo.collider.gameObject.CompareTag("Objectives"))
+                {
+                    gameObject.transform.Find("Geometry").gameObject.transform.gameObject.tag = "ObjectiveDone";
+                    
+                }
             }
         }
         else

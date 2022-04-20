@@ -11,7 +11,7 @@ public class hitDetectionObject : MonoBehaviour
     private void OnCollisionEnter(Collision other) {
         TutorialLevel tutorialHandler = GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>();
 
-        if(other.gameObject.name == "C_man_1_FBX2013" || other.gameObject.name == "MainCharacter") {
+        if(other.gameObject.name == "C_man_1_FBX2013" || other.gameObject.name == "3RD Person") {
             
             if(treeFallAction) tutorialHandler.triggerTreeFallingDown();
             if(arrowExplanation) tutorialHandler.showcaseTutorialMessage();

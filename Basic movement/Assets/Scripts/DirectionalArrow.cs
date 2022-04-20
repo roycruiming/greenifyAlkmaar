@@ -9,6 +9,12 @@ public class DirectionalArrow : MonoBehaviour
 {
     public ObjectivesController objCon;
 
+    public GameObject[] objects;
+
+    private float oldDistance = 9999;
+    GameObject closetsObject;
+
+
 
     [System.Obsolete]
 
@@ -16,46 +22,36 @@ public class DirectionalArrow : MonoBehaviour
     private void Start()
     {
         objCon = FindObjectOfType<ObjectivesController>();
+
+        //objects = GameObject.FindGameObjectsWithTag("Objectives");
+        
     }
 
     private void Update()
     {
-       /* if(objCon.targets.Count != 0)
-        {
+        objects = GameObject.FindGameObjectsWithTag("Objectives");
 
-        //Arrow points to next objective
-        if (objCon.targets.Count >= 1)
-        {
-            Vector3 targetPosition = objCon.targets[0].transform.position;
-            targetPosition.y = transform.position.y;
-            transform.LookAt(targetPosition);
 
-        }
-        else if(objCon.solarPanels.Count == 2 && objCon.solarPanelsSpot.Count == 2)
+        if (objects.Length != 0)
         {
-            Vector3 targetPosition = objCon.solarPanels[0].transform.position;
+            Vector3 targetPosition = GetClosestObjective(objects).transform.position;
             targetPosition.y = transform.position.y;
             transform.LookAt(targetPosition);
         }
-        else if(objCon.solarPanels.Count == 1 && objCon.solarPanelsSpot.Count == 2)
-        {
-            Vector3 targetPosition = objCon.solarPanelsSpot[0].transform.position;
-            targetPosition.y = transform.position.y;
-            transform.LookAt(targetPosition);
-        }
-        else if (objCon.solarPanels.Count == 1 && objCon.solarPanelsSpot.Count == 1)
-        {
-            Vector3 targetPosition = objCon.solarPanels[0].transform.position;
-            targetPosition.y = transform.position.y;
-            transform.LookAt(targetPosition);
-        }
-        else if (objCon.solarPanels.Count == 0 && objCon.solarPanelsSpot.Count == 1)
-        {
-            Vector3 targetPosition = objCon.solarPanelsSpot[0].transform.position;
-            targetPosition.y = transform.position.y;
-            transform.LookAt(targetPosition);
-        }
+    }
 
-        }*/
+
+    GameObject GetClosestObjective(GameObject[] objects)
+    {
+        foreach (GameObject g in objects)
+        {
+            float dist = Vector3.Distance(this.gameObject.transform.position, g.transform.position);
+            if (dist < oldDistance)
+            {
+                closetsObject = g;
+                oldDistance = dist;
+            }
+        }
+        return closetsObject;
     }
 }

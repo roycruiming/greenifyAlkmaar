@@ -31,10 +31,6 @@ public class ThirtPersonPLayerScript : MonoBehaviour
     private bool isGrounded1;
 
 
-    public float cameraSmoothingFactor = 0.5f;
-    public float lookUpMax = 10f;
-    public float lookUpMin = -10f;
-
     private Quaternion camRotation;
 
     private void Awake()
