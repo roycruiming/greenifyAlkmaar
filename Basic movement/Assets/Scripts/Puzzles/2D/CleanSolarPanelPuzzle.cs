@@ -24,6 +24,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
     //start van de puzzle
     public void StartPuzzle(int difficulty, string Name)
     {
+      PuzzlePanel.SetActive(true);
         ParentName = Name;
         Cursor.visible = true;
 

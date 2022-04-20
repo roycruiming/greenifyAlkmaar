@@ -26,6 +26,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     //start van de puzzel
     public void StartPuzzle(int difficulty, string Name)
     {
+        PuzzlePanel.SetActive(true);
         ParentName = Name;
         Cursor.visible = true;
 

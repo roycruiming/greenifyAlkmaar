@@ -26,6 +26,7 @@ public class MemoryPuzzle : MonoBehaviour
     // Start is called before the first frame update
 
     public void StartPuzzle(int Difficulty, string Name){
+      PuzzlePanel.SetActive(true);
       PuzzleDifficulty = 8;
       ParentName = Name;
       Cursor.visible = true;
@@ -114,8 +115,10 @@ public class MemoryPuzzle : MonoBehaviour
           ToSay = "bulb information";
           break;
       }
-      GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey(ToSay));
-      GameObject.FindWithTag("HUDCanvas").GetComponent<Canvas>().sortingOrder = 5;
+      if(GameObject.FindWithTag("HUDCanvas")){
+        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey(ToSay));
+        GameObject.FindWithTag("HUDCanvas").GetComponent<Canvas>().sortingOrder = 5;
+      }
     }
 
     IEnumerator ClosePair(){
