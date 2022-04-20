@@ -104,36 +104,36 @@ public class ObjectivesController : MonoBehaviour
         TextUiCounter.text = objectivesCounter + "/" + totalObjectives;
 
         //ammount of money
-
+        AmmountCoins.text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
 
         //when objectivesList == emtpy - game is finished
-       /* if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-            Time.timeScale = 0;
-            puzzleCanvas.gameObject.SetActive(false);
+        /* if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
+         {
+             Cursor.lockState = CursorLockMode.Confined;
+             Cursor.visible = true;
+             Time.timeScale = 0;
+             puzzleCanvas.gameObject.SetActive(false);
 
-            blackBarArroundScoreScreen.gameObject.SetActive(true);
-            nameInput.gameObject.SetActive(true);
-            nameInputBar.gameObject.SetActive(true);
-            GameDone.text = "Gefeliciteerd!";
-            gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
-            gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
-            back.gameObject.SetActive(true);
-            gameFinnished = true;
+             blackBarArroundScoreScreen.gameObject.SetActive(true);
+             nameInput.gameObject.SetActive(true);
+             nameInputBar.gameObject.SetActive(true);
+             GameDone.text = "Gefeliciteerd!";
+             gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
+             gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
+             back.gameObject.SetActive(true);
+             gameFinnished = true;
 
-            if(!analyticsSend){
-              AnalyticsResult analyticsResult = Analytics.CustomEvent(
-                "LevelWin ",
-                new Dictionary<string, object> {
-                  {"level", levelName},
-                  {"time", minutemark + ":" + Mathf.Round(secondsTimer)}
-                  });
-              print(analyticsResult);
-              analyticsSend = true;
-            }
-        }*/
+             if(!analyticsSend){
+               AnalyticsResult analyticsResult = Analytics.CustomEvent(
+                 "LevelWin ",
+                 new Dictionary<string, object> {
+                   {"level", levelName},
+                   {"time", minutemark + ":" + Mathf.Round(secondsTimer)}
+                   });
+               print(analyticsResult);
+               analyticsSend = true;
+             }
+         }*/
     }
 
     public void DeleteItemInList(PuzzleController resolvedTask)
