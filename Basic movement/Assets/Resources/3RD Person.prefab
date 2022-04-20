@@ -7341,7 +7341,7 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 5
   rotateSpeed: 50
-  jumpForce: 15
+  jumpForce: 8
   walkAnimationSpeed: 2
   runAnimatonSpeed: 1
   animator: {fileID: 3010936533986347313}
@@ -7351,9 +7351,6 @@ MonoBehaviour:
   m_turnSpeed: 200
   view: {fileID: 3010936533986347317}
   cam: {fileID: 3010936535159786413}
-  cameraSmoothingFactor: 0.1
-  lookUpMax: 30
-  lookUpMin: -30
 --- !u!1 &3010936533997780932
 GameObject:
   m_ObjectHideFlags: 0
@@ -7964,7 +7961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3010936534079212764
 Transform:
   m_ObjectHideFlags: 0
@@ -15177,6 +15174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objCon: {fileID: 0}
+  objects: []
 --- !u!1 &3010936534871985082
 GameObject:
   m_ObjectHideFlags: 0
@@ -15406,7 +15404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3010936534873902172
 Transform:
   m_ObjectHideFlags: 0

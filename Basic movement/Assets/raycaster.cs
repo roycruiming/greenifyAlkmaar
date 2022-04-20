@@ -81,7 +81,7 @@ public class raycaster : MonoBehaviour
                 }
 
                 PuzzleController puzzleController = hitInfo.collider.gameObject.GetComponent<PuzzleController>();
-                if (puzzleController != null && hitInfo.collider.transform.GetChild(0).gameObject.activeInHierarchy) {
+                if (puzzleController != null) {
                     hitInfo.collider.gameObject.GetComponent<PuzzleController>().StartAPuzzle();
                 }
 
