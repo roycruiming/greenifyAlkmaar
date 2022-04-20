@@ -17,7 +17,7 @@ public class Unlockable : MonoBehaviour
 
     public UnlockableType type;
 
-    public Unlockable(int id, float price, int unlockedInLevel, string imageName, bool unlocked, UnlockableType unlockableType,string polyPerfectModelName = null ,bool isPurchased = false) {
+    public Unlockable(int id, float price, int unlockedInLevel, string imageName, bool unlocked, UnlockableType unlockableType,string polyPerfectModelName = "" ,bool isPurchased = false) {
         this.id = id;
 
         if(PlayerPrefs.HasKey(id + "_unlockableInfo") == false) {

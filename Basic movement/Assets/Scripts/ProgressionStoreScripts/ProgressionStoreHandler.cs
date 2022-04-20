@@ -44,14 +44,25 @@ public class ProgressionStoreHandler : MonoBehaviour
 
     private void changeShowcaseCharacter(int indexCharacterList) {
         Unlockable unlockableCharacter = this.allCharacterUnlockablesInfo[indexCharacterList];
+        GameObject charactersShowcaseContainer = GameObject.Find("CharacterShowCaseContainer");
 
-        
+        int childrenCount = charactersShowcaseContainer.transform.childCount-1;
+        if (charactersShowcaseContainer != null)
+        {
+            for (int i = 0; i < childrenCount; i++) charactersShowcaseContainer.transform.GetChild(i).gameObject.SetActive(false); //disable current shown character
+
+
+            charactersShowcaseContainer.transform.Find(unlockableCharacter.polyPerfectModelName).gameObject.SetActive(true);
+        }
+
+
     }
 
     public void showcasePreviousCharacter() {
         if(currentCharacterShopIndex - 1 >= 0) {
             this.currentCharacterShopIndex--;
             updateShowcase(allCharacterUnlockablesInfo[currentCharacterShopIndex]);
+            changeShowcaseCharacter(currentCharacterShopIndex);
         }
     }
 
