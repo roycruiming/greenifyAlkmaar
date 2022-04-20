@@ -150,6 +150,6 @@ public class MemoryPuzzle : MonoBehaviour
       yield return new WaitForSeconds(5);
       Cursor.visible = false;
       PuzzlePanel.SetActive(false);
-      GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted();
+      GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
     }
 }

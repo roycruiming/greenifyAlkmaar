@@ -153,7 +153,7 @@ public class TurnTheTurbnines : MonoBehaviour
 
     private void PuzzleVictory(){
       IsPuzzleDone = true;
-      GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted();
+      GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
       StartCoroutine(ClosePuzzle());
     }
 
