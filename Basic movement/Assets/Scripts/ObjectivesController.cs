@@ -38,6 +38,19 @@ public class ObjectivesController : MonoBehaviour
 
     public void Awake()
     {
+        TextUiCounter = GameObject.Find("ObjectivesCounter").GetComponent<Text>();
+        GameTimer = GameObject.Find("GameTimer").GetComponent<Text>();
+        GameDone = GameObject.Find("EndScreen").GetComponent<Text>();
+        gameEndScore = GameObject.Find("EndTime").GetComponent<Text>();
+        gameEndTime = GameObject.Find("EndTime").GetComponent<Text>();
+        nameInput = GameObject.Find("InputFieldName");
+        nameInputBar = GameObject.Find("EndScore");
+        blackBarArroundScoreScreen = GameObject.Find("BlackBar");
+        back = GameObject.Find("ExitLevelButton").GetComponent<Button>();
+
+
+
+
         targets = Resources.FindObjectsOfTypeAll<PuzzleController>().ToList();
         solarPanels = Resources.FindObjectsOfTypeAll<Item>().ToList();
         solarPanelsSpot = GameObject.FindGameObjectsWithTag("SolarSpot").ToList();
@@ -49,15 +62,7 @@ public class ObjectivesController : MonoBehaviour
         nameInputBar.gameObject.SetActive(false);
         back.gameObject.SetActive(false);
 
-        solarPanels.Remove(solarPanels[2]);
-        solarPanels.Remove(solarPanels[2]);
-        solarPanels.Remove(solarPanels[2]);
-        solarPanels.Remove(solarPanels[2]);
-        solarPanels.Remove(solarPanels[2]);
-        solarPanels.Remove(solarPanels[2]);
-
         totalObjectives = targets.Count + solarPanels.Count;
-
 
 
     }
@@ -96,7 +101,7 @@ public class ObjectivesController : MonoBehaviour
 
 
         //when objectivesList == emtpy - game is finished
-        if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
+       /* if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
@@ -122,7 +127,7 @@ public class ObjectivesController : MonoBehaviour
               print(analyticsResult);
               analyticsSend = true;
             }
-        }
+        }*/
     }
 
     public void DeleteItemInList(PuzzleController resolvedTask)
