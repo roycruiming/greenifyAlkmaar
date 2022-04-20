@@ -30,6 +30,7 @@ public class TurnTheTurbnines : MonoBehaviour
     public void StartPuzzle(int Difficulty, string Name)
     {
       Puzzle.SetActive(true);
+      Puzzle.SetActive(true);
       Cursor.visible = true;
       PuzzleDifficulty = Difficulty;
       ParentName = Name;

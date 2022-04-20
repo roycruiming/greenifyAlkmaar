@@ -41,6 +41,11 @@ public class MainMenu : MonoBehaviour
         SwitchVisibility(MainButtons, StartButtons);
     }
 
+    public void shop()
+    {
+      SceneManager.LoadScene("Progression-store");
+    }
+
     void SwitchVisibility(GameObject object1, GameObject object2)
     {
         object1.SetActive(true);
