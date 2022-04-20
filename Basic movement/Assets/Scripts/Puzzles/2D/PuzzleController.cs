@@ -24,6 +24,7 @@ void Start()
 
   public void StartAPuzzle()
   {
+      Cursor.lockState = CursorLockMode.None;
       //Als de speler op enter drukt en nu nog geen puzzel speelt
         SelectedPuzzle = Random.Range(0, Puzzles.Count);
 
@@ -59,7 +60,10 @@ void Start()
 
   public void PuzzleCompleted(string PuzzleName)
   {
-    transform.Find("Smoke").gameObject.SetActive(false);
+    if(transform.Find("Smoke")){
+        transform.Find("Smoke").gameObject.SetActive(false);
+    }
+
     gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
     AnalyticsResult analyticsResult = Analytics.CustomEvent(
@@ -72,6 +76,7 @@ void Start()
     if(objectivesController){
           objectivesController.DeleteItemInList(this);
     }
+    Cursor.lockState = CursorLockMode.Locked;
     PuzzlePlaying = false;
     GlobalGameHandler.GivePlayerCoints(Random.Range(MoneyRange / 2, MoneyRange * 2 ));
   }
