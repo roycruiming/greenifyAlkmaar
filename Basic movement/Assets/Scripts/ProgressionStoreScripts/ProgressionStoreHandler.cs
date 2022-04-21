@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ProgressionStoreHandler : MonoBehaviour
 {
@@ -40,6 +41,11 @@ public class ProgressionStoreHandler : MonoBehaviour
             updateShowcase(allCharacterUnlockablesInfo[currentCharacterShopIndex]);
             changeShowcaseCharacter(currentCharacterShopIndex);
         }
+    }
+
+    public void LeaveProgressionStore() {
+
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void changeShowcaseCharacter(int indexCharacterList) {
