@@ -30,7 +30,6 @@ public class TurnTheTurbnines : MonoBehaviour
     public void StartPuzzle(int Difficulty, string Name)
     {
       Puzzle.SetActive(true);
-      Puzzle.SetActive(true);
       Cursor.visible = true;
       PuzzleDifficulty = Difficulty;
       ParentName = Name;
@@ -54,7 +53,7 @@ public class TurnTheTurbnines : MonoBehaviour
         if (Power >= 100){
           PuzzleVictory();
         } else {
-          Power += 0.01;
+          Power += 0.03;
         }
       } else {
         if (Power > 0) {
@@ -114,7 +113,6 @@ public class TurnTheTurbnines : MonoBehaviour
     private void CheckIfWindFlip()
     {
       if (WindFlippable){
-        print("YO");
         StartCoroutine(ChangeWind(Random.Range(5,8)));
         WindFlippable = false;
       }
@@ -153,9 +151,11 @@ public class TurnTheTurbnines : MonoBehaviour
 
 
     private void PuzzleVictory(){
-      IsPuzzleDone = true;
-      GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
-      StartCoroutine(ClosePuzzle());
+      if(!IsPuzzleDone){
+        IsPuzzleDone = true;
+        GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
+        StartCoroutine(ClosePuzzle());
+      }
     }
 
     IEnumerator ClosePuzzle()
@@ -167,7 +167,6 @@ public class TurnTheTurbnines : MonoBehaviour
       Power = 0;
       PuzzleDifficulty = 0;
       WindFlippable = true;
-
-      gameObject.transform.parent.gameObject.SetActive(false);
+      Puzzle.SetActive(false);
     }
 }
