@@ -1735,6 +1735,7 @@ MonoBehaviour:
   GameDone: {fileID: 0}
   gameEndScore: {fileID: 0}
   gameEndTime: {fileID: 0}
+  AmmountCoins: {fileID: 0}
   blackBarArroundScoreScreen: {fileID: 0}
   nameInput: {fileID: 0}
   nameInputBar: {fileID: 0}
@@ -1777,8 +1778,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -58, y: 1.8}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -64.338, y: 0.054000854}
+  m_SizeDelta: {x: 121.37, y: 154.4889}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4040048715770269612
 CanvasRenderer:
