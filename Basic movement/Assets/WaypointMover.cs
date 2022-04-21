@@ -40,7 +40,7 @@ public class WaypointMover : MonoBehaviour
        // print(current.name);
         transform.LookAt(current);
         
-        transform.transform.rotation *= Quaternion.Euler(0, -90, 0);
+        transform.transform.rotation *= Quaternion.Euler(0, 0, 0);
         // Vector3 angles = currentWaypoint.transform.eulerAngles;
         // Vector3 onlyYaxisAngles = new Vector3(0f, angles.y - 90, 0f);
         // currentWaypoint.transform.eulerAngles = onlyYaxisAngles;
