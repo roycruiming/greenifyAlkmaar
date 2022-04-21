@@ -80,7 +80,6 @@ public class ObjectivesController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
         for (var i = solarPanelsSpot.Count - 1; i > -1; i--)
         {
@@ -109,18 +108,18 @@ public class ObjectivesController : MonoBehaviour
 
         this.CheckNextProgressionPhase();
         //when objectivesList == emtpy - game is finished
-        /* if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
+         if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
          {
              Cursor.lockState = CursorLockMode.Confined;
              Cursor.visible = true;
              Time.timeScale = 0;
-             puzzleCanvas.gameObject.SetActive(false);
+             //puzzleCanvas.gameObject.SetActive(false);
 
              blackBarArroundScoreScreen.gameObject.SetActive(true);
-             nameInput.gameObject.SetActive(true);
-             nameInputBar.gameObject.SetActive(true);
+             //nameInput.gameObject.SetActive(true);
+             //nameInputBar.gameObject.SetActive(true);
              GameDone.text = "Gefeliciteerd!";
-             gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
+             //gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
              gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
              back.gameObject.SetActive(true);
              gameFinnished = true;
@@ -135,7 +134,7 @@ public class ObjectivesController : MonoBehaviour
                print(analyticsResult);
                analyticsSend = true;
              }
-         }*/
+         }
     }
 
     private void OnDisable()
@@ -199,6 +198,6 @@ public class ObjectivesController : MonoBehaviour
         int result = minutemark * 100;
         SubmitScore.AddNewHighscore(nameInput.GetComponent<InputField>().text, result + secondsFinal);
 
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("Mainmap-Scene");
     }
 }
