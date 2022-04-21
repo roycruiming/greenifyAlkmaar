@@ -8,6 +8,10 @@ public class WaypointMover : MonoBehaviour
     [SerializeField] private Waypoints waypoints;
     [SerializeField] private float moveSpeed = 5f;
     private Transform currentWaypoint;
+    public Transform StartingWaypoint; 
+
+    
+
 
     Transform GetCurrentWayPoint() {
         return currentWaypoint; 
@@ -17,7 +21,12 @@ public class WaypointMover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
+        if (StartingWaypoint == null)
+        {
+            currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
+        }
+        else { currentWaypoint = StartingWaypoint; }
+
         transform.position = currentWaypoint.position;  
         currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
 
@@ -30,20 +39,14 @@ public class WaypointMover : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.position, moveSpeed * Time.deltaTime);
         if (Vector3.Distance(transform.position, currentWaypoint.position) < 0.1f) {
-            currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
-            //transform.LookAt(currentWaypoint);
+            currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);;
             lookat(currentWaypoint);
         }
     }
 
     private void lookat(Transform current) {
-       // print(current.name);
         transform.LookAt(current);
-        
         transform.transform.rotation *= Quaternion.Euler(0, 0, 0);
-        // Vector3 angles = currentWaypoint.transform.eulerAngles;
-        // Vector3 onlyYaxisAngles = new Vector3(0f, angles.y - 90, 0f);
-        // currentWaypoint.transform.eulerAngles = onlyYaxisAngles;
     }
 
     private void OnCollisionEnter(Collision collision)

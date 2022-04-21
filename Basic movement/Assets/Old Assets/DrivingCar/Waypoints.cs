@@ -39,6 +39,9 @@ public class Waypoints : MonoBehaviour
         
     }
 
+
+
+
     public Transform GetNextWayPoint(Transform currentWaypoint)
     {
         if (currentWaypoint == null){
