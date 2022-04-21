@@ -15,6 +15,7 @@ public class SolarSpot : MonoBehaviour
     private void Start()
     {
         objCon = GameObject.FindGameObjectWithTag("GameController");
+        if (objCon == null) objCon = GameObject.Find("HUDCanvas");
     }
 
     public void DoShit(Item item)
@@ -34,6 +35,7 @@ public class SolarSpot : MonoBehaviour
         Quaternion quat = gameObject.transform.rotation;
 
         GameObject itemGameObject = item.gameObject;
+        objCon.GetComponent<ObjectivesController>().DeleteItemInListSolarSpot(this.gameObject);
         Destroy(gameObject);
         itemGameObject.transform.position = pos;
         itemGameObject.transform.rotation = quat;
@@ -43,11 +45,12 @@ public class SolarSpot : MonoBehaviour
         itemGameObject.SetActive(true);
 
         objCon.GetComponent<ObjectivesController>().DeleteItemInListSolar(item);
+       
 
         //Box.Find("Smoke").gameObject.SetActive(false);
 
-        Box.transform.Find("Smoke").gameObject.SetActive(false);  
-        Box.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+        //Box.transform.Find("Smoke").gameObject.SetActive(false);  
+        //Box.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
         //objectivesController.DeleteItemInList(this);
     }
 }

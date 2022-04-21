@@ -51,6 +51,7 @@ public class InventoryController : MonoBehaviour
 
     public void ClearInventory() {
         Inventory.item = null;
+        
 
         //if (Inventory.item.HudImage == null) return; 
 

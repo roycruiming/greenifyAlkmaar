@@ -25,6 +25,8 @@ public class raycaster : MonoBehaviour
         }
 
         objCon = GameObject.FindGameObjectWithTag("GameController");
+        if (objCon == null) objCon = GameObject.Find("HUDCanvas"); 
+
     }
 
 
@@ -60,7 +62,10 @@ public class raycaster : MonoBehaviour
                     }
 
                     InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);
-                    objCon.GetComponent<ObjectivesController>().DeleteItemInListSolar(hitInfo.collider.gameObject.GetComponent<Item>());
+
+                    ObjectivesController objc = objCon.GetComponent<ObjectivesController>();
+
+                    objc.DeleteItemInListSolar(hitInfo.collider.gameObject.GetComponent<Item>());
                 }
 
 
@@ -89,7 +94,9 @@ public class raycaster : MonoBehaviour
                 Item item3 = InventoryController.GetItem();
                 if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null) {
                     solarSpot.DoShit(item3);
-                    InventoryController.ClearInventory();                    
+                    InventoryController.ClearInventory();
+                    //item3 = InventoryController.GetItem(); 
+                    print(InventoryController.GetItem().name);
                 }
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
