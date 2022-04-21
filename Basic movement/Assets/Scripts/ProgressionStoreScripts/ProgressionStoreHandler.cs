@@ -58,7 +58,7 @@ public class ProgressionStoreHandler : MonoBehaviour
             for (int i = 0; i < childrenCount; i++) charactersShowcaseContainer.transform.GetChild(i).gameObject.SetActive(false); //disable current shown character
 
 
-            charactersShowcaseContainer.transform.Find(unlockableCharacter.polyPerfectModelName).gameObject.SetActive(true);
+            if(string.IsNullOrEmpty(unlockableCharacter.GetPolyPerfectCharacterName()) == false) charactersShowcaseContainer.transform.Find(unlockableCharacter.GetPolyPerfectCharacterName()).gameObject.SetActive(true);
         }
 
 
