@@ -77,7 +77,6 @@ public class ObjectivesController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
         for (var i = solarPanelsSpot.Count - 1; i > -1; i--)
         {
