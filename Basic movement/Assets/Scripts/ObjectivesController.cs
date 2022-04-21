@@ -50,7 +50,7 @@ public class ObjectivesController : MonoBehaviour
         nameInput = GameObject.Find("InputFieldName");
         nameInputBar = GameObject.Find("EndScore");
         blackBarArroundScoreScreen = GameObject.Find("BlackBar");
-       // back = GameObject.Find("ExitLevelButton").GetComponent<Button>();
+        back = GameObject.Find("ExitLevelButton").GetComponent<Button>();
         AmmountCoins = GameObject.Find("MoneyAmount").GetComponent<Text>();
 
 
@@ -62,9 +62,9 @@ public class ObjectivesController : MonoBehaviour
         gameEndTime.text = "";
         gameEndScore.text = "";
         blackBarArroundScoreScreen.gameObject.SetActive(false);
-      //  nameInput.gameObject.SetActive(false);
+        nameInput.gameObject.SetActive(false);
         nameInputBar.gameObject.SetActive(false);
-      //  back.gameObject.SetActive(false);
+        back.gameObject.SetActive(false);
 
         totalObjectives = targets.Count + solarPanels.Count;
 

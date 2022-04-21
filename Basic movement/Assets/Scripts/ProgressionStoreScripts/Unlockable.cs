@@ -53,6 +53,12 @@ public class Unlockable : MonoBehaviour
         
     }
 
+    public string GetPolyPerfectCharacterName() {
+        string[] names = this.polyPerfectModelName.Split('+');
+
+        return names[0] + "_" + names[1];
+    }
+
     private void SaveInfoToDisk() {
         string unlockableInfoString = "";
         unlockableInfoString += this.price.ToString();
