@@ -58,6 +58,7 @@ public class MemoryPuzzle : MonoBehaviour
         NewObj.AddComponent<MemoryCard>();
         NewObj.GetComponent<MemoryCard>().IconSprite = Pairs[i];
         NewObj.GetComponent<MemoryCard>().CanBeClicked = true;
+        print(NewObj.GetComponent<MemoryCard>().CanBeClicked);
         NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);
       }
     }
@@ -116,8 +117,8 @@ public class MemoryPuzzle : MonoBehaviour
           break;
       }
       if(GameObject.FindWithTag("HUDCanvas")){
-        GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey(ToSay));
-        GameObject.FindWithTag("HUDCanvas").GetComponent<Canvas>().sortingOrder = 5;
+        //GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey(ToSay));
+        //GameObject.FindWithTag("HUDCanvas").GetComponent<Canvas>().sortingOrder = 5;
       }
     }
 
@@ -126,6 +127,8 @@ public class MemoryPuzzle : MonoBehaviour
       FirstCard.GetComponent<Image>().overrideSprite = null;
       SecondCard.GetComponent<Image>().overrideSprite = null;
       CountChecked = 0;
+      FirstCard.GetComponent<MemoryCard>().CanBeClicked = true;
+      SecondCard.GetComponent<MemoryCard>().CanBeClicked = true;
     }
 
     IEnumerator CheckForCompletion(){

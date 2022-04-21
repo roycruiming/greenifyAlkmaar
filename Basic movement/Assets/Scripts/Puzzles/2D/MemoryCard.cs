@@ -19,6 +19,7 @@ public class MemoryCard : MonoBehaviour, IPointerClickHandler
   {
     if(CanBeClicked){
       PuzzleScript.ShowCard(gameObject, IconSprite);
+      CanBeClicked = false;
     }
   }
 }
