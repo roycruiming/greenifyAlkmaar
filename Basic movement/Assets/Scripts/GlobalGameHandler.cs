@@ -69,7 +69,7 @@ public class GlobalGameHandler : MonoBehaviour
     private void InitUnlockAbles() {
         instance.allUnlockables = new List<Unlockable>();
 
-        PlayerPrefs.DeleteAll(); //just for testing remove later!
+        //PlayerPrefs.DeleteAll(); //just for testing remove later!
 
         //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
         //id price unlockedInLevel imageName unlocked unlockableType isPurchased
@@ -105,8 +105,9 @@ public class GlobalGameHandler : MonoBehaviour
 
     public static List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
         List<Unlockable> allTypeUnlockables = new List<Unlockable>();
-        
+
         for(int i = 0; i < instance.allUnlockables.Count; i++) {
+            print(i);
             if(instance.allUnlockables[i].type == uType) {
                 allTypeUnlockables.Add(instance.allUnlockables[i]);
             } 
