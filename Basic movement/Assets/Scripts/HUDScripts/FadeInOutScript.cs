@@ -23,6 +23,20 @@ public class FadeInOutScript : MonoBehaviour
 
     }
 
+    public void MakeVisible() {
+        image = GetComponent<Image>();
+        Color transZeroCol = image.color;
+        transZeroCol.a = 1f;
+        image.color = transZeroCol;
+    }
+
+    public void MakeInVisible() {
+        image = GetComponent<Image>();
+        Color transZeroCol = image.color;
+        transZeroCol.a = 0f;
+        image.color = transZeroCol;
+    }
+
     IEnumerator FadeImage(bool fadeAway)
     {
         // fade from opaque to transparent
