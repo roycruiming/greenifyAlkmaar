@@ -14,6 +14,10 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public Text turbineCounterText;
     public GameObject bridge;
 
+    public float y = 0;
+    bool up = true;
+    bool down = false;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -87,6 +91,31 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public void CollectableWindTurbine()
     {
         TurbineCounter++;
+    }
+
+    [PunRPC]
+    public void MoveVork()
+    {
+        if (y < 2f && up)
+        {
+            y += 0.01f;
+        }
+        if (y >= 2)
+        {
+            up = false;
+            down = true;
+
+        }
+        if (y > 0f && down)
+        {
+            y -= 0.01f;
+        }
+        if (y <= 0)
+        {
+            up = true;
+            down = false;
+        }
+
     }
 
 }
