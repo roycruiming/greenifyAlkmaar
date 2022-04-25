@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 
     public void Tutorial()
     {
-        HelpMenu.SetActive(true);
+        SceneManager.LoadScene("Tutorial-Level");
     }
 
     public void Options()
