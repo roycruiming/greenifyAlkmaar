@@ -25,6 +25,7 @@ void Start()
 
   public void StartAPuzzle()
   {
+    if(!PuzzlePlaying){
       Cursor.lockState = CursorLockMode.None;
       //Als de speler op enter drukt en nu nog geen puzzel speelt
         SelectedPuzzle = Random.Range(0, Puzzles.Count);
@@ -56,6 +57,7 @@ void Start()
         }
 
         PuzzlePlaying = true;
+    }
   }
 
 

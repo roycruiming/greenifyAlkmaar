@@ -17,7 +17,7 @@ public class MemoryCard : MonoBehaviour, IPointerClickHandler
 
   public void OnPointerClick(PointerEventData eventData)
   {
-    if(CanBeClicked){
+    if(CanBeClicked && MemoryPuzzle.CanClickOthers){
       PuzzleScript.ShowCard(gameObject, IconSprite);
       CanBeClicked = false;
     }

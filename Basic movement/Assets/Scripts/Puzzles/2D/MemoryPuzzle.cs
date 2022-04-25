@@ -11,6 +11,7 @@ public class MemoryPuzzle : MonoBehaviour
     string ParentName;
     bool WhichPair = false;
     int CountChecked = 0;
+    public static bool CanClickOthers = true;
 
     Sprite FirstChoice;
     GameObject FirstCard;
@@ -74,51 +75,18 @@ public class MemoryPuzzle : MonoBehaviour
         SecondCard = Card;
         Card.GetComponent<Image>().overrideSprite = Icon;
         CountChecked++;
+        CanClickOthers = false;
         CheckPair();
+
       }
     }
 
     public void CheckPair(){
       if(FirstChoice == SecondChoice){
         print("YOU FOUND A PAIR");
-        ShowText(FirstChoice);
         StartCoroutine(CheckForCompletion());
       } else {
         StartCoroutine(ClosePair());
-      }
-    }
-
-    void ShowText(Sprite icon){
-      string ToSay = " ";
-      switch (icon.name){
-        case "windturbine":
-          ToSay = "wind turbine information";
-          break;
-        case "tree":
-          ToSay = "tree information";
-          break;
-        case "solar-panel-icon":
-          ToSay = "solar panel information";
-          break;
-        case "sand":
-          ToSay = "sand information";
-          break;
-        case "recycle-icon":
-          ToSay = "recycle information";
-          break;
-        case "plant":
-          ToSay = "plant information";
-          break;
-        case "Green Home":
-          ToSay = "green home information";
-          break;
-        case "bulb":
-          ToSay = "bulb information";
-          break;
-      }
-      if(GameObject.FindWithTag("HUDCanvas")){
-        //GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey(ToSay));
-        //GameObject.FindWithTag("HUDCanvas").GetComponent<Canvas>().sortingOrder = 5;
       }
     }
 
@@ -126,15 +94,17 @@ public class MemoryPuzzle : MonoBehaviour
       yield return new WaitForSeconds(2);
       FirstCard.GetComponent<Image>().overrideSprite = null;
       SecondCard.GetComponent<Image>().overrideSprite = null;
+      CanClickOthers = true;
       CountChecked = 0;
       FirstCard.GetComponent<MemoryCard>().CanBeClicked = true;
       SecondCard.GetComponent<MemoryCard>().CanBeClicked = true;
     }
 
     IEnumerator CheckForCompletion(){
-      yield return new WaitForSeconds(5);
+      yield return new WaitForSeconds(1);
       AmountSolved++;
       CountChecked = 0;
+      CanClickOthers = true;
       FirstCard.GetComponent<Image>().color = new Color32(204, 51, 51, 0);
       SecondCard.GetComponent<Image>().color = new Color32(204, 51, 51, 0);
       FirstCard.GetComponent<MemoryCard>().CanBeClicked = false;
@@ -153,7 +123,7 @@ public class MemoryPuzzle : MonoBehaviour
       FirstChoice = null;
       SecondChoice = null;
 
-      yield return new WaitForSeconds(5);
+      yield return new WaitForSeconds(1);
       Cursor.visible = false;
       PuzzlePanel.SetActive(false);
       GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
