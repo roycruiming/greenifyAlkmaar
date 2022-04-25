@@ -11,12 +11,20 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
 
     public int progressionPhase { get; set; }
 
+    private GameObject mainCamera;
     public List<GameObject> allPhaseObjects { get; set; }
 
     private List<List<GameObject>> allPhaseObjectsList = new List<List<GameObject>>();
 
     public void Awake() {
         GameObject.Find("splash").GetComponent<FadeInOutScript>().MakeInVisible();
+
+        this.mainCamera = GameObject.Find("Main Camera");
+
+
+        //intro cutscene
+        
+
     }
 
     public void showSplashEffectAndSound() {
@@ -30,6 +38,12 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
         yield return new WaitForSeconds(0.56f);
 
         GameObject.Find("splash").GetComponent<FadeInOutScript>().StartFadingOut();
+        
+    }
+
+    private void SwitchCamera(GameObject cameraToEnable, GameObject cameraToDisable) {
+        if(cameraToDisable != null) cameraToDisable.SetActive(false);
+        if(cameraToEnable != null) cameraToEnable.SetActive(true);
         
     }
 
