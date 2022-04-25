@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ProgressionStoreHandler : MonoBehaviour
 {
@@ -42,6 +43,11 @@ public class ProgressionStoreHandler : MonoBehaviour
         }
     }
 
+    public void LeaveProgressionStore() {
+
+        SceneManager.LoadScene("MainMenu");
+    }
+
     private void changeShowcaseCharacter(int indexCharacterList) {
         Unlockable unlockableCharacter = this.allCharacterUnlockablesInfo[indexCharacterList];
         GameObject charactersShowcaseContainer = GameObject.Find("CharacterShowCaseContainer");
@@ -52,7 +58,7 @@ public class ProgressionStoreHandler : MonoBehaviour
             for (int i = 0; i < childrenCount; i++) charactersShowcaseContainer.transform.GetChild(i).gameObject.SetActive(false); //disable current shown character
 
 
-            charactersShowcaseContainer.transform.Find(unlockableCharacter.polyPerfectModelName).gameObject.SetActive(true);
+            if(string.IsNullOrEmpty(unlockableCharacter.GetPolyPerfectCharacterName()) == false) charactersShowcaseContainer.transform.Find(unlockableCharacter.GetPolyPerfectCharacterName()).gameObject.SetActive(true);
         }
 
 

@@ -37,6 +37,9 @@ public class ObjectivesController : MonoBehaviour
     public bool analyticsSend = false;
     public Canvas puzzleCanvas;
 
+    private bool progression1PhaseDone = false;
+      private bool progression2PhaseDone = false;
+
     public void Awake()
     {
         TextUiCounter = GameObject.Find("ObjectivesCounter").GetComponent<Text>();
@@ -134,12 +137,21 @@ public class ObjectivesController : MonoBehaviour
          }
     }
 
+    private void OnDisable()
+    {
+        string str = UnityEngine.StackTraceUtility.ExtractStackTrace(); 
+        print(""); 
+       
+    }
+
     private void CheckNextProgressionPhase() {
-        if(objectivesCounter == 2)  {
+        if(objectivesCounter == 2 && progression1PhaseDone == false)  {
             GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
+            progression1PhaseDone = true;
         }
-        else if(objectivesCounter == 4) {
+        else if(objectivesCounter == 4 && progression2PhaseDone == false) {
             GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
+            progression2PhaseDone = true;
         }
     }
 

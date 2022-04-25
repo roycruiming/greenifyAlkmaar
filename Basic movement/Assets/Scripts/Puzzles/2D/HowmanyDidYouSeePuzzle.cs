@@ -144,7 +144,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       {
         Correct();
       } else {
-        Wrong();
+        StartCoroutine(Wrong());
       }
     }
 
@@ -158,10 +158,13 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     }
 
     //als antwoord fout is
-    void Wrong()
+    IEnumerator Wrong()
     {
       Text.text =  GlobalGameHandler.GetTextByDictionaryKey("incorrect answer");
       StartCoroutine(ClosePuzzle());
+      PuzzleController.PuzzlePlaying = false;
+      yield return new WaitForSeconds(1);
+      GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey("ask for help"));
     }
 
     //puzzel sluiten

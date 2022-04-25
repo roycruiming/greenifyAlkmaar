@@ -115,8 +115,8 @@ public class HUDController : MonoBehaviour
     }
 
     public void RemoveImage() {
-       Image image =  this.gameObject.transform.Find("InventoryPanel").GetComponent<Image>();
-        Destroy(image); 
+       //Image image =  this.gameObject.transform.Find("InventoryPanel").GetComponent<Image>();
+       //Destroy(image); 
     }
 
     private void calculateMessageFontSize(int characters) {
