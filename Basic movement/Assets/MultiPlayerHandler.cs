@@ -8,19 +8,21 @@ using UnityEngine.UI;
 public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 {
     public bridgeUp brScript;
-    public int counter;
-    public Text scherm;
+    public int solarCounter;
+    public int TurbineCounter;
+    public Text solarCounterText;
+    public Text turbineCounterText;
     public GameObject bridge;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(counter);
+            stream.SendNext(solarCounter);
         }
         if (stream.IsReading)
         {
-            counter = (int)stream.ReceiveNext();
+            solarCounter = (int)stream.ReceiveNext();
         }
     }
 
@@ -29,12 +31,15 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         bridge = GameObject.Find("bridge-road-hill");
         brScript = GameObject.FindObjectOfType<bridgeUp>();
+        solarCounterText = GameObject.Find("SolarCounter").GetComponent<Text>();
+        turbineCounterText = GameObject.Find("WindCounter").GetComponent<Text>();
     }
 
-    // Update is called once per frame
+    // Update is called once per frame  
     void Update()
     {
-        scherm.text = counter.ToString();
+        solarCounterText.text = solarCounter.ToString();
+        turbineCounterText.text = TurbineCounter.ToString();
 
         if (Input.GetKeyDown("k"))
         {
@@ -57,7 +62,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void test()
     {
-        counter++;
+        solarCounter++;
     }
 
     [PunRPC]
@@ -70,6 +75,18 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public void bridgeDeActivate()
     {
         bridge.SetActive(false);
+    }
+
+    [PunRPC]
+    public void CollectableSolarPanel()
+    {
+        solarCounter++;
+    }
+
+    [PunRPC]
+    public void CollectableWindTurbine()
+    {
+        TurbineCounter++;
     }
 
 }
