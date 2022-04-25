@@ -66,7 +66,7 @@ public class LevelSelectorHandler : MonoBehaviour
 
             if(currentLevelInfo.isUnlocked) {
                 //launch scene because level is unlocked and user pressed the correct button
-                if(currentLevelInfo != null) SceneManager.LoadScene("DeMeent");
+                if(currentLevelInfo != null) SceneManager.LoadScene("DeMeentv2");
             }
         }
     }
