@@ -50,6 +50,75 @@ public class HUDController : MonoBehaviour
         InvokeRepeating("PrintTypeMessage",1f,0.08f); //initaite the script to type each message letter by letter if it is set. 0.08 means the interval between typing each letter
     }
 
+    public void Update() {
+        if(showcaseUnlockables.Count > 0 && showcasingUnlockItem == false) {
+            showcasingUnlockItem = true;
+            StartCoroutine(ShowcaseUnlockItem());
+        }
+
+        if(Input.GetKeyDown(KeyCode.Z)) {
+            //  if(this.messageSequence != null && this.messageSequence.Count > 0)  {
+            //     this.toBePrintedCharacters = null;
+            //     this.currentlyPrintedCharacters = null;
+            //     hidingPopUpContainer = false;
+            //     this.ShowcaseMessage("",null,this.messageSequence,true);
+            //  } //show the next message from the message sequence
+            //  else {
+            //     hidingPopUpContainer = true;
+            //     //yield on a new YieldInstruction that waits for x seconds.
+            //     if(cancelHidingProgress == false) {
+            //         this.toBePrintedCharacters = new char[4];
+            //         this.currentlyPrintedCharacters = new char[4];
+            //         this.PopUpMessageContainer.SetActive(false); //hide popup message container
+
+            //         //hide image block
+            //         this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
+
+            //         //reset the sprite character icon to the default mascot
+            //         this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
+
+            //         //reset the message sequence list
+            //         this.messageSequence = null;
+
+            //         //reset current information helper to null
+            //         this.currentInformationHelper = null;
+
+            //         //reset font size
+            //         this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().fontSize = 36;
+
+            //         //reset waiting times for hiding and next message
+            //         this.nextMessageWaitingTime = 2f; //default value is 2f
+            //         this.hidePopUpGroupWaitingTime = 4f;
+
+            //     }
+            //     else this.cancelHidingProgress = false;
+
+                this.toBePrintedCharacters = new char[4];
+                    this.currentlyPrintedCharacters = new char[4];
+                    this.PopUpMessageContainer.SetActive(false); //hide popup message container
+
+                    //hide image block
+                    this.PopUpMessageContainer.transform.Find("PopUpImage").gameObject.SetActive(false);
+
+                    //reset the sprite character icon to the default mascot
+                    this.PopUpMessageContainer.transform.Find("PopUpCharacterIcon").gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/mascotte");
+
+                    //reset the message sequence list
+                    this.messageSequence = null;
+
+                    //reset current information helper to null
+                    this.currentInformationHelper = null;
+
+                    //reset font size
+                    this.PopUpMessageContainer.transform.Find("PopUpText").gameObject.GetComponent<TextMeshProUGUI>().fontSize = 36;
+
+                    //reset waiting times for hiding and next message
+                    this.nextMessageWaitingTime = 2f; //default value is 2f
+                    this.hidePopUpGroupWaitingTime = 4f;
+             
+        }
+    }
+
     public void ShowcaseMessage(string messageText, InformationHelper senderInfo = null, List<string> senderMessageSequence = null, bool fromMessageSequence = false) {
         bool useMessageText = false;
         this.cancelHidingProgress = true;
@@ -235,13 +304,6 @@ public class HUDController : MonoBehaviour
 
         }
         else this.cancelHidingProgress = false;
-    }
-
-    public void Update() {
-        if(showcaseUnlockables.Count > 0 && showcasingUnlockItem == false) {
-            showcasingUnlockItem = true;
-            StartCoroutine(ShowcaseUnlockItem());
-        }
     }
 
     public void showcaseAndUnlockUnlockable(int unlockableId) {
