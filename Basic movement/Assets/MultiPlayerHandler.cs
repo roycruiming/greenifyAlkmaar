@@ -15,6 +15,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject bridge;
     public ScoreFootball1 sc1;
     public ScoreFootball sc;
+    public GameObject football;
 
     public float y = 0;
     bool up = true;
@@ -25,10 +26,12 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(solarCounter);
+            //stream.SendNext(football);
         }
         if (stream.IsReading)
         {
             solarCounter = (int)stream.ReceiveNext();
+            //football = (GameObject)stream.ReceiveNext();
         }
     }
 
@@ -41,6 +44,9 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         brScript = GameObject.FindObjectOfType<bridgeUp>();
         solarCounterText = GameObject.Find("SolarCounter").GetComponent<Text>();
         turbineCounterText = GameObject.Find("WindCounter").GetComponent<Text>();
+        PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(76,2,104.5f), Quaternion.identity);
+        football = GameObject.Find("soccer-ball (3)");
+        
     }
 
     // Update is called once per frame  
