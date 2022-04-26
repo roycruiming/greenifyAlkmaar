@@ -13,6 +13,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public Text solarCounterText;
     public Text turbineCounterText;
     public GameObject bridge;
+    public ScoreFootball1 sc1;
+    public ScoreFootball sc;
 
     public float y = 0;
     bool up = true;
@@ -34,6 +36,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     void Start()
     {
         bridge = GameObject.Find("bridge-road-hill");
+        sc1 = GameObject.FindObjectOfType<ScoreFootball1>();
+        sc = GameObject.FindObjectOfType<ScoreFootball>();
         brScript = GameObject.FindObjectOfType<bridgeUp>();
         solarCounterText = GameObject.Find("SolarCounter").GetComponent<Text>();
         turbineCounterText = GameObject.Find("WindCounter").GetComponent<Text>();
@@ -116,6 +120,18 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             down = false;
         }
 
+    }
+
+    [PunRPC]
+    public void GoalScored1(Collider other)
+    {
+        sc1.SpawnConfeti1(other);
+    }
+
+    [PunRPC]
+    public void GoalScored(Collider other)
+    {
+        sc.SpawnConfeti(other);
     }
 
 }
