@@ -11,6 +11,7 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
 
     public int progressionPhase { get; set; }
 
+    private GameObject cutsceneParent;
     private GameObject mainCamera;
     public List<GameObject> allPhaseObjects { get; set; }
 
@@ -18,12 +19,34 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
 
     public void Awake() {
         GameObject.Find("splash").GetComponent<FadeInOutScript>().MakeInVisible();
-
-        this.mainCamera = GameObject.Find("Main Camera");
+        
+        initLevel();
+        
+        StartCoroutine(showcaseIntroCutscene());
 
 
         //intro cutscene
+
+
+    }
+
+    public void initLevel()
+    {
+        this.mainCamera = GameObject.Find("Main Camera");
+        this.cutsceneParent = GameObject.Find("cutscenesHolder");
+    }
+
+    IEnumerator showcaseIntroCutscene() {
         
+        this.mainCamera.SetActive(false);
+        this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(true);
+        yield return new WaitForSeconds(1);
+        //GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("intro de meent"));
+        yield return new WaitForSeconds(18);
+
+        this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(false);
+        this.mainCamera.SetActive(true);
+        yield return null;
 
     }
 
@@ -45,11 +68,6 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
         if(cameraToDisable != null) cameraToDisable.SetActive(false);
         if(cameraToEnable != null) cameraToEnable.SetActive(true);
         
-    }
-
-    public void initLevel()
-    {
-        throw new System.NotImplementedException();
     }
 
     public void saveProgress()

@@ -19,12 +19,34 @@ public class ProgressionStoreHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.allUnlockablesInfo = GlobalGameHandler.GetAllUnlockablesInfo();
-        this.allCharacterUnlockablesInfo = GlobalGameHandler.GetAllUnlockablesInfoByType(UnlockableType.character);
+        this.allUnlockablesInfo = this.LoadUnlockablesFromSaveFile();
+        this.allCharacterUnlockablesInfo = this.GetAllUnlockablesInfoByType(UnlockableType.character);
         
         this.UpdateTotalPlayerCointsUI();
         this.SetFirstUnlocksDataAndIndex();
         //updateShowcase(allUnlockablesInfo[0]);
+    }
+
+    private List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
+        List<Unlockable> allTypeUnlockables = new List<Unlockable>();
+
+        for(int i = 0; i < allUnlockablesInfo.Count; i++) {
+            print(i);
+            if(allUnlockablesInfo[i].type == uType) {
+                allTypeUnlockables.Add(allUnlockablesInfo[i]);
+            } 
+        }
+
+        return allTypeUnlockables;
+    }
+    private List<Unlockable> LoadUnlockablesFromSaveFile() {
+        List<Unlockable> loadedUnlockables = new List<Unlockable>();
+        for(int i = 0; i < PlayerPrefs.GetInt("UnlockableCount") - 1; i++) {
+            loadedUnlockables.Add(new Unlockable(i));
+            print(loadedUnlockables[i].polyPerfectModelName);
+        }
+
+        return loadedUnlockables;
     }
 
     private void SetFirstUnlocksDataAndIndex() {
