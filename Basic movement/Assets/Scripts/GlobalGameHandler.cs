@@ -73,14 +73,18 @@ public class GlobalGameHandler : MonoBehaviour
 
         //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
         //id price unlockedInLevel imageName unlocked unlockableType isPurchased
+        //Every class gets saved from the constructor
         instance.allUnlockables.Add(new Unlockable(0,1644,0,"test3",true,UnlockableType.character, "man+clown")); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
         instance.allUnlockables.Add(new Unlockable(1,2030,1,"test2",false,UnlockableType.character, "man+knight")); 
         instance.allUnlockables.Add(new Unlockable(2,550,1,"test",false,UnlockableType.character, "man+ninja")); 
         instance.allUnlockables.Add(new Unlockable(3,320,2,"test2",false,UnlockableType.character)); 
-        instance.allUnlockables.Add(new Unlockable(3,320,2,"test2",false,UnlockableType.character)); 
-        instance.allUnlockables.Add(new Unlockable(4,320,3,"test3",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(4,320,2,"test2",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(5,320,3,"test3",false,UnlockableType.character)); 
 
-        //GlobalGameHandler.GivePlayerCoints(794);
+        //save the total count of unlockables
+        PlayerPrefs.SetInt("UnlockableCount",instance.allUnlockables.Count);
+        
+        GlobalGameHandler.GivePlayerCoints(1900);
     }
 
     public static int GetTotalPlayerCointsAmount() {
@@ -103,18 +107,18 @@ public class GlobalGameHandler : MonoBehaviour
         return instance.allUnlockables;
     }
 
-    public static List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
-        List<Unlockable> allTypeUnlockables = new List<Unlockable>();
+    // public static List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
+    //     List<Unlockable> allTypeUnlockables = new List<Unlockable>();
 
-        for(int i = 0; i < instance.allUnlockables.Count; i++) {
-            print(i);
-            if(instance.allUnlockables[i].type == uType) {
-                allTypeUnlockables.Add(instance.allUnlockables[i]);
-            } 
-        }
+    //     for(int i = 0; i < instance.allUnlockables.Count; i++) {
+    //         print(i);
+    //         if(instance.allUnlockables[i].type == uType) {
+    //             allTypeUnlockables.Add(instance.allUnlockables[i]);
+    //         } 
+    //     }
 
-        return allTypeUnlockables;
-    }
+    //     return allTypeUnlockables;
+    // }
 
     // public static void UnlockUnlockable(int unlockableId) {
     //     //for some reason this function below returns me null so create a function that loads info from the player prefs

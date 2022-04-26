@@ -48,15 +48,28 @@ public class Unlockable : MonoBehaviour
             
             //Debug.Log("From disk");
         }
+    }
 
-
-        
+    public Unlockable(int id) {
+        if(PlayerPrefs.HasKey(id + "_unlockableInfo") == false) {
+            this.id = id;
+        }
+        else {
+            string[] unlockableInfo = PlayerPrefs.GetString(id + "_unlockableInfo").Split('_');
+            this.price = float.Parse(unlockableInfo[0]);
+            this.unlockedInLevel = int.Parse(unlockableInfo[1]);
+            this.exampleImageName = unlockableInfo[2];
+            this.isUnlocked = bool.Parse(unlockableInfo[3]);
+            this.type = (UnlockableType) int.Parse(unlockableInfo[4]);
+            this.isPurchased = bool.Parse(unlockableInfo[5]);
+            this.polyPerfectModelName = unlockableInfo[6]; 
+        }
     }
 
     public string GetPolyPerfectCharacterName() {
         string[] names = this.polyPerfectModelName.Split('+');
-
-        return names[0] + "_" + names[1];
+        if(names.GetLength(0) > 1) return names[0] + "_" + names[1];
+        else return "";
     }
 
     private void SaveInfoToDisk() {
