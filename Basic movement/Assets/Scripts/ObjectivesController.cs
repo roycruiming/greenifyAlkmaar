@@ -61,7 +61,7 @@ public class ObjectivesController : MonoBehaviour
         GameDone.text = "";
         gameEndTime.text = "";
         gameEndScore.text = "";
-        blackBarArroundScoreScreen.gameObject.SetActive(false);
+        //blackBarArroundScoreScreen.gameObject.SetActive(false);
         nameInput.gameObject.SetActive(false);
         nameInputBar.gameObject.SetActive(false);
         back.gameObject.SetActive(false);

@@ -109,14 +109,18 @@ public class HUDController : MonoBehaviour
 
     public void SetInventorySprite(Sprite hudImage)
     {
-        Transform panel = gameObject.transform.Find("InventoryPanel");   
+        Transform panel = gameObject.transform.Find("Panel");   
         if (panel.GetComponent<Image>() == null) panel.gameObject.AddComponent<Image>();
         panel.GetComponent<Image>().sprite = hudImage;     
     }
 
+
+
+
+
     public void RemoveImage() {
-       //Image image =  this.gameObject.transform.Find("InventoryPanel").GetComponent<Image>();
-       //Destroy(image); 
+        Image image = this.gameObject.transform.Find("Panel").GetComponent<Image>();
+        Destroy(image);
     }
 
     private void calculateMessageFontSize(int characters) {
