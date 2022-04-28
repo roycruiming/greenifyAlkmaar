@@ -12,9 +12,12 @@ public class CameraFocusSelection : MonoBehaviour
     }
 
     void Follow() {
-        Transform target = GameObject.Find("level-selector-outline").transform;
-        Vector3 targetPos = new Vector3(target.position.x + offsetX, transform.position.y, transform.position.z);
-        Vector3 smoothPos = Vector3.Lerp(transform.position, targetPos, cameraSpeed * Time.deltaTime);
-        transform.position = smoothPos;
+        if(GameObject.Find("OverworldLevelSelectorHandler").GetComponent<OverworldLevelSelectorHandler>().currentlySelectedLevel != null) {
+            Transform target = GameObject.Find("OverworldLevelSelectorHandler").GetComponent<OverworldLevelSelectorHandler>().currentlySelectedLevel.transform;
+            Vector3 targetPos = new Vector3(target.position.x, transform.position.y, transform.position.z);
+            Vector3 smoothPos = Vector3.Lerp(transform.position, targetPos, cameraSpeed * Time.deltaTime);
+            transform.position = smoothPos;
+        }
+
     }
 }

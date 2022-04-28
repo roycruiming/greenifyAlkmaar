@@ -1,38 +1,19 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LevelSelectorObject : MonoBehaviour
 {
+    public int levelIndex;
+    public string levelKeyName;
+    public string levelSceneName;
 
-    public string levelNameKey;
-    public int index;
-    public int isActive = 0;
-
-    public Object levelScene;
-
-    public bool isUnlocked;
-    float posX = 0;
-    float poxY = 0;
-    float posZ = 0;
-
-    public void Awake() {
-        //posX = transform.position.x;
-        // Assigns a material named "Assets/Resources/DEV_Orange" to the object.
-        if(this.isUnlocked == false) {
-            Material disabledMaterial = Resources.Load("DisabledLevel", typeof(Material)) as Material;
-            GetComponent<Renderer>().material = disabledMaterial;
-        }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    
+    public void DisplayLevelInfo() {
+        GameObject.Find("LevelIndexText").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("level") + " " + (levelIndex + 1).ToString();
+        if(levelKeyName == "cheesemarket") GameObject.Find("LevelNameText").GetComponent<TextMeshProUGUI>().text = "Alkmaar " + GlobalGameHandler.GetTextByDictionaryKey(levelKeyName);
+        else GameObject.Find("LevelNameText").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey(levelKeyName);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
