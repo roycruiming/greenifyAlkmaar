@@ -24,14 +24,12 @@ public class ProgressionStoreHandler : MonoBehaviour
         
         this.UpdateTotalPlayerCointsUI();
         this.SetFirstUnlocksDataAndIndex();
-        //updateShowcase(allUnlockablesInfo[0]);
     }
 
     private List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
         List<Unlockable> allTypeUnlockables = new List<Unlockable>();
 
         for(int i = 0; i < allUnlockablesInfo.Count; i++) {
-            print(i);
             if(allUnlockablesInfo[i].type == uType) {
                 allTypeUnlockables.Add(allUnlockablesInfo[i]);
             } 
@@ -54,6 +52,7 @@ public class ProgressionStoreHandler : MonoBehaviour
         this.currentPowerUpShopIndex = 0;
 
         updateShowcase(this.allCharacterUnlockablesInfo[currentCharacterShopIndex]); //set characters
+        changeShowcaseCharacter(currentCharacterShopIndex);
         //function for setting the first powerup
     }
 

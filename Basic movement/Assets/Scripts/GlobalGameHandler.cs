@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using System.IO;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class GlobalGameHandler : MonoBehaviour
 {
@@ -35,10 +36,13 @@ public class GlobalGameHandler : MonoBehaviour
                 PlayerPrefs.SetString("settings_language","english");
             }
             DontDestroyOnLoad(this.gameObject);
-            InitTranslationDictionary();
+            //InitTranslationDictionary();
+            InitTranslationDictionaryBuildFunctional(); //test
             InitUnlockAbles();
 
             LoadSaveGameInfo();
+
+
         }
     }
 
@@ -187,6 +191,39 @@ public class GlobalGameHandler : MonoBehaviour
 
     private static void AddTranslationWord(string key, string value) {
         instance.translationDictionary.Add(new KeyValuePair<string,string>(key, value));
+    }
+
+    private List<KeyValuePair<string, string>> InitTranslationDictionaryBuildFunctional() {
+        //System.Object[] files = Resources.LoadAll("TranslationFiles/Languages");
+        TextAsset[] translationFiles = Resources.LoadAll<TextAsset>("TranslationFiles/Languages");
+        foreach(TextAsset textAsset in translationFiles) {
+            string[] allCsvLines = Regex.Split ( textAsset.text, "\n|\r|\r\n" );
+            foreach(string line in allCsvLines) {
+                if(!string.IsNullOrEmpty(line)) {
+                    string[] stringData = line.Split(',');
+                    if(stringData != null && stringData.GetLength(0) > 1) {
+                            if(stringData[0] == "_language_") {
+                                //add languages to languages list
+                                GlobalGameHandler.AddLanguage(stringData[1]);
+                                currentLanguage = stringData[1];
+                            }
+                            else {
+                                //add key and word to the words list
+                                //the key is the keyword + current language so for example:
+                                //  key:    'start game_english'    value: 'start game'
+                                //  key:    'start game_nederlands'    value: 'start spel'
+                                if(currentLanguage != null) {
+                                    GlobalGameHandler.AddTranslationWord(stringData[0] + '_' + currentLanguage, stringData[1]);
+                                    //Debug.Log("Added to the words dictionary: key= " + values[0] + '_' + currentLanguage + " , values= " + values[1]);
+                                }
+
+                            }
+                    }
+                }
+            }
+        }
+        //foreach(System.Object s in files) print("test");
+        return null;
     }
 
     private List<KeyValuePair<string, string>> InitTranslationDictionary()

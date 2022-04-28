@@ -38,7 +38,6 @@ public class LoadSelectedPlayerModel : MonoBehaviour
         List<Unlockable> loadedUnlockables = new List<Unlockable>();
         for(int i = 0; i < PlayerPrefs.GetInt("UnlockableCount") - 1; i++) {
             loadedUnlockables.Add(new Unlockable(i));
-            print(loadedUnlockables[i].polyPerfectModelName);
         }
 
         return loadedUnlockables;
