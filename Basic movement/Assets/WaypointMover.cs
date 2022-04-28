@@ -8,7 +8,9 @@ public class WaypointMover : MonoBehaviour
     [SerializeField] private Waypoints waypoints;
     [SerializeField] private float moveSpeed = 5f;
     private Transform currentWaypoint;
-    public Transform StartingWaypoint; 
+    public Transform StartingWaypoint;
+    public bool bloon; 
+
 
     Transform GetCurrentWayPoint() {
         return currentWaypoint; 
@@ -26,7 +28,8 @@ public class WaypointMover : MonoBehaviour
 
         transform.position = currentWaypoint.position;  
         currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
-        lookat(currentWaypoint); 
+        if (!bloon) { lookat(currentWaypoint);  }
+         
     }
 
     // Update is called once per frame
@@ -42,7 +45,7 @@ public class WaypointMover : MonoBehaviour
 
         if (Vector3.Distance(transform.position, currentWaypoint.position) < 0.1f) {
             currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);;
-            lookat(currentWaypoint);
+            if (!bloon) { lookat(currentWaypoint); }
         }
     }
 
