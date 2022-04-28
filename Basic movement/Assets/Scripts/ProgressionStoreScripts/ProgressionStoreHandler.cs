@@ -30,7 +30,6 @@ public class ProgressionStoreHandler : MonoBehaviour
         List<Unlockable> allTypeUnlockables = new List<Unlockable>();
 
         for(int i = 0; i < allUnlockablesInfo.Count; i++) {
-            print(i);
             if(allUnlockablesInfo[i].type == uType) {
                 allTypeUnlockables.Add(allUnlockablesInfo[i]);
             } 
