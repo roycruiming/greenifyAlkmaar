@@ -18,6 +18,18 @@ public class SolarSpot : MonoBehaviour
         if (objCon == null) objCon = GameObject.Find("HUDCanvas");
     }
 
+
+    void Awake()
+    {
+        foreach( GameObject x in GameObject.FindGameObjectsWithTag("SolarPanel"))
+        {
+            print(x.name);
+        }
+        
+
+    }
+
+
     public void DoShit(Item item)
     {
 
@@ -40,8 +52,11 @@ public class SolarSpot : MonoBehaviour
         itemGameObject.transform.position = pos;
         itemGameObject.transform.rotation = quat;
         itemGameObject.transform.position = new Vector3(itemGameObject.transform.position.x, itemGameObject.transform.position.y, itemGameObject.transform.position.z);
-        itemGameObject.GetComponent<BoxCollider>().enabled = false;
+        
         itemGameObject.GetComponent<AnimationScript>().enabled = false;
+        itemGameObject.GetComponent<Outline>().enabled = false;
+        Destroy(itemGameObject.GetComponent<Item>()); 
+
         itemGameObject.SetActive(true);
 
         objCon.GetComponent<ObjectivesController>().DeleteItemInListSolar(item);
