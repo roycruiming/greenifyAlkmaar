@@ -14,7 +14,13 @@ public class Item : MonoBehaviour
     public bool OverwriteHeightOffsetByInitialItemPosition = true;
     public Sprite HudImage;
 
-    private void Awake()      
+
+    private void Update()
+    {
+        
+    }
+
+    void Awake()      
     {
         if (OverwriteHeightOffsetByInitialItemPosition) { HeightOffsetY = gameObject.transform.position.y; } 
     }

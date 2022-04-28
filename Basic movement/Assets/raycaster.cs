@@ -54,7 +54,7 @@ public class raycaster : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F)) {
 
-                Item item = hitInfo.collider.gameObject.GetComponent<Item>();
+               Item item = hitInfo.collider.gameObject.GetComponent<Item>();
                 if (item != null) {
                     if (item.HudImage != null)
                     {
@@ -84,6 +84,16 @@ public class raycaster : MonoBehaviour
                     if (!doors.OpenDoors(key)) return;
                     InventoryController.ClearInventory();
                 }
+
+                Treespot treeSpot = hitInfo.collider.gameObject.GetComponent<Treespot>();
+                if (treeSpot != null) {
+                    Item tree = InventoryController.GetItem();
+                    if (!treeSpot.PlantTree(tree)) return;
+                    InventoryController.ClearInventory(); 
+                }
+
+
+
 
                 PuzzleController puzzleController = hitInfo.collider.gameObject.GetComponent<PuzzleController>();
                 if (puzzleController != null) {
