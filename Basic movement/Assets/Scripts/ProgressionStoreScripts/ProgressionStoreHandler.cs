@@ -24,7 +24,6 @@ public class ProgressionStoreHandler : MonoBehaviour
         
         this.UpdateTotalPlayerCointsUI();
         this.SetFirstUnlocksDataAndIndex();
-        //updateShowcase(allUnlockablesInfo[0]);
     }
 
     private List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
@@ -54,6 +53,7 @@ public class ProgressionStoreHandler : MonoBehaviour
         this.currentPowerUpShopIndex = 0;
 
         updateShowcase(this.allCharacterUnlockablesInfo[currentCharacterShopIndex]); //set characters
+        changeShowcaseCharacter(currentCharacterShopIndex);
         //function for setting the first powerup
     }
 

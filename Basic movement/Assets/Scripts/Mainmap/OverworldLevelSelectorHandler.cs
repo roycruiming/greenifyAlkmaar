@@ -50,7 +50,7 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.C)) {
             //go to progression store
-
+            SceneManager.LoadScene("Progression-Store");
         }
 
         //         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
