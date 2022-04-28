@@ -18,6 +18,8 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
 
     private float m_currentH = 0;
+    public float horizontalMove;
+    public float vertical;
 
     private readonly float m_interpolation = 10;
 
@@ -91,9 +93,9 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             }
 
             //Allow the player to move left and right
-            float horizontalMove = Input.GetAxisRaw("Horizontal");
+            horizontalMove = Input.GetAxisRaw("Horizontal");
             //Allow the player to move forward and back
-            float vertical = Input.GetAxisRaw("Vertical");
+            vertical = Input.GetAxisRaw("Vertical");
 
             float speed = walkSpeed;
             float animSpeed = walkAnimationSpeed;
