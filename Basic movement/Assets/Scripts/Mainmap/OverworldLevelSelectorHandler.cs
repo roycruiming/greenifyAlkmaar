@@ -45,9 +45,7 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.E)) {
             //select current level
-            // OverworldLevelObject lo = FindLevelObject(currentlySelectedIndex).GetComponents<OverworldLevelObject>();
-
-            // SceneManager.LoadScene(lo.levelSceneName);
+            SceneManager.LoadScene(FindLevelObject(currentlySelectedIndex).GetComponent<OverworldLevelObject>().levelSceneName);
         }
         
         if(Input.GetKeyDown(KeyCode.C)) {
