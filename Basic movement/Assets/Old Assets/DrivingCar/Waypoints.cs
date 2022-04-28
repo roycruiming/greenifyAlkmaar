@@ -39,7 +39,7 @@ public class Waypoints : MonoBehaviour
 
         foreach (Transform t in transform) {
             Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(t.position, 0.1f); 
+            Gizmos.DrawWireSphere(t.position, 1f); 
         }
 
         for (int i = 0; i < transform.childCount - 1; i++) {
