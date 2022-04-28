@@ -5,12 +5,10 @@ public class NPCScript : MonoBehaviour
     public float walkAnimationSpeed; 
     public Animator animator;
     public new Rigidbody rigidbody;
-    //private Vector3 endPos;
-    private float elapsedTime;
-    private float desiredDuration = 10;
+    
 
     [SerializeField] private Waypoints waypoints;
-    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float moveSpeed = 8f;
     private Transform currentWaypoint;
     public Transform StartingWaypoint;
 
@@ -37,7 +35,7 @@ public class NPCScript : MonoBehaviour
 
 
 
-        if (Vector3.Distance(transform.position, currentWaypoint.position) < 0.1f)
+        if (Vector3.Distance(transform.position, currentWaypoint.position) < 0.5f)
         {
             currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
             Lookat(); 
@@ -48,7 +46,6 @@ public class NPCScript : MonoBehaviour
 
     private void Lookat() {
         Vector3 lookhere = currentWaypoint.position;
-        lookhere.y = transform.position.y;
         transform.LookAt(lookhere);
     }
 
