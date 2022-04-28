@@ -23,7 +23,6 @@ public class TutorialMenu : MonoBehaviour
 
     public void close()
     {
-        Debug.Log("Close Help");
         HelpMenuUI.SetActive(false);
         if(PauseMenuUI){
             PauseMenuUI.SetActive(true);
@@ -33,7 +32,6 @@ public class TutorialMenu : MonoBehaviour
     //teleporteert de speler naar het begin
     public void stuck()
     {
-        Debug.Log("Respawn player");
         Cursor.lockState = CursorLockMode.Locked;
         Player.transform.position = StartPosition;
         Time.timeScale = 1f;
@@ -45,13 +43,11 @@ public class TutorialMenu : MonoBehaviour
 
     public void controls()
     {
-        Debug.Log("Go to help controls");
         HowToPlayUI.SetActive(true);
     }
 
     public void objectives()
     {
-        Debug.Log("Go to help objectivs");
         WhatDoIDoUI.SetActive(true);
     }
 }

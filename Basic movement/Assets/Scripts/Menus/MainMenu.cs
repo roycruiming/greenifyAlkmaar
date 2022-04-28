@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     public GameObject MainButtons;
     public GameObject StartButtons;
     public GameObject SettingMenu;
+    public AudioSource ClickSound;
 
     public void StartGame()
     {
@@ -36,6 +37,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Mainmap-Scene");
     }
 
+    public void Multiplayer()
+    {
+      SceneManager.LoadScene("LobbyScreen");
+    }
+
     public void BackToMainMenu()
     {
         SwitchVisibility(MainButtons, StartButtons);
@@ -51,4 +57,5 @@ public class MainMenu : MonoBehaviour
         object1.SetActive(true);
         object2.SetActive(false);
     }
+
 }
