@@ -32,13 +32,14 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
             if((currentlySelectedIndex + 1) < levelObjects.GetLength(0)) {
                 this.currentlySelectedIndex++;
+                GameObject.Find("RightButtIcon").GetComponent<LeftRightButton>().SimulateClick();
                 FocusOnLevel(currentlySelectedIndex);
-                
             }
         }
         else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
             if((currentlySelectedIndex - 1) > -1) {
                 this.currentlySelectedIndex--;
+                GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().SimulateClick();
                 FocusOnLevel(currentlySelectedIndex);
             }
         }
@@ -52,21 +53,6 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
             //go to progression store
             SceneManager.LoadScene("Progression-Store");
         }
-
-        //         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
-//             if((currentLevelIndex + 1) < levelObjects.GetLength(0)) {
-//                 //Debug.Log("right");
-//                 this.currentLevelIndex = this.currentLevelIndex + 1;
-//                 GetAndSetLevelSelectorByIndex(currentLevelIndex);
-//             }
-//         }
-//         else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) {
-//             if((currentLevelIndex - 1) > -1) {
-//                 //Debug.Log("Left");
-//                 this.currentLevelIndex = this.currentLevelIndex - 1;
-//                 GetAndSetLevelSelectorByIndex(currentLevelIndex);
-//             }
-//         }
     }
 
     private void FocusOnLevel(int index) {
@@ -79,6 +65,34 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
                 levelObject.GetComponent<OverworldLevelObject>().DisplayLevelInfo();
                 PlayerPrefs.SetInt("lastOverworldIndex",currentlySelectedIndex); //save last position
             }
+        }
+
+        HideButtonsIfNeeded();
+    }
+
+    private void HideButtonsIfNeeded() {
+        if(currentlySelectedIndex == 0) {
+            //hide the left button information UI
+            GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().ForcedHidden();
+            GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().HideButton();
+            GameObject.Find("LeftButtText").GetComponent<LeftRightButton>().HideButton();
+        }
+        else {
+            //show the left button information UI
+            GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().UnableForcedHidden();
+            GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().ShowButton();
+            GameObject.Find("LeftButtText").GetComponent<LeftRightButton>().ShowButton();
+        }
+
+        if(currentlySelectedIndex == levelObjects.GetLength(0) - 1) {
+            GameObject.Find("RightButtIcon").GetComponent<LeftRightButton>().ForcedHidden();
+            GameObject.Find("RightButtIcon").GetComponent<LeftRightButton>().HideButton();
+            GameObject.Find("RightButtText").GetComponent<LeftRightButton>().HideButton();
+        }
+        else {
+            GameObject.Find("RightButtIcon").GetComponent<LeftRightButton>().UnableForcedHidden();
+            GameObject.Find("RightButtIcon").GetComponent<LeftRightButton>().ShowButton();
+            GameObject.Find("RightButtText").GetComponent<LeftRightButton>().ShowButton();
         }
     }
 
