@@ -7212,9 +7212,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2.1952825
+  m_Height: 2.1919134
   m_Direction: 1
-  m_Center: {x: 0, y: 1.08, z: 0}
+  m_Center: {x: 0, y: 1.0816847, z: 0}
 --- !u!114 &3010936533986347316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7346,8 +7346,8 @@ MonoBehaviour:
   runAnimatonSpeed: 1
   animator: {fileID: 3010936533986347313}
   rigidbody: {fileID: 3010936533986347318}
-  distToGround: 1
-  isGrounded: 0
+  distToGround: -1
+  isGrounded: 1
   m_turnSpeed: 200
   view: {fileID: 3010936533986347317}
   cam: {fileID: 3010936535159786413}

@@ -12,7 +12,7 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
     Vector3 offset;
 
-    public float distToGround = 3f;
+    public float distToGround;
 
     public bool isGrounded;
 
@@ -27,11 +27,12 @@ public class ThirtPersonPLayerScript : MonoBehaviour
     public PhotonView view;
     public Camera cam;
 
-    private bool isJumping;
+    public bool isJumping;
     private bool isGrounded1;
 
 
     private Quaternion camRotation;
+
 
     private void Awake()
     {
@@ -76,19 +77,17 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             Debug.DrawRay(transform.position, -Vector3.up, Color.red);
 
             isGrounded = Grounded();
-            if (isGrounded)
+            if (isGrounded && !isJumping)
             {
-                animator.SetBool("IsGrounded", true);
-                animator.SetBool("IsJumping", false);
-                isJumping = false;
-                animator.SetBool("IsFalling", false);
+                GetComponent<Animator>().Play("Blend Tree");
             }
-            else
+            if(!isGrounded)
             {
-                animator.SetBool("IsGrounded", false);
 
+                GetComponent<Animator>().Play("falling");
 
             }
+            
 
             //Allow the player to move left and right
             float horizontalMove = Input.GetAxisRaw("Horizontal");
@@ -112,9 +111,12 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
-                animator.SetBool("IsJumping", true);
-                isJumping = true;
+                GetComponent<Animator>().Play("jumping") ;
+                
+                //isGrounded = false;
                 rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                StartCoroutine(WaitForSeconds());
+                
 
             }
 
@@ -133,11 +135,24 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
             rigidbody.MovePosition(translation);
 
+            if (Input.GetKeyDown("h"))
+            {
+                GetComponent<Animator>().Play("okSign"); 
+            }
         }
     }
 
         bool Grounded()
         {
-            return Physics.Raycast(transform.position, -Vector3.up, distToGround);
+        //StartCoroutine(WaitForSeconds());
+        return Physics.Raycast(transform.position, -Vector3.up, distToGround);
         }
+
+
+    IEnumerator WaitForSeconds()
+    {
+        isJumping = true;
+        yield return new WaitForSeconds(1.4f);
+        isJumping = false;
     }
+}

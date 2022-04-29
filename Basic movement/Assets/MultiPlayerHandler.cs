@@ -50,6 +50,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         turbineCounterText = GameObject.Find("WindCounter").GetComponent<Text>();
         PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(76,2,104.5f), Quaternion.identity);
         football = GameObject.Find("soccer-ball (3)");
+        
+        
 
         totalTurbineCount = GameObject.FindGameObjectsWithTag("TurbineMultiplayer").Length;
         totalSolarCount = GameObject.FindGameObjectsWithTag("SolarMultiplayer").Length;

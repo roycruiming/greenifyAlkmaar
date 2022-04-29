@@ -8,6 +8,7 @@ public class ScoreFootball1 : MonoBehaviour
     public GameObject confeti;
     public GameObject confetiFiveSeconds;
     public GameObject solarPanel;
+    public GameObject windmill;
     public MultiPlayerHandler MPH;
 
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class ScoreFootball1 : MonoBehaviour
     {
         MPH = GameObject.FindObjectOfType<MultiPlayerHandler>();
         solarPanel = GameObject.Find("solar-panel (4)");
+        windmill = GameObject.Find("windmill (2)");
         solarPanel.SetActive(false);
     }
 
@@ -39,5 +41,6 @@ public class ScoreFootball1 : MonoBehaviour
         Destroy(confetiFiveSeconds, 5);
         other.gameObject.transform.position = new Vector3(76, 2.5f, 104);
         solarPanel.SetActive(true);
+        windmill.SetActive(true);
     }
 }
