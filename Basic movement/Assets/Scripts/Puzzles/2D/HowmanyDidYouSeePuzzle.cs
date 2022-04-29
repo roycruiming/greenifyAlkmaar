@@ -94,10 +94,12 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     {
       GameObject NewObj = new GameObject();
       NewObj.name = "Icon";
+      NewObj.transform.localScale = new Vector3(0.5f , 0.5f, 0.5f);
 
       Image NewImage = NewObj.AddComponent<Image>();
       NewImage.sprite = Icons[Random.Range(0, Icons.Count)];
       NewImage.color = new Color32(255, 255, 255, 255);
+      
       NewObj.AddComponent<SlidingIcon>();
 
       NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);

@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 
     public void Tutorial()
     {
-        HelpMenu.SetActive(true);
+        SceneManager.LoadScene("Tutorial-Level");
     }
 
     public void Options()
@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
 
     public void Singleplayer()
     {
-        SceneManager.LoadScene("Mainmap-Scene");
+        SceneManager.LoadScene("OverworldMapV2");
     }
 
     public void BackToMainMenu()

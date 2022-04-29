@@ -54,7 +54,7 @@ public class raycaster : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.F)) {
 
-                Item item = hitInfo.collider.gameObject.GetComponent<Item>();
+               Item item = hitInfo.collider.gameObject.GetComponent<Item>();
                 if (item != null) {
                     if (item.HudImage != null)
                     {
@@ -85,6 +85,16 @@ public class raycaster : MonoBehaviour
                     InventoryController.ClearInventory();
                 }
 
+                Treespot treeSpot = hitInfo.collider.gameObject.GetComponent<Treespot>();
+                if (treeSpot != null) {
+                    Item tree = InventoryController.GetItem();
+                    if (!treeSpot.PlantTree(tree)) return;
+                    InventoryController.ClearInventory(); 
+                }
+
+
+
+
                 PuzzleController puzzleController = hitInfo.collider.gameObject.GetComponent<PuzzleController>();
                 if (puzzleController != null) {
                     hitInfo.collider.gameObject.GetComponent<PuzzleController>().StartAPuzzle();
@@ -94,9 +104,7 @@ public class raycaster : MonoBehaviour
                 Item item3 = InventoryController.GetItem();
                 if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null) {
                     solarSpot.DoShit(item3);
-                    InventoryController.ClearInventory();
-                    //item3 = InventoryController.GetItem(); 
-                    print(InventoryController.GetItem().name);
+                    InventoryController.ClearInventory();            
                 }
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))

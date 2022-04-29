@@ -3,8 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum RouteType
+{
+    Undefined, Linear, circular
+}
+
 public class Waypoints : MonoBehaviour
 {
+
+
+    public RouteType RouteType; 
+
+
 
     private void Start()
     {
@@ -14,12 +25,15 @@ public class Waypoints : MonoBehaviour
 
     private void Awake()
     {
-        
+        if (RouteType == RouteType.Undefined) {
+            RouteType = RouteType.circular;     
+        }
     }
 
     private void OnDrawGizmos()
     {
 
+        //
 
         //print("ffs");
 
@@ -32,12 +46,19 @@ public class Waypoints : MonoBehaviour
 
             Gizmos.DrawLine(transform.GetChild(i).position, transform.GetChild(i + 1).position); 
             
-        }; 
+        }
 
+        if (RouteType != RouteType.circular) return; 
         Gizmos.DrawLine(transform.GetChild(transform.childCount -1).position , transform.GetChild(0).position);
 
         
     }
+
+    public bool IsFirstChild(Transform wayPoint) {
+        return wayPoint == transform.GetChild(0); 
+    }
+
+
 
 
 

@@ -11,11 +11,12 @@ public class LoadSelectedPlayerModel : MonoBehaviour
         int selectedCharacterUnlockableId = PlayerPrefs.GetInt("ActiveCharacterUnlockId");
 
         if(selectedCharacterUnlockableId != -1) {
-            foreach(Unlockable ue in GlobalGameHandler.GetAllUnlockablesInfoByType(UnlockableType.character)) {
+            foreach(Unlockable ue in this.LoadUnlockablesFromSaveFile()) {
                 if(ue.id == selectedCharacterUnlockableId) {
 
                     transform.Find("man_casual").gameObject.SetActive(false); //disable current shown character
                     this.transform.Find(ue.GetPolyPerfectCharacterName()).gameObject.SetActive(true);
+                    break;
                 }
             }
         }
@@ -31,6 +32,15 @@ public class LoadSelectedPlayerModel : MonoBehaviour
 
         //     charactersShowcaseContainer.transform.Find(unlockableCharacter.polyPerfectModelName).gameObject.SetActive(true);
         // }
+    }
+
+    private List<Unlockable> LoadUnlockablesFromSaveFile() {
+        List<Unlockable> loadedUnlockables = new List<Unlockable>();
+        for(int i = 0; i < PlayerPrefs.GetInt("UnlockableCount") - 1; i++) {
+            loadedUnlockables.Add(new Unlockable(i));
+        }
+
+        return loadedUnlockables;
     }
 
     // Update is called once per frame

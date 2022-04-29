@@ -28,7 +28,7 @@ public class DirectionalArrow : MonoBehaviour
     {
 
 
-        if (objCon.targets.Count != 0)
+        if (objCon != null && objCon.targets.Count > 0)
         {
             //Vector3 targetPosition = GetClosestObjective(objCon.targets).transform.position;
             Vector3 targetPosition = objCon.targets[0].transform.position;

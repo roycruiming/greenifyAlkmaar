@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using System.IO;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class GlobalGameHandler : MonoBehaviour
 {
@@ -35,10 +36,13 @@ public class GlobalGameHandler : MonoBehaviour
                 PlayerPrefs.SetString("settings_language","english");
             }
             DontDestroyOnLoad(this.gameObject);
-            InitTranslationDictionary();
+            //InitTranslationDictionary();
+            InitTranslationDictionaryBuildFunctional(); //test
             InitUnlockAbles();
 
             LoadSaveGameInfo();
+
+
         }
     }
 
@@ -69,18 +73,22 @@ public class GlobalGameHandler : MonoBehaviour
     private void InitUnlockAbles() {
         instance.allUnlockables = new List<Unlockable>();
 
-        PlayerPrefs.DeleteAll(); //just for testing remove later!
+        //PlayerPrefs.DeleteAll(); //just for testing remove later!
 
         //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
         //id price unlockedInLevel imageName unlocked unlockableType isPurchased
+        //Every class gets saved from the constructor
         instance.allUnlockables.Add(new Unlockable(0,1644,0,"test3",true,UnlockableType.character, "man+clown")); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
         instance.allUnlockables.Add(new Unlockable(1,2030,1,"test2",false,UnlockableType.character, "man+knight")); 
         instance.allUnlockables.Add(new Unlockable(2,550,1,"test",false,UnlockableType.character, "man+ninja")); 
         instance.allUnlockables.Add(new Unlockable(3,320,2,"test2",false,UnlockableType.character)); 
-        instance.allUnlockables.Add(new Unlockable(3,320,2,"test2",false,UnlockableType.character)); 
-        instance.allUnlockables.Add(new Unlockable(4,320,3,"test3",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(4,320,2,"test2",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(5,320,3,"test3",false,UnlockableType.character)); 
 
-        //GlobalGameHandler.GivePlayerCoints(794);
+        //save the total count of unlockables
+        PlayerPrefs.SetInt("UnlockableCount",instance.allUnlockables.Count);
+        
+        GlobalGameHandler.GivePlayerCoints(1900);
     }
 
     public static int GetTotalPlayerCointsAmount() {
@@ -103,17 +111,18 @@ public class GlobalGameHandler : MonoBehaviour
         return instance.allUnlockables;
     }
 
-    public static List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
-        List<Unlockable> allTypeUnlockables = new List<Unlockable>();
-        
-        for(int i = 0; i < instance.allUnlockables.Count; i++) {
-            if(instance.allUnlockables[i].type == uType) {
-                allTypeUnlockables.Add(instance.allUnlockables[i]);
-            } 
-        }
+    // public static List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
+    //     List<Unlockable> allTypeUnlockables = new List<Unlockable>();
 
-        return allTypeUnlockables;
-    }
+    //     for(int i = 0; i < instance.allUnlockables.Count; i++) {
+    //         print(i);
+    //         if(instance.allUnlockables[i].type == uType) {
+    //             allTypeUnlockables.Add(instance.allUnlockables[i]);
+    //         } 
+    //     }
+
+    //     return allTypeUnlockables;
+    // }
 
     // public static void UnlockUnlockable(int unlockableId) {
     //     //for some reason this function below returns me null so create a function that loads info from the player prefs
@@ -182,6 +191,39 @@ public class GlobalGameHandler : MonoBehaviour
 
     private static void AddTranslationWord(string key, string value) {
         instance.translationDictionary.Add(new KeyValuePair<string,string>(key, value));
+    }
+
+    private List<KeyValuePair<string, string>> InitTranslationDictionaryBuildFunctional() {
+        //System.Object[] files = Resources.LoadAll("TranslationFiles/Languages");
+        TextAsset[] translationFiles = Resources.LoadAll<TextAsset>("TranslationFiles/Languages");
+        foreach(TextAsset textAsset in translationFiles) {
+            string[] allCsvLines = Regex.Split ( textAsset.text, "\n|\r|\r\n" );
+            foreach(string line in allCsvLines) {
+                if(!string.IsNullOrEmpty(line)) {
+                    string[] stringData = line.Split(',');
+                    if(stringData != null && stringData.GetLength(0) > 1) {
+                            if(stringData[0] == "_language_") {
+                                //add languages to languages list
+                                GlobalGameHandler.AddLanguage(stringData[1]);
+                                currentLanguage = stringData[1];
+                            }
+                            else {
+                                //add key and word to the words list
+                                //the key is the keyword + current language so for example:
+                                //  key:    'start game_english'    value: 'start game'
+                                //  key:    'start game_nederlands'    value: 'start spel'
+                                if(currentLanguage != null) {
+                                    GlobalGameHandler.AddTranslationWord(stringData[0] + '_' + currentLanguage, stringData[1]);
+                                    //Debug.Log("Added to the words dictionary: key= " + values[0] + '_' + currentLanguage + " , values= " + values[1]);
+                                }
+
+                            }
+                    }
+                }
+            }
+        }
+        //foreach(System.Object s in files) print("test");
+        return null;
     }
 
     private List<KeyValuePair<string, string>> InitTranslationDictionary()
