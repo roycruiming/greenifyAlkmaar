@@ -10,12 +10,15 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public bridgeUp brScript;
     public int solarCounter;
     public int TurbineCounter;
+    public int totalSolarCount;
+    public int totalTurbineCount;
     public Text solarCounterText;
     public Text turbineCounterText;
     public GameObject bridge;
     public ScoreFootball1 sc1;
     public ScoreFootball sc;
     public GameObject football;
+
 
     public float y = 0;
     bool up = true;
@@ -26,12 +29,13 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(solarCounter);
-            //stream.SendNext(football);
+            stream.SendNext(TurbineCounter);
         }
         if (stream.IsReading)
         {
             solarCounter = (int)stream.ReceiveNext();
-            //football = (GameObject)stream.ReceiveNext();
+            TurbineCounter = (int)stream.ReceiveNext();
+
         }
     }
 
@@ -46,14 +50,20 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         turbineCounterText = GameObject.Find("WindCounter").GetComponent<Text>();
         PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(76,2,104.5f), Quaternion.identity);
         football = GameObject.Find("soccer-ball (3)");
-        
+
+        totalTurbineCount = GameObject.FindGameObjectsWithTag("TurbineMultiplayer").Length;
+        totalSolarCount = GameObject.FindGameObjectsWithTag("SolarMultiplayer").Length;
+
+
+
+
     }
 
     // Update is called once per frame  
     void Update()
     {
-        solarCounterText.text = solarCounter.ToString();
-        turbineCounterText.text = TurbineCounter.ToString();
+        solarCounterText.text = solarCounter.ToString() + "/" + totalSolarCount;
+        turbineCounterText.text = TurbineCounter.ToString() + "/" + totalTurbineCount;
 
         if (Input.GetKeyDown("k"))
         {

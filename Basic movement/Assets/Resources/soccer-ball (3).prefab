@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 53871166691115059}
   - component: {fileID: 98337749031104763}
   - component: {fileID: 98337749031104761}
-  - component: {fileID: 98337749031104766}
+  - component: {fileID: 7534392299363403838}
   m_Layer: 0
   m_Name: soccer-ball (3)
   m_TagString: Football
@@ -97,7 +97,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.12897533
+  m_Radius: 0.15
   m_Center: {x: 0.00008801371, y: 0.000048846006, z: 0.00013779476}
 --- !u!54 &98337749031104763
 Rigidbody:
@@ -134,11 +134,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 98337749031104766}
+  - {fileID: 7534392299363403838}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &98337749031104766
+--- !u!114 &7534392299363403838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +147,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 97299421485817827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35144820bcc25444bb8f0fd767d9423e, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SmoothingDelay: 5
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1

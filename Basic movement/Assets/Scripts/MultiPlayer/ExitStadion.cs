@@ -18,6 +18,14 @@ public class ExitStadion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.transform.position = new Vector3(77, 3, 67);
+        if (other.CompareTag("Football"))
+        {
+
+
+        }
+        else
+        {
+            other.gameObject.transform.position = new Vector3(77, 3, 67);
+        }
     }
 }
