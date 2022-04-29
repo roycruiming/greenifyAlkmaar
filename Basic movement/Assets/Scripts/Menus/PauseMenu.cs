@@ -13,6 +13,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject SettingMenu;
 
     public DirectionalArrow arrow;
+    public AudioSource OpenSound;
+    public AudioSource ClickSound;
 
 
     // Update is called once per frame
@@ -36,23 +38,29 @@ public class PauseMenu : MonoBehaviour
         //laat het spel verder gaan
         public void Resume()
         {
+            OpenSound.Play();
             Cursor.lockState = CursorLockMode.Locked;
-
             foreach (Transform child in transform)
             {
-                child.gameObject.SetActive(false);
+                if(child.gameObject.GetComponent<AudioSource>() == null)
+                {
+                  child.gameObject.SetActive(false);
+                }
             }
             Time.timeScale = 1f;
             GameIsPaused = false;
+
         }
 
         //zet het spel op pauze
         void Pause()
         {
             Cursor.lockState = CursorLockMode.None;
+
             PauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
             GameIsPaused = true;
+            OpenSound.Play();
         }
 
         public void Options()
@@ -85,5 +93,10 @@ public class PauseMenu : MonoBehaviour
             {
                 panel.SetActive(visbility);
             }
+        }
+
+        public void playSound()
+        {
+          ClickSound.Play();
         }
 }
