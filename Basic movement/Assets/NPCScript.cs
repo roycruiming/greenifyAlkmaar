@@ -33,8 +33,7 @@ public class NPCScript : MonoBehaviour
         Transform curveControl = currentWaypoint.GetChild(0);
 
 
-
-
+           
         //initiate curvePoints 
         if (curvePoints.Count == 0 && isInstantiated == false)
         {
@@ -42,6 +41,7 @@ public class NPCScript : MonoBehaviour
             {
                 float t = i / (float)50;
                 Vector3 pointPos = waypoints.CalculateQuadraticBezierPoint(t, currentWaypoint.position, curveControl.position, waypoints.GetNextWayPoint(currentWaypoint).position);
+                pointPos.y = waypoints.GetNextWayPoint(currentWaypoint).position.y; 
                 curvePoints.Add(pointPos);
 
             }
