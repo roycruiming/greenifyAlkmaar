@@ -22,7 +22,8 @@ public class GuessWordsAnswerButton : MonoBehaviour
     }
 
     public void CommitLetterPress() {
-        print("click " + this.currentLetter);
+        bool correctlySet = wordGuesserController.SetLetter(currentLetter);
+        if(correctlySet) this.HideElement();
     }
 
     public void SetAndDisplayLetter(char letter) {

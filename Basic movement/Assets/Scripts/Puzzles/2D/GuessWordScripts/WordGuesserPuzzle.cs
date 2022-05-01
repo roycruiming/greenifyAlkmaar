@@ -9,8 +9,10 @@ public class WordGuesserPuzzle : MonoBehaviour
     int puzzleDifficulty;
 
     string currentWord = "";
+    char[] currentWordCorr;
 
     List<string> allWords = new List<string>();
+    List<GuessWordAnswerSpot> currentAnswerSpots = new List<GuessWordAnswerSpot>();
 
     public void StartPuzzle(WordGuesserDifficulty difficulty, string Name) {
         //TEST WORDS:
@@ -31,6 +33,41 @@ public class WordGuesserPuzzle : MonoBehaviour
     private void InitPuzzle() {
         PickAndSetWord();
         SetAndDiplayInputLetters();
+        SetAnswerDisplay();
+    }
+
+    public bool SetLetter(char letter) {
+        GuessWordAnswerSpot gs = GetFirstUnsetAnswerSpot();
+        if(gs != null) {
+            bool correctLetterInSpot = false;
+            if(currentWordCorr[gs.rowIndex] == letter) correctLetterInSpot = true;
+            gs.setAndUpdateLetterDisplay(letter, correctLetterInSpot);
+            return true;
+        }
+        else return false;
+    }
+
+    private GuessWordAnswerSpot GetFirstUnsetAnswerSpot() {
+        foreach(GuessWordAnswerSpot gs in currentAnswerSpots) if(gs.currentLetter == '-') return gs;
+
+        return null;
+    }
+
+    private void SetAnswerDisplay() {
+        //clear previous answer spots
+        this.currentAnswerSpots.Clear();
+
+        for(int i = 0; i < 12; i++)  
+            if(GameObject.Find("letter_answer_display_" + i) != null) {
+                if(i < currentWord.Length) {
+                    GuessWordAnswerSpot gs = GameObject.Find("letter_answer_display_" + i).GetComponent<GuessWordAnswerSpot>();
+                    gs.currentLetter = '-';
+                    gs.UpdateLetterDisplay('-');
+                    gs.ShowElement();
+                    currentAnswerSpots.Add(gs);
+                }
+                else GameObject.Find("letter_answer_display_" + i).GetComponent<GuessWordAnswerSpot>().HideElement();
+            }
     }
 
     private void SetAndDiplayInputLetters() {
@@ -48,7 +85,6 @@ public class WordGuesserPuzzle : MonoBehaviour
 
     private void RandomlySetLetters(List<char> allLetters) {
         allLetters = RandommizedItemsList(allLetters);
-        print(allLetters.Count);
         for(int i = 0; i < GameObject.FindGameObjectsWithTag("LetterAnswerButt").Count(); i++) {
             GameObject answerButton = null;
             foreach(GameObject anwserButt in  GameObject.FindGameObjectsWithTag("LetterAnswerButt")) {
@@ -66,25 +102,6 @@ public class WordGuesserPuzzle : MonoBehaviour
                 else answerButton.GetComponent<GuessWordsAnswerButton>().HideElement();
             }
         }
-
-        // int counter = -1;
-        // int initialLettersCount = allLetters.Count;
-        // do {
-        //     counter++;
-        //     int randomIndex = Random.Range(0,allLetters.Count);
-        //     print("Set letter " + allLetters[randomIndex] + " in letter_answer_container_" + counter);
-        //     GameObject.Find("letter_answer_container_" + counter).GetComponent<GuessWordsAnswerButton>().SetAndDisplayLetter(allLetters[randomIndex]);
-        //     allLetters.RemoveAt(randomIndex);
-
-        // } while (allLetters.Count > 0);
-        // print(GameObject.FindGameObjectsWithTag("LetterAnswerButt").Count());
-        // print(initialLettersCount);
-        
-        //max letters is 16; so hide all the other answer buttons that are not used
-        // for(int j = initialLettersCount; j < GameObject.FindGameObjectsWithTag("LetterAnswerButt").Count(); j++) {
-        //     print("Hide" + "letter_answer_container_" + j); 
-        //     if(GameObject.Find("letter_answer_container_" + j) != null) GameObject.Find("letter_answer_container_" + j).GetComponent<GuessWordsAnswerButton>().HideElement();
-        // }
     }
 
     private List<char> RandommizedItemsList(List<char> originalList) {
@@ -109,6 +126,7 @@ public class WordGuesserPuzzle : MonoBehaviour
     private void PickAndSetWord() {
         //!! NEED TO SET RESTRICTION OF MAXIMUM CHARACTERS FOR TRANSLATED WORDS !!
         currentWord = this.allWords[UnityEngine.Random.Range(0,allWords.Count)].ToUpper();
+        currentWordCorr = currentWord.ToArray();
         print(currentWord);
     }
 }
