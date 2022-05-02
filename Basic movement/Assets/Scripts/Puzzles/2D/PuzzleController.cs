@@ -15,6 +15,8 @@ public class PuzzleController : MonoBehaviour
   int SelectedPuzzle;
   public static bool PuzzlePlaying = false;
 
+  public WordGuesserDifficulty wordGuesserDifficulty = WordGuesserDifficulty.easy;
+
 void Start()
 {
   PuzzleCanvas = GameObject.Find("PuzzleCanvas");
@@ -53,6 +55,9 @@ void Start()
             break;
           case "TurnTheTurbine":
             Puzzles[SelectedPuzzle].GetComponent<TurnTheTurbnines>().StartPuzzle(PuzzleDifficulty, transform.name);
+            break;
+          case "GuessWordsPuzzle":
+            Puzzles[SelectedPuzzle].GetComponent<WordGuesserPuzzle>().StartPuzzle(wordGuesserDifficulty, transform.name, this.gameObject);
             break;
         }
 
