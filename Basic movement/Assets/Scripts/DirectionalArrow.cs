@@ -35,6 +35,10 @@ public class DirectionalArrow : MonoBehaviour
             targetPosition.y = transform.position.y;
             transform.LookAt(targetPosition);
         }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 

@@ -12,8 +12,11 @@ public class SolarSpot : MonoBehaviour
 
     public GameObject objCon;
 
+    public ObjectivesController objConScript;
+
     private void Start()
     {
+        objConScript = FindObjectOfType<ObjectivesController>();
         objCon = GameObject.FindGameObjectWithTag("GameController");
         if (objCon == null) objCon = GameObject.Find("HUDCanvas");
     }

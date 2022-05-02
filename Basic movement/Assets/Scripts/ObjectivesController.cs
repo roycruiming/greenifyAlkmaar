@@ -108,18 +108,18 @@ public class ObjectivesController : MonoBehaviour
 
         this.CheckNextProgressionPhase();
         //when objectivesList == emtpy - game is finished
-         if(targets.Count == 0 && solarPanels.Count == 0 && solarPanelsSpot.Count == 0)
+         if(targets.Count == 0 && solarPanels.Count == 0 && objectivesCounter == totalObjectives)
          {
              Cursor.lockState = CursorLockMode.Confined;
              Cursor.visible = true;
              Time.timeScale = 0;
-             //puzzleCanvas.gameObject.SetActive(false);
+             puzzleCanvas.gameObject.SetActive(false);
 
              blackBarArroundScoreScreen.gameObject.SetActive(true);
-             //nameInput.gameObject.SetActive(true);
-             //nameInputBar.gameObject.SetActive(true);
+             nameInput.gameObject.SetActive(true);
+             nameInputBar.gameObject.SetActive(true);
              GameDone.text = "Gefeliciteerd!";
-             //gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
+             gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
              gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
              back.gameObject.SetActive(true);
              gameFinnished = true;
