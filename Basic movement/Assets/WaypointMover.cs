@@ -52,7 +52,6 @@ public class WaypointMover : MonoBehaviour
             {
                 float t = i / (float)50;
                 Vector3 pointPos = waypoints.CalculateQuadraticBezierPoint(t, currentWaypoint.position, curveControl.position, waypoints.GetNextWayPoint(currentWaypoint).position);
-                pointPos.y = waypoints.GetNextWayPoint(currentWaypoint).position.y;
                 curvePoints.Add(pointPos);
 
             }
@@ -65,7 +64,7 @@ public class WaypointMover : MonoBehaviour
         {
             transform.position =  Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.deltaTime);
 
-            if (Vector3.Distance(transform.position, curvePoints[0]) < (float)1/50)
+            if (Vector3.Distance(transform.position, curvePoints[0]) < 0.5)
             {
                 transform.LookAt(curvePoints[0]);
                 curvePoints.RemoveAt(0);
