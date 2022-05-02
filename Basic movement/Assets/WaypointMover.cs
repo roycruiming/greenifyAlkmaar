@@ -65,7 +65,7 @@ public class WaypointMover : MonoBehaviour
         {
             transform.position =  Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.deltaTime);
 
-            if (Vector3.Distance(transform.position, curvePoints[0]) < 0.5)
+            if (Vector3.Distance(transform.position, curvePoints[0]) < (float)1/50)
             {
                 transform.LookAt(curvePoints[0]);
                 curvePoints.RemoveAt(0);
