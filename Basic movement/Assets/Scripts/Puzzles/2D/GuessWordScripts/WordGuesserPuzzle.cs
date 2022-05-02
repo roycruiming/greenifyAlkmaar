@@ -99,11 +99,8 @@ public class WordGuesserPuzzle : MonoBehaviour
     }
 
     public void StartPuzzle(WordGuesserDifficulty difficulty, string Name, GameObject puzzleParentController) {
-        //TEST WORDS:
-        allWords.Add("zonnestraal");
-        allWords.Add("windmolen");
-        allWords.Add("alkmaar");
-        //END TEST WORDS
+        //load words from translation file.
+        this.allWords = this.GetAllPossibleTranslatedWords(difficulty);
 
         this.gameObject.SetActive(true);
         this.transform.Find("Puzzle").gameObject.SetActive(true);
@@ -208,10 +205,23 @@ public class WordGuesserPuzzle : MonoBehaviour
         return randomizedList;
     }
 
-    private List<string> GetAllPossibleTranslatedWords() {
+    private List<string> GetAllPossibleTranslatedWords(WordGuesserDifficulty difficulty) {
         //length 12 is the max amount of characters that can be used,
+        List<string> allWords = new List<string>();
+        int maxWordLength = 100;
+        if(difficulty == WordGuesserDifficulty.easy) maxWordLength = 8;
+        else if(difficulty == WordGuesserDifficulty.normal) maxWordLength = 10;
+        else maxWordLength = 12;
 
-        return null;
+        for(int i = 0; i < 200; i++) {
+            string translatedWord = GlobalGameHandler.GetTextByDictionaryKey("guess word " + i);
+            if(translatedWord != "ERROR WORD NOT FOUND") {
+                if(translatedWord.Length <= maxWordLength) allWords.Add(translatedWord);
+            }
+            else break;
+        }
+
+        return allWords;
     }
 
     private void PickAndSetWord() {

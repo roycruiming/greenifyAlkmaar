@@ -15,7 +15,7 @@ public class PuzzleController : MonoBehaviour
   int SelectedPuzzle;
   public static bool PuzzlePlaying = false;
 
-  public WordGuesserDifficulty wordGuesserDifficulty = WordGuesserDifficulty.normal;
+  public WordGuesserDifficulty wordGuesserDifficulty = WordGuesserDifficulty.easy;
 
 void Start()
 {
