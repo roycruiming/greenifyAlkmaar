@@ -20,7 +20,6 @@ public class GuessWordAnswerSpot : MonoBehaviour
     }
 
     public void setAndUpdateLetterDisplay(char letter, bool isPlacedCorrect) {
-        print("inside set and display");
         this.currentLetter = letter;
         this.isCorrect = isPlacedCorrect;
         this.UpdateLetterDisplay(letter);
@@ -30,9 +29,16 @@ public class GuessWordAnswerSpot : MonoBehaviour
         gameObject.transform.Find("letter").GetComponent<TextMeshProUGUI>().text = letter.ToString();
     }
 
-    public void resetAnswerSpot() {
+    public void ResetAnswerSpot() {
         this.currentLetter = '-';
         isCorrect = false;
+        gameObject.transform.Find("letter").GetComponent<TextMeshProUGUI>().color = new Color(0,0,0,1);
+        this.UpdateLetterDisplay(this.currentLetter);
+    }
+
+    public void SetTextColor(Color color) {
+        gameObject.transform.Find("letter").GetComponent<TextMeshProUGUI>().color = color;
+        //gameObject.transform.Find("letter").GetComponent<TextMeshProUGUI>().outlineColor = new Color32(255,245,66,66);
     }
 
     public void HideElement() {

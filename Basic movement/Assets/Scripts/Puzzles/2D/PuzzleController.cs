@@ -57,7 +57,7 @@ void Start()
             Puzzles[SelectedPuzzle].GetComponent<TurnTheTurbnines>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
           case "GuessWordsPuzzle":
-            Puzzles[SelectedPuzzle].GetComponent<WordGuesserPuzzle>().StartPuzzle(wordGuesserDifficulty, transform.name);
+            Puzzles[SelectedPuzzle].GetComponent<WordGuesserPuzzle>().StartPuzzle(wordGuesserDifficulty, transform.name, this.gameObject);
             break;
         }
 

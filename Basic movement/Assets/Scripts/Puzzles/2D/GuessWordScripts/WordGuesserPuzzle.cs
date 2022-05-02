@@ -9,12 +9,96 @@ public class WordGuesserPuzzle : MonoBehaviour
     int puzzleDifficulty;
 
     string currentWord = "";
+    string forcedWord = null; //when pressing the quit button to skip a word and get a new one, should not be possible.
     char[] currentWordCorr;
 
     List<string> allWords = new List<string>();
     List<GuessWordAnswerSpot> currentAnswerSpots = new List<GuessWordAnswerSpot>();
+    List<GuessWordsAnswerButton> currentAnswerButtons = new List<GuessWordsAnswerButton>();
 
-    public void StartPuzzle(WordGuesserDifficulty difficulty, string Name) {
+    GameObject PuzzleControllerObject;
+
+    private void checkCurrentInput() {
+        bool everythingCorrect = true;
+        for(int i = 0; i < currentWordCorr.GetLength(0); i++) 
+            if(currentWordCorr[i] != currentAnswerSpots[i].currentLetter) {
+                everythingCorrect = false;
+                break;
+            }
+        
+        if(everythingCorrect == false) StartCoroutine(showcaseTextAnimationAndHandleResult(new Color(1,0,0,1), everythingCorrect));
+        else StartCoroutine(showcaseTextAnimationAndHandleResult(new Color(0,1,0,1), everythingCorrect)); //everything was filled in correct
+        
+    }
+
+    IEnumerator showcaseTextAnimationAndHandleResult(Color textColor,bool everythingCorrect) {
+        //showcase blink effect and after the effect reset the letters or reward the player
+        float waitingTime = 0.35f;
+        this.SetAnswerSpotsTextColors(textColor);
+        yield return new WaitForSeconds(waitingTime);
+        this.SetAnswerSpotsTextColors(new Color(0,0,0,1)); //black
+        yield return new WaitForSeconds(waitingTime);
+        this.SetAnswerSpotsTextColors(textColor);
+        yield return new WaitForSeconds(waitingTime);
+        this.SetAnswerSpotsTextColors(new Color(0,0,0,1)); //black
+        yield return new WaitForSeconds(waitingTime);
+        this.SetAnswerSpotsTextColors(textColor);
+        yield return new WaitForSeconds(waitingTime);
+        this.SetAnswerSpotsTextColors(new Color(0,0,0,1)); //black
+        yield return new WaitForSeconds(waitingTime);
+        this.SetAnswerSpotsTextColors(textColor);
+        yield return new WaitForSeconds(waitingTime);
+        this.SetAnswerSpotsTextColors(new Color(0,0,0,1)); //black
+        yield return new WaitForSeconds(waitingTime);
+        this.SetAnswerSpotsTextColors(textColor);
+        yield return new WaitForSeconds(waitingTime);
+        this.SetAnswerSpotsTextColors(new Color(0,0,0,1)); //black
+        yield return new WaitForSeconds(waitingTime);
+
+        if(everythingCorrect == false) ResetEverything();
+        else PuzzleVictory();
+    }
+
+    public void ResetEverything() {
+        foreach(GuessWordsAnswerButton gb in currentAnswerButtons) gb.ShowElement(); 
+        foreach(GuessWordAnswerSpot gs in this.currentAnswerSpots) gs.ResetAnswerSpot();
+    }
+
+    private void ClosePuzzle() {
+        Cursor.visible = false;
+      this.gameObject.SetActive(false);
+    }
+
+    public void ForceClosePuzzle() {
+        this.forcedWord = this.currentWord;
+        this.ClosePuzzle();
+        Cursor.lockState = CursorLockMode.Locked;
+        PuzzleController.PuzzlePlaying = false;
+    }
+
+    private void PuzzleVictory() {
+        this.ClosePuzzle();
+        PuzzleControllerObject.GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
+    }
+
+    private void SetAnswerSpotsTextColors(Color textColor) {
+        foreach(GuessWordAnswerSpot gs in this.currentAnswerSpots) gs.SetTextColor(textColor);
+    }
+
+    private bool AllAnswersFilledIn() {
+        bool everythingFilledIn = true;
+        if(this.currentAnswerSpots.Count > 0) 
+            foreach(GuessWordAnswerSpot gs in this.currentAnswerSpots) 
+                if(gs.currentLetter == '-') {
+                    everythingFilledIn = false;
+                    break;
+                }
+            
+
+        return everythingFilledIn;
+    }
+
+    public void StartPuzzle(WordGuesserDifficulty difficulty, string Name, GameObject puzzleParentController) {
         //TEST WORDS:
         allWords.Add("zonnestraal");
         allWords.Add("windmolen");
@@ -24,6 +108,8 @@ public class WordGuesserPuzzle : MonoBehaviour
         this.gameObject.SetActive(true);
         this.transform.Find("Puzzle").gameObject.SetActive(true);
 
+        this.PuzzleControllerObject = puzzleParentController;
+        Cursor.visible = true;
         //set puzzle difficulty based on difficulty number
 
 
@@ -42,9 +128,13 @@ public class WordGuesserPuzzle : MonoBehaviour
             bool correctLetterInSpot = false;
             if(currentWordCorr[gs.rowIndex] == letter) correctLetterInSpot = true;
             gs.setAndUpdateLetterDisplay(letter, correctLetterInSpot);
+            if(this.AllAnswersFilledIn()) this.checkCurrentInput();
             return true;
         }
-        else return false;
+        else {
+            if(this.AllAnswersFilledIn()) this.checkCurrentInput();
+            return false;
+        }
     }
 
     private GuessWordAnswerSpot GetFirstUnsetAnswerSpot() {
@@ -98,6 +188,7 @@ public class WordGuesserPuzzle : MonoBehaviour
                 if(i < allLetters.Count) {
                     answerButton.GetComponent<GuessWordsAnswerButton>().ShowElement();
                     answerButton.GetComponent<GuessWordsAnswerButton>().SetAndDisplayLetter(allLetters[i]);
+                    currentAnswerButtons.Add(answerButton.GetComponent<GuessWordsAnswerButton>());
                 }
                 else answerButton.GetComponent<GuessWordsAnswerButton>().HideElement();
             }
@@ -118,14 +209,21 @@ public class WordGuesserPuzzle : MonoBehaviour
     }
 
     private List<string> GetAllPossibleTranslatedWords() {
-
+        //length 12 is the max amount of characters that can be used,
 
         return null;
     }
 
     private void PickAndSetWord() {
-        //!! NEED TO SET RESTRICTION OF MAXIMUM CHARACTERS FOR TRANSLATED WORDS !!
-        currentWord = this.allWords[UnityEngine.Random.Range(0,allWords.Count)].ToUpper();
+        if(forcedWord == null) {
+            //DEPENDING ON THE DIFFICULTY CHOOSE A WORD THAT HAS A MATCHING AMOUNT OF CHARACTERS BASED ON THE DIFFICULTY
+            currentWord = this.allWords[UnityEngine.Random.Range(0,allWords.Count)].ToUpper();
+        }
+        else {
+            currentWord = forcedWord;
+            forcedWord = null;
+        }
+
         currentWordCorr = currentWord.ToArray();
         print(currentWord);
     }
