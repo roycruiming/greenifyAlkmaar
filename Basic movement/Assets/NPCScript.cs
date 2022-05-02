@@ -24,7 +24,7 @@ public class NPCScript : MonoBehaviour
 
 
     List<Vector3> curvePoints = new List<Vector3>();
-    private bool isInstantiated = false; 
+
 
 
 
@@ -35,7 +35,7 @@ public class NPCScript : MonoBehaviour
 
            
         //initiate curvePoints 
-        if (curvePoints.Count == 0 && isInstantiated == false)
+        if (curvePoints.Count == 0 )
         {
             for (int i = 1; i < 50 + 1; i++)
             {
@@ -46,34 +46,25 @@ public class NPCScript : MonoBehaviour
 
             }
 
-            isInstantiated = true; 
+   
 
         }
 
-        else {
-            if (curvePoints.Count > 0)
+        else if (curvePoints.Count > 0)
+        {
+            rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.deltaTime));
+
+            if (Vector3.Distance(transform.position, curvePoints[0]) < 0.5)
             {
-                rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.deltaTime));
-               
-                if (Vector3.Distance(transform.position, curvePoints[0]) < 0.5) {
-                    transform.LookAt(curvePoints[0]);
-                    curvePoints.RemoveAt(0);
-                }
-
-                if (curvePoints.Count == 0) {
-                    currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
-                    isInstantiated = false; 
-                }
-
-                
+                transform.LookAt(curvePoints[0]);
+                curvePoints.RemoveAt(0);
             }
- 
 
+            if (curvePoints.Count == 0)
+            {
+                currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
+            }
         }
-
- 
-
-
     }
 
 
