@@ -10,10 +10,16 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public bridgeUp brScript;
     public int solarCounter;
     public int TurbineCounter;
+    public int treeCounter;
     public int totalSolarCount;
     public int totalTurbineCount;
+    public int totalTreeCount;
+    public int totalCount;
+    public int totalCounter;
     public Text solarCounterText;
     public Text turbineCounterText;
+    public Text treeCounterText;
+    public Text totalCounterText;
     public GameObject bridge;
     public ScoreFootball1 sc1;
     public ScoreFootball sc;
@@ -30,11 +36,15 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         {
             stream.SendNext(solarCounter);
             stream.SendNext(TurbineCounter);
+            stream.SendNext(treeCounter);
+            stream.SendNext(totalCount);
         }
         if (stream.IsReading)
         {
             solarCounter = (int)stream.ReceiveNext();
             TurbineCounter = (int)stream.ReceiveNext();
+            treeCounter = (int)stream.ReceiveNext();
+            totalCount = (int)stream.ReceiveNext();
 
         }
     }
@@ -48,6 +58,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         brScript = GameObject.FindObjectOfType<bridgeUp>();
         solarCounterText = GameObject.Find("SolarCounter").GetComponent<Text>();
         turbineCounterText = GameObject.Find("WindCounter").GetComponent<Text>();
+        treeCounterText = GameObject.Find("TreeCounter").GetComponent<Text>();
+        totalCounterText = GameObject.Find("TotalCounter").GetComponent<Text>();
         PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(76,2,104.5f), Quaternion.identity);
         football = GameObject.Find("soccer-ball (3)");
         
@@ -55,6 +67,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 
         totalTurbineCount = GameObject.FindGameObjectsWithTag("TurbineMultiplayer").Length;
         totalSolarCount = GameObject.FindGameObjectsWithTag("SolarMultiplayer").Length;
+        totalTreeCount = GameObject.FindGameObjectsWithTag("TreeMultiplayer").Length;
+        totalCounter = totalTurbineCount + totalSolarCount + totalTreeCount;
 
 
 
@@ -66,6 +80,10 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         solarCounterText.text = solarCounter.ToString() + "/" + totalSolarCount;
         turbineCounterText.text = TurbineCounter.ToString() + "/" + totalTurbineCount;
+        treeCounterText.text = treeCounter.ToString() + "/" + totalTreeCount;
+        totalCounterText.text = totalCount.ToString() + "/" + totalCounter;
+
+        totalCount = solarCounter + TurbineCounter + treeCounter;
 
         if (Input.GetKeyDown("k"))
         {
@@ -113,6 +131,11 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public void CollectableWindTurbine()
     {
         TurbineCounter++;
+    }
+    [PunRPC]
+    public void CollectableTree()
+    {
+        treeCounter++;
     }
 
     [PunRPC]

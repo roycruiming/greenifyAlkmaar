@@ -36,6 +36,11 @@ public class CollectablesMultiplayer : MonoBehaviour
             MPH.CollectableWindTurbine();
             Destroy(this.gameObject);
         }
+        else if (this.gameObject.CompareTag("TreeMultiplayer"))
+        {
+            MPH.CollectableTree();
+            Destroy(this.gameObject);
+        }
 
     }
 }
