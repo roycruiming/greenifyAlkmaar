@@ -42,5 +42,6 @@ public class ScoreFootball1 : MonoBehaviour
         other.gameObject.transform.position = new Vector3(76, 2.5f, 104);
         solarPanel.SetActive(true);
         windmill.SetActive(true);
+        
     }
 }
