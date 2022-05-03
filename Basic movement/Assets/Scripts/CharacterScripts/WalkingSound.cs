@@ -28,7 +28,7 @@ public class WalkingSound : MonoBehaviour
     }
 
     void IsPlayerMoving(){
-      if(parent.horizontalMove != 0 || parent.vertical != 0){
+      if((parent.horizontalMove != 0 || parent.vertical != 0) && parent.isGrounded){
         if(Input.GetKey(KeyCode.LeftShift)){
           waitTime = 0.3f;
         } else {
