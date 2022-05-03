@@ -83,7 +83,6 @@ public class MemoryPuzzle : MonoBehaviour
 
     public void CheckPair(){
       if(FirstChoice == SecondChoice){
-        print("YOU FOUND A PAIR");
         StartCoroutine(CheckForCompletion());
       } else {
         StartCoroutine(ClosePair());
@@ -109,7 +108,6 @@ public class MemoryPuzzle : MonoBehaviour
       SecondCard.GetComponent<Image>().color = new Color32(204, 51, 51, 0);
       FirstCard.GetComponent<MemoryCard>().CanBeClicked = false;
       SecondCard.GetComponent<MemoryCard>().CanBeClicked = false;
-      GameObject.FindWithTag("HUDCanvas").GetComponent<Canvas>().sortingOrder = 0;
       if(AmountSolved >= 8){
         StartCoroutine(PuzzleCompleted());
       }
