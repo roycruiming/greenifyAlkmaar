@@ -27,6 +27,7 @@ void Start()
 
   public void StartAPuzzle()
   {
+    print("stinkyyy");
     if(!PuzzlePlaying){
       Cursor.lockState = CursorLockMode.None;
       //Als de speler op enter drukt en nu nog geen puzzel speelt
@@ -51,6 +52,7 @@ void Start()
             Puzzles[SelectedPuzzle].GetComponent<HowmanyDidYouSeePuzzle>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
           case "MemoryPuzzle":
+            print("stinky");
             Puzzles[SelectedPuzzle].GetComponent<MemoryPuzzle>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
           case "TurnTheTurbine":

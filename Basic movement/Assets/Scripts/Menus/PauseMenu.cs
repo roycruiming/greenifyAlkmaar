@@ -38,7 +38,11 @@ public class PauseMenu : MonoBehaviour
         //laat het spel verder gaan
         public void Resume()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            if(!PuzzleController.PuzzlePlaying)
+            {
+              Cursor.lockState = CursorLockMode.Locked;
+            }
+
             foreach (Transform child in transform)
             {
                 if(child.gameObject.GetComponent<AudioSource>() == null)
