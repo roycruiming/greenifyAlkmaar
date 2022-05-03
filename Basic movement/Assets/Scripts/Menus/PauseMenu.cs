@@ -38,8 +38,11 @@ public class PauseMenu : MonoBehaviour
         //laat het spel verder gaan
         public void Resume()
         {
-            OpenSound.Play();
-            Cursor.lockState = CursorLockMode.Locked;
+            if(!PuzzleController.PuzzlePlaying)
+            {
+              Cursor.lockState = CursorLockMode.Locked;
+            }
+
             foreach (Transform child in transform)
             {
                 if(child.gameObject.GetComponent<AudioSource>() == null)
@@ -48,19 +51,20 @@ public class PauseMenu : MonoBehaviour
                 }
             }
             Time.timeScale = 1f;
+            AudioListener.pause = false;
             GameIsPaused = false;
 
         }
 
         //zet het spel op pauze
-        void Pause()
+        public void Pause()
         {
             Cursor.lockState = CursorLockMode.None;
-
+            AudioListener.pause = true;
             PauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
             GameIsPaused = true;
-            OpenSound.Play();
+
         }
 
         public void Options()
@@ -77,6 +81,7 @@ public class PauseMenu : MonoBehaviour
         public void ExitLevel()
         {
             GameIsPaused = false;
+            AudioListener.pause = false;
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene(ExitTo);
@@ -85,6 +90,11 @@ public class PauseMenu : MonoBehaviour
         public void ExitGame()
         {
             Application.Quit();
+        }
+
+        public void MainMenu()
+        {
+          SceneManager.LoadScene("MainMenu");
         }
 
         void SwitchVisibility(GameObject panel, bool visbility)
@@ -99,4 +109,5 @@ public class PauseMenu : MonoBehaviour
         {
           ClickSound.Play();
         }
+
 }

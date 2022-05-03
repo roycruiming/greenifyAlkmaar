@@ -13,7 +13,7 @@ public class raycaster : MonoBehaviour
     public Text textUI;
     public GameObject objCon;
 
-    private InventoryController InventoryController; 
+    private InventoryController InventoryController;
 
 
 
@@ -25,20 +25,20 @@ public class raycaster : MonoBehaviour
         }
 
         objCon = GameObject.FindGameObjectWithTag("GameController");
-        if (objCon == null) objCon = GameObject.Find("HUDCanvas"); 
+        if (objCon == null) objCon = GameObject.Find("HUDCanvas");
 
     }
 
 
     private void Awake()
     {
-        InventoryController = new InventoryController(new Inventory()); 
+        InventoryController = new InventoryController(new Inventory());
     }
 
 
     void Update()
     {
-        
+
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hitInfo;
 
@@ -53,7 +53,6 @@ public class raycaster : MonoBehaviour
             }
 
             if (Input.GetKeyDown(KeyCode.F)) {
-
                Item item = hitInfo.collider.gameObject.GetComponent<Item>();
                 if (item != null) {
                     if (item.HudImage != null)
@@ -89,13 +88,14 @@ public class raycaster : MonoBehaviour
                 if (treeSpot != null) {
                     Item tree = InventoryController.GetItem();
                     if (!treeSpot.PlantTree(tree)) return;
-                    InventoryController.ClearInventory(); 
+                    InventoryController.ClearInventory();
                 }
 
 
 
 
                 PuzzleController puzzleController = hitInfo.collider.gameObject.GetComponent<PuzzleController>();
+                print(hitInfo.collider.gameObject.name);
                 if (puzzleController != null) {
                     hitInfo.collider.gameObject.GetComponent<PuzzleController>().StartAPuzzle();
                 }
@@ -104,7 +104,7 @@ public class raycaster : MonoBehaviour
                 Item item3 = InventoryController.GetItem();
                 if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null) {
                     solarSpot.DoShit(item3);
-                    InventoryController.ClearInventory();            
+                    InventoryController.ClearInventory();
                 }
 
                 else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
@@ -118,13 +118,13 @@ public class raycaster : MonoBehaviour
                         if (senderInfo.keyTextIsSentence == false) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo);
                         else GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo, senderInfo.GetMultipleTranslatedSentences());
                     }
-                    
+
                 }
 
                 else if (hitInfo.collider.gameObject.CompareTag("Objectives"))
                 {
                     gameObject.transform.Find("Geometry").gameObject.transform.gameObject.tag = "ObjectiveDone";
-                    
+
                 }
             }
         }

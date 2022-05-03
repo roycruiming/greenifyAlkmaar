@@ -33,7 +33,7 @@ public class ObjectivesController : MonoBehaviour
     public Button back;
 
     public bool gameFinnished = false;
-    public string levelName = "De Meent";
+    public string levelName;
     public bool analyticsSend = false;
     public Canvas puzzleCanvas;
 
@@ -125,13 +125,23 @@ public class ObjectivesController : MonoBehaviour
              gameFinnished = true;
 
              if(!analyticsSend){
+               if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>())
+               {
+                 levelName = GameObject.Find("LevelHandler").GetComponent<MeentLevel>().levelName;
+               } else if (GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>())
+               {
+                 levelName = GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().levelName;
+               } else if (GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>())
+               {
+                 levelName = GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>().levelName;
+               }
+
                AnalyticsResult analyticsResult = Analytics.CustomEvent(
                  "LevelWin ",
                  new Dictionary<string, object> {
                    {"level", levelName},
                    {"time", minutemark + ":" + Mathf.Round(secondsTimer)}
                    });
-               print(analyticsResult);
                analyticsSend = true;
              }
          }
@@ -139,9 +149,9 @@ public class ObjectivesController : MonoBehaviour
 
     private void OnDisable()
     {
-        string str = UnityEngine.StackTraceUtility.ExtractStackTrace(); 
-        print(""); 
-       
+        string str = UnityEngine.StackTraceUtility.ExtractStackTrace();
+        print("");
+
     }
 
     private void CheckNextProgressionPhase() {

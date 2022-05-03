@@ -9,16 +9,82 @@ public class WaypointMover : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     private Transform currentWaypoint;
     public Transform StartingWaypoint;
-    public bool bloon; 
+    public bool bloon;
 
 
-    Transform GetCurrentWayPoint() {
-        return currentWaypoint; 
+
+    public void Move() {
+        if (waypoints.RouteType == RouteType.Linear && waypoints.IsFirstChild(currentWaypoint))
+        {
+            transform.position = currentWaypoint.position;
+        }
+
+        if (waypoints.IsCurve(currentWaypoint))
+        {
+            MoveCurve();
+            return;
+        }
+
+        else transform.position = Vector3.MoveTowards(this.transform.position, currentWaypoint.position, moveSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, currentWaypoint.position) < 0.5)
+        {
+            currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
+            lookat(currentWaypoint);
+        }
+
+
     }
-    
+
+
+    List<Vector3> curvePoints = new List<Vector3>();
+
+    private void MoveCurve()
+    {
+        Transform curveControl = currentWaypoint.GetChild(0);
+
+
+
+        //initiate curvePoints 
+        if (curvePoints.Count == 0)
+        {
+            for (int i = 1; i < 50 + 1; i++)
+            {
+                float t = i / (float)50;
+                Vector3 pointPos = waypoints.CalculateQuadraticBezierPoint(t, currentWaypoint.position, curveControl.position, waypoints.GetNextWayPoint(currentWaypoint).position);
+                curvePoints.Add(pointPos);
+
+            }
+
+        
+
+        }
+
+        else if (curvePoints.Count > 0)
+        {
+            transform.position =  Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(transform.position, curvePoints[0]) < 0.5)
+            {
+                transform.LookAt(curvePoints[0]);
+                curvePoints.RemoveAt(0);
+            }
+
+            if (curvePoints.Count == 0)
+            {
+                currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
+              
+            }
+        }
+    }
+
+
+
+
+
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (StartingWaypoint == null)
         {
@@ -27,7 +93,7 @@ public class WaypointMover : MonoBehaviour
         else { currentWaypoint = StartingWaypoint; }
 
         transform.position = currentWaypoint.position;  
-        currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
+
         if (!bloon) { lookat(currentWaypoint);  }
          
     }
@@ -35,18 +101,7 @@ public class WaypointMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waypoints.RouteType == RouteType.Linear && waypoints.IsFirstChild(currentWaypoint))
-        {
-            transform.position = currentWaypoint.position; 
-        }
-        else {
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.position, moveSpeed * Time.deltaTime);
-        }
-
-        if (Vector3.Distance(transform.position, currentWaypoint.position) < 0.1f) {
-            currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);;
-            if (!bloon) { lookat(currentWaypoint); }
-        }
+        Move(); 
     }
 
 
@@ -57,15 +112,6 @@ public class WaypointMover : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject == GameObject.Find("MainCharacter"))
-        {
-            float speed = 600;
-            Vector3 force = transform.forward;
-            force = new Vector3(force.x, 1, force.z);
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(force * 600);
-        }
-    }
+
 
 }

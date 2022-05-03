@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 public class OverworldLevelSelectorHandler : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
             this.currentlySelectedIndex = 0;
             PlayerPrefs.SetInt("lastOverworldIndex",currentlySelectedIndex);
         }
-        
+
         this.currentlySelectedLevel = FindLevelObject(currentlySelectedIndex);
         FocusOnLevel(currentlySelectedIndex);
 
@@ -47,8 +48,15 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E)) {
             //select current level
             SceneManager.LoadScene(FindLevelObject(currentlySelectedIndex).GetComponent<OverworldLevelObject>().levelSceneName);
+
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(
+ 	            "LevelStart",
+          	   new Dictionary<string, object> {
+                   {"level", FindLevelObject(currentlySelectedIndex).GetComponent<OverworldLevelObject>().levelSceneName}
+               });
+
         }
-        
+
         if(Input.GetKeyDown(KeyCode.C)) {
             //go to progression store
             SceneManager.LoadScene("Progression-Store");
@@ -61,7 +69,7 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
                 this.currentlySelectedLevel = levelObject; //for the camera to follow
                 GameObject.Find("LevelSelectorMessageContainer").transform.position = new Vector3(levelObject.transform.position.x + 4.84f, GameObject.Find("LevelSelectorMessageContainer").transform.position.y, GameObject.Find("LevelSelectorMessageContainer").transform.position.z);
                  GameObject.Find("PressCToBuyContainer").transform.position = new Vector3(levelObject.transform.position.x + 5.81f, GameObject.Find("PressCToBuyContainer").transform.position.y, GameObject.Find("PressCToBuyContainer").transform.position.z);
-                
+
                 levelObject.GetComponent<OverworldLevelObject>().DisplayLevelInfo();
                 PlayerPrefs.SetInt("lastOverworldIndex",currentlySelectedIndex); //save last position
             }
@@ -107,6 +115,6 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 }

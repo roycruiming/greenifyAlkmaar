@@ -15,6 +15,8 @@ public class PuzzleController : MonoBehaviour
   int SelectedPuzzle;
   public static bool PuzzlePlaying = false;
 
+  public WordGuesserDifficulty wordGuesserDifficulty = WordGuesserDifficulty.easy;
+
 void Start()
 {
   PuzzleCanvas = GameObject.Find("PuzzleCanvas");
@@ -25,6 +27,7 @@ void Start()
 
   public void StartAPuzzle()
   {
+    print("stinkyyy");
     if(!PuzzlePlaying){
       Cursor.lockState = CursorLockMode.None;
       //Als de speler op enter drukt en nu nog geen puzzel speelt
@@ -49,10 +52,14 @@ void Start()
             Puzzles[SelectedPuzzle].GetComponent<HowmanyDidYouSeePuzzle>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
           case "MemoryPuzzle":
+            print("stinky");
             Puzzles[SelectedPuzzle].GetComponent<MemoryPuzzle>().StartPuzzle(PuzzleDifficulty, transform.name);
             break;
           case "TurnTheTurbine":
             Puzzles[SelectedPuzzle].GetComponent<TurnTheTurbnines>().StartPuzzle(PuzzleDifficulty, transform.name);
+            break;
+          case "GuessWordsPuzzle":
+            Puzzles[SelectedPuzzle].GetComponent<WordGuesserPuzzle>().StartPuzzle(wordGuesserDifficulty, transform.name, this.gameObject);
             break;
         }
 

@@ -15,7 +15,6 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
 
     public ObjectivesController objCon;
 
-
     int Answer;
     int PuzzleDifficulty;
     int IconIndex;
