@@ -39,7 +39,7 @@ public class WaveScript : MonoBehaviour
             Animator.SetBool("isWaving", true);
         else if (Animator.GetBool("isWaving") && distance >= 15) {
             Animator.SetBool("isWaving", false);
-            hasInterActed = true; 
+          
         }
     }
 }
