@@ -115,6 +115,14 @@ public class raycaster : MonoBehaviour
                     {
                         //find the hudcontroller object and call the ShowcaseMessage function with the informationHelper message
                         InformationHelper senderInfo = hitInfo.collider.gameObject.GetComponent<InformationHelper>();
+
+                        //check for wavescript in order to stop wave animation when active
+                        WaveScript waveScript = hitInfo.collider.gameObject.GetComponent<WaveScript>(); 
+                        if (waveScript != null) {
+                            waveScript.SetInterActionComplete(); 
+                        
+                        }
+
                         if (senderInfo.keyTextIsSentence == false) GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo);
                         else GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(senderInfo.GetTranslatedText(), senderInfo, senderInfo.GetMultipleTranslatedSentences());
                     }
