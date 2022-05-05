@@ -1,234 +1,680 @@
 fileFormatVersion: 2
 guid: d83d395fd464b67438cebe05f5bfd990
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Ankle_L
-    100002: Ankle_R
-    100004: BottomLip_M
-    100006: Cheek_L
-    100008: Cheek_R
-    100010: Chest_M
-    100012: //RootNode
-    100014: DeformationSystem
-    100016: Elbow_L
-    100018: Elbow_R
-    100020: Eye_L
-    100022: Eye_R
-    100024: EyebrowCenter_M
-    100026: EyebrowInner_L
-    100028: EyebrowInner_R
-    100030: EyebrowMid_L
-    100032: EyebrowMid_R
-    100034: EyebrowOuter_L
-    100036: EyebrowOuter_R
-    100038: EyeEnd_L
-    100040: EyeEnd_R
-    100042: Hand_Container_L
-    100044: Hand_Container_R
-    100046: Head_M
-    100048: HeadEnd_M
-    100050: Hip_L
-    100052: Hip_R
-    100054: IndexFinger1_L
-    100056: IndexFinger1_R
-    100058: IndexFinger2_L
-    100060: IndexFinger2_R
-    100062: IndexFinger3_L
-    100064: IndexFinger3_R
-    100066: Jaw_M
-    100068: JawEnd_M
-    100070: Knee_L
-    100072: Knee_R
-    100074: LowerCheek_L
-    100076: LowerCheek_R
-    100078: LowerNose_L
-    100080: LowerNose_R
-    100082: LowerNoseMid_M
-    100084: Main
-    100086: MiddleFinger1_L
-    100088: MiddleFinger1_R
-    100090: MiddleFinger2_L
-    100092: MiddleFinger2_R
-    100094: MiddleFinger3_L
-    100096: MiddleFinger3_R
-    100098: Neck_M
-    100100: OuterMouth_L
-    100102: OuterMouth_R
-    100104: PinkyFinger1_L
-    100106: PinkyFinger1_R
-    100108: PinkyFinger2_L
-    100110: PinkyFinger2_R
-    100112: PinkyFinger3_L
-    100114: PinkyFinger3_R
-    100116: RingFinger1_L
-    100118: RingFinger1_R
-    100120: RingFinger2_L
-    100122: RingFinger2_R
-    100124: RingFinger3_L
-    100126: RingFinger3_R
-    100128: Root_M
-    100130: Scapula_L
-    100132: Scapula_R
-    100134: Shoulder_L
-    100136: Shoulder_R
-    100138: Spine1_M
-    100140: ThumbFinger1_L
-    100142: ThumbFinger1_R
-    100144: ThumbFinger2_L
-    100146: ThumbFinger2_R
-    100148: ThumbFinger3_L
-    100150: ThumbFinger3_R
-    100152: Toes_L
-    100154: Toes_R
-    100156: ToesEnd_L
-    100158: ToesEnd_R
-    100160: UpperLip_M
-    100162: UpperNose_L
-    100164: UpperNose_R
-    100166: Wrist_L
-    100168: Wrist_R
-    400000: Ankle_L
-    400002: Ankle_R
-    400004: BottomLip_M
-    400006: Cheek_L
-    400008: Cheek_R
-    400010: Chest_M
-    400012: //RootNode
-    400014: DeformationSystem
-    400016: Elbow_L
-    400018: Elbow_R
-    400020: Eye_L
-    400022: Eye_R
-    400024: EyebrowCenter_M
-    400026: EyebrowInner_L
-    400028: EyebrowInner_R
-    400030: EyebrowMid_L
-    400032: EyebrowMid_R
-    400034: EyebrowOuter_L
-    400036: EyebrowOuter_R
-    400038: EyeEnd_L
-    400040: EyeEnd_R
-    400042: Hand_Container_L
-    400044: Hand_Container_R
-    400046: Head_M
-    400048: HeadEnd_M
-    400050: Hip_L
-    400052: Hip_R
-    400054: IndexFinger1_L
-    400056: IndexFinger1_R
-    400058: IndexFinger2_L
-    400060: IndexFinger2_R
-    400062: IndexFinger3_L
-    400064: IndexFinger3_R
-    400066: Jaw_M
-    400068: JawEnd_M
-    400070: Knee_L
-    400072: Knee_R
-    400074: LowerCheek_L
-    400076: LowerCheek_R
-    400078: LowerNose_L
-    400080: LowerNose_R
-    400082: LowerNoseMid_M
-    400084: Main
-    400086: MiddleFinger1_L
-    400088: MiddleFinger1_R
-    400090: MiddleFinger2_L
-    400092: MiddleFinger2_R
-    400094: MiddleFinger3_L
-    400096: MiddleFinger3_R
-    400098: Neck_M
-    400100: OuterMouth_L
-    400102: OuterMouth_R
-    400104: PinkyFinger1_L
-    400106: PinkyFinger1_R
-    400108: PinkyFinger2_L
-    400110: PinkyFinger2_R
-    400112: PinkyFinger3_L
-    400114: PinkyFinger3_R
-    400116: RingFinger1_L
-    400118: RingFinger1_R
-    400120: RingFinger2_L
-    400122: RingFinger2_R
-    400124: RingFinger3_L
-    400126: RingFinger3_R
-    400128: Root_M
-    400130: Scapula_L
-    400132: Scapula_R
-    400134: Shoulder_L
-    400136: Shoulder_R
-    400138: Spine1_M
-    400140: ThumbFinger1_L
-    400142: ThumbFinger1_R
-    400144: ThumbFinger2_L
-    400146: ThumbFinger2_R
-    400148: ThumbFinger3_L
-    400150: ThumbFinger3_R
-    400152: Toes_L
-    400154: Toes_R
-    400156: ToesEnd_L
-    400158: ToesEnd_R
-    400160: UpperLip_M
-    400162: UpperNose_L
-    400164: UpperNose_R
-    400166: Wrist_L
-    400168: Wrist_R
-    7400000: Standing_Idle
-    7400002: Standing_Singing
-    7400004: Standing_Mobile_Calling
-    7400006: Standing_Texting
-    7400008: Standing_Talking
-    7400010: Standing_Shouting
-    7400012: Walking
-    7400014: Walking_Mobile_Texting
-    7400016: Walking_Mobile_Talking
-    7400018: Walking-Holding_Box
-    7400020: Walking_Holding_Box
-    7400022: Holding_Box-Walking
-    7400024: Walking-Holding_Bag
-    7400026: Holding_Bag-Walking
-    7400028: Walking_Talking
-    7400030: Walking-Holding_Drink
-    7400032: Walking_Holding_Drink
-    7400034: Walking_Drinking
-    7400036: Drinking-Walking
-    7400038: Walking-Idle
-    7400040: Sitting_Floor_Idle
-    7400042: Idle-Sitting_Bench
-    7400044: Sitting_Bench_Idle
-    7400046: Sitting_Sofa_Idle
-    7400048: Sitting-Changing_Channels
-    7400050: Sitting_Changing_Channels
-    7400052: Sitting-Mobile
-    7400054: Sitting_Mobile_Texting
-    7400056: Mobile_Texting-Sitting
-    7400058: Blow_Kiss
-    7400060: Make_Ok_Gesture
-    7400062: Thumbs_Up_Gesture
-    7400064: Vomiting
-    7400066: Idle_Cleaning_Sweeping
-    7400068: Cleaning_Sweeping
-    7400070: Cleaning_Sweeping-Idle
-    7400072: Cleaning_Table
-    7400074: Idle_Laying_Down_Resting
-    7400076: Laying_Down_Resting
-    7400078: Laying_Down-Sleeping
-    7400080: Laying_Down_Sleeping
-    7400082: Laying_Down-Laying_Mobile_Texting
-    7400084: Laying_Mobile_Texting
-    7400086: Laying_Mobile_Texting-Laying_Sleeping
-    7400088: Sitting_Eating_Bowl
-    7400090: Sitting_Eating_Plate
-    7400092: Sitting_Drinking
-    7400094: Sitting_Using_Computer
-    7400096: Sitting_Talking
-    7400098: Sitting-Idle
-    7400100: Standing_Dancing
-    9500000: //RootNode
-    2186277476908879412: ImportLogs
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Ankle_L
+  - first:
+      1: 100002
+    second: Ankle_R
+  - first:
+      1: 100004
+    second: BottomLip_M
+  - first:
+      1: 100006
+    second: Cheek_L
+  - first:
+      1: 100008
+    second: Cheek_R
+  - first:
+      1: 100010
+    second: Chest_M
+  - first:
+      1: 100012
+    second: //RootNode
+  - first:
+      1: 100014
+    second: DeformationSystem
+  - first:
+      1: 100016
+    second: Elbow_L
+  - first:
+      1: 100018
+    second: Elbow_R
+  - first:
+      1: 100020
+    second: Eye_L
+  - first:
+      1: 100022
+    second: Eye_R
+  - first:
+      1: 100024
+    second: EyebrowCenter_M
+  - first:
+      1: 100026
+    second: EyebrowInner_L
+  - first:
+      1: 100028
+    second: EyebrowInner_R
+  - first:
+      1: 100030
+    second: EyebrowMid_L
+  - first:
+      1: 100032
+    second: EyebrowMid_R
+  - first:
+      1: 100034
+    second: EyebrowOuter_L
+  - first:
+      1: 100036
+    second: EyebrowOuter_R
+  - first:
+      1: 100038
+    second: EyeEnd_L
+  - first:
+      1: 100040
+    second: EyeEnd_R
+  - first:
+      1: 100042
+    second: Hand_Container_L
+  - first:
+      1: 100044
+    second: Hand_Container_R
+  - first:
+      1: 100046
+    second: Head_M
+  - first:
+      1: 100048
+    second: HeadEnd_M
+  - first:
+      1: 100050
+    second: Hip_L
+  - first:
+      1: 100052
+    second: Hip_R
+  - first:
+      1: 100054
+    second: IndexFinger1_L
+  - first:
+      1: 100056
+    second: IndexFinger1_R
+  - first:
+      1: 100058
+    second: IndexFinger2_L
+  - first:
+      1: 100060
+    second: IndexFinger2_R
+  - first:
+      1: 100062
+    second: IndexFinger3_L
+  - first:
+      1: 100064
+    second: IndexFinger3_R
+  - first:
+      1: 100066
+    second: Jaw_M
+  - first:
+      1: 100068
+    second: JawEnd_M
+  - first:
+      1: 100070
+    second: Knee_L
+  - first:
+      1: 100072
+    second: Knee_R
+  - first:
+      1: 100074
+    second: LowerCheek_L
+  - first:
+      1: 100076
+    second: LowerCheek_R
+  - first:
+      1: 100078
+    second: LowerNose_L
+  - first:
+      1: 100080
+    second: LowerNose_R
+  - first:
+      1: 100082
+    second: LowerNoseMid_M
+  - first:
+      1: 100084
+    second: Main
+  - first:
+      1: 100086
+    second: MiddleFinger1_L
+  - first:
+      1: 100088
+    second: MiddleFinger1_R
+  - first:
+      1: 100090
+    second: MiddleFinger2_L
+  - first:
+      1: 100092
+    second: MiddleFinger2_R
+  - first:
+      1: 100094
+    second: MiddleFinger3_L
+  - first:
+      1: 100096
+    second: MiddleFinger3_R
+  - first:
+      1: 100098
+    second: Neck_M
+  - first:
+      1: 100100
+    second: OuterMouth_L
+  - first:
+      1: 100102
+    second: OuterMouth_R
+  - first:
+      1: 100104
+    second: PinkyFinger1_L
+  - first:
+      1: 100106
+    second: PinkyFinger1_R
+  - first:
+      1: 100108
+    second: PinkyFinger2_L
+  - first:
+      1: 100110
+    second: PinkyFinger2_R
+  - first:
+      1: 100112
+    second: PinkyFinger3_L
+  - first:
+      1: 100114
+    second: PinkyFinger3_R
+  - first:
+      1: 100116
+    second: RingFinger1_L
+  - first:
+      1: 100118
+    second: RingFinger1_R
+  - first:
+      1: 100120
+    second: RingFinger2_L
+  - first:
+      1: 100122
+    second: RingFinger2_R
+  - first:
+      1: 100124
+    second: RingFinger3_L
+  - first:
+      1: 100126
+    second: RingFinger3_R
+  - first:
+      1: 100128
+    second: Root_M
+  - first:
+      1: 100130
+    second: Scapula_L
+  - first:
+      1: 100132
+    second: Scapula_R
+  - first:
+      1: 100134
+    second: Shoulder_L
+  - first:
+      1: 100136
+    second: Shoulder_R
+  - first:
+      1: 100138
+    second: Spine1_M
+  - first:
+      1: 100140
+    second: ThumbFinger1_L
+  - first:
+      1: 100142
+    second: ThumbFinger1_R
+  - first:
+      1: 100144
+    second: ThumbFinger2_L
+  - first:
+      1: 100146
+    second: ThumbFinger2_R
+  - first:
+      1: 100148
+    second: ThumbFinger3_L
+  - first:
+      1: 100150
+    second: ThumbFinger3_R
+  - first:
+      1: 100152
+    second: Toes_L
+  - first:
+      1: 100154
+    second: Toes_R
+  - first:
+      1: 100156
+    second: ToesEnd_L
+  - first:
+      1: 100158
+    second: ToesEnd_R
+  - first:
+      1: 100160
+    second: UpperLip_M
+  - first:
+      1: 100162
+    second: UpperNose_L
+  - first:
+      1: 100164
+    second: UpperNose_R
+  - first:
+      1: 100166
+    second: Wrist_L
+  - first:
+      1: 100168
+    second: Wrist_R
+  - first:
+      4: 400000
+    second: Ankle_L
+  - first:
+      4: 400002
+    second: Ankle_R
+  - first:
+      4: 400004
+    second: BottomLip_M
+  - first:
+      4: 400006
+    second: Cheek_L
+  - first:
+      4: 400008
+    second: Cheek_R
+  - first:
+      4: 400010
+    second: Chest_M
+  - first:
+      4: 400012
+    second: //RootNode
+  - first:
+      4: 400014
+    second: DeformationSystem
+  - first:
+      4: 400016
+    second: Elbow_L
+  - first:
+      4: 400018
+    second: Elbow_R
+  - first:
+      4: 400020
+    second: Eye_L
+  - first:
+      4: 400022
+    second: Eye_R
+  - first:
+      4: 400024
+    second: EyebrowCenter_M
+  - first:
+      4: 400026
+    second: EyebrowInner_L
+  - first:
+      4: 400028
+    second: EyebrowInner_R
+  - first:
+      4: 400030
+    second: EyebrowMid_L
+  - first:
+      4: 400032
+    second: EyebrowMid_R
+  - first:
+      4: 400034
+    second: EyebrowOuter_L
+  - first:
+      4: 400036
+    second: EyebrowOuter_R
+  - first:
+      4: 400038
+    second: EyeEnd_L
+  - first:
+      4: 400040
+    second: EyeEnd_R
+  - first:
+      4: 400042
+    second: Hand_Container_L
+  - first:
+      4: 400044
+    second: Hand_Container_R
+  - first:
+      4: 400046
+    second: Head_M
+  - first:
+      4: 400048
+    second: HeadEnd_M
+  - first:
+      4: 400050
+    second: Hip_L
+  - first:
+      4: 400052
+    second: Hip_R
+  - first:
+      4: 400054
+    second: IndexFinger1_L
+  - first:
+      4: 400056
+    second: IndexFinger1_R
+  - first:
+      4: 400058
+    second: IndexFinger2_L
+  - first:
+      4: 400060
+    second: IndexFinger2_R
+  - first:
+      4: 400062
+    second: IndexFinger3_L
+  - first:
+      4: 400064
+    second: IndexFinger3_R
+  - first:
+      4: 400066
+    second: Jaw_M
+  - first:
+      4: 400068
+    second: JawEnd_M
+  - first:
+      4: 400070
+    second: Knee_L
+  - first:
+      4: 400072
+    second: Knee_R
+  - first:
+      4: 400074
+    second: LowerCheek_L
+  - first:
+      4: 400076
+    second: LowerCheek_R
+  - first:
+      4: 400078
+    second: LowerNose_L
+  - first:
+      4: 400080
+    second: LowerNose_R
+  - first:
+      4: 400082
+    second: LowerNoseMid_M
+  - first:
+      4: 400084
+    second: Main
+  - first:
+      4: 400086
+    second: MiddleFinger1_L
+  - first:
+      4: 400088
+    second: MiddleFinger1_R
+  - first:
+      4: 400090
+    second: MiddleFinger2_L
+  - first:
+      4: 400092
+    second: MiddleFinger2_R
+  - first:
+      4: 400094
+    second: MiddleFinger3_L
+  - first:
+      4: 400096
+    second: MiddleFinger3_R
+  - first:
+      4: 400098
+    second: Neck_M
+  - first:
+      4: 400100
+    second: OuterMouth_L
+  - first:
+      4: 400102
+    second: OuterMouth_R
+  - first:
+      4: 400104
+    second: PinkyFinger1_L
+  - first:
+      4: 400106
+    second: PinkyFinger1_R
+  - first:
+      4: 400108
+    second: PinkyFinger2_L
+  - first:
+      4: 400110
+    second: PinkyFinger2_R
+  - first:
+      4: 400112
+    second: PinkyFinger3_L
+  - first:
+      4: 400114
+    second: PinkyFinger3_R
+  - first:
+      4: 400116
+    second: RingFinger1_L
+  - first:
+      4: 400118
+    second: RingFinger1_R
+  - first:
+      4: 400120
+    second: RingFinger2_L
+  - first:
+      4: 400122
+    second: RingFinger2_R
+  - first:
+      4: 400124
+    second: RingFinger3_L
+  - first:
+      4: 400126
+    second: RingFinger3_R
+  - first:
+      4: 400128
+    second: Root_M
+  - first:
+      4: 400130
+    second: Scapula_L
+  - first:
+      4: 400132
+    second: Scapula_R
+  - first:
+      4: 400134
+    second: Shoulder_L
+  - first:
+      4: 400136
+    second: Shoulder_R
+  - first:
+      4: 400138
+    second: Spine1_M
+  - first:
+      4: 400140
+    second: ThumbFinger1_L
+  - first:
+      4: 400142
+    second: ThumbFinger1_R
+  - first:
+      4: 400144
+    second: ThumbFinger2_L
+  - first:
+      4: 400146
+    second: ThumbFinger2_R
+  - first:
+      4: 400148
+    second: ThumbFinger3_L
+  - first:
+      4: 400150
+    second: ThumbFinger3_R
+  - first:
+      4: 400152
+    second: Toes_L
+  - first:
+      4: 400154
+    second: Toes_R
+  - first:
+      4: 400156
+    second: ToesEnd_L
+  - first:
+      4: 400158
+    second: ToesEnd_R
+  - first:
+      4: 400160
+    second: UpperLip_M
+  - first:
+      4: 400162
+    second: UpperNose_L
+  - first:
+      4: 400164
+    second: UpperNose_R
+  - first:
+      4: 400166
+    second: Wrist_L
+  - first:
+      4: 400168
+    second: Wrist_R
+  - first:
+      74: 7400000
+    second: Standing_Idle
+  - first:
+      74: 7400002
+    second: Standing_Singing
+  - first:
+      74: 7400004
+    second: Standing_Mobile_Calling
+  - first:
+      74: 7400006
+    second: Standing_Texting
+  - first:
+      74: 7400008
+    second: Standing_Talking
+  - first:
+      74: 7400010
+    second: Standing_Shouting
+  - first:
+      74: 7400012
+    second: Walking
+  - first:
+      74: 7400014
+    second: Walking_Mobile_Texting
+  - first:
+      74: 7400016
+    second: Walking_Mobile_Talking
+  - first:
+      74: 7400018
+    second: Walking-Holding_Box
+  - first:
+      74: 7400020
+    second: Walking_Holding_Box
+  - first:
+      74: 7400022
+    second: Holding_Box-Walking
+  - first:
+      74: 7400024
+    second: Walking-Holding_Bag
+  - first:
+      74: 7400026
+    second: Holding_Bag-Walking
+  - first:
+      74: 7400028
+    second: Walking_Talking
+  - first:
+      74: 7400030
+    second: Walking-Holding_Drink
+  - first:
+      74: 7400032
+    second: Walking_Holding_Drink
+  - first:
+      74: 7400034
+    second: Walking_Drinking
+  - first:
+      74: 7400036
+    second: Drinking-Walking
+  - first:
+      74: 7400038
+    second: Walking-Idle
+  - first:
+      74: 7400040
+    second: Sitting_Floor_Idle
+  - first:
+      74: 7400042
+    second: Idle-Sitting_Bench
+  - first:
+      74: 7400044
+    second: Sitting_Bench_Idle
+  - first:
+      74: 7400046
+    second: Sitting_Sofa_Idle
+  - first:
+      74: 7400048
+    second: Sitting-Changing_Channels
+  - first:
+      74: 7400050
+    second: Sitting_Changing_Channels
+  - first:
+      74: 7400052
+    second: Sitting-Mobile
+  - first:
+      74: 7400054
+    second: Sitting_Mobile_Texting
+  - first:
+      74: 7400056
+    second: Mobile_Texting-Sitting
+  - first:
+      74: 7400058
+    second: Blow_Kiss
+  - first:
+      74: 7400060
+    second: Make_Ok_Gesture
+  - first:
+      74: 7400062
+    second: Thumbs_Up_Gesture
+  - first:
+      74: 7400064
+    second: Vomiting
+  - first:
+      74: 7400066
+    second: Idle_Cleaning_Sweeping
+  - first:
+      74: 7400068
+    second: Cleaning_Sweeping
+  - first:
+      74: 7400070
+    second: Cleaning_Sweeping-Idle
+  - first:
+      74: 7400072
+    second: Cleaning_Table
+  - first:
+      74: 7400074
+    second: Idle_Laying_Down_Resting
+  - first:
+      74: 7400076
+    second: Laying_Down_Resting
+  - first:
+      74: 7400078
+    second: Laying_Down-Sleeping
+  - first:
+      74: 7400080
+    second: Laying_Down_Sleeping
+  - first:
+      74: 7400082
+    second: Laying_Down-Laying_Mobile_Texting
+  - first:
+      74: 7400084
+    second: Laying_Mobile_Texting
+  - first:
+      74: 7400086
+    second: Laying_Mobile_Texting-Laying_Sleeping
+  - first:
+      74: 7400088
+    second: Sitting_Eating_Bowl
+  - first:
+      74: 7400090
+    second: Sitting_Eating_Plate
+  - first:
+      74: 7400092
+    second: Sitting_Drinking
+  - first:
+      74: 7400094
+    second: Sitting_Using_Computer
+  - first:
+      74: 7400096
+    second: Sitting_Talking
+  - first:
+      74: 7400098
+    second: Sitting-Idle
+  - first:
+      74: 7400100
+    second: Standing_Dancing
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      41386430: 2186277476908879412
+    second: ImportLogs
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -245,24 +691,24 @@ ModelImporter:
       that might lower retargeting quality:\nNote: Activate translation DOF on avatar
       to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n\t'Scapula_R' has translation
-      animation that will be discarded.\n\t'Scapula_L' has translation animation that
-      will be discarded.\n\nClip 'Standing_Singing' has import animation warnings
+      animation that will be discarded.\n\t'Scapula_L' has translation animation
+      that will be discarded.\n\nClip 'Standing_Singing' has import animation warnings
       that might lower retargeting quality:\nNote: Activate translation DOF on avatar
       to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n\t'Scapula_R' has translation
-      animation that will be discarded.\n\t'Scapula_L' has translation animation that
-      will be discarded.\n\nClip 'Standing_Mobile_Calling' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'Scapula_R' has translation
-      animation that will be discarded.\n\t'Scapula_L' has translation animation that
-      will be discarded.\n\nClip 'Standing_Texting' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\nClip 'Standing_Talking'
-      has import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      animation that will be discarded.\n\t'Scapula_L' has translation animation
+      that will be discarded.\n\nClip 'Standing_Mobile_Calling' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\t'Scapula_R'
+      has translation animation that will be discarded.\n\t'Scapula_L' has translation
+      animation that will be discarded.\n\nClip 'Standing_Texting' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\nClip 'Standing_Talking'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
       'Standing_Shouting' has import animation warnings that might lower retargeting
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
@@ -276,9 +722,9 @@ ModelImporter:
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Scapula_R'
       has translation animation that will be discarded.\n\nClip 'Walking-Holding_Box'
-      has import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
       'Walking_Holding_Box' has import animation warnings that might lower retargeting
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
@@ -315,25 +761,26 @@ ModelImporter:
       humanoid transforms and has rotation animation that will be discarded.\n\t'Scapula_R'
       has translation animation that will be discarded.\n\t'Scapula_L' has translation
       animation that will be discarded.\n\nClip 'Idle-Sitting_Bench' has import animation
-      warnings that might lower retargeting quality:\nNote: Activate translation DOF
-      on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid
       transforms and has rotation animation that will be discarded.\n\nClip 'Sitting_Bench_Idle'
-      has import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'Chest_M' has translation
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
+      has translation animation that will be discarded.\n\t'Chest_M' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'Scapula_R'
+      has translation animation that will be discarded.\n\t'Scapula_L' has translation
+      animation that will be discarded.\n\nClip 'Sitting_Sofa_Idle' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'Chest_M' has translation
       animation that will be discarded.\n\t'Chest_M' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n\t'Scapula_R' has translation
-      animation that will be discarded.\n\t'Scapula_L' has translation animation that
-      will be discarded.\n\nClip 'Sitting_Sofa_Idle' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'Chest_M' has translation animation that
-      will be discarded.\n\t'Chest_M' is inbetween humanoid transforms and has rotation
-      animation that will be discarded.\n\t'Scapula_R' has translation animation that
-      will be discarded.\n\t'Scapula_L' has translation animation that will be discarded.\n\nClip
-      'Sitting-Changing_Channels' has import animation warnings that might lower retargeting
-      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
-      'Sitting-Mobile' has import animation warnings that might lower retargeting
-      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
+      animation that will be discarded.\n\t'Scapula_L' has translation animation
+      that will be discarded.\n\nClip 'Sitting-Changing_Channels' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
+      DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid
+      transforms and has rotation animation that will be discarded.\n\nClip 'Sitting-Mobile'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
       'Sitting_Mobile_Texting' has import animation warnings that might lower retargeting
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
@@ -372,41 +819,41 @@ ModelImporter:
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Scapula_L'
       has translation animation that will be discarded.\n\nClip 'Laying_Down-Sleeping'
-      has import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
       'Laying_Down_Sleeping' has import animation warnings that might lower retargeting
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Scapula_L'
       has translation animation that will be discarded.\n\nClip 'Laying_Down-Laying_Mobile_Texting'
-      has import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
       'Laying_Mobile_Texting' has import animation warnings that might lower retargeting
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Scapula_R'
       has translation animation that will be discarded.\n\t'Scapula_L' has translation
       animation that will be discarded.\n\nClip 'Laying_Mobile_Texting-Laying_Sleeping'
-      has import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\t'Scapula_R'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Scapula_R'
       has translation animation that will be discarded.\n\t'Jaw_M' has translation
-      animation that will be discarded.\n\t'Scapula_L' has translation animation that
-      will be discarded.\n\nClip 'Sitting_Eating_Bowl' has import animation warnings
-      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'Jaw_M' has translation
-      animation that will be discarded.\n\nClip 'Sitting_Eating_Plate' has import
-      animation warnings that might lower retargeting quality:\nNote: Activate translation
+      animation that will be discarded.\n\t'Scapula_L' has translation animation
+      that will be discarded.\n\nClip 'Sitting_Eating_Bowl' has import animation
+      warnings that might lower retargeting quality:\nNote: Activate translation
       DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween humanoid
-      transforms and has rotation animation that will be discarded.\n\nClip 'Sitting_Drinking'
-      has import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\t'Jaw_M'
+      transforms and has rotation animation that will be discarded.\n\t'Jaw_M' has
+      translation animation that will be discarded.\n\nClip 'Sitting_Eating_Plate'
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      'Sitting_Drinking' has import animation warnings that might lower retargeting
+      quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Jaw_M'
       has translation animation that will be discarded.\n\nClip 'Sitting_Using_Computer'
-      has import animation warnings that might lower retargeting quality:\nNote: Activate
-      translation DOF on avatar to improve retargeting quality.\n\t'Chest_M' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\nClip
+      has import animation warnings that might lower retargeting quality:\nNote:
+      Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
       'Sitting_Talking' has import animation warnings that might lower retargeting
       quality:\nNote: Activate translation DOF on avatar to improve retargeting quality.\n\t'Chest_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\nClip
@@ -431,6 +878,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Standing_Idle
       takeName: Standing_Idle
+      internalID: 0
       firstFrame: 1
       lastFrame: 225
       wrapMode: 0
@@ -459,6 +907,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Standing_Singing
       takeName: Standing_Singing
+      internalID: 0
       firstFrame: 300
       lastFrame: 571
       wrapMode: 0
@@ -487,6 +936,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Standing_Mobile_Calling
       takeName: Standing_Mobile_Calling
+      internalID: 0
       firstFrame: 600
       lastFrame: 875
       wrapMode: 0
@@ -515,8 +965,9 @@ ModelImporter:
     - serializedVersion: 16
       name: Standing_Texting
       takeName: Standing_Texting
-      firstFrame: 900
-      lastFrame: 1109
+      internalID: 0
+      firstFrame: 963
+      lastFrame: 982
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -543,6 +994,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Standing_Talking
       takeName: Standing_Talking
+      internalID: 0
       firstFrame: 1150
       lastFrame: 1332
       wrapMode: 0
@@ -571,6 +1023,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Standing_Shouting
       takeName: Standing_Shouting
+      internalID: 0
       firstFrame: 1400
       lastFrame: 1618
       wrapMode: 0
@@ -599,6 +1052,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking
       takeName: Walking
+      internalID: 0
       firstFrame: 1700
       lastFrame: 1730
       wrapMode: 0
@@ -627,6 +1081,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking_Mobile_Texting
       takeName: Walking_Mobile_Texting
+      internalID: 0
       firstFrame: 1750
       lastFrame: 1990
       wrapMode: 0
@@ -655,6 +1110,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking_Mobile_Talking
       takeName: Walking_Mobile_Talking
+      internalID: 0
       firstFrame: 2050
       lastFrame: 2320
       wrapMode: 0
@@ -683,6 +1139,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking-Holding_Box
       takeName: Walking-Holding_Box
+      internalID: 0
       firstFrame: 2400
       lastFrame: 2460
       wrapMode: 0
@@ -711,6 +1168,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking_Holding_Box
       takeName: Walking_Holding_Box
+      internalID: 0
       firstFrame: 2480
       lastFrame: 2510
       wrapMode: 0
@@ -739,6 +1197,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Holding_Box-Walking
       takeName: Holding_Box-Walking
+      internalID: 0
       firstFrame: 2530
       lastFrame: 2590
       wrapMode: 0
@@ -767,6 +1226,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking-Holding_Bag
       takeName: Walking-Holding_Bag
+      internalID: 0
       firstFrame: 2730
       lastFrame: 2760
       wrapMode: 0
@@ -795,6 +1255,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Holding_Bag-Walking
       takeName: Holding_Bag-Walking
+      internalID: 0
       firstFrame: 2800
       lastFrame: 2860
       wrapMode: 0
@@ -823,6 +1284,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking_Talking
       takeName: Walking_Talking
+      internalID: 0
       firstFrame: 2900
       lastFrame: 3080
       wrapMode: 0
@@ -851,6 +1313,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking-Holding_Drink
       takeName: Walking-Holding_Drink
+      internalID: 0
       firstFrame: 3120
       lastFrame: 3180
       wrapMode: 0
@@ -879,6 +1342,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking_Holding_Drink
       takeName: Walking_Holding_Drink
+      internalID: 0
       firstFrame: 3200
       lastFrame: 3230
       wrapMode: 0
@@ -907,6 +1371,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking_Drinking
       takeName: Walking_Drinking
+      internalID: 0
       firstFrame: 3270
       lastFrame: 3360
       wrapMode: 0
@@ -935,6 +1400,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Drinking-Walking
       takeName: Drinking-Walking
+      internalID: 0
       firstFrame: 3400
       lastFrame: 3460
       wrapMode: 0
@@ -963,6 +1429,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walking-Idle
       takeName: Walking-Idle
+      internalID: 0
       firstFrame: 3500
       lastFrame: 3515
       wrapMode: 0
@@ -991,6 +1458,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting_Floor_Idle
       takeName: Sitting_Floor_Idle
+      internalID: 0
       firstFrame: 3560
       lastFrame: 3680
       wrapMode: 0
@@ -1019,6 +1487,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle-Sitting_Bench
       takeName: Idle-Sitting_Bench
+      internalID: 0
       firstFrame: 3740
       lastFrame: 3774
       wrapMode: 0
@@ -1047,6 +1516,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting_Bench_Idle
       takeName: Sitting_Bench_Idle
+      internalID: 0
       firstFrame: 3800
       lastFrame: 3960
       wrapMode: 0
@@ -1075,6 +1545,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting_Sofa_Idle
       takeName: Sitting_Sofa_Idle
+      internalID: 0
       firstFrame: 4060
       lastFrame: 4250
       wrapMode: 0
@@ -1103,6 +1574,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting-Changing_Channels
       takeName: Sitting-Changing_Channels
+      internalID: 0
       firstFrame: 4300
       lastFrame: 4340
       wrapMode: 0
@@ -1131,6 +1603,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting_Changing_Channels
       takeName: Sitting_Changing_Channels
+      internalID: 0
       firstFrame: 4424
       lastFrame: 4425
       wrapMode: 0
@@ -1159,6 +1632,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting-Mobile
       takeName: Sitting-Mobile
+      internalID: 0
       firstFrame: 4600
       lastFrame: 4640
       wrapMode: 0
@@ -1187,6 +1661,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting_Mobile_Texting
       takeName: Sitting_Mobile_Texting
+      internalID: 0
       firstFrame: 4670
       lastFrame: 4770
       wrapMode: 0
@@ -1215,6 +1690,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Mobile_Texting-Sitting
       takeName: Mobile_Texting-Sitting
+      internalID: 0
       firstFrame: 4800
       lastFrame: 4844
       wrapMode: 0
@@ -1243,6 +1719,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Blow_Kiss
       takeName: Blow_Kiss
+      internalID: 0
       firstFrame: 4880
       lastFrame: 4948
       wrapMode: 0
@@ -1271,6 +1748,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Make_Ok_Gesture
       takeName: Make_Ok_Gesture
+      internalID: 0
       firstFrame: 4970
       lastFrame: 5030
       wrapMode: 0
@@ -1299,6 +1777,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Thumbs_Up_Gesture
       takeName: Thumbs_Up_Gesture
+      internalID: 0
       firstFrame: 5060
       lastFrame: 5120
       wrapMode: 0
@@ -1327,6 +1806,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Vomiting
       takeName: Vomiting
+      internalID: 0
       firstFrame: 5160
       lastFrame: 5253
       wrapMode: 0
@@ -1355,6 +1835,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle_Cleaning_Sweeping
       takeName: Idle_Cleaning_Sweeping
+      internalID: 0
       firstFrame: 5280
       lastFrame: 5320
       wrapMode: 0
@@ -1383,6 +1864,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Cleaning_Sweeping
       takeName: Cleaning_Sweeping
+      internalID: 0
       firstFrame: 5340
       lastFrame: 5442
       wrapMode: 0
@@ -1411,6 +1893,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Cleaning_Sweeping-Idle
       takeName: Cleaning_Sweeping-Idle
+      internalID: 0
       firstFrame: 5470
       lastFrame: 5514
       wrapMode: 0
@@ -1439,6 +1922,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Cleaning_Table
       takeName: Cleaning_Table
+      internalID: 0
       firstFrame: 5550
       lastFrame: 5712
       wrapMode: 0
@@ -1467,6 +1951,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle_Laying_Down_Resting
       takeName: Idle_Laying_Down_Resting
+      internalID: 0
       firstFrame: 5750
       lastFrame: 5785
       wrapMode: 0
@@ -1495,6 +1980,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Laying_Down_Resting
       takeName: Laying_Down_Resting
+      internalID: 0
       firstFrame: 5800
       lastFrame: 5940
       wrapMode: 0
@@ -1523,6 +2009,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Laying_Down-Sleeping
       takeName: Laying_Down-Sleeping
+      internalID: 0
       firstFrame: 6040
       lastFrame: 6070
       wrapMode: 0
@@ -1551,6 +2038,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Laying_Down_Sleeping
       takeName: Laying_Down_Sleeping
+      internalID: 0
       firstFrame: 6100
       lastFrame: 6361
       wrapMode: 0
@@ -1579,6 +2067,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Laying_Down-Laying_Mobile_Texting
       takeName: Laying_Down-Laying_Mobile_Texting
+      internalID: 0
       firstFrame: 6420
       lastFrame: 6461
       wrapMode: 0
@@ -1607,6 +2096,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Laying_Mobile_Texting
       takeName: Laying_Mobile_Texting
+      internalID: 0
       firstFrame: 6500
       lastFrame: 6580
       wrapMode: 0
@@ -1635,6 +2125,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Laying_Mobile_Texting-Laying_Sleeping
       takeName: Laying_Mobile_Texting-Laying_Sleeping
+      internalID: 0
       firstFrame: 6500
       lastFrame: 8215
       wrapMode: 0
@@ -1663,6 +2154,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting_Eating_Bowl
       takeName: Sitting_Eating_Bowl
+      internalID: 0
       firstFrame: 6750
       lastFrame: 7028
       wrapMode: 0
@@ -1691,6 +2183,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting_Eating_Plate
       takeName: Sitting_Eating_Plate
+      internalID: 0
       firstFrame: 7070
       lastFrame: 7303
       wrapMode: 0
@@ -1719,6 +2212,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting_Drinking
       takeName: Sitting_Drinking
+      internalID: 0
       firstFrame: 7350
       lastFrame: 7472
       wrapMode: 0
@@ -1747,6 +2241,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting_Using_Computer
       takeName: Sitting_Using_Computer
+      internalID: 0
       firstFrame: 7500
       lastFrame: 7617
       wrapMode: 0
@@ -1775,6 +2270,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting_Talking
       takeName: Sitting_Talking
+      internalID: 0
       firstFrame: 7680
       lastFrame: 7856
       wrapMode: 0
@@ -1803,6 +2299,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sitting-Idle
       takeName: Sitting-Idle
+      internalID: 0
       firstFrame: 7900
       lastFrame: 7932
       wrapMode: 0
@@ -1831,6 +2328,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Standing_Dancing
       takeName: Standing_Dancing
+      internalID: 0
       firstFrame: 7950
       lastFrame: 8215
       wrapMode: 0
@@ -1863,25 +2361,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -1890,10 +2395,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 1
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human:
     - boneName: Root_M
       humanName: Hips
@@ -3053,14 +3558,18 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: a4a3ba617ed9c5946bb76844ec1ef299,
     type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
