@@ -66,7 +66,15 @@ public class ObjectivesController : MonoBehaviour
         nameInputBar.gameObject.SetActive(false);
         back.gameObject.SetActive(false);
 
+
+        if(levelName == "De Meent")
+        {
+           targets.RemoveAt(4);
+        }
+
         totalObjectives = targets.Count + solarPanels.Count;
+
+        
 
 
     }
