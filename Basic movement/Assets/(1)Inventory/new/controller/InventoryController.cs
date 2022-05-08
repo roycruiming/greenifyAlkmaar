@@ -55,6 +55,8 @@ public class InventoryController : MonoBehaviour
 
         //if (Inventory.item.HudImage == null) return; 
 
+
+
         GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().RemoveImage(); 
     }
 

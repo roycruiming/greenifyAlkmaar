@@ -63,7 +63,6 @@ public class raycaster : MonoBehaviour
                     InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);
 
                     ObjectivesController objc = objCon.GetComponent<ObjectivesController>();
-
                     objc.DeleteItemInListSolar(hitInfo.collider.gameObject.GetComponent<Item>());
                 }
 
@@ -91,6 +90,14 @@ public class raycaster : MonoBehaviour
                     InventoryController.ClearInventory();
                 }
 
+
+                ChargerSpot chargerSpot = hitInfo.collider.gameObject.GetComponent<ChargerSpot>();
+                if (chargerSpot != null)
+                {
+                    Item charger = InventoryController.GetItem();
+                    if (chargerSpot.InstallCharger(charger)) return;
+                    InventoryController.ClearInventory();
+                }
 
 
 
@@ -148,3 +155,4 @@ public class raycaster : MonoBehaviour
         }
 
     }
+
