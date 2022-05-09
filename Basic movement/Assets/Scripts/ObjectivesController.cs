@@ -29,6 +29,8 @@ public class ObjectivesController : MonoBehaviour
     public GameObject blackBarArroundScoreScreen;
     public GameObject nameInput;
     public GameObject nameInputBar;
+    public GameObject pauseMenu;
+    public GameObject puzzleCanvass;
 
     public Button back;
 
@@ -52,6 +54,9 @@ public class ObjectivesController : MonoBehaviour
         blackBarArroundScoreScreen = GameObject.Find("BlackBar");
         back = GameObject.Find("ExitLevelButton").GetComponent<Button>();
         AmmountCoins = GameObject.Find("MoneyAmount").GetComponent<Text>();
+        pauseMenu = GameObject.Find("PauseMenu 1");
+        puzzleCanvass = GameObject.Find("PuzzleCanvas");
+        
 
 
 
@@ -67,14 +72,13 @@ public class ObjectivesController : MonoBehaviour
         back.gameObject.SetActive(false);
 
 
-        if(levelName == "De Meent")
+/*        if (levelName == "De Meent")
         {
            targets.RemoveAt(4);
-        }
+        }*/
 
         totalObjectives = targets.Count + solarPanels.Count;
 
-        
 
 
     }
@@ -98,6 +102,7 @@ public class ObjectivesController : MonoBehaviour
             }
         }
 
+
         //timer in game.
         secondsTimer += Time.deltaTime;
         if (secondsTimer > 59.45)
@@ -110,6 +115,7 @@ public class ObjectivesController : MonoBehaviour
         // Set how many objectives are done
         TextUiCounter.text = objectivesCounter + "/" + totalObjectives;
 
+
         //ammount of money
         AmmountCoins.text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
 
@@ -121,8 +127,8 @@ public class ObjectivesController : MonoBehaviour
              Cursor.lockState = CursorLockMode.Confined;
              Cursor.visible = true;
              Time.timeScale = 0;
-             puzzleCanvas.gameObject.SetActive(false);
-
+            pauseMenu.SetActive(false);
+            puzzleCanvass.SetActive(false);
              blackBarArroundScoreScreen.gameObject.SetActive(true);
              nameInput.gameObject.SetActive(true);
              nameInputBar.gameObject.SetActive(true);
@@ -212,9 +218,13 @@ public class ObjectivesController : MonoBehaviour
 
     public void SubmitAndExit()
     {
-        int secondsFinal = (int)Mathf.Round(secondsTimer);
+        if(GameObject.Find("TutorialLevel") != null)
+        {
+            print("testtttt");
+        }
+        /*int secondsFinal = (int)Mathf.Round(secondsTimer);
         int result = minutemark * 100;
-        SubmitScore.AddNewHighscore(nameInput.GetComponent<InputField>().text, result + secondsFinal);
+        SubmitScore.AddNewHighscore(nameInput.GetComponent<InputField>().text, result + secondsFinal);*/
 
         SceneManager.LoadScene("Mainmap-Scene");
     }
