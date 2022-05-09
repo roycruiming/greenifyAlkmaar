@@ -87,7 +87,7 @@ public class ObjectivesController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -117,16 +117,7 @@ public class ObjectivesController : MonoBehaviour
         TextUiCounter.text = objectivesCounter + "/" + totalObjectives;
 
 
-        //ammount of money
-        if(GameObject.Find("Kaasmarkt scenery") != null)
-        {
-
-        }
-        else
-        {
-            AmmountCoins.text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
-
-        }
+        AmmountCoins.text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
 
 
         this.CheckNextProgressionPhase();
@@ -173,17 +164,17 @@ public class ObjectivesController : MonoBehaviour
     private void OnDisable()
     {
         string str = UnityEngine.StackTraceUtility.ExtractStackTrace();
-        print("");
-
     }
 
     private void CheckNextProgressionPhase() {
         if(objectivesCounter == 2 && progression1PhaseDone == false)  {
-            GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
+            if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
+            else if(GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
             progression1PhaseDone = true;
         }
         else if(objectivesCounter == 4 && progression2PhaseDone == false) {
-            GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
+            if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
+            else if(GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
             progression2PhaseDone = true;
         }
     }
