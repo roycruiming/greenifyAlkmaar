@@ -218,13 +218,20 @@ public class ObjectivesController : MonoBehaviour
 
     public void SubmitAndExit()
     {
-        if(GameObject.Find("TutorialLevel") != null)
+        if (GameObject.Find("TutorialLevel") != null)
         {
             print("testtttt");
         }
-        /*int secondsFinal = (int)Mathf.Round(secondsTimer);
-        int result = minutemark * 100;
-        SubmitScore.AddNewHighscore(nameInput.GetComponent<InputField>().text, result + secondsFinal);*/
+
+        if (GameObject.Find("MeentV2") != null)
+        {
+            print("testtttt");
+            /*int secondsFinal = (int)Mathf.Round(secondsTimer);
+            int result = minutemark * 100;
+            SubmitScore.AddNewHighscore(nameInput.GetComponent<InputField>().text, result + secondsFinal);*/
+        }
+
+        
 
         SceneManager.LoadScene("Mainmap-Scene");
     }

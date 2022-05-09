@@ -60,7 +60,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         turbineCounterText = GameObject.Find("WindCounter").GetComponent<Text>();
         treeCounterText = GameObject.Find("TreeCounter").GetComponent<Text>();
         totalCounterText = GameObject.Find("TotalCounter").GetComponent<Text>();
-        PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(76,2,104.5f), Quaternion.identity);
+        PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(129.43f, 2.39f, 360.32f), Quaternion.identity);
         football = GameObject.Find("soccer-ball (3)");
         
         

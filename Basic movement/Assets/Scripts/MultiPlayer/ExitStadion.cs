@@ -25,7 +25,7 @@ public class ExitStadion : MonoBehaviour
         }
         else
         {
-            other.gameObject.transform.position = new Vector3(77, 3, 67);
+            other.gameObject.transform.position = new Vector3(129, 1.5f, 322);
         }
     }
 }

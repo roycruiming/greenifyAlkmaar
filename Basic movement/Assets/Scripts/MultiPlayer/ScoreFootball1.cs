@@ -37,9 +37,9 @@ public class ScoreFootball1 : MonoBehaviour
 
     public void SpawnConfeti1(Collider other)
     {
-        confetiFiveSeconds = Instantiate(confeti, new Vector3(95, 6.8f, 103.5f), Quaternion.Euler(90, 0, 0));
+        confetiFiveSeconds = Instantiate(confeti, new Vector3(150.13f, 7.03f, 360.31f), Quaternion.Euler(90, 0, 0));
         Destroy(confetiFiveSeconds, 5);
-        other.gameObject.transform.position = new Vector3(76, 2.5f, 104);
+        other.gameObject.transform.position = new Vector3(129.43f, 2.39f, 360.32f);
         solarPanel.SetActive(true);
         windmill.SetActive(true);
         
