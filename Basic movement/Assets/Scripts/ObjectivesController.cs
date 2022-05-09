@@ -56,6 +56,8 @@ public class ObjectivesController : MonoBehaviour
         AmmountCoins = GameObject.Find("MoneyAmount").GetComponent<Text>();
         pauseMenu = GameObject.Find("PauseMenu 1");
         puzzleCanvass = GameObject.Find("PuzzleCanvas");
+
+        AmmountCoins.text = "0";
         
 
 
@@ -79,11 +81,7 @@ public class ObjectivesController : MonoBehaviour
             solarPanels.RemoveAt(1);
         }
 
-
         totalObjectives = targets.Count + solarPanels.Count;
-
-
-
     }
 
     // Start is called before the first frame update
@@ -120,7 +118,15 @@ public class ObjectivesController : MonoBehaviour
 
 
         //ammount of money
-        AmmountCoins.text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
+        if(GameObject.Find("Kaasmarkt scenery") != null)
+        {
+
+        }
+        else
+        {
+            AmmountCoins.text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
+
+        }
 
 
         this.CheckNextProgressionPhase();
