@@ -77,7 +77,7 @@ public class GlobalGameHandler : MonoBehaviour
         //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
         //id price unlockedInLevel imageName unlocked unlockableType isPurchased
         //Every class gets saved from the constructor
-        instance.allUnlockables.Add(new Unlockable(0,1644,0,"test3",true,UnlockableType.character, "man+clown")); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
+        instance.allUnlockables.Add(new Unlockable(0,1644,0,"clown face",true,UnlockableType.character, "man+clown")); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
         instance.allUnlockables.Add(new Unlockable(1,2030,1,"test2",false,UnlockableType.character, "woman+superhero")); 
         instance.allUnlockables.Add(new Unlockable(2,550,1,"test",false,UnlockableType.character, "man+ninja")); 
         instance.allUnlockables.Add(new Unlockable(3,320,2,"test2",false,UnlockableType.character, "man+astronaut")); 

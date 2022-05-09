@@ -139,7 +139,6 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
     public void showcaseLevelProgression()
     {
         //progressionPhase++; //up the progression level phase
-        progressionPhase = 1;
         if(allPhaseObjectsList[progressionPhase] != null) {
             //initiate the blinking of the new greener level-props
             allPhaseObjects = allPhaseObjectsList[progressionPhase];
