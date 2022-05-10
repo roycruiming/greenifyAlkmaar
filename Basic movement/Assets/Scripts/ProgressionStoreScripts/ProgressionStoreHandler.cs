@@ -66,7 +66,7 @@ public class ProgressionStoreHandler : MonoBehaviour
 
     public void LeaveProgressionStore() {
 
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("OverworldMapV2");
     }
 
     private void changeShowcaseCharacter(int indexCharacterList) {

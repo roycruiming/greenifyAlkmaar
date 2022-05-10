@@ -34,9 +34,11 @@ public class GlobalGameHandler : MonoBehaviour
                 instance.currentLanguage = "english";
                 PlayerPrefs.SetString("settings_language","english");
             }
+
+            if(PlayerPrefs.HasKey("settings_directionalArrow") == false) PlayerPrefs.SetInt("settings_directionalArrow",1);
+
             DontDestroyOnLoad(this.gameObject);
-            //InitTranslationDictionary();
-            InitTranslationDictionaryBuildFunctional(); //test
+            InitTranslationDictionaryBuildFunctional();
             InitUnlockAbles();
 
             LoadSaveGameInfo();
@@ -67,6 +69,26 @@ public class GlobalGameHandler : MonoBehaviour
         PlayerPrefs.SetInt("ActiveCharacterUnlockId",unlockableId);
         PlayerPrefs.Save();
         print("new character equipped");
+    }
+
+    public static bool PlayerWantsDirectionalArrow() {
+        if(PlayerPrefs.HasKey("settings_directionalArrow") == false) {
+            PlayerPrefs.SetInt("settings_directionalArrow",1);
+            return true;
+        }
+        else {
+            if(PlayerPrefs.GetInt("settings_directionalArrow") == 1) return true;
+            else return false;
+        }
+    }
+
+    public static void ToggleDirectionalArrowSetting() {
+        if(PlayerPrefs.HasKey("settings_directionalArrow") == false) PlayerPrefs.SetInt("settings_directionalArrow",1);
+        else {
+            if(PlayerPrefs.GetInt("settings_directionalArrow") == 1) PlayerPrefs.SetInt("settings_directionalArrow",0);
+            else PlayerPrefs.SetInt("settings_directionalArrow",1);
+        }
+
     }
 
     private void InitUnlockAbles() {
@@ -109,37 +131,6 @@ public class GlobalGameHandler : MonoBehaviour
     public static List<Unlockable> GetAllUnlockablesInfo() {
         return instance.allUnlockables;
     }
-
-    // public static List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
-    //     List<Unlockable> allTypeUnlockables = new List<Unlockable>();
-
-    //     for(int i = 0; i < instance.allUnlockables.Count; i++) {
-    //         print(i);
-    //         if(instance.allUnlockables[i].type == uType) {
-    //             allTypeUnlockables.Add(instance.allUnlockables[i]);
-    //         } 
-    //     }
-
-    //     return allTypeUnlockables;
-    // }
-
-    // public static void UnlockUnlockable(int unlockableId) {
-    //     //for some reason this function below returns me null so create a function that loads info from the player prefs
-    //     Unlockable unlockableItem = GlobalGameHandler.GetUnlockableById(unlockableId);
-        
-    //     print(unlockableItem);
-    //     if(unlockableItem != null) {
-    //         if(unlockableItem.isUnlocked == false) {
-
-    //             unlockableItem.isUnlocked = true;
-    //             unlockableItem.UpdateInfoToDisk();
-
-    //             //showcase the unlock
-    //             HUDController hudController = GameObject.Find("HUDCanvas").GetComponent<HUDController>();
-    //             if(hudController != null) hudController.AddUnlockableToShowcaseUnlockables(unlockableItem);
-    //         }
-    //     }
-    // }
 
     public static GlobalGameHandler GetInstance() {
         return instance;
