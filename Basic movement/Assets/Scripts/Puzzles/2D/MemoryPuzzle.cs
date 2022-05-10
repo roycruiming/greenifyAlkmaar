@@ -59,7 +59,6 @@ public class MemoryPuzzle : MonoBehaviour
         NewObj.AddComponent<MemoryCard>();
         NewObj.GetComponent<MemoryCard>().IconSprite = Pairs[i];
         NewObj.GetComponent<MemoryCard>().CanBeClicked = true;
-        print(NewObj.GetComponent<MemoryCard>().CanBeClicked);
         NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);
       }
     }
@@ -120,6 +119,13 @@ public class MemoryPuzzle : MonoBehaviour
       PuzzleDifficulty = 0;
       FirstChoice = null;
       SecondChoice = null;
+      Pairs.Clear();
+      AmountSolved = 0;
+
+      foreach(Transform child in ParentPanel.transform)
+      {
+        GameObject.Destroy(child.gameObject);
+      }
 
       yield return new WaitForSeconds(1);
       Cursor.visible = false;
