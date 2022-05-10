@@ -58,9 +58,6 @@ public class ObjectivesController : MonoBehaviour
         puzzleCanvass = GameObject.Find("PuzzleCanvas");
 
         AmmountCoins.text = "0";
-        
-
-
 
         targets = Resources.FindObjectsOfTypeAll<PuzzleController>().ToList();
         solarPanels = Resources.FindObjectsOfTypeAll<Item>().ToList();
@@ -75,11 +72,18 @@ public class ObjectivesController : MonoBehaviour
 
         if (GameObject.Find("MeentV2") != null)
         {
-            targets.RemoveAt(1);
             solarPanels.RemoveAt(0);
             solarPanels.RemoveAt(0);
             solarPanels.RemoveAt(1);
         }
+        for(int i = 0; i < targets.Count; i++)
+        {   
+            if(targets[i].name == "ObjectiveBox")
+            {
+                targets.RemoveAt(i);
+            }
+        }
+
 
         totalObjectives = targets.Count + solarPanels.Count;
     }
@@ -130,8 +134,15 @@ public class ObjectivesController : MonoBehaviour
             pauseMenu.SetActive(false);
             puzzleCanvass.SetActive(false);
              blackBarArroundScoreScreen.gameObject.SetActive(true);
-             nameInput.gameObject.SetActive(true);
-             nameInputBar.gameObject.SetActive(true);
+            if (GameObject.Find("TutorialLevel"))
+            {
+
+            }
+            else
+            {
+                nameInputBar.gameObject.SetActive(true);
+            }
+
              GameDone.text = "Gefeliciteerd!";
              gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
              gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
