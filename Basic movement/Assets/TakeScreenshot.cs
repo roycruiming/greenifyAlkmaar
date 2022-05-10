@@ -2,14 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
-
+using SFB;
+using System;
 
 public class TakeScreenshot : MonoBehaviour
 {
 
-    private Camera camera; 
+    public Camera camera;
 
+    public int width = 256;
+    public int height = 256;
+    public int depth = 24;
+    public TextureFormat textureFormat = TextureFormat.RGBA32 ;
+    
+
+
+    private void Awake()
+    {
+        
+        //if (width == null) width = 256;
+        //if (height == null)
+    }
 
 
 
@@ -17,17 +30,31 @@ public class TakeScreenshot : MonoBehaviour
     [ContextMenu("Take Screenshot")]
     public void TakeScreenShot() {
 
-
-        if (camera == null) camera = this.GetComponent<Camera>();
-
+        string path = StandaloneFileBrowser.SaveFilePanel("Save File", "", "", "png");
 
 
-        RenderTexture rt = new RenderTexture(256, 256, 24);
+        //check if there is a path 
+        if (path == null || path.Length == 0 || System.IO.File.Exists(path)) {
+            //path = StandaloneFileBrowser.SaveFilePanel("Save File", "", "", "png"); 
+            return;
+            
+        }
+
+
+
+
+
+
+
+
+
+
+        RenderTexture rt = new RenderTexture(width, height, depth);
         camera.targetTexture = rt;
-        Texture2D screenshot = new Texture2D(256, 256, TextureFormat.RGBA32, false);
+        Texture2D screenshot = new Texture2D(width, height, textureFormat, false);
         camera.Render();
         RenderTexture.active = rt;
-        screenshot.ReadPixels(new Rect(0, 0, 256, 256), 0, 0);
+        screenshot.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         camera.targetTexture = null;
         RenderTexture.active = null;
 
@@ -41,7 +68,7 @@ public class TakeScreenshot : MonoBehaviour
         }
 
         byte[] bytes = screenshot.EncodeToPNG();
-        System.IO.File.WriteAllBytes("C:/Users/tim/Documents/GitHub/greenifyAlkmaar/Basic movement/Assets/Sprites/Camera/test.png", bytes);
+        System.IO.File.WriteAllBytes(path, bytes);
 
 
 

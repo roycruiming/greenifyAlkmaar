@@ -21,6 +21,8 @@ public class GlobalGameHandler : MonoBehaviour
 
     private int totalPlayerCoints;
 
+     
+
     private void Awake() 
     { 
         // If there is an instance, and it's not me, delete myself.
@@ -44,6 +46,9 @@ public class GlobalGameHandler : MonoBehaviour
 
         }
     }
+
+
+
 
     private void LoadSaveGameInfo() {
         if(PlayerPrefs.HasKey("playerTotalCoints") == false) {
