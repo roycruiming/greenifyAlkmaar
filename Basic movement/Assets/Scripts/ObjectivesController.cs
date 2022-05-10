@@ -75,14 +75,17 @@ public class ObjectivesController : MonoBehaviour
             solarPanels.RemoveAt(0);
             solarPanels.RemoveAt(0);
             solarPanels.RemoveAt(1);
-        }
-        for(int i = 0; i < targets.Count; i++)
-        {   
-            if(targets[i].name == "ObjectiveBox")
+
+            for (int i = 0; i < targets.Count; i++)
             {
-                targets.RemoveAt(i);
+                if (targets[i].name == "ObjectiveBox")
+                {
+                    targets.RemoveAt(i);
+                }
             }
         }
+
+
 
 
         totalObjectives = targets.Count + solarPanels.Count;
