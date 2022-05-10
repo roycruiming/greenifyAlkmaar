@@ -59,10 +59,10 @@ public class OptionsMenu : MonoBehaviour
 
     public void ChangeArrow()
     {
-      if(GlobalGameHandler.PlayerWantsDirectionalArrow = false && ToggleCheckBox.isOn = true){
+      if(!GlobalGameHandler.PlayerWantsDirectionalArrow() && ToggleCheckBox.isOn){
         GlobalGameHandler.ToggleDirectionalArrowSetting();
-      } else if (GlobalGameHandler.PlayerWantsDirectionalArrow = true && ToggleCheckBox.isOn = false){
-         GlobalGameHandler.ToggleDirectionalArrowSetting();
+      } else if (GlobalGameHandler.PlayerWantsDirectionalArrow() && !ToggleCheckBox.isOn){
+        GlobalGameHandler.ToggleDirectionalArrowSetting();
       }
     }
 
