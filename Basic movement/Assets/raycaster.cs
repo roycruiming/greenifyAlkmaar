@@ -61,7 +61,7 @@ public class raycaster : MonoBehaviour
                         GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().SetInventorySprite(item.HudImage);
                     }
 
-                    //InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);
+                    InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);
 
                     ObjectivesController objc = objCon.GetComponent<ObjectivesController>();
                     objc.DeleteItemInListSolar(hitInfo.collider.gameObject.GetComponent<Item>());
@@ -110,7 +110,7 @@ public class raycaster : MonoBehaviour
 
                 SolarSpot solarSpot = hitInfo.collider.GetComponent<SolarSpot>();
                 Item item3 = InventoryController.GetItem();
-                if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null) {
+                if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null &&  item3.tag == "SolarPanel") {
                     solarSpot.DoShit(item3);
                     InventoryController.ClearInventory();
                 }
