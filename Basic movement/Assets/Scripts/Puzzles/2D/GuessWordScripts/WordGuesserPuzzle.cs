@@ -34,25 +34,25 @@ public class WordGuesserPuzzle : MonoBehaviour
     IEnumerator showcaseTextAnimationAndHandleResult(Color textColor,bool everythingCorrect) {
         //showcase blink effect and after the effect reset the letters or reward the player
         float waitingTime = 0.35f;
-        this.SetAnswerSpotsTextColors(textColor);
+        this.SetAnswerSpotsTextColors(false,new Color(0,1,0,1),new Color(1,0,0,1)); //color
         yield return new WaitForSeconds(waitingTime);
-        this.SetAnswerSpotsTextColors(new Color(0,0,0,1)); //black
+        this.SetAnswerSpotsTextColors(true,new Color(0,1,0,1),new Color(1,0,0,1)); //black
         yield return new WaitForSeconds(waitingTime);
-        this.SetAnswerSpotsTextColors(textColor);
+        this.SetAnswerSpotsTextColors(false,new Color(0,1,0,1),new Color(1,0,0,1)); //color
         yield return new WaitForSeconds(waitingTime);
-        this.SetAnswerSpotsTextColors(new Color(0,0,0,1)); //black
+        this.SetAnswerSpotsTextColors(true,new Color(0,1,0,1),new Color(1,0,0,1)); //black
         yield return new WaitForSeconds(waitingTime);
-        this.SetAnswerSpotsTextColors(textColor);
+        this.SetAnswerSpotsTextColors(false,new Color(0,1,0,1),new Color(1,0,0,1)); //color
         yield return new WaitForSeconds(waitingTime);
-        this.SetAnswerSpotsTextColors(new Color(0,0,0,1)); //black
+        this.SetAnswerSpotsTextColors(true,new Color(0,1,0,1),new Color(1,0,0,1)); //black
         yield return new WaitForSeconds(waitingTime);
-        this.SetAnswerSpotsTextColors(textColor);
+        this.SetAnswerSpotsTextColors(false,new Color(0,1,0,1),new Color(1,0,0,1)); //color
         yield return new WaitForSeconds(waitingTime);
-        this.SetAnswerSpotsTextColors(new Color(0,0,0,1)); //black
+        this.SetAnswerSpotsTextColors(true,new Color(0,1,0,1),new Color(1,0,0,1)); //black
         yield return new WaitForSeconds(waitingTime);
-        this.SetAnswerSpotsTextColors(textColor);
+        this.SetAnswerSpotsTextColors(false,new Color(0,1,0,1),new Color(1,0,0,1)); //color
         yield return new WaitForSeconds(waitingTime);
-        this.SetAnswerSpotsTextColors(new Color(0,0,0,1)); //black
+        this.SetAnswerSpotsTextColors(true,new Color(0,1,0,1),new Color(1,0,0,1)); //black
         yield return new WaitForSeconds(waitingTime);
 
         if(everythingCorrect == false) ResetEverything();
@@ -84,8 +84,11 @@ public class WordGuesserPuzzle : MonoBehaviour
         PuzzleControllerObject.GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
     }
 
-    private void SetAnswerSpotsTextColors(Color textColor) {
-        foreach(GuessWordAnswerSpot gs in this.currentAnswerSpots) gs.SetTextColor(textColor);
+    private void SetAnswerSpotsTextColors(bool showcaseBlack, Color correctColor, Color incorrectColor) {
+        foreach(GuessWordAnswerSpot gs in this.currentAnswerSpots) {
+            if(showcaseBlack) gs.SetTextColor(correctColor,incorrectColor,true);
+            else gs.SetTextColor(correctColor,incorrectColor,false);
+        }
     }
 
     private bool AllAnswersFilledIn() {

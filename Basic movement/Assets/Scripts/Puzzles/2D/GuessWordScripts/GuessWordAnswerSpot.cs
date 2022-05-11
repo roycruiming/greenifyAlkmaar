@@ -36,8 +36,12 @@ public class GuessWordAnswerSpot : MonoBehaviour
         this.UpdateLetterDisplay(this.currentLetter);
     }
 
-    public void SetTextColor(Color color) {
-        gameObject.transform.Find("letter").GetComponent<TextMeshProUGUI>().color = color;
+    public void SetTextColor(Color correctColor, Color incorrectColor, bool blackColor) {
+        if(blackColor == true) gameObject.transform.Find("letter").GetComponent<TextMeshProUGUI>().color = new Color(0, 0, 0, 1);
+        else {
+            if(isCorrect) gameObject.transform.Find("letter").GetComponent<TextMeshProUGUI>().color = correctColor;
+            else gameObject.transform.Find("letter").GetComponent<TextMeshProUGUI>().color = incorrectColor;
+        }
         //gameObject.transform.Find("letter").GetComponent<TextMeshProUGUI>().outlineColor = new Color32(255,245,66,66);
     }
 
