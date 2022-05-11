@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class ChargerSpot : MonoBehaviour
 {
+
+    private int counter = 0; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,9 +40,22 @@ public class ChargerSpot : MonoBehaviour
             charger.GetComponent<Outline>().enabled = false;
             GetComponent<Outline>().enabled = false;
             charger.gameObject.SetActive(true);
+            counter++;
+            
+            if (counter == 1) {
+                ObjectivesController oc =  GameObject.Find("HUDCanvas").GetComponent<ObjectivesController>();
+
+                if (oc != null) {
+                    oc.objectivesCounter++;
+                }
+            
+            }
+
             return true;
         }
         return false;
     }
+
+
 }
 
