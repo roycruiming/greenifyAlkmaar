@@ -66,7 +66,8 @@ public class WordGuesserPuzzle : MonoBehaviour
 
     private void ClosePuzzle() {
         Cursor.visible = false;
-      this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
+        
     }
 
     public void ForceClosePuzzle() {
@@ -78,6 +79,7 @@ public class WordGuesserPuzzle : MonoBehaviour
 
     private void PuzzleVictory() {
         this.ClosePuzzle();
+        Cursor.visible = false;
         PuzzleControllerObject.GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
     }
 
