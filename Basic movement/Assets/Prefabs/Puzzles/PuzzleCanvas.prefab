@@ -110,6 +110,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5833494597555451399}
     m_Modifications:
+    - target: {fileID: 4807822864611745252, guid: 15880f7ecbc72a44b9f59a5db83b4ffd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 125
+      objectReference: {fileID: 0}
     - target: {fileID: 5944595197666176610, guid: 15880f7ecbc72a44b9f59a5db83b4ffd,
         type: 3}
       propertyPath: m_IsActive
@@ -125,6 +130,36 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -734
       objectReference: {fileID: 0}
+    - target: {fileID: 5944595198322558136, guid: 15880f7ecbc72a44b9f59a5db83b4ffd,
+        type: 3}
+      propertyPath: CleanIcons.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 3de4e7e7e9966b34cab6644e5af0d94e,
+        type: 3}
+    - target: {fileID: 5944595198322558136, guid: 15880f7ecbc72a44b9f59a5db83b4ffd,
+        type: 3}
+      propertyPath: CleanIcons.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: acbe41d68e987574286c3877a9534915,
+        type: 3}
+    - target: {fileID: 5944595198322558136, guid: 15880f7ecbc72a44b9f59a5db83b4ffd,
+        type: 3}
+      propertyPath: CleanIcons.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f93a77017c1fe141a1400d47063c5fe,
+        type: 3}
+    - target: {fileID: 5944595198322558136, guid: 15880f7ecbc72a44b9f59a5db83b4ffd,
+        type: 3}
+      propertyPath: DirtyIcons.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 39ad30ab2bf848a44b39a1753016e2ea,
+        type: 3}
+    - target: {fileID: 5944595198322558136, guid: 15880f7ecbc72a44b9f59a5db83b4ffd,
+        type: 3}
+      propertyPath: DirtyIcons.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 7c64b2568ff7bd142a3b05435a1b9c4a,
+        type: 3}
     - target: {fileID: 5944595198322558138, guid: 15880f7ecbc72a44b9f59a5db83b4ffd,
         type: 3}
       propertyPath: m_Name
@@ -1038,12 +1073,12 @@ PrefabInstance:
     - target: {fileID: 4646747701991121351, guid: 4189f2d16dc057e41842cebde77058b6,
         type: 3}
       propertyPath: m_Spacing.x
-      value: 5
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 4646747701991121351, guid: 4189f2d16dc057e41842cebde77058b6,
         type: 3}
       propertyPath: m_Spacing.y
-      value: 5
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 4646747701991121351, guid: 4189f2d16dc057e41842cebde77058b6,
         type: 3}
