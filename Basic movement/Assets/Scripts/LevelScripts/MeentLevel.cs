@@ -33,7 +33,7 @@ public class MeentLevel : MonoBehaviour, LevelBasis
         initLevel();
 
         //showcase intro cinematic
-        //StartCoroutine(showcaseIntroCutscene());
+        StartCoroutine(showcaseIntroCutscene());
         print(progressionPhase + " start");
         
     }
