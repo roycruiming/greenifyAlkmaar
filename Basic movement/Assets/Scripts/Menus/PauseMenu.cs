@@ -94,7 +94,11 @@ public class PauseMenu : MonoBehaviour
 
         public void MainMenu()
         {
-          SceneManager.LoadScene("MainMenu");
+            GameIsPaused = false;
+            AudioListener.pause = false;
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("MainMenu");
         }
 
         void SwitchVisibility(GameObject panel, bool visbility)
