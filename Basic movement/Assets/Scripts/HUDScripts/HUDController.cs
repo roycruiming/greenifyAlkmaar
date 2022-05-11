@@ -40,8 +40,11 @@ public class HUDController : MonoBehaviour
         this.PopUpMessageContainer = HudCanvas.transform.Find("PopUpMessageContainer").gameObject;
         this.messageSequence = null;
         this.currentInformationHelper = null;
+        if(GameObject.Find("AzStadion") == null)
+        {
+            allUnlockablesInfo = GlobalGameHandler.GetInstance().allUnlockables;
 
-        allUnlockablesInfo = GlobalGameHandler.GetInstance().allUnlockables;
+        }
     }
 
     // Start is called before the first frame update
