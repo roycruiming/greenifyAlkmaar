@@ -96,9 +96,18 @@ public class ObjectivesController : MonoBehaviour
 
 
 
-        totalObjectives = targets.Count + solarPanels.Count;
 
-        if(GameObject.Find("AzStadion") != null)
+        if(GameObject.Find("Kaasmarkt scenery") != null)
+        {
+            totalObjectives = targets.Count + 1;
+        }
+        else
+        {
+            totalObjectives = targets.Count + solarPanels.Count;
+
+        }
+
+        if (GameObject.Find("AzStadion") != null)
         {
             AzStadion();
         }
