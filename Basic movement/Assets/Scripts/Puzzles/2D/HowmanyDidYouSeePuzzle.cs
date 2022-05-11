@@ -93,7 +93,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     {
       GameObject NewObj = new GameObject();
       NewObj.name = "Icon";
-      NewObj.transform.localScale = new Vector3(0.5f , 0.5f, 0.5f);
+      NewObj.transform.localScale = new Vector3(1f , 1f, 1f);
 
       Image NewImage = NewObj.AddComponent<Image>();
       NewImage.sprite = Icons[Random.Range(0, Icons.Count)];
