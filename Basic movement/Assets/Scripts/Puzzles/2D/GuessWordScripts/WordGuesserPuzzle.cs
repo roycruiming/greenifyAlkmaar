@@ -78,6 +78,7 @@ public class WordGuesserPuzzle : MonoBehaviour
     }
 
     private void PuzzleVictory() {
+        forcedWord = null;
         this.ClosePuzzle();
         Cursor.visible = false;
         PuzzleControllerObject.GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
