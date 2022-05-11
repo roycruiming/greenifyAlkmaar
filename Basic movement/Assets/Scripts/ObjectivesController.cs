@@ -35,6 +35,8 @@ public class ObjectivesController : MonoBehaviour
     public GameObject objectivesObject;
     public GameObject GameTimerObject;
 
+    public int chargingStationCounter = 0; 
+
     public Button back;
 
     public bool gameFinnished = false;
@@ -105,7 +107,7 @@ public class ObjectivesController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        objectivesCounter = 2; 
     }
 
     // Update is called once per frame
