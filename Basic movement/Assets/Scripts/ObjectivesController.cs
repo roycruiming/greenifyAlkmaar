@@ -44,7 +44,13 @@ public class ObjectivesController : MonoBehaviour
 
     public void Awake()
     {
-        TextUiCounter = GameObject.Find("ObjectivesCounter").GetComponent<Text>();
+
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+                TextUiCounter = GameObject.Find("ObjectivesCounter").GetComponent<Text>();
         GameTimer = GameObject.Find("GameTimer").GetComponent<Text>();
         GameDone = GameObject.Find("EndScreen").GetComponent<Text>();
         gameEndScore = GameObject.Find("EndTime").GetComponent<Text>();
@@ -82,12 +88,6 @@ public class ObjectivesController : MonoBehaviour
         }
 
         totalObjectives = targets.Count + solarPanels.Count;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -168,14 +168,14 @@ public class ObjectivesController : MonoBehaviour
 
     private void CheckNextProgressionPhase() {
         if(objectivesCounter == 2 && progression1PhaseDone == false)  {
+            progression1PhaseDone = true;
             if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
             else if(GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
-            progression1PhaseDone = true;
         }
         else if(objectivesCounter == 4 && progression2PhaseDone == false) {
+            progression2PhaseDone = true;
             if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
             else if(GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
-            progression2PhaseDone = true;
         }
     }
 
