@@ -26,10 +26,16 @@ public class MeentLevel : MonoBehaviour, LevelBasis
     float elapsedTime = 0f;
 
     public void Awake() {
+        
+    }
+
+    public void Start() {
         initLevel();
 
         //showcase intro cinematic
-        StartCoroutine(showcaseIntroCutscene());
+        //StartCoroutine(showcaseIntroCutscene());
+        print(progressionPhase + " start");
+        
     }
 
     IEnumerator showcaseIntroCutscene() {
@@ -92,7 +98,7 @@ public class MeentLevel : MonoBehaviour, LevelBasis
 
     public void showcaseLevelProgression() {
         progressionPhase++; //up the progression level phase
-
+        print("progressionphase=" + progressionPhase);
         if(allPhaseObjectsList[progressionPhase] != null) {
             //initiate the blinking of the new greener level-props
             allPhaseObjects = allPhaseObjectsList[progressionPhase];
