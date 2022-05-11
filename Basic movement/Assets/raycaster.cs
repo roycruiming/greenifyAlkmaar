@@ -12,8 +12,9 @@ public class raycaster : MonoBehaviour
     public LayerMask layerMask;
     public Text textUI;
     public GameObject objCon;
-
     private InventoryController InventoryController;
+
+    public bool seenTreeInformation = false; 
 
 
 
@@ -114,12 +115,32 @@ public class raycaster : MonoBehaviour
                     InventoryController.ClearInventory();
                 }
 
-                else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
+                 if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {
+
+                    
+
+              
+
+
+
                     //object is gamehelper so showcase this message in the HUD
                     //get the information text from the object and send it to the controller
                     if (hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null)
                     {
+                        //dit is een lelijke oplossing, maar wel snel :D :D 
+                        if (hitInfo.collider.gameObject.GetComponent<InformationHelper>().isTree && !seenTreeInformation)
+                        {
+                            seenTreeInformation = true;
+                        }
+
+                        else if (hitInfo.collider.gameObject.GetComponent<InformationHelper>().isTree && seenTreeInformation) return; 
+
+
+
+                        //else return; 
+
+
                         //find the hudcontroller object and call the ShowcaseMessage function with the informationHelper message
                         InformationHelper senderInfo = hitInfo.collider.gameObject.GetComponent<InformationHelper>();
 
