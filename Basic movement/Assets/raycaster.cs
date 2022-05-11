@@ -61,7 +61,7 @@ public class raycaster : MonoBehaviour
                         GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().SetInventorySprite(item.HudImage);
                     }
 
-                    InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);
+                    //InventoryController.StoreItemAndPlacePreviouslyStoredItemInWorld(item, gameObject.transform);
 
                     ObjectivesController objc = objCon.GetComponent<ObjectivesController>();
                     objc.DeleteItemInListSolar(hitInfo.collider.gameObject.GetComponent<Item>());
@@ -128,7 +128,8 @@ public class raycaster : MonoBehaviour
                     //get the information text from the object and send it to the controller
                     if (hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null)
                     {
-                        //dit is een lelijke oplossing, maar wel snel :D :D 
+                       
+                        //
                         if (hitInfo.collider.gameObject.GetComponent<InformationHelper>().isTree && !seenTreeInformation)
                         {
                             seenTreeInformation = true;
