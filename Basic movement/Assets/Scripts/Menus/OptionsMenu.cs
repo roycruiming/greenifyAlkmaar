@@ -10,6 +10,7 @@ public class OptionsMenu : MonoBehaviour
     public AudioMixer audioMixer;
     public Dropdown LanguageDropdown;
     public GameObject optionMenu;
+    public Toggle ToggleCheckBox;
 
     public string LanguageSelected;
     int LanguageSelectedIndex;
@@ -18,6 +19,15 @@ public class OptionsMenu : MonoBehaviour
     //zet de juiste values in dropdown
     void Start()
     {
+      ToggleCheckBox = transform.Find("ArrowToggle").GetComponent<Toggle>();
+      if(ToggleCheckBox){
+        if(GlobalGameHandler.PlayerWantsDirectionalArrow()){
+          ToggleCheckBox.isOn = true;
+        } else {
+          ToggleCheckBox.isOn = false;
+        }
+      }
+
       languages = GlobalGameHandler.GetLanguagesList();
       LanguageDropdown.ClearOptions();
       LanguageDropdown.AddOptions(languages);
@@ -45,6 +55,15 @@ public class OptionsMenu : MonoBehaviour
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+    }
+
+    public void ChangeArrow()
+    {
+      if(!GlobalGameHandler.PlayerWantsDirectionalArrow() && ToggleCheckBox.isOn){
+        GlobalGameHandler.ToggleDirectionalArrowSetting();
+      } else if (GlobalGameHandler.PlayerWantsDirectionalArrow() && !ToggleCheckBox.isOn){
+        GlobalGameHandler.ToggleDirectionalArrowSetting();
+      }
     }
 
     public void CloseOptions()
