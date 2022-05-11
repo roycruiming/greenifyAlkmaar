@@ -68,7 +68,7 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
             if(levelObject.GetComponent<OverworldLevelObject>().levelIndex == index) {
                 this.currentlySelectedLevel = levelObject; //for the camera to follow
                 GameObject.Find("LevelSelectorMessageContainer").transform.position = new Vector3(levelObject.transform.position.x + 4.84f, GameObject.Find("LevelSelectorMessageContainer").transform.position.y, GameObject.Find("LevelSelectorMessageContainer").transform.position.z);
-                 GameObject.Find("PressCToBuyContainer").transform.position = new Vector3(levelObject.transform.position.x + 5.81f, GameObject.Find("PressCToBuyContainer").transform.position.y, GameObject.Find("PressCToBuyContainer").transform.position.z);
+                GameObject.Find("PressCToBuyContainer").transform.position = new Vector3(levelObject.transform.position.x + 5.81f, GameObject.Find("PressCToBuyContainer").transform.position.y, GameObject.Find("PressCToBuyContainer").transform.position.z);
 
                 levelObject.GetComponent<OverworldLevelObject>().DisplayLevelInfo();
                 PlayerPrefs.SetInt("lastOverworldIndex",currentlySelectedIndex); //save last position
@@ -81,15 +81,19 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
     private void HideButtonsIfNeeded() {
         if(currentlySelectedIndex == 0) {
             //hide the left button information UI
+            GameObject.Find("Left").GetComponent<LeftRightButton>().ForcedHidden();
             GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().ForcedHidden();
-            GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().HideButton();
-            GameObject.Find("LeftButtText").GetComponent<LeftRightButton>().HideButton();
+            //GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().HideButton();
+            GameObject.Find("Left").GetComponent<LeftRightButton>().HideButton();
         }
         else {
             //show the left button information UI
+            GameObject.Find("Left").GetComponent<LeftRightButton>().UnableForcedHidden();
+            //GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().HideButton();
+            GameObject.Find("Left").GetComponent<LeftRightButton>().ShowButton();
             GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().UnableForcedHidden();
             GameObject.Find("LeftButtIcon").GetComponent<LeftRightButton>().ShowButton();
-            GameObject.Find("LeftButtText").GetComponent<LeftRightButton>().ShowButton();
+            // GameObject.Find("LeftButtText").GetComponent<LeftRightButton>().ShowButton();
         }
 
         if(currentlySelectedIndex == levelObjects.GetLength(0) - 1) {
