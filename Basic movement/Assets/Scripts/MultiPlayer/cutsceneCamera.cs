@@ -17,13 +17,28 @@ public class cutsceneCamera : MonoBehaviour
         MainCamera.SetActive(false);
         Destroy(CutsceneCamera, 6f);
 
+        StartCoroutine(showcaseIntroCutscene());
+
+    }
+
+    IEnumerator showcaseIntroCutscene()
+    {
+        print("test");
+        yield return new WaitForSeconds(1);
+        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey("intro de meent"));
+        yield return new WaitForSeconds(18);
+
+        yield return null;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(CutsceneCamera == null)
+        {
+            MainCamera.SetActive(true);
+        }
 
     }
 }
