@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using TMPro; 
 
 public class raycaster : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class raycaster : MonoBehaviour
 
     public int rayLength;
     public LayerMask layerMask;
-    public Text textUI;
+    private GameObject pressFContainer; 
+    private TextMeshProUGUI textMeshPro; 
     public GameObject objCon;
     private InventoryController InventoryController;
 
@@ -20,10 +22,7 @@ public class raycaster : MonoBehaviour
 
     void Start()
     {
-        if (textUI != null) {
-            textUI.text = "";
-            textUI.gameObject.SetActive(false);
-        }
+
 
         objCon = GameObject.FindGameObjectWithTag("GameController");
         if (objCon == null) objCon = GameObject.Find("HUDCanvas");
@@ -33,6 +32,14 @@ public class raycaster : MonoBehaviour
 
     private void Awake()
     {
+         
+
+        pressFContainer = GameObject.Find("PressFContainer");
+        textMeshPro = GameObject.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>();
+
+        if(pressFContainer != null) 
+        pressFContainer.SetActive(false); 
+
         InventoryController = new InventoryController(new Inventory());
     }
 
@@ -45,12 +52,27 @@ public class raycaster : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
-            OnScreenDescription description
-                = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
+            bool hasItem = hitInfo.collider.gameObject.GetComponent<Item>() != null;
+            bool  hasInformationHelper = hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null;
+            //bool hasItem = hitInfo.collider.gameObject.GetComponent<Item>();
 
-            if (textUI != null && description != null) {
-                textUI.gameObject.SetActive(true);
-                textUI.text = description.textToDisplay;
+
+
+            //= hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
+
+            if (textMeshPro != null && (hasInformationHelper || hasItem))
+            {
+
+                if (textMeshPro != null && pressFContainer != null) { 
+
+                textMeshPro.text = "press f to interact";
+                pressFContainer.SetActive(true);
+                }
+            }
+
+            else
+            {
+                if (textMeshPro != null && pressFContainer != null)  pressFContainer.SetActive(false);
             }
 
             if (Input.GetKeyDown(KeyCode.F)) {
@@ -167,11 +189,11 @@ public class raycaster : MonoBehaviour
         }
         else
         {
-            if (textUI != null)
-            {
-                textUI.gameObject.SetActive(false);
+            //if (textUI != null)
+            //{
+            //    textUI.gameObject.SetActive(false);
 
-            }
+            //}
 
             }
         }
