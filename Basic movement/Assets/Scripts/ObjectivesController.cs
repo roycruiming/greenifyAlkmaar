@@ -208,14 +208,14 @@ public class ObjectivesController : MonoBehaviour
 
     private void CheckNextProgressionPhase() {
         if(objectivesCounter == 2 && progression1PhaseDone == false)  {
+            progression1PhaseDone = true;
             if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
             else if(GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
-            progression1PhaseDone = true;
         }
         else if(objectivesCounter == 4 && progression2PhaseDone == false) {
+            progression2PhaseDone = true;
             if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
             else if(GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
-            progression2PhaseDone = true;
         }
     }
 
