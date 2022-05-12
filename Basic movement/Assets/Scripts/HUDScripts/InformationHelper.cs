@@ -6,6 +6,7 @@ public class InformationHelper : MonoBehaviour
 {
 
     public string informationTextDictionaryKey;
+    public bool isTree = false; 
 
     public bool keyTextIsSentence;
     
@@ -24,6 +25,7 @@ public class InformationHelper : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        //isTree = false; 
         
     }
 

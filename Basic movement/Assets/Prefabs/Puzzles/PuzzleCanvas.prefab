@@ -592,6 +592,7 @@ GameObject:
   - component: {fileID: 195507963698243281}
   - component: {fileID: 195507963698243280}
   - component: {fileID: 195507963698243279}
+  - component: {fileID: 7688914854900717669}
   m_Layer: 5
   m_Name: Efficiency
   m_TagString: Untagged
@@ -615,7 +616,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 279, y: 146}
+  m_AnchoredPosition: {x: 315, y: 146}
   m_SizeDelta: {x: 552.6698, y: 126.7835}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &195507963698243281
@@ -675,6 +676,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 4, y: -4}
   m_UseGraphicAlpha: 1
+--- !u!114 &7688914854900717669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195507963698243277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d05a4ad1cd40524ab194533f59cc807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: progress
 --- !u!1 &195507963708816426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,7 +1466,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 5, y: 5}
+  m_Spacing: {x: 60, y: 60}
   m_Constraint: 1
   m_ConstraintCount: 4
 --- !u!1 &195507963769069555
@@ -9054,6 +9068,7 @@ GameObject:
   - component: {fileID: 195507965084341779}
   - component: {fileID: 195507965084341778}
   - component: {fileID: 195507965084341777}
+  - component: {fileID: 5645636494472666923}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -9137,6 +9152,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 4, y: -4}
   m_UseGraphicAlpha: 1
+--- !u!114 &5645636494472666923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195507965084341775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d05a4ad1cd40524ab194533f59cc807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: clean solar panel
 --- !u!1 &195507965093621336
 GameObject:
   m_ObjectHideFlags: 0
@@ -11930,12 +11958,12 @@ MonoBehaviour:
   - {fileID: 195507963989458792}
   - {fileID: 195507963623511718}
   DirtyIcons:
-  - {fileID: 21300000, guid: dd63085f51402bc488f26c61429da6dc, type: 3}
-  - {fileID: 21300000, guid: 77255676fb6672b419878cb1cec319f1, type: 3}
+  - {fileID: 21300000, guid: 39ad30ab2bf848a44b39a1753016e2ea, type: 3}
+  - {fileID: 21300000, guid: 7c64b2568ff7bd142a3b05435a1b9c4a, type: 3}
   CleanIcons:
-  - {fileID: 21300000, guid: 32332d06774bcf748b9b6cb6ce51b6df, type: 3}
-  - {fileID: 21300000, guid: 784f7b6c8e3f70049a089b0719147887, type: 3}
-  - {fileID: 21300000, guid: 225ef27ffdff0c74182e2d315990e203, type: 3}
+  - {fileID: 21300000, guid: 3de4e7e7e9966b34cab6644e5af0d94e, type: 3}
+  - {fileID: 21300000, guid: acbe41d68e987574286c3877a9534915, type: 3}
+  - {fileID: 21300000, guid: 4f93a77017c1fe141a1400d47063c5fe, type: 3}
   PuzzlePanel: {fileID: 195507963801183912}
   ParentPanel: {fileID: 195507965240487925}
   Text: {fileID: 195507965305501238}

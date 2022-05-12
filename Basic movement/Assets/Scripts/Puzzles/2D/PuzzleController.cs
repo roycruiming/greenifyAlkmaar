@@ -17,11 +17,11 @@ public class PuzzleController : MonoBehaviour
 
   public WordGuesserDifficulty wordGuesserDifficulty = WordGuesserDifficulty.easy;
 
-void Start()
-{
-  PuzzleCanvas = GameObject.Find("PuzzleCanvas");
-        objectivesController = FindObjectOfType<ObjectivesController>();
-    }
+  void Start()
+  {
+    PuzzleCanvas = GameObject.Find("PuzzleCanvas");
+    objectivesController = FindObjectOfType<ObjectivesController>();
+  }
 
 
 
