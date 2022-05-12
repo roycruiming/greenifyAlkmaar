@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &7348734 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 195507963715901265, guid: 701681729b3315f4f8c3827215ef12f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6273049210477904027}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &374261562
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,12 +173,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &438921127 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6273049210111518524, guid: 701681729b3315f4f8c3827215ef12f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 6273049210477904027}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &571158817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Puzzles:
-  - {fileID: 438921127}
+  - {fileID: 7348734}
   PuzzleDifficulty: 3
   MoneyRange: 10
   wordGuesserDifficulty: 1
