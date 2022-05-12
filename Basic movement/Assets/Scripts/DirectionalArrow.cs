@@ -12,15 +12,20 @@ public class DirectionalArrow : MonoBehaviour
     private float oldDistance = 9999;
     PuzzleController closetsObject;
 
+    bool arrowValue;
+
 
 
     [System.Obsolete]
-
-
     private void Start()
     {
         objCon = FindObjectOfType<ObjectivesController>();
+        this.arrowValue = GlobalGameHandler.PlayerWantsDirectionalArrow();
 
+        HideOrShowArrow(arrowValue);
+    }
+
+    public void awake() {
         
     }
 
@@ -39,6 +44,16 @@ public class DirectionalArrow : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        if(GlobalGameHandler.PlayerWantsDirectionalArrow() != arrowValue) {
+            arrowValue = GlobalGameHandler.PlayerWantsDirectionalArrow();
+            HideOrShowArrow(arrowValue);
+        }
+    }
+
+    private void HideOrShowArrow(bool show) {
+        if(show == false) this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 400, this.gameObject.transform.position.z);
+        else this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - 400, this.gameObject.transform.position.z);
     }
 
 

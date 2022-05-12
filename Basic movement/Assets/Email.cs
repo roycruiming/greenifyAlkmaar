@@ -13,7 +13,7 @@ public class Email : MonoBehaviour
 {
 
 
-  
+
     public string SenderPassword;
     public string SenderEmail;
     public int ProviderPort;
@@ -42,7 +42,7 @@ public class Email : MonoBehaviour
         Debug.Assert(!parametersAreMissing, "parameters missing");
         Debug.Assert(IsEmail(SendToMail.text), "not a valid email");
 
-        string mailReciever = SendToMail.text.Trim(); 
+        string mailReciever = SendToMail.text.Trim();
 
         if (parametersAreMissing) return;
         if (!IsEmail(mailReciever)) {
@@ -56,17 +56,17 @@ public class Email : MonoBehaviour
             SmtpClient smtp = new SmtpClient();
             message.From = new MailAddress(SenderEmail);
             message.To.Add(new MailAddress(mailReciever));
-            message.Subject = "Test";
-            message.IsBodyHtml = true; //to make message body as html  
+            message.Subject = "Come play Greenify Alkmaar with me!";
+            message.IsBodyHtml = true; //to make message body as html
 
-            string name = SendToName.text.Trim(); 
+            string name = SendToName.text.Trim();
 
 
             message.Body = getBody(name, pin);
-            
+
 
             smtp.Port = ProviderPort;
-            smtp.Host = "smtp.gmail.com"; //for gmail host  
+            smtp.Host = "smtp.gmail.com"; //for gmail host
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new NetworkCredential(SenderEmail, SenderPassword);
@@ -74,7 +74,7 @@ public class Email : MonoBehaviour
             smtp.Send(message);
             SendToName.text = "";
             SendToMail.text = "";
-            
+
 
 
         }
@@ -87,11 +87,11 @@ public class Email : MonoBehaviour
     public bool IsEmail(string emailString) {
 
 
-        emailString = emailString.Trim(); 
-        
+        emailString = emailString.Trim();
 
-         return Regex.IsMatch(emailString, 
-             @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", 
+
+         return Regex.IsMatch(emailString,
+             @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
              RegexOptions.IgnoreCase);
     }
 
@@ -101,21 +101,21 @@ public class Email : MonoBehaviour
 
 
 
-       
+
 
         if (lang == "nederlands") {
 
             return "Hallo, " +  name + "! Heb jij toevallig zin om samen greenify alkmaar te spelen? De joincode is: " +
-                roomname + " en het spel kan worden gedownload via: testwebsite.nl"; 
+                roomname + " en het spel kan worden gedownload via: testwebsite.nl";
         }
 
         if (lang == "english") {
-            return "Hallo,"  +  name + 
+            return "Hallo,"  +  name +
                "! Do you want to play greenify Alkmaar with me? My Joincode is:, " + roomname + "and the game can be downloaded on: " +
                 "testwebsite.nl";
         }
 
-        return "something went wrong, ignore this message "; 
+        return "something went wrong, ignore this message ";
 
     }
 }
