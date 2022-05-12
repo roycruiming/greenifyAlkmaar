@@ -24,6 +24,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public ScoreFootball1 sc1;
     public ScoreFootball sc;
     public GameObject football;
+    public GameObject addingTreeAfterProgress;
 
 
     public float y = 0;
@@ -62,13 +63,16 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         totalCounterText = GameObject.Find("TotalCounter").GetComponent<Text>();
         PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(129.43f, 2.39f, 360.32f), Quaternion.identity);
         football = GameObject.Find("soccer-ball (3)");
-        
-        
+        addingTreeAfterProgress = GameObject.Find("Adding");
+
+
 
         totalTurbineCount = GameObject.FindGameObjectsWithTag("TurbineMultiplayer").Length;
         totalSolarCount = GameObject.FindGameObjectsWithTag("SolarMultiplayer").Length;
         totalTreeCount = GameObject.FindGameObjectsWithTag("TreeMultiplayer").Length;
         totalCounter = totalTurbineCount + totalSolarCount + totalTreeCount;
+
+        addingTreeAfterProgress.SetActive(false);
 
 
 
@@ -98,6 +102,12 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         else
         {
             bridgeDeActivate();
+        }
+
+
+        if(totalCount > 5)
+        {
+            AddTreesAfterObject();
         }
 
 
@@ -173,6 +183,12 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public void GoalScored(Collider other)
     {
         sc.SpawnConfeti(other);
+    }
+
+    [PunRPC]
+    public void AddTreesAfterObject()
+    {
+        addingTreeAfterProgress.SetActive(true);
     }
 
 }
