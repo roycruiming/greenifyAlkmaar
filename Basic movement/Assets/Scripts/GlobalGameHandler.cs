@@ -83,10 +83,19 @@ public class GlobalGameHandler : MonoBehaviour
     }
 
     public static void ToggleDirectionalArrowSetting() {
-        if(PlayerPrefs.HasKey("settings_directionalArrow") == false) PlayerPrefs.SetInt("settings_directionalArrow",1);
+        if(PlayerPrefs.HasKey("settings_directionalArrow") == false) {
+            PlayerPrefs.SetInt("settings_directionalArrow",1);
+            print("set directional arrow true");
+        }
         else {
-            if(PlayerPrefs.GetInt("settings_directionalArrow") == 1) PlayerPrefs.SetInt("settings_directionalArrow",0);
-            else PlayerPrefs.SetInt("settings_directionalArrow",1);
+            if(PlayerPrefs.GetInt("settings_directionalArrow") == 1) {
+                PlayerPrefs.SetInt("settings_directionalArrow",0);
+                print("set directional arrow false");
+            }
+            else {
+                PlayerPrefs.SetInt("settings_directionalArrow",1);
+                print("set directional arrow true");
+            }
         }
 
     }
