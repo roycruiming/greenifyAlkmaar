@@ -21,8 +21,11 @@ public class DirectionalArrow : MonoBehaviour
     {
         objCon = FindObjectOfType<ObjectivesController>();
         this.arrowValue = GlobalGameHandler.PlayerWantsDirectionalArrow();
-
-        HideOrShowArrow(arrowValue);
+        if(arrowValue == false) {
+            //hide the arrow else do nothing
+            this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - 400, this.gameObject.transform.position.z);
+        }
+        //HideOrShowArrow(arrowValue);
     }
 
     public void awake() {
@@ -52,7 +55,7 @@ public class DirectionalArrow : MonoBehaviour
     }
 
     private void HideOrShowArrow(bool show) {
-        if(show == false) this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 400, this.gameObject.transform.position.z);
+        if(show == true) this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 400, this.gameObject.transform.position.z);
         else this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - 400, this.gameObject.transform.position.z);
     }
 
