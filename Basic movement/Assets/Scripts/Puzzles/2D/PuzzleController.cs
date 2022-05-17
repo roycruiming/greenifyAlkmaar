@@ -81,11 +81,12 @@ public class PuzzleController : MonoBehaviour
       {"Difficulty", PuzzleDifficulty}
     });
 
-    if(objectivesController){
-          objectivesController.DeleteItemInList(this);
-    }
+
     Cursor.lockState = CursorLockMode.Locked;
     PuzzlePlaying = false;
     GlobalGameHandler.GivePlayerCoints(Random.Range(MoneyRange / 2, MoneyRange * 2 ));
+    if(objectivesController){
+          objectivesController.DeleteItemInList(this);
+    }
   }
 }
