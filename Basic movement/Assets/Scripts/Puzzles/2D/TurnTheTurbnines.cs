@@ -153,7 +153,6 @@ public class TurnTheTurbnines : MonoBehaviour
     private void PuzzleVictory(){
       if(!IsPuzzleDone){
         IsPuzzleDone = true;
-        GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
         StartCoroutine(ClosePuzzle());
       }
     }
@@ -161,12 +160,12 @@ public class TurnTheTurbnines : MonoBehaviour
     IEnumerator ClosePuzzle()
     {
       yield return new WaitForSeconds(1);
-
       IsPuzzleDone = false;
       Cursor.visible = false;
       Power = 0;
       PuzzleDifficulty = 0;
       WindFlippable = true;
       Puzzle.SetActive(false);
+      GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
     }
 }
