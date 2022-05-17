@@ -15,6 +15,7 @@ public class TutorialMenu : MonoBehaviour
 
     void Start()
     {
+      Player = GameObject.FindGameObjectWithTag("player");
       if(Player)
       {
         StartPosition = Player.transform.position;
