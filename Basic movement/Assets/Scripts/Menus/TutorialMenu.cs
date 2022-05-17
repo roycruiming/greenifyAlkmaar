@@ -15,10 +15,18 @@ public class TutorialMenu : MonoBehaviour
 
     void Start()
     {
-      Player = GameObject.FindGameObjectWithTag("player");
+
       if(Player)
       {
         StartPosition = Player.transform.position;
+      }
+    }
+
+    void Update()
+    {
+      if(!Player)
+      {
+        Player = GameObject.FindGameObjectWithTag("Player");
       }
     }
 
