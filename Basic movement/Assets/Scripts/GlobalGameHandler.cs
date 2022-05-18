@@ -108,12 +108,13 @@ public class GlobalGameHandler : MonoBehaviour
         //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
         //id price unlockedInLevel imageName unlocked unlockableType isPurchased
         //Every class gets saved from the constructor
-        instance.allUnlockables.Add(new Unlockable(0,1644,0,"clown face",true,UnlockableType.character, "man+clown")); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
-        instance.allUnlockables.Add(new Unlockable(1,2030,1,"super woman",false,UnlockableType.character, "woman+superhero")); 
-        instance.allUnlockables.Add(new Unlockable(2,550,1,"ninja man",false,UnlockableType.character, "man+ninja")); 
-        instance.allUnlockables.Add(new Unlockable(3,320,2,"astronaut man",false,UnlockableType.character, "man+astronaut")); 
-        instance.allUnlockables.Add(new Unlockable(4,320,2,"police woman",false,UnlockableType.character, "woman+police")); 
-        instance.allUnlockables.Add(new Unlockable(5,320,3,"test3",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(0,0,0,"test3",true,UnlockableType.character, "man+casual",true)); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
+        instance.allUnlockables.Add(new Unlockable(1,1644,1,"clown face",true,UnlockableType.character, "man+clown")); 
+        instance.allUnlockables.Add(new Unlockable(2,2030,2,"super woman",false,UnlockableType.character, "woman+superhero")); 
+        instance.allUnlockables.Add(new Unlockable(3,550,2,"ninja man",false,UnlockableType.character, "man+ninja")); 
+        instance.allUnlockables.Add(new Unlockable(4,320,3,"astronaut man",false,UnlockableType.character, "man+astronaut")); 
+        instance.allUnlockables.Add(new Unlockable(5,320,3,"police woman",false,UnlockableType.character, "woman+police")); 
+        instance.allUnlockables.Add(new Unlockable(6,320,3,"test3",false,UnlockableType.character)); //this one is ignored.
 
         //save the total count of unlockables
         PlayerPrefs.SetInt("UnlockableCount",instance.allUnlockables.Count);
