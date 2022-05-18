@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class OptionsMenu : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class OptionsMenu : MonoBehaviour
     public string LanguageSelected;
     int LanguageSelectedIndex;
     List<string> languages;
+    bool LanguageStarted = false;
 
     //zet de juiste values in dropdown
     void Start()
@@ -48,8 +50,14 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetLanguage()
     {
-      Debug.Log(languages[LanguageDropdown.value]);
-      GlobalGameHandler.ChangeLanguage(languages[LanguageDropdown.value]);
+      print(LanguageStarted);
+      if(GlobalGameHandler.GetCurrentLanguage() != languages[LanguageDropdown.value]){
+        GlobalGameHandler.ChangeLanguage(languages[LanguageDropdown.value]);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      }
+
+
+
     }
 
     public void SetFullscreen(bool isFullscreen)
