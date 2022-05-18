@@ -35,6 +35,8 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
     private Quaternion camRotation;
 
+    bool canMoveAndLookAround = true;
+
 
     private void Awake()
     {
@@ -58,6 +60,10 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
     }
 
+    public void toggleCanMoveAndLookAround() {
+        canMoveAndLookAround = !canMoveAndLookAround;
+    }
+
         // Start is called before the first frame update
         void Start()
         {
@@ -78,7 +84,7 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             GetComponent<Outline>().enabled = false;
 
         }
-        if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine)
+        if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine && canMoveAndLookAround)
         {
 
 

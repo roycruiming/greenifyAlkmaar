@@ -8,14 +8,13 @@ public class SpawnPlayers : MonoBehaviour
     public GameObject playerPrefab;
     public Transform spawnPoint;
     public GameObject dirArrow;
-    private Vector3 startingPosCamera;
-    private Quaternion startingRotationCamera;
+    // private Vector3 startingPosCamera;
+    // private Quaternion startingRotationCamera;
     private void Start()
     {
         bool player1Active = GameObject.Find("MultiPlayerHandler").GetComponent<MultiPlayerHandler>().isPlayer1Set();
         
         GameObject player;
-         
         if(player1Active == false) {
             player = PhotonNetwork.Instantiate("Mp1", spawnPoint.position, spawnPoint.rotation);
         }
@@ -23,34 +22,32 @@ public class SpawnPlayers : MonoBehaviour
             player = PhotonNetwork.Instantiate("Mp2", spawnPoint.position, spawnPoint.rotation);
         }
 
-        //initiate intro cutscene
-        GameObject maincameraPlayer = player.transform.Find("Main Camera").gameObject;
-        if(maincameraPlayer != null) {
-            startingPosCamera = maincameraPlayer.transform.position;
-            startingRotationCamera = maincameraPlayer.transform.rotation;
-            
-            StartCoroutine(ResetCameraAfterCutsceneTime(player.transform.tag));
-        }   
-
-        
         dirArrow = GameObject.Find("DirectionalArrow");
         dirArrow.SetActive(false);
 
-        
+        //initiate intro cutscene
+        // GameObject maincameraPlayer = player.transform.Find("Main Camera").gameObject;
+        // if(maincameraPlayer != null) {
+        //     startingPosCamera = maincameraPlayer.transform.position;
+        //     startingRotationCamera = maincameraPlayer.transform.rotation;
+
+           
+            // player.GetComponent<ThirtPersonPLayerScript>().toggleCanMoveAndLookAround();
+            // StartCoroutine(ResetCameraAfterCutsceneTime(maincameraPlayer, player));
+        // }   
     }
 
-    IEnumerator ResetCameraAfterCutsceneTime(string playerTagName) {
-        yield return new WaitForSeconds(15);
-            GameObject p = GameObject.FindGameObjectWithTag(playerTagName);
-            GameObject maincameraPlayer = p.transform.Find("Main Camera").gameObject;
-                if(maincameraPlayer != null) {
-                    maincameraPlayer.transform.position = this.startingPosCamera;
-                    maincameraPlayer.transform.rotation = this.startingRotationCamera;
-                }
+    // IEnumerator ResetCameraAfterCutsceneTime(GameObject playerCamera, GameObject player) {
+    //     yield return new WaitForSeconds(15);
+    	
+    //     playerCamera.transform.position = this.startingPosCamera;
+    //     playerCamera.transform.rotation = this.startingRotationCamera;
+    //     player.GetComponent<ThirtPersonPLayerScript>().toggleCanMoveAndLookAround();
+
             
 
-        yield return null;
-    }
+    //     yield return null;
+    // }
 
 
 }
