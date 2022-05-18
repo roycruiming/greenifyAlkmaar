@@ -129,10 +129,10 @@ public class TurnTheTurbnines : MonoBehaviour
     {
       if(WindDir == "left"){
         WindDir = "right";
-        WindDirArrow.GetComponent<Image>().transform.localScale = new Vector3(-1,1,1);
+        WindDirArrow.GetComponent<Image>().transform.localScale = new Vector3(-2,2,1);
       } else {
         WindDir = "left";
-        WindDirArrow.GetComponent<Image>().transform.localScale = new Vector3(1,1,1);
+        WindDirArrow.GetComponent<Image>().transform.localScale = new Vector3(2,2,1);
       }
       yield return new WaitForSeconds(WaitTime);
       WindFlippable = true;
