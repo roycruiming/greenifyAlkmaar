@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,7 +57,10 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     public bool isPlayer1Set() {
-        return this.player1IsSet;
+        int playerCount = 0;
+        foreach(Player player in PhotonNetwork.PlayerList) playerCount++;
+        if(playerCount >= 2) return true;
+        else return false;
     }
 
     // Start is called before the first frame update
