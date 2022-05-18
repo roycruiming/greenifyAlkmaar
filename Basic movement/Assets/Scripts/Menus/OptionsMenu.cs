@@ -18,10 +18,12 @@ public class OptionsMenu : MonoBehaviour
     List<string> languages;
     bool LanguageStarted = false;
 
-    //zet de juiste values in dropdown
+    //set the correct values of the options menu
     void Start()
     {
       ToggleCheckBox = transform.Find("ArrowToggle").GetComponent<Toggle>();
+
+      //checks if the player has toggled on/off the directional arrow from the save game
       if(ToggleCheckBox){
         if(GlobalGameHandler.PlayerWantsDirectionalArrow()){
           ToggleCheckBox.isOn = true;
@@ -30,10 +32,12 @@ public class OptionsMenu : MonoBehaviour
         }
       }
 
+      //Makes the dropdown empty and adds the correct languages
       languages = GlobalGameHandler.GetLanguagesList();
       LanguageDropdown.ClearOptions();
       LanguageDropdown.AddOptions(languages);
 
+      //Checks for the current language and sets the value to that language
       for (int i = 0; i < languages.Count; i++)
       {
         if(languages[i] == GlobalGameHandler.GetCurrentLanguage())
@@ -48,16 +52,13 @@ public class OptionsMenu : MonoBehaviour
         audioMixer.SetFloat("volume", volume);
     }
 
+    //Changes the language and reloads the scene
     public void SetLanguage()
     {
-      print(LanguageStarted);
       if(GlobalGameHandler.GetCurrentLanguage() != languages[LanguageDropdown.value]){
         GlobalGameHandler.ChangeLanguage(languages[LanguageDropdown.value]);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
       }
-
-
-
     }
 
     public void SetFullscreen(bool isFullscreen)
@@ -65,6 +66,7 @@ public class OptionsMenu : MonoBehaviour
         Screen.fullScreen = isFullscreen;
     }
 
+    //Toggle on/off the directional arrow
     public void ChangeArrow()
     {
       if(!GlobalGameHandler.PlayerWantsDirectionalArrow() && ToggleCheckBox.isOn){

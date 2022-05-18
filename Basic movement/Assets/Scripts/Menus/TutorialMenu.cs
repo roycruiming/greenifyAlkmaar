@@ -24,6 +24,7 @@ public class TutorialMenu : MonoBehaviour
 
     void Update()
     {
+      //Checks for a player when a player has not been found at the start.
       if(!Player)
       {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -38,7 +39,7 @@ public class TutorialMenu : MonoBehaviour
         }
     }
 
-    //teleporteert de speler naar het begin
+    //Teleports the player back to the original position
     public void stuck()
     {
         Cursor.lockState = CursorLockMode.Locked;

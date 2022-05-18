@@ -6,6 +6,7 @@ public class SlidingIcon : MonoBehaviour
 {
   int x;
 
+    //Moves the icon by a set amount every fixed update
     void FixedUpdate()
     {
       transform.Translate(new Vector3(-5, 0, 0));
