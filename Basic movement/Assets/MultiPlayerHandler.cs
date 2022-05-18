@@ -27,8 +27,17 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject football;
     public GameObject addingTreeAfterProgress;
     private int totalPlayerCount = 0;
+    public bool player1IsSet = false;
+    public bool player2IsSet = false;
 
     public HUDController hud;
+
+    public GameObject player1;
+    public GameObject player2;
+
+    public GameObject flagPlayer1;
+    public GameObject flagPlayer2;
+
 
 
     public float y = 0;
@@ -79,7 +88,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         totalCounterText = GameObject.Find("TotalCounter").GetComponent<Text>();
         PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(129.43f, 2.39f, 360.32f), Quaternion.identity);
         football = GameObject.Find("soccer-ball (3)");
-        addingTreeAfterProgress = GameObject.Find("Adding");
 
 
         totalTurbineCount = GameObject.FindGameObjectsWithTag("TurbineMultiplayer").Length;
@@ -87,12 +95,21 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         totalTreeCount = GameObject.FindGameObjectsWithTag("TreeMultiplayer").Length;
         totalCounter = totalTurbineCount + totalSolarCount + totalTreeCount;
 
-        addingTreeAfterProgress.SetActive(false);
+        player1 = GameObject.FindGameObjectWithTag("Mp1");
+        player2 = GameObject.FindGameObjectWithTag("Mp2");
+
+
+
+
+
     }
 
     // Update is called once per frame  
     void Update()
     {
+        player1 = GameObject.FindGameObjectWithTag("Mp1");
+        player2 = GameObject.FindGameObjectWithTag("Mp2");
+        print(player1.transform.position);
         solarCounterText.text = solarCounter.ToString() + "/" + totalSolarCount;
         turbineCounterText.text = TurbineCounter.ToString() + "/" + totalTurbineCount;
         treeCounterText.text = treeCounter.ToString() + "/" + totalTreeCount;
@@ -116,10 +133,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         }
 
 
-        if(totalCount > 5)
-        {
-            AddTreesAfterObject();
-        }
 
         //check if a new player has joined and set activate his intro cutscene
         // if(this.totalPlayerCount != this.GetTotalPlayerCount()) {
@@ -155,13 +168,48 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("CallFriend", RpcTarget.All);
         }
 
+        if (Input.GetKeyDown("g"))
+        {
+            if (photonView.IsMine)
+            {
+                photonView.RPC("PlaceFlagPlayer1", RpcTarget.All);
 
+            }
+            if (!photonView.IsMine)
+            {
+                //photonView.RPC("PlaceFlagPlayer2", RpcTarget.All);
+            }
+        }
     }
 
+
     [PunRPC]
-    public void test()
+    [System.Obsolete]
+    public void PlaceFlagPlayer1()
     {
-        solarCounter++;
+        if(flagPlayer1 == null)
+        {
+            flagPlayer1 = PhotonNetwork.InstantiateRoomObject("Flag", player1.transform.position, Quaternion.identity);
+
+        }
+        else
+        {
+            flagPlayer1.transform.position = transform.position + new Vector3(player1.transform.position.x, 0, player1.transform.position.z);
+        }
+    }
+    [PunRPC]
+    [System.Obsolete]
+    public void PlaceFlagPlayer2()
+    {
+        if(flagPlayer2 == null)
+        {
+            flagPlayer2 = PhotonNetwork.InstantiateRoomObject("Flag", player2.transform.position, Quaternion.identity);
+
+        }
+        else
+        {
+            flagPlayer2.transform.position = transform.position + new Vector3(player2.transform.position.x, 0, player2.transform.position.z);
+        }
     }
 
     [PunRPC]
@@ -240,11 +288,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         sc.SpawnConfeti(other);
     }
 
-    [PunRPC]
-    public void AddTreesAfterObject()
-    {
-        addingTreeAfterProgress.SetActive(true);
-    }
+
 
 
 }
