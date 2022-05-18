@@ -29,6 +29,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public bool player1IsSet = false;
     public bool player2IsSet = false;
 
+    public HUDController hud;
+
 
     public float y = 0;
     bool up = true;
@@ -123,6 +125,12 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             AddTreesAfterObject();
         }
 
+        if (Input.GetKeyDown("h"))
+        {
+
+            photonView.RPC("CallFriend", RpcTarget.All);
+        }
+
 
     }
 
@@ -133,9 +141,16 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
+    public void CallFriend()
+    {
+        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("ask for help multiplayer"));
+    }
+
+    [PunRPC]
     public void bridgeActivate()
     {
         bridge.SetActive(true);
+        
     }
 
     [PunRPC]
@@ -216,5 +231,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         addingTreeAfterProgress.SetActive(true);
     }
+
 
 }

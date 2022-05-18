@@ -32,6 +32,9 @@ public class ThirtPersonPLayerScript : MonoBehaviour
     public bool isJumping;
     private bool isGrounded1;
 
+    public HUDController hud;
+    public MultiPlayerHandler mp;
+
 
     private Quaternion camRotation;
 
@@ -67,7 +70,10 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             animator = GetComponent<Animator>();
 
             distToGround = GetComponent<Collider>().bounds.extents.y;
-        }
+
+
+        mp = GameObject.FindObjectOfType<MultiPlayerHandler>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -144,14 +150,14 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             rigidbody.MovePosition(translation);
 
 
-
+/*
             if (GameObject.Find("MultiPlayerHandler") != null){
 
                 if (Input.GetKeyDown("h")){
 
-
+                    mp.CallFriend();
                 }
-            }
+            }*/
 
         }
     }
