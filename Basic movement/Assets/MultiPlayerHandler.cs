@@ -28,6 +28,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject addingTreeAfterProgress;
     private int totalPlayerCount = 0;
 
+    public HUDController hud;
+
 
     public float y = 0;
     bool up = true;
@@ -147,6 +149,12 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         // this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(false);
         // this.mainCamera.SetActive(true);
         // yield return null;
+        if (Input.GetKeyDown("h"))
+        {
+
+            photonView.RPC("CallFriend", RpcTarget.All);
+        }
+
 
     }
 
@@ -157,9 +165,16 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
+    public void CallFriend()
+    {
+        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("ask for help multiplayer"));
+    }
+
+    [PunRPC]
     public void bridgeActivate()
     {
         bridge.SetActive(true);
+        
     }
 
     [PunRPC]
@@ -230,5 +245,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         addingTreeAfterProgress.SetActive(true);
     }
+
 
 }
