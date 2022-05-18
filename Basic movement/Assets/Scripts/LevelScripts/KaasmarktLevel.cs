@@ -144,7 +144,6 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
             allPhaseObjects = allPhaseObjectsList[progressionPhase];
             this.blinkProgressObjects = true;
             
-            //add rewards if needed=
 
             if(progressionPhase == 0) {
                 this.cutsceneParent.transform.Find("Progression1Phase").GetComponent<Animator>().SetTrigger("phase1");

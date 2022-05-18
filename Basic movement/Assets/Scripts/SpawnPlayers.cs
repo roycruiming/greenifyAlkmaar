@@ -16,12 +16,13 @@ public class SpawnPlayers : MonoBehaviour
          
         if(player1Active == false) {
             player = PhotonNetwork.Instantiate("Mp1", spawnPoint.position, spawnPoint.rotation);
-            GameObject.Find("MultiPlayerHandler").GetComponent<MultiPlayerHandler>().setPlayer1();
         }
         else {
             player = PhotonNetwork.Instantiate("Mp2", spawnPoint.position, spawnPoint.rotation);
-            GameObject.Find("MultiPlayerHandler").GetComponent<MultiPlayerHandler>().setPlayer2();
         }
+
+        //initiate intro cutscene
+        player.transform.Find("Main Camera").GetComponent<Animator>().SetTrigger("Start");
 
         
         dirArrow = GameObject.Find("DirectionalArrow");

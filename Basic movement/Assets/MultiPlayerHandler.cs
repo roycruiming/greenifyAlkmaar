@@ -26,8 +26,9 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public ScoreFootball sc;
     public GameObject football;
     public GameObject addingTreeAfterProgress;
-    public bool player1IsSet = false;
-    public bool player2IsSet = false;
+    private GameObject cutsceneParent;
+    private GameObject mainCamera;
+    private int totalPlayerCount = 0;
 
 
     public float y = 0;
@@ -42,8 +43,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(TurbineCounter);
             stream.SendNext(treeCounter);
             stream.SendNext(totalCount);
-            stream.SendNext(player1IsSet);
-            stream.SendNext(player2IsSet);
         }
         if (stream.IsReading)
         {
@@ -51,16 +50,20 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             TurbineCounter = (int)stream.ReceiveNext();
             treeCounter = (int)stream.ReceiveNext();
             totalCount = (int)stream.ReceiveNext();
-            player1IsSet = (bool)stream.ReceiveNext();
-            player2IsSet = (bool)stream.ReceiveNext();
         }
     }
 
     public bool isPlayer1Set() {
-        int playerCount = 0;
-        foreach(Player player in PhotonNetwork.PlayerList) playerCount++;
+        int playerCount = this.GetTotalPlayerCount();
+    
         if(playerCount >= 2) return true;
         else return false;
+    }
+
+    public int GetTotalPlayerCount() {
+        int playerCount = 0;
+        foreach(Player player in PhotonNetwork.PlayerList) playerCount++;
+        return playerCount;
     }
 
     // Start is called before the first frame update
@@ -79,7 +82,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         addingTreeAfterProgress = GameObject.Find("Adding");
 
 
-
         totalTurbineCount = GameObject.FindGameObjectsWithTag("TurbineMultiplayer").Length;
         totalSolarCount = GameObject.FindGameObjectsWithTag("SolarMultiplayer").Length;
         totalTreeCount = GameObject.FindGameObjectsWithTag("TreeMultiplayer").Length;
@@ -87,9 +89,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 
         addingTreeAfterProgress.SetActive(false);
 
-
-
-
+        this.mainCamera = GameObject.Find("Main Camera");
+        this.cutsceneParent = GameObject.Find("cutscenesHolder");
     }
 
     // Update is called once per frame  
@@ -123,6 +124,34 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             AddTreesAfterObject();
         }
 
+        //check if a new player has joined and set activate his intro cutscene
+        // if(this.totalPlayerCount != this.GetTotalPlayerCount()) {
+        //     this.totalPlayerCount = this.GetTotalPlayerCount();
+
+        //     if(totalPlayerCount == 1) {
+        //         //activate for player 1
+        //         StartCoroutine(showcaseIntroCutscene("Mp1"));
+        //     }
+        //     else {
+        //         //activate for player 2
+        //         StartCoroutine(showcaseIntroCutscene("Mp2"));
+        //     }
+        // }
+
+    }
+
+    IEnumerator showcaseIntroCutscene(string playerTag) {
+        
+        yield return null;
+        // this.mainCamera.SetActive(false);
+        // this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(true);
+        // yield return new WaitForSeconds(1);
+        // GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("intro cheesemarket"));
+        // yield return new WaitForSeconds(18);
+
+        // this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(false);
+        // this.mainCamera.SetActive(true);
+        // yield return null;
 
     }
 
@@ -159,16 +188,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public void CollectableTree()
     {
         treeCounter++;
-    }
-
-    [PunRPC]
-    public void setPlayer1() {
-        this.player1IsSet = true;
-    }
-
-    [PunRPC]
-    public void setPlayer2() {
-        this.player2IsSet = true;
     }
 
 
