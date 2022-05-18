@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,10 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public ScoreFootball1 sc1;
     public ScoreFootball sc;
     public GameObject football;
+    public GameObject addingTreeAfterProgress;
+    private int totalPlayerCount = 0;
+
+    public HUDController hud;
 
 
     public float y = 0;
@@ -45,8 +50,20 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             TurbineCounter = (int)stream.ReceiveNext();
             treeCounter = (int)stream.ReceiveNext();
             totalCount = (int)stream.ReceiveNext();
-
         }
+    }
+
+    public bool isPlayer1Set() {
+        int playerCount = this.GetTotalPlayerCount();
+    
+        if(playerCount >= 2) return true;
+        else return false;
+    }
+
+    public int GetTotalPlayerCount() {
+        int playerCount = 0;
+        foreach(Player player in PhotonNetwork.PlayerList) playerCount++;
+        return playerCount;
     }
 
     // Start is called before the first frame update
@@ -62,17 +79,15 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         totalCounterText = GameObject.Find("TotalCounter").GetComponent<Text>();
         PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(129.43f, 2.39f, 360.32f), Quaternion.identity);
         football = GameObject.Find("soccer-ball (3)");
-        
-        
+        addingTreeAfterProgress = GameObject.Find("Adding");
+
 
         totalTurbineCount = GameObject.FindGameObjectsWithTag("TurbineMultiplayer").Length;
         totalSolarCount = GameObject.FindGameObjectsWithTag("SolarMultiplayer").Length;
         totalTreeCount = GameObject.FindGameObjectsWithTag("TreeMultiplayer").Length;
         totalCounter = totalTurbineCount + totalSolarCount + totalTreeCount;
 
-
-
-
+        addingTreeAfterProgress.SetActive(false);
     }
 
     // Update is called once per frame  
@@ -101,6 +116,46 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         }
 
 
+        if(totalCount > 5)
+        {
+            AddTreesAfterObject();
+        }
+
+        //check if a new player has joined and set activate his intro cutscene
+        // if(this.totalPlayerCount != this.GetTotalPlayerCount()) {
+        //     this.totalPlayerCount = this.GetTotalPlayerCount();
+
+        //     if(totalPlayerCount == 1) {
+        //         //activate for player 1
+        //         StartCoroutine(showcaseIntroCutscene("Mp1"));
+        //     }
+        //     else {
+        //         //activate for player 2
+        //         StartCoroutine(showcaseIntroCutscene("Mp2"));
+        //     }
+        // }
+
+    }
+
+    IEnumerator showcaseIntroCutscene(string playerTag) {
+        
+        yield return null;
+        // this.mainCamera.SetActive(false);
+        // this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(true);
+        // yield return new WaitForSeconds(1);
+        // GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("intro cheesemarket"));
+        // yield return new WaitForSeconds(18);
+
+        // this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(false);
+        // this.mainCamera.SetActive(true);
+        // yield return null;
+        if (Input.GetKeyDown("h"))
+        {
+
+            photonView.RPC("CallFriend", RpcTarget.All);
+        }
+
+
     }
 
     [PunRPC]
@@ -110,9 +165,16 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
+    public void CallFriend()
+    {
+        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("ask for help multiplayer"));
+    }
+
+    [PunRPC]
     public void bridgeActivate()
     {
         bridge.SetActive(true);
+        
     }
 
     [PunRPC]
@@ -137,6 +199,9 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         treeCounter++;
     }
+
+
+
 
     [PunRPC]
     public void MoveVork()
@@ -174,5 +239,12 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         sc.SpawnConfeti(other);
     }
+
+    [PunRPC]
+    public void AddTreesAfterObject()
+    {
+        addingTreeAfterProgress.SetActive(true);
+    }
+
 
 }

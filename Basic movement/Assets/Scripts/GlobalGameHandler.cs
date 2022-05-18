@@ -34,9 +34,11 @@ public class GlobalGameHandler : MonoBehaviour
                 instance.currentLanguage = "english";
                 PlayerPrefs.SetString("settings_language","english");
             }
+
+            if(PlayerPrefs.HasKey("settings_directionalArrow") == false) PlayerPrefs.SetInt("settings_directionalArrow",1);
+
             DontDestroyOnLoad(this.gameObject);
-            //InitTranslationDictionary();
-            InitTranslationDictionaryBuildFunctional(); //test
+            InitTranslationDictionaryBuildFunctional();
             InitUnlockAbles();
 
             LoadSaveGameInfo();
@@ -69,29 +71,59 @@ public class GlobalGameHandler : MonoBehaviour
         print("new character equipped");
     }
 
+    public static bool PlayerWantsDirectionalArrow() {
+        if(PlayerPrefs.HasKey("settings_directionalArrow") == false) {
+            PlayerPrefs.SetInt("settings_directionalArrow",1);
+            return true;
+        }
+        else {
+            if(PlayerPrefs.GetInt("settings_directionalArrow") == 1) return true;
+            else return false;
+        }
+    }
+
+    public static void ToggleDirectionalArrowSetting() {
+        if(PlayerPrefs.HasKey("settings_directionalArrow") == false) {
+            PlayerPrefs.SetInt("settings_directionalArrow",1);
+            print("set directional arrow true");
+        }
+        else {
+            if(PlayerPrefs.GetInt("settings_directionalArrow") == 1) {
+                PlayerPrefs.SetInt("settings_directionalArrow",0);
+                print("set directional arrow false");
+            }
+            else {
+                PlayerPrefs.SetInt("settings_directionalArrow",1);
+                print("set directional arrow true");
+            }
+        }
+
+    }
+
     private void InitUnlockAbles() {
         instance.allUnlockables = new List<Unlockable>();
 
-        PlayerPrefs.DeleteAll(); //just for testing remove later!
+        //PlayerPrefs.DeleteAll(); //just for testing remove later!
 
         //NOTE: WHEN ADDING AN UNLOCKABLE TO THIS LIST UP THE FIRST INTEGER BY 1
         //id price unlockedInLevel imageName unlocked unlockableType isPurchased
         //Every class gets saved from the constructor
-        instance.allUnlockables.Add(new Unlockable(0,1644,0,"clown face",true,UnlockableType.character, "man+clown")); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
-        instance.allUnlockables.Add(new Unlockable(1,2030,1,"super woman",false,UnlockableType.character, "woman+superhero")); 
-        instance.allUnlockables.Add(new Unlockable(2,550,1,"ninja man",false,UnlockableType.character, "man+ninja")); 
-        instance.allUnlockables.Add(new Unlockable(3,320,2,"astronaut man",false,UnlockableType.character, "man+astronaut")); 
-        instance.allUnlockables.Add(new Unlockable(4,320,2,"police woman",false,UnlockableType.character, "woman+police")); 
-        instance.allUnlockables.Add(new Unlockable(5,320,3,"test3",false,UnlockableType.character)); 
+        instance.allUnlockables.Add(new Unlockable(0,0,0,"test3",true,UnlockableType.character, "man+casual",true)); //set the initial info, if info has already been set constructor loads the saved info and initializes the object
+        instance.allUnlockables.Add(new Unlockable(1,1644,1,"clown face",true,UnlockableType.character, "man+clown")); 
+        instance.allUnlockables.Add(new Unlockable(2,2030,2,"super woman",false,UnlockableType.character, "woman+superhero")); 
+        instance.allUnlockables.Add(new Unlockable(3,550,2,"ninja man",false,UnlockableType.character, "man+ninja")); 
+        instance.allUnlockables.Add(new Unlockable(4,320,3,"astronaut man",false,UnlockableType.character, "man+astronaut")); 
+        instance.allUnlockables.Add(new Unlockable(5,320,3,"police woman",false,UnlockableType.character, "woman+police")); 
+        instance.allUnlockables.Add(new Unlockable(6,320,3,"test3",false,UnlockableType.character)); //this one is ignored.
 
         //save the total count of unlockables
         PlayerPrefs.SetInt("UnlockableCount",instance.allUnlockables.Count);
         
-        GlobalGameHandler.GivePlayerCoints(1900);
+        //GlobalGameHandler.GivePlayerCoints(1900);
     }
 
     public static int GetTotalPlayerCointsAmount() {
-        return instance.totalPlayerCoints;
+        return PlayerPrefs.GetInt("playerTotalCoints",0);
     }
 
     public static void GivePlayerCoints(int amount) {
@@ -109,37 +141,6 @@ public class GlobalGameHandler : MonoBehaviour
     public static List<Unlockable> GetAllUnlockablesInfo() {
         return instance.allUnlockables;
     }
-
-    // public static List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
-    //     List<Unlockable> allTypeUnlockables = new List<Unlockable>();
-
-    //     for(int i = 0; i < instance.allUnlockables.Count; i++) {
-    //         print(i);
-    //         if(instance.allUnlockables[i].type == uType) {
-    //             allTypeUnlockables.Add(instance.allUnlockables[i]);
-    //         } 
-    //     }
-
-    //     return allTypeUnlockables;
-    // }
-
-    // public static void UnlockUnlockable(int unlockableId) {
-    //     //for some reason this function below returns me null so create a function that loads info from the player prefs
-    //     Unlockable unlockableItem = GlobalGameHandler.GetUnlockableById(unlockableId);
-        
-    //     print(unlockableItem);
-    //     if(unlockableItem != null) {
-    //         if(unlockableItem.isUnlocked == false) {
-
-    //             unlockableItem.isUnlocked = true;
-    //             unlockableItem.UpdateInfoToDisk();
-
-    //             //showcase the unlock
-    //             HUDController hudController = GameObject.Find("HUDCanvas").GetComponent<HUDController>();
-    //             if(hudController != null) hudController.AddUnlockableToShowcaseUnlockables(unlockableItem);
-    //         }
-    //     }
-    // }
 
     public static GlobalGameHandler GetInstance() {
         return instance;

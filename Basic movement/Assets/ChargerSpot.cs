@@ -17,7 +17,13 @@ public class ChargerSpot : MonoBehaviour
         
     }
 
-    internal bool InstallCharger(Item charger)
+
+    public int wtf = 0; 
+
+  
+
+
+    public bool InstallCharger(Item charger)
     {
         print("ffs"); 
 
@@ -25,18 +31,40 @@ public class ChargerSpot : MonoBehaviour
         {
             Vector3 pos = this.transform.position;
             Quaternion quat = transform.rotation;
-         
 
-            print("lost");
 
-            Instantiate(GameObject.Find("Electric-car-loader (2)"), pos, quat);
+            //print("lost");
+            Vector3 p = this.transform.position;
+            Quaternion q = transform.rotation;
+
+
+            //Instantiate(GameObject.Find("collectable charger"), pos, quat);
 
 
             charger.GetComponent<AnimationScript>().enabled = false;
             Destroy(charger.GetComponent<Item>());
             charger.GetComponent<Outline>().enabled = false;
             GetComponent<Outline>().enabled = false;
+            charger.transform.position = pos;
+            charger.transform.rotation = quat; 
             charger.gameObject.SetActive(true);
+
+            ObjectivesController oc = GameObject.Find("HUDCanvas").GetComponent<ObjectivesController>();
+
+            oc.chargingStationCounter++; 
+
+
+            if (oc.chargingStationCounter == 3) {
+
+                print("counter reached"); 
+
+                
+                if (oc != null)
+                {
+                    oc.objectivesCounter++;
+                } 
+            }
+
             return true;
         }
         return false;

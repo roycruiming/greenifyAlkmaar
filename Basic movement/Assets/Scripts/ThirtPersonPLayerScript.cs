@@ -32,8 +32,13 @@ public class ThirtPersonPLayerScript : MonoBehaviour
     public bool isJumping;
     private bool isGrounded1;
 
+    public HUDController hud;
+    public MultiPlayerHandler mp;
+
 
     private Quaternion camRotation;
+
+    bool canMoveAndLookAround = true;
 
 
     private void Awake()
@@ -58,6 +63,10 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
     }
 
+    public void toggleCanMoveAndLookAround() {
+        canMoveAndLookAround = !canMoveAndLookAround;
+    }
+
         // Start is called before the first frame update
         void Start()
         {
@@ -67,12 +76,21 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             animator = GetComponent<Animator>();
 
             distToGround = GetComponent<Collider>().bounds.extents.y;
-        }
+
+
+        mp = GameObject.FindObjectOfType<MultiPlayerHandler>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine)
+
+        if (view.IsMine)
+        {
+            GetComponent<Outline>().enabled = false;
+
+        }
+        if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine && canMoveAndLookAround)
         {
 
 
@@ -137,10 +155,16 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
             rigidbody.MovePosition(translation);
 
-            if (Input.GetKeyDown("h"))
-            {
-                GetComponent<Animator>().Play("okSign"); 
-            }
+
+/*
+            if (GameObject.Find("MultiPlayerHandler") != null){
+
+                if (Input.GetKeyDown("h")){
+
+                    mp.CallFriend();
+                }
+            }*/
+
         }
     }
 
@@ -151,10 +175,13 @@ public class ThirtPersonPLayerScript : MonoBehaviour
         }
 
 
+
     IEnumerator WaitForSeconds()
     {
         isJumping = true;
         yield return new WaitForSeconds(1.4f);
         isJumping = false;
     }
+
+    
 }

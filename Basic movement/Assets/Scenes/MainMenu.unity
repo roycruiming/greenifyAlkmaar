@@ -553,6 +553,7 @@ GameObject:
   - component: {fileID: 401437502}
   - component: {fileID: 401437504}
   - component: {fileID: 401437503}
+  - component: {fileID: 401437505}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -621,6 +622,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401437501}
   m_CullTransparentMesh: 0
+--- !u!114 &401437505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401437501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d05a4ad1cd40524ab194533f59cc807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: back
 --- !u!1 &547133154
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,9 +965,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BackgroundImage: {fileID: 578354484}
   Sprites:
-  - {fileID: 21300000, guid: a260ea9757b08b640a4ef4c95ff611ff, type: 3}
-  - {fileID: 21300000, guid: b4b5233074e503842ae01c4f23a591e5, type: 3}
-  - {fileID: 21300000, guid: 61d75550f1ae09a4d9e0988cd21e9fe2, type: 3}
+  - {fileID: 21300000, guid: 065b281adadad0c439f6a10209e57926, type: 3}
+  - {fileID: 21300000, guid: 13caf2699bb01ee459bf994900da524c, type: 3}
+  - {fileID: 21300000, guid: 2059991075f0f5840ae589ac50ef9d19, type: 3}
+  - {fileID: 21300000, guid: 50a5b8acde6953345a8bb2d790dba6bd, type: 3}
+  - {fileID: 21300000, guid: a996391321da06c45bc9b91a8ae8df56, type: 3}
+  - {fileID: 21300000, guid: 702dc6562dd8e8f48ac3f281d109cbf5, type: 3}
+  - {fileID: 21300000, guid: 89c0c7f014d66c34190ea336ca8aa29b, type: 3}
+  - {fileID: 21300000, guid: 394bdb1776e0f1547b131ed8a12920b1, type: 3}
+  - {fileID: 21300000, guid: 5243ac4ebae235c4bba286286157896f, type: 3}
   WaitTime: 10
 --- !u!1 &602019868
 GameObject:
@@ -1067,7 +1087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &660836779
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2478,11 +2498,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.36862746, g: 0.34901962, b: 0.34901962, a: 1}
-    m_HighlightedColor: {r: 0.36862746, g: 0.34901962, b: 0.34901962, a: 1}
-    m_PressedColor: {r: 0.36862746, g: 0.34901962, b: 0.34901962, a: 1}
-    m_SelectedColor: {r: 0.36862746, g: 0.34901962, b: 0.34901962, a: 1}
-    m_DisabledColor: {r: 0.36862746, g: 0.34901962, b: 0.34901962, a: 0.5019608}
+    m_NormalColor: {r: 0.4117647, g: 0.58431375, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:

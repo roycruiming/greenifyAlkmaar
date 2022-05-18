@@ -24,6 +24,8 @@ public class ProgressionStoreHandler : MonoBehaviour
         
         this.UpdateTotalPlayerCointsUI();
         this.SetFirstUnlocksDataAndIndex();
+
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
@@ -66,7 +68,7 @@ public class ProgressionStoreHandler : MonoBehaviour
 
     public void LeaveProgressionStore() {
 
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("OverworldMapV2");
     }
 
     private void changeShowcaseCharacter(int indexCharacterList) {

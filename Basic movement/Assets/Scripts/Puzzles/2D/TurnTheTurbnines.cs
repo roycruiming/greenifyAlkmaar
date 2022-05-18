@@ -27,6 +27,7 @@ public class TurnTheTurbnines : MonoBehaviour
     string ParentName;
 
 
+    //When the puzzle starts
     public void StartPuzzle(int Difficulty, string Name)
     {
       Puzzle.SetActive(true);
@@ -35,6 +36,7 @@ public class TurnTheTurbnines : MonoBehaviour
       ParentName = Name;
     }
 
+    //Checks for the directions of the 3 turbines and updates the energy values
     void FixedUpdate(){
       if(!IsPuzzleDone && PuzzleController.PuzzlePlaying){
         CheckDirection(TurbineLeftDir);
@@ -47,6 +49,7 @@ public class TurnTheTurbnines : MonoBehaviour
       }
     }
 
+    //Checks if the direction of the turbine is correct
     void CheckDirection(string Turbine)
     {
       if (WindDir == Turbine) {
@@ -62,6 +65,7 @@ public class TurnTheTurbnines : MonoBehaviour
       }
     }
 
+    //Turn the correct turbine when a button is pressed
     public void ButtonPress(string Dir)
     {
       switch (Dir)
@@ -89,6 +93,7 @@ public class TurnTheTurbnines : MonoBehaviour
       TurnTurbines();
     }
 
+    //Turns the sprites of the turbines
     private void TurnTurbines()
     {
       if (TurbineLeftDir == "left"){
@@ -110,6 +115,7 @@ public class TurnTheTurbnines : MonoBehaviour
       }
     }
 
+    //Check if the wind can be flipped
     private void CheckIfWindFlip()
     {
       if (WindFlippable){
@@ -118,19 +124,21 @@ public class TurnTheTurbnines : MonoBehaviour
       }
     }
 
+    //Flips the wind
     IEnumerator ChangeWind(int WaitTime)
     {
       if(WindDir == "left"){
         WindDir = "right";
-        WindDirArrow.GetComponent<Image>().transform.localScale = new Vector3(-1,1,1);
+        WindDirArrow.GetComponent<Image>().transform.localScale = new Vector3(-2,2,1);
       } else {
         WindDir = "left";
-        WindDirArrow.GetComponent<Image>().transform.localScale = new Vector3(1,1,1);
+        WindDirArrow.GetComponent<Image>().transform.localScale = new Vector3(2,2,1);
       }
       yield return new WaitForSeconds(WaitTime);
       WindFlippable = true;
     }
 
+    //Changes the energy values according to the amount of correct directions of the turbines
     private void UpdateEnergy()
     {
       EnergyText.text = Mathf.RoundToInt((float)Power).ToString() + "%";
@@ -149,24 +157,24 @@ public class TurnTheTurbnines : MonoBehaviour
     }
   }
 
-
+  //Only finish the puzzle once and not every frame
     private void PuzzleVictory(){
       if(!IsPuzzleDone){
         IsPuzzleDone = true;
-        GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
         StartCoroutine(ClosePuzzle());
       }
     }
 
+    //Closes and resets the puzzle
     IEnumerator ClosePuzzle()
     {
       yield return new WaitForSeconds(1);
-
       IsPuzzleDone = false;
       Cursor.visible = false;
       Power = 0;
       PuzzleDifficulty = 0;
       WindFlippable = true;
       Puzzle.SetActive(false);
+      GameObject.Find(ParentName).GetComponent<PuzzleController>().PuzzleCompleted(gameObject.name);
     }
 }

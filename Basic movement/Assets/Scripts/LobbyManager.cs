@@ -32,5 +32,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void BackButton()
     {
         SceneManager.LoadScene("MainMenu");
+    
+    }
+
+    public void InviteButton() {
+        //GlobalGameHandler x = GlobalGameHandler.GetInstance();
+
+        SceneManager.LoadScene("InviteFriends");
+
+        
+
+        
     }
 }

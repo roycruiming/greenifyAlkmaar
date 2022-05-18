@@ -102,7 +102,7 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
         this.mainCamera.SetActive(false);
         this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
-        //GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("intro de meent"));
+        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("intro cheesemarket"));
         yield return new WaitForSeconds(18);
 
         this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(false);
@@ -144,7 +144,6 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
             allPhaseObjects = allPhaseObjectsList[progressionPhase];
             this.blinkProgressObjects = true;
             
-            //add rewards if needed=
 
             if(progressionPhase == 0) {
                 this.cutsceneParent.transform.Find("Progression1Phase").GetComponent<Animator>().SetTrigger("phase1");

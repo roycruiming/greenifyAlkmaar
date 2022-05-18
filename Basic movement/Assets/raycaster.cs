@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using TMPro; 
 
 public class raycaster : MonoBehaviour
 {
@@ -10,19 +11,18 @@ public class raycaster : MonoBehaviour
 
     public int rayLength;
     public LayerMask layerMask;
-    public Text textUI;
+    private GameObject pressFContainer; 
+    private TextMeshProUGUI textMeshPro; 
     public GameObject objCon;
-
     private InventoryController InventoryController;
+
+    public bool seenTreeInformation = false; 
 
 
 
     void Start()
     {
-        if (textUI != null) {
-            textUI.text = "";
-            textUI.gameObject.SetActive(false);
-        }
+
 
         objCon = GameObject.FindGameObjectWithTag("GameController");
         if (objCon == null) objCon = GameObject.Find("HUDCanvas");
@@ -32,24 +32,47 @@ public class raycaster : MonoBehaviour
 
     private void Awake()
     {
+         
+
+        pressFContainer = GameObject.Find("PressFContainer");
+        textMeshPro = GameObject.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>();
+
+        if(pressFContainer != null) 
+        pressFContainer.SetActive(false); 
+
         InventoryController = new InventoryController(new Inventory());
     }
 
 
     void Update()
     {
-
+        
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hitInfo;
 
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
-            OnScreenDescription description
-                = hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
+            bool hasItem = hitInfo.collider.gameObject.GetComponent<Item>() != null;
+            bool  hasInformationHelper = hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null;
+            //bool hasItem = hitInfo.collider.gameObject.GetComponent<Item>();
 
-            if (textUI != null && description != null) {
-                textUI.gameObject.SetActive(true);
-                textUI.text = description.textToDisplay;
+
+
+            //= hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
+
+            if (textMeshPro != null && (hasInformationHelper || hasItem))
+            {
+
+                if (textMeshPro != null && pressFContainer != null) { 
+
+                textMeshPro.text = "press f to interact";
+                pressFContainer.SetActive(true);
+                }
+            }
+
+            else
+            {
+                if (textMeshPro != null && pressFContainer != null)  pressFContainer.SetActive(false);
             }
 
             if (Input.GetKeyDown(KeyCode.F)) {
@@ -109,17 +132,38 @@ public class raycaster : MonoBehaviour
 
                 SolarSpot solarSpot = hitInfo.collider.GetComponent<SolarSpot>();
                 Item item3 = InventoryController.GetItem();
-                if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null) {
+                if (hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null && item3 != null &&  item3.tag == "SolarPanel") {
                     solarSpot.DoShit(item3);
                     InventoryController.ClearInventory();
                 }
 
-                else if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
+                 if (hitInfo.collider.gameObject.CompareTag("InformationHelper"))
                 {
+
+                    
+
+              
+
+
+
                     //object is gamehelper so showcase this message in the HUD
                     //get the information text from the object and send it to the controller
                     if (hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null && GameObject.FindWithTag("HUDCanvas") != null)
                     {
+                       
+                        //
+                        if (hitInfo.collider.gameObject.GetComponent<InformationHelper>().isTree && !seenTreeInformation)
+                        {
+                            seenTreeInformation = true;
+                        }
+
+                        else if (hitInfo.collider.gameObject.GetComponent<InformationHelper>().isTree && seenTreeInformation) return; 
+
+
+
+                        //else return; 
+
+
                         //find the hudcontroller object and call the ShowcaseMessage function with the informationHelper message
                         InformationHelper senderInfo = hitInfo.collider.gameObject.GetComponent<InformationHelper>();
 
@@ -145,11 +189,11 @@ public class raycaster : MonoBehaviour
         }
         else
         {
-            if (textUI != null)
-            {
-                textUI.gameObject.SetActive(false);
+            //if (textUI != null)
+            //{
+            //    textUI.gameObject.SetActive(false);
 
-            }
+            //}
 
             }
         }

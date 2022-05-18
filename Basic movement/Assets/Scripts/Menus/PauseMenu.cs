@@ -35,7 +35,7 @@ public class PauseMenu : MonoBehaviour
 
         }
     }
-        //laat het spel verder gaan
+        //Continues the game
         public void Resume()
         {
             if(!PuzzleController.PuzzlePlaying)
@@ -56,7 +56,7 @@ public class PauseMenu : MonoBehaviour
 
         }
 
-        //zet het spel op pauze
+        //Pauses the game
         public void Pause()
         {
             Cursor.lockState = CursorLockMode.None;
@@ -94,7 +94,11 @@ public class PauseMenu : MonoBehaviour
 
         public void MainMenu()
         {
-          SceneManager.LoadScene("MainMenu");
+            GameIsPaused = false;
+            AudioListener.pause = false;
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene("MainMenu");
         }
 
         void SwitchVisibility(GameObject panel, bool visbility)

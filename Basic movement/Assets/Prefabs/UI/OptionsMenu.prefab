@@ -1034,6 +1034,7 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: acbbf39d3dd28be4ab2d62a6d054c44a, type: 2}
   LanguageDropdown: {fileID: 895904895638954248}
   optionMenu: {fileID: 895904896169400468}
+  ToggleCheckBox: {fileID: 0}
   LanguageSelected: 
 --- !u!1 &895904896184931452
 GameObject:
@@ -2804,7 +2805,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+      - m_Target: {fileID: 895904896169400464}
+        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
+        m_MethodName: ChangeArrow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_IsOn: 0
 --- !u!1 &895904897547594483
 GameObject:
   m_ObjectHideFlags: 0

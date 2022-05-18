@@ -31,6 +31,11 @@ public class ObjectivesController : MonoBehaviour
     public GameObject nameInputBar;
     public GameObject pauseMenu;
     public GameObject puzzleCanvass;
+    public GameObject AmmountOfCoins;
+    public GameObject objectivesObject;
+    public GameObject GameTimerObject;
+
+    public int chargingStationCounter = 0; 
 
     public Button back;
 
@@ -54,13 +59,13 @@ public class ObjectivesController : MonoBehaviour
         blackBarArroundScoreScreen = GameObject.Find("BlackBar");
         back = GameObject.Find("ExitLevelButton").GetComponent<Button>();
         AmmountCoins = GameObject.Find("MoneyAmount").GetComponent<Text>();
+        AmmountOfCoins = GameObject.Find("MoneyAmount");
         pauseMenu = GameObject.Find("PauseMenu 1");
         puzzleCanvass = GameObject.Find("PuzzleCanvas");
+        objectivesObject = GameObject.Find("ObjectivesCounter");
+        GameTimerObject = GameObject.Find("GameTimer");
 
         AmmountCoins.text = "0";
-        
-
-
 
         targets = Resources.FindObjectsOfTypeAll<PuzzleController>().ToList();
         solarPanels = Resources.FindObjectsOfTypeAll<Item>().ToList();
@@ -75,20 +80,43 @@ public class ObjectivesController : MonoBehaviour
 
         if (GameObject.Find("MeentV2") != null)
         {
-            targets.RemoveAt(1);
             solarPanels.RemoveAt(0);
             solarPanels.RemoveAt(0);
             solarPanels.RemoveAt(1);
+
+            for (int i = 0; i < targets.Count; i++)
+            {
+                if (targets[i].name == "ObjectiveBox")
+                {
+                    targets.RemoveAt(i);
+                }
+            }
         }
 
-        totalObjectives = targets.Count + solarPanels.Count;
+
+
+
+
+        if(GameObject.Find("Kaasmarkt scenery") != null)
+        {
+            totalObjectives = targets.Count + 1;
+        }
+        else
+        {
+            totalObjectives = targets.Count + solarPanels.Count;
+
+        }
+
+        if (GameObject.Find("AzStadion") != null)
+        {
+            AzStadion();
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        gameFinnished = true; 
-        //this.objectivesCounter = 6; 
+        //objectivesCounter = 2; 
     }
 
     // Update is called once per frame
@@ -117,8 +145,11 @@ public class ObjectivesController : MonoBehaviour
         // Set how many objectives are done
         TextUiCounter.text = objectivesCounter + "/" + totalObjectives;
 
+        if(GameObject.Find("AzStadion") == null)
+        {
+            AmmountCoins.text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
 
-        AmmountCoins.text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
+        
 
 
         this.CheckNextProgressionPhase();
@@ -131,8 +162,15 @@ public class ObjectivesController : MonoBehaviour
             pauseMenu.SetActive(false);
             puzzleCanvass.SetActive(false);
              blackBarArroundScoreScreen.gameObject.SetActive(true);
-             nameInput.gameObject.SetActive(true);
-             nameInputBar.gameObject.SetActive(true);
+            if (GameObject.Find("TutorialLevel"))
+            {
+
+            }
+            else
+            {
+                nameInputBar.gameObject.SetActive(true);
+            }
+
              GameDone.text = "Gefeliciteerd!";
              gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
              gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
@@ -160,6 +198,7 @@ public class ObjectivesController : MonoBehaviour
                analyticsSend = true;
              }
          }
+        }
     }
 
     private void OnDisable()
@@ -169,14 +208,14 @@ public class ObjectivesController : MonoBehaviour
 
     private void CheckNextProgressionPhase() {
         if(objectivesCounter == 2 && progression1PhaseDone == false)  {
+            progression1PhaseDone = true;
             if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
             else if(GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
-            progression1PhaseDone = true;
         }
         else if(objectivesCounter == 4 && progression2PhaseDone == false) {
+            progression2PhaseDone = true;
             if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
             else if(GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
-            progression2PhaseDone = true;
         }
     }
 
@@ -235,5 +274,12 @@ public class ObjectivesController : MonoBehaviour
         
 
         SceneManager.LoadScene("Mainmap-Scene");
+    }
+
+    public void AzStadion()
+    {
+        AmmountOfCoins.SetActive(false);
+        objectivesObject.SetActive(false);
+        GameTimerObject.SetActive(false);
     }
 }
