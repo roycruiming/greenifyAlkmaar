@@ -25,6 +25,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public ScoreFootball sc;
     public GameObject football;
     public GameObject addingTreeAfterProgress;
+    public bool player1IsSet = false;
+    public bool player2IsSet = false;
 
 
     public float y = 0;
@@ -39,6 +41,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(TurbineCounter);
             stream.SendNext(treeCounter);
             stream.SendNext(totalCount);
+            stream.SendNext(player1IsSet);
+            stream.SendNext(player2IsSet);
         }
         if (stream.IsReading)
         {
@@ -46,8 +50,13 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             TurbineCounter = (int)stream.ReceiveNext();
             treeCounter = (int)stream.ReceiveNext();
             totalCount = (int)stream.ReceiveNext();
-
+            player1IsSet = (bool)stream.ReceiveNext();
+            player2IsSet = (bool)stream.ReceiveNext();
         }
+    }
+
+    public bool isPlayer1Set() {
+        return this.player1IsSet;
     }
 
     // Start is called before the first frame update
@@ -147,6 +156,21 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         treeCounter++;
     }
+
+    [PunRPC]
+    public void setPlayer1(GameObject go) {
+        this.player1IsSet = true;
+        go.transform.tag = "Mp1";
+    }
+
+    [PunRPC]
+    public void setPlayer2(GameObject go) {
+        this.player2IsSet = true;
+        go.transform.tag = "Mp2";
+    }
+
+
+
 
     [PunRPC]
     public void MoveVork()
