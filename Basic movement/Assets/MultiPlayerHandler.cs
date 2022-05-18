@@ -162,15 +162,13 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    public void setPlayer1(GameObject go) {
+    public void setPlayer1() {
         this.player1IsSet = true;
-        go.transform.tag = "Mp1";
     }
 
     [PunRPC]
-    public void setPlayer2(GameObject go) {
+    public void setPlayer2() {
         this.player2IsSet = true;
-        go.transform.tag = "Mp2";
     }
 
 
