@@ -26,8 +26,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public ScoreFootball sc;
     public GameObject football;
     public GameObject addingTreeAfterProgress;
-    private GameObject cutsceneParent;
-    private GameObject mainCamera;
     private int totalPlayerCount = 0;
 
 
@@ -88,9 +86,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         totalCounter = totalTurbineCount + totalSolarCount + totalTreeCount;
 
         addingTreeAfterProgress.SetActive(false);
-
-        this.mainCamera = GameObject.Find("Main Camera");
-        this.cutsceneParent = GameObject.Find("cutscenesHolder");
     }
 
     // Update is called once per frame  

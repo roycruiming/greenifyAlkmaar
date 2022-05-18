@@ -25,6 +25,8 @@ public class SpawnPlayers : MonoBehaviour
         dirArrow = GameObject.Find("DirectionalArrow");
         dirArrow.SetActive(false);
 
+        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("multiplayer explanation"));
+
         //initiate intro cutscene
         // GameObject maincameraPlayer = player.transform.Find("Main Camera").gameObject;
         // if(maincameraPlayer != null) {
