@@ -24,7 +24,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
     List<int> Values = new List<int>();
 
 
-    //start van de puzzel
+    //Start of the puzzle
     public void StartPuzzle(int difficulty, string Name)
     {
         PuzzlePanel.SetActive(true);
@@ -42,7 +42,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
         StartCoroutine(StartMovingIcons());
     }
 
-    //berekent een random antwoord en maakt de icons aan
+    //Calculates a random answer and creates the icons
     void CalculateAnswer()
     {
       for(int i = 0; i < PuzzleDifficulty; i++)
@@ -61,7 +61,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       Debug.Log("Answer: " + Answer);
     }
 
-    //zet de knoppen op de juist waarde van laag -> hoog
+    //Set the buttons with the right values from low -> High
     void SetButtonValues()
     {
       Values.Add(Answer);
@@ -77,7 +77,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       }
     }
 
-    //geeft random value
+    //Gives a random value
     void AddRandomValue()
     {
       int rand = Random.Range(1,PuzzleDifficulty +1);
@@ -88,7 +88,8 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       }
     }
 
-    //maakt de icons aan en zet juiste sprite
+
+    //Creates the icons and sets them with the correct sprite
     void SetIcons(List<Sprite> Icons)
     {
       GameObject NewObj = new GameObject();
@@ -98,7 +99,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       Image NewImage = NewObj.AddComponent<Image>();
       NewImage.sprite = Icons[Random.Range(0, Icons.Count)];
       NewImage.color = new Color32(255, 255, 255, 255);
-      
+
       NewObj.AddComponent<SlidingIcon>();
 
       NewObj.GetComponent<RectTransform>().SetParent(ParentPanel.transform);
@@ -107,14 +108,14 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       NewObj.SetActive(false);
     }
 
-    //laat de icons 1 voor 1 bewegen
+    //Let the icons move 1 for 1
     IEnumerator StartMovingIcons()
     {
       yield return new WaitForSeconds(3);
       StartCoroutine(MoveIcons());
     }
 
-    //beweegt de icons
+    //Moves the icons
     IEnumerator MoveIcons()
     {
       yield return new WaitForSeconds(1);
@@ -128,7 +129,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       }
     }
 
-    //als een knop wordt ingedrukt
+    //When an answer button has been pressed.
     public void ButtonPress(Button button)
     {
       if (!IsButtonPressed && MovingFinished)
@@ -138,7 +139,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       }
     }
 
-    //checkt antwoord of klopt
+    //Checks if the answer is correct
     void CheckAnswer(string GivenAnswer)
     {
       if(Answer.ToString() == GivenAnswer)
@@ -149,7 +150,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       }
     }
 
-    //als antwoord correct is
+    //When the answer is correct
     void Correct()
     {
       Text.text =  GlobalGameHandler.GetTextByDictionaryKey("correct answer");
@@ -158,7 +159,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
 
     }
 
-    //als antwoord fout is
+    //When the answer is wrong
     IEnumerator Wrong()
     {
       Text.text =  GlobalGameHandler.GetTextByDictionaryKey("incorrect answer");
@@ -168,7 +169,7 @@ public class HowmanyDidYouSeePuzzle : MonoBehaviour
       GameObject.FindWithTag("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null, null, GlobalGameHandler.GetSentencesByDictionaryKey("ask for help"));
     }
 
-    //puzzel sluiten
+    //Puzzle closes
     IEnumerator ClosePuzzle()
     {
       yield return new WaitForSeconds(1);

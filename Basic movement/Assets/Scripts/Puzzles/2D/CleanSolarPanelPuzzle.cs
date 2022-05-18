@@ -22,7 +22,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
     Sprite LastSprite;
 
 
-    //start van de puzzle
+    //Start of the puzzle
     public void StartPuzzle(int difficulty, string Name)
     {
       PuzzlePanel.SetActive(true);
@@ -40,7 +40,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
 
     }
 
-    //maakt alle images aan die de speler moet slepen
+    //Makes all the images that the player has swipe off
     void CreateImages(int amount)
     {
       for(int i = 0; i < amount; i++)
@@ -61,7 +61,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
       }
     }
 
-    //update de efficientie text met kleur
+    //Update the progress with the correct colour
     void ChangeText(int number)
     {
       if(PercentText) {
@@ -81,7 +81,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
 
     }
 
-    //als de speler een stukje afval van het zonnepaneel haalt wordt deze uitgevoerd
+    //When a player removes a piece of trash of the solar panel, then update the progress
     public void UpdateProgress(){
       PercentCompleted += PercentAmount;
       ChangeText(PercentCompleted);
@@ -90,7 +90,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
       CheckCompletion();
     }
 
-    //wordt gekeken of de speler klaar is
+    //Checks if the player is done with the puzzle
     void CheckCompletion()
     {
       if (AmountCompleted == TotalTrash)
@@ -101,7 +101,7 @@ public class CleanSolarPanelPuzzle : MonoBehaviour
       }
     }
 
-    //stopt en reset de puzzel
+    //Stops and resets the puzzel
     IEnumerator StopPuzzle(){
       PercentCompleted = 0;
       PercentAmount = 0;
