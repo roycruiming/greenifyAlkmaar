@@ -109,7 +109,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         player1 = GameObject.FindGameObjectWithTag("Mp1");
         player2 = GameObject.FindGameObjectWithTag("Mp2");
-        print(player1.transform.position);
         solarCounterText.text = solarCounter.ToString() + "/" + totalSolarCount;
         turbineCounterText.text = TurbineCounter.ToString() + "/" + totalTurbineCount;
         treeCounterText.text = treeCounter.ToString() + "/" + totalTreeCount;
@@ -132,6 +131,25 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             bridgeDeActivate();
         }
 
+        if (Input.GetKeyDown("h"))
+        {
+            print("H is pressed!");
+            photonView.RPC("CallFriend", RpcTarget.All);
+        }
+
+        if (Input.GetKeyDown("g"))
+        {
+            print("G is pressed!! ");
+            if (photonView.IsMine)
+            {
+                photonView.RPC("PlaceFlagPlayer1", RpcTarget.All);
+
+            }
+            if (!photonView.IsMine)
+            {
+                photonView.RPC("PlaceFlagPlayer2", RpcTarget.All);
+            }
+        }
 
 
         //check if a new player has joined and set activate his intro cutscene
@@ -162,24 +180,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         // this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(false);
         // this.mainCamera.SetActive(true);
         // yield return null;
-        if (Input.GetKeyDown("h"))
-        {
-
-            photonView.RPC("CallFriend", RpcTarget.All);
-        }
-
-        if (Input.GetKeyDown("g"))
-        {
-            if (photonView.IsMine)
-            {
-                photonView.RPC("PlaceFlagPlayer1", RpcTarget.All);
-
-            }
-            if (!photonView.IsMine)
-            {
-                //photonView.RPC("PlaceFlagPlayer2", RpcTarget.All);
-            }
-        }
+        
     }
 
 
@@ -187,6 +188,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     [System.Obsolete]
     public void PlaceFlagPlayer1()
     {
+        print("In functie van G");
         if(flagPlayer1 == null)
         {
             flagPlayer1 = PhotonNetwork.InstantiateRoomObject("Flag", player1.transform.position, Quaternion.identity);
@@ -194,7 +196,10 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            flagPlayer1.transform.position = transform.position + new Vector3(player1.transform.position.x, 0, player1.transform.position.z);
+            PhotonNetwork.Destroy(flagPlayer1);
+            flagPlayer1 = PhotonNetwork.InstantiateRoomObject("Flag", player1.transform.position, Quaternion.identity);
+            //flagPlayer1.transform.position = transform.position + new Vector3(player1.transform.position.x, 0, player1.transform.position.z);
+
         }
     }
     [PunRPC]
@@ -208,13 +213,17 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            flagPlayer2.transform.position = transform.position + new Vector3(player2.transform.position.x, 0, player2.transform.position.z);
+            PhotonNetwork.Destroy(flagPlayer2);
+            flagPlayer2 = PhotonNetwork.InstantiateRoomObject("Flag", player2.transform.position, Quaternion.identity);
+            //flagPlayer2.transform.position = transform.position + new Vector3(player2.transform.position.x, 0, player2.transform.position.z);
         }
     }
 
     [PunRPC]
     public void CallFriend()
     {
+        print("In functie van H");
+
         GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("ask for help multiplayer"));
     }
 

@@ -17,7 +17,6 @@ public class ScoreFootball : MonoBehaviour
         MPH = GameObject.FindObjectOfType<MultiPlayerHandler>();
         windmill = GameObject.Find("windmill (2)");
         solarPanel = GameObject.Find("solar-panel (4)");
-        windmill.SetActive(false);
     }
 
     // Update is called once per frame
