@@ -4656,6 +4656,7 @@ GameObject:
   - component: {fileID: 3685856677608094377}
   - component: {fileID: 7002143332465494450}
   - component: {fileID: 613207702323937059}
+  - component: {fileID: -8470327566428773583}
   m_Layer: 9
   m_Name: Mp2
   m_TagString: Mp2
@@ -4896,6 +4897,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdc144bade1c044e99487edcca3bcc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8470327566428773583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2914798282258610652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 2
+  outlineColor: {r: 0.11137152, g: 1, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2946054613590083518
 GameObject:
   m_ObjectHideFlags: 0

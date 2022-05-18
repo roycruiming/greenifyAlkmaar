@@ -72,6 +72,12 @@ public class ThirtPersonPLayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (view.IsMine)
+        {
+            GetComponent<Outline>().enabled = false;
+
+        }
         if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine)
         {
 
