@@ -42,5 +42,16 @@ public class CollectablesMultiplayer : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        //decide if a positive feedback message is going to be displayed to the player
+        int oneToThreeChance = Random.Range(1,4);
+
+        if(oneToThreeChance == 1) {
+            //pick a random message
+            int messageIndex = Random.Range(1,5);
+            string key = "multiplayer positive feedback " + messageIndex;
+
+            GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey(key));
+        }
+
     }
 }
