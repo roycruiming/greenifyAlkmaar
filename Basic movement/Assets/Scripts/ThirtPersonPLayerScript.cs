@@ -143,10 +143,16 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
             rigidbody.MovePosition(translation);
 
-            if (Input.GetKeyDown("h"))
-            {
-                GetComponent<Animator>().Play("okSign"); 
+
+
+            if (GameObject.Find("MultiPlayerHandler") != null){
+
+                if (Input.GetKeyDown("h")){
+
+
+                }
             }
+
         }
     }
 
@@ -157,10 +163,13 @@ public class ThirtPersonPLayerScript : MonoBehaviour
         }
 
 
+
     IEnumerator WaitForSeconds()
     {
         isJumping = true;
         yield return new WaitForSeconds(1.4f);
         isJumping = false;
     }
+
+    
 }
