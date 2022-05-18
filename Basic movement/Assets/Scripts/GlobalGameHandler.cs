@@ -118,11 +118,11 @@ public class GlobalGameHandler : MonoBehaviour
         //save the total count of unlockables
         PlayerPrefs.SetInt("UnlockableCount",instance.allUnlockables.Count);
         
-        GlobalGameHandler.GivePlayerCoints(1900);
+        //GlobalGameHandler.GivePlayerCoints(1900);
     }
 
     public static int GetTotalPlayerCointsAmount() {
-        return instance.totalPlayerCoints;
+        return PlayerPrefs.GetInt("playerTotalCoints",0);
     }
 
     public static void GivePlayerCoints(int amount) {

@@ -52,6 +52,7 @@ public class MainMenu : MonoBehaviour
       SceneManager.LoadScene("Progression-store");
     }
 
+    //Switches the visibility of the given 2 objects
     void SwitchVisibility(GameObject object1, GameObject object2)
     {
         object1.SetActive(true);

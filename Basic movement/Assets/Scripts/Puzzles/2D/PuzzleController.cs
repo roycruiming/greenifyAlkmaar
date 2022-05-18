@@ -29,19 +29,19 @@ public class PuzzleController : MonoBehaviour
   {
     if(!PuzzlePlaying){
       Cursor.lockState = CursorLockMode.None;
-      //Als de speler op enter drukt en nu nog geen puzzel speelt
+      //When the player wants to start a puzzel and isn't playing a puzzle
         SelectedPuzzle = Random.Range(0, Puzzles.Count);
 
-        //set elke puzzel op inactief
+        //Set every puzzle inactive
         for(int i = 0; i < PuzzleCanvas.transform.childCount; i++)
         {
            PuzzleCanvas.transform.GetChild(i).gameObject.SetActive(false);
         }
 
-        //set alleen de juiste puzzle op actief
+        //Only set the correct puzzle active
         Puzzles[SelectedPuzzle].gameObject.SetActive(true);
 
-        //welke puzzel speel je en welk script hoort daarbij
+        //Which puzzle are you playing and which script is for that puzzle
         switch (Puzzles[SelectedPuzzle].name.ToString())
         {
           case "CleanPuzzle":
@@ -68,12 +68,14 @@ public class PuzzleController : MonoBehaviour
 
   public void PuzzleCompleted(string PuzzleName)
   {
+    //Disables the smoke of the object
     if(transform.Find("Smoke")){
         transform.Find("Smoke").gameObject.SetActive(false);
     }
 
     gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
 
+    //Sends the analytics on which puzzle is completed
     AnalyticsResult analyticsResult = Analytics.CustomEvent(
     "PuzzleCompleted",
     new Dictionary<string, object> {
@@ -81,11 +83,11 @@ public class PuzzleController : MonoBehaviour
       {"Difficulty", PuzzleDifficulty}
     });
 
-    if(objectivesController){
-          objectivesController.DeleteItemInList(this);
-    }
     Cursor.lockState = CursorLockMode.Locked;
     PuzzlePlaying = false;
     GlobalGameHandler.GivePlayerCoints(Random.Range(MoneyRange / 2, MoneyRange * 2 ));
+    if(objectivesController){
+          objectivesController.DeleteItemInList(this);
+    }
   }
 }

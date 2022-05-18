@@ -15,6 +15,7 @@ public class MemoryCard : MonoBehaviour, IPointerClickHandler
     PuzzleScript = GameObject.FindGameObjectWithTag("MemoryPuzzle").GetComponent<MemoryPuzzle>();
   }
 
+  //If player clicks the card
   public void OnPointerClick(PointerEventData eventData)
   {
     if(CanBeClicked && MemoryPuzzle.CanClickOthers){

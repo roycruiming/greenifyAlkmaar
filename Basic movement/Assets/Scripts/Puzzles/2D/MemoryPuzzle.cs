@@ -35,6 +35,7 @@ public class MemoryPuzzle : MonoBehaviour
       MakeCards();
     }
 
+    //Makes the icon combination list
     public void setIcons(){
       for(int x = 0; x < 2; x++){
         for(int i = 0; i < SpriteSources.Count; i++){
@@ -50,6 +51,7 @@ public class MemoryPuzzle : MonoBehaviour
      }
     }
 
+    //Makes the card from the icon list
     public void MakeCards(){
       for (int i = 0; i < PuzzleDifficulty * 2; i++){
         GameObject NewObj = new GameObject();
@@ -63,6 +65,7 @@ public class MemoryPuzzle : MonoBehaviour
       }
     }
 
+    //Shows the icon of the card
     public void ShowCard(GameObject Card, Sprite Icon){
       if(CountChecked < 1 ){
         FirstChoice = Icon;
@@ -80,6 +83,7 @@ public class MemoryPuzzle : MonoBehaviour
       }
     }
 
+    //Check if the icons of the cards are the same
     public void CheckPair(){
       if(FirstChoice == SecondChoice){
         StartCoroutine(CheckForCompletion());
@@ -88,6 +92,7 @@ public class MemoryPuzzle : MonoBehaviour
       }
     }
 
+    //Closes the pair if they aren't the same
     IEnumerator ClosePair(){
       yield return new WaitForSeconds(2);
       FirstCard.GetComponent<Image>().overrideSprite = null;
@@ -98,6 +103,7 @@ public class MemoryPuzzle : MonoBehaviour
       SecondCard.GetComponent<MemoryCard>().CanBeClicked = true;
     }
 
+    //When the icons are the same, check for completion of the puzzle and remove the pair
     IEnumerator CheckForCompletion(){
       yield return new WaitForSeconds(1);
       AmountSolved++;
@@ -112,6 +118,7 @@ public class MemoryPuzzle : MonoBehaviour
       }
     }
 
+    //Resets the puzzle
     IEnumerator PuzzleCompleted(){
       FirstCard = null;
       SecondCard = null;

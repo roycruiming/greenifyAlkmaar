@@ -12,13 +12,13 @@ public class MainMenuBackground : MonoBehaviour
     int Number = 1;
     Sprite CurrentImage;
 
-    //start van de achtergrond
+    //Start of the background
     void Start()
     {
         InvokeRepeating("ChangeImage", 0f, WaitTime);
     }
 
-    //verandert de achtergrondafbeelding naar een andere
+    //Changes the background image to a different one
     void ChangeImage()
     {
         ChooseRandomImage();
@@ -33,7 +33,7 @@ public class MainMenuBackground : MonoBehaviour
 
     }
 
-    //kiest random afbeelding
+    //Chooses a random image from the list
     void ChooseRandomImage()
     {
         Number = Random.Range(0, Sprites.Count);

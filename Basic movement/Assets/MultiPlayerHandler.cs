@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public ScoreFootball sc;
     public GameObject football;
     public GameObject addingTreeAfterProgress;
+    public bool player1IsSet = false;
+    public bool player2IsSet = false;
 
 
     public float y = 0;
@@ -39,6 +42,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(TurbineCounter);
             stream.SendNext(treeCounter);
             stream.SendNext(totalCount);
+            stream.SendNext(player1IsSet);
+            stream.SendNext(player2IsSet);
         }
         if (stream.IsReading)
         {
@@ -46,8 +51,16 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             TurbineCounter = (int)stream.ReceiveNext();
             treeCounter = (int)stream.ReceiveNext();
             totalCount = (int)stream.ReceiveNext();
-
+            player1IsSet = (bool)stream.ReceiveNext();
+            player2IsSet = (bool)stream.ReceiveNext();
         }
+    }
+
+    public bool isPlayer1Set() {
+        int playerCount = 0;
+        foreach(Player player in PhotonNetwork.PlayerList) playerCount++;
+        if(playerCount >= 2) return true;
+        else return false;
     }
 
     // Start is called before the first frame update
@@ -147,6 +160,19 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         treeCounter++;
     }
+
+    [PunRPC]
+    public void setPlayer1() {
+        this.player1IsSet = true;
+    }
+
+    [PunRPC]
+    public void setPlayer2() {
+        this.player2IsSet = true;
+    }
+
+
+
 
     [PunRPC]
     public void MoveVork()
