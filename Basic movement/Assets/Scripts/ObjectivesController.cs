@@ -87,7 +87,8 @@ public class ObjectivesController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameFinnished = true; 
+        //this.objectivesCounter = 6; 
     }
 
     // Update is called once per frame

@@ -8,9 +8,21 @@ using UnityEditor;
 public class TakeScreenshot : MonoBehaviour
 {
 
-    private Camera camera; 
+    private Camera camera;
 
 
+    public int width;
+    public int heigth;
+    public TextureFormat textureFormat;
+
+    private void Awake()
+    {
+        
+        this.width = 1000;
+        this.heigth = 1000;
+        this.textureFormat = TextureFormat.RGBA32; 
+        
+    }
 
 
 
@@ -22,12 +34,12 @@ public class TakeScreenshot : MonoBehaviour
 
 
 
-        RenderTexture rt = new RenderTexture(256, 256, 24);
+        RenderTexture rt = new RenderTexture(width, heigth, 24);
         camera.targetTexture = rt;
-        Texture2D screenshot = new Texture2D(256, 256, TextureFormat.RGBA32, false);
+        Texture2D screenshot = new Texture2D(width, heigth, TextureFormat.RGBA32, false);
         camera.Render();
         RenderTexture.active = rt;
-        screenshot.ReadPixels(new Rect(0, 0, 256, 256), 0, 0);
+        screenshot.ReadPixels(new Rect(0, 0, width, heigth), 0, 0);
         camera.targetTexture = null;
         RenderTexture.active = null;
 
