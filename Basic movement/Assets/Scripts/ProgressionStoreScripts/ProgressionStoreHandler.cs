@@ -24,6 +24,8 @@ public class ProgressionStoreHandler : MonoBehaviour
         
         this.UpdateTotalPlayerCointsUI();
         this.SetFirstUnlocksDataAndIndex();
+
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private List<Unlockable> GetAllUnlockablesInfoByType(UnlockableType uType) {
