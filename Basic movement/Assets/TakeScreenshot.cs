@@ -53,7 +53,14 @@ public class TakeScreenshot : MonoBehaviour
         }
 
         byte[] bytes = screenshot.EncodeToPNG();
-        System.IO.File.WriteAllBytes("C:/Users/tim/Documents/GitHub/greenifyAlkmaar/Basic movement/Assets/Sprites/Camera/test.png", bytes);
+
+        string path = Application.persistentDataPath + "/FotoTemp.jpg";
+
+        print("SAVING ON : " +  Application.persistentDataPath + "/MyScreenshot.jpg");
+
+        System.IO.File.WriteAllBytes(path, bytes); 
+
+      
 
 
 
