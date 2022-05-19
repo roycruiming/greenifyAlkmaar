@@ -21,6 +21,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public Text turbineCounterText;
     public Text treeCounterText;
     public Text totalCounterText;
+    public Text gefeliciteerd;
     public GameObject bridge;
     public ScoreFootball1 sc1;
     public ScoreFootball sc;
@@ -37,6 +38,9 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 
     public GameObject flagPlayer1;
     public GameObject flagPlayer2;
+
+    public Button mpBackButton;
+    public GameObject medalIcon;
 
 
 
@@ -86,8 +90,12 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         turbineCounterText = GameObject.Find("WindCounter").GetComponent<Text>();
         treeCounterText = GameObject.Find("TreeCounter").GetComponent<Text>();
         totalCounterText = GameObject.Find("TotalCounter").GetComponent<Text>();
+        gefeliciteerd = GameObject.Find("Gefeliciteerd").GetComponent<Text>();
         PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(129.43f, 2.39f, 360.32f), Quaternion.identity);
         football = GameObject.Find("soccer-ball (3)");
+        mpBackButton = GameObject.Find("mpExitButton").GetComponent<Button>();
+        print(mpBackButton);
+        medalIcon = GameObject.Find("MedalIcon");
 
 
         totalTurbineCount = GameObject.FindGameObjectsWithTag("TurbineMultiplayer").Length;
@@ -97,6 +105,13 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 
         player1 = GameObject.FindGameObjectWithTag("Mp1");
         player2 = GameObject.FindGameObjectWithTag("Mp2");
+
+        gefeliciteerd.enabled = false;
+        mpBackButton.gameObject.SetActive(false);
+        medalIcon.SetActive(false);
+
+        
+        
 
 
 
@@ -168,6 +183,13 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         //     }
         // }
 
+
+        if(totalCount == totalCounter)
+        {
+
+            photonView.RPC("WinConditie", RpcTarget.All);
+        }
+
     }
 
     IEnumerator showcaseIntroCutscene(string playerTag) {
@@ -185,6 +207,15 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         
     }
 
+    [PunRPC]
+    public void WinConditie()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        gefeliciteerd.enabled = true;
+        mpBackButton.gameObject.SetActive(true);
+        medalIcon.SetActive(true);
+        Time.timeScale = 0f;
+    }
 
     [PunRPC]
     [System.Obsolete]
