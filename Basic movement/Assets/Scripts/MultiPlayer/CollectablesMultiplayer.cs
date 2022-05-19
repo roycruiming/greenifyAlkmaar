@@ -28,6 +28,7 @@ public class CollectablesMultiplayer : MonoBehaviour
 
         if (this.gameObject.CompareTag("SolarMultiplayer"))
         {
+            
             MPH.CollectableSolarPanel();
             Destroy(this.gameObject);
         }

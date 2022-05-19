@@ -124,11 +124,13 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 
         if (brScript.bridgeUps)
         {
-            bridgeActivate();
+            photonView.RPC("bridgeActivate", RpcTarget.All);
+            //bridgeActivate();
         }
         else
         {
-            bridgeDeActivate();
+            photonView.RPC("bridgeDeActivate", RpcTarget.All);
+            //bridgeDeActivate();
         }
 
         if (Input.GetKeyDown("h"))
