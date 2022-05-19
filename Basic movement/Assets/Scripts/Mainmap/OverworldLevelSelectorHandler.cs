@@ -28,6 +28,13 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
 
     }
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) {
@@ -114,11 +121,5 @@ public class OverworldLevelSelectorHandler : MonoBehaviour
         }
 
         return null;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
     }
 }
