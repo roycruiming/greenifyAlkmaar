@@ -116,9 +116,12 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                vertical *= 2f;
-                speed = runSpeed;
-                animSpeed = runAnimatonSpeed;
+                if(!Input.GetKey(KeyCode.S))
+                {
+                    vertical *= 2f;
+                    speed = runSpeed;
+                    animSpeed = runAnimatonSpeed;
+                }
             }
 
             var translation = transform.forward * (vertical * Time.deltaTime);
