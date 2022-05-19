@@ -42,13 +42,15 @@ public class TutorialMenu : MonoBehaviour
     //Teleports the player back to the original position
     public void stuck()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Player.transform.position = StartPosition;
-        Time.timeScale = 1f;
-        PauseMenu.GameIsPaused = false;
-        PauseMenuUI.SetActive(false);
-        HelpMenuUI.SetActive(false);
-        Debug.Log(Cursor.lockState);
+        if(!PuzzleController.PuzzlePlaying)
+        {
+          Cursor.lockState = CursorLockMode.Locked;
+          Player.transform.position = StartPosition;
+          Time.timeScale = 1f;
+          PauseMenu.GameIsPaused = false;
+          PauseMenuUI.SetActive(false);
+          HelpMenuUI.SetActive(false);
+        }
     }
 
     public void controls()
