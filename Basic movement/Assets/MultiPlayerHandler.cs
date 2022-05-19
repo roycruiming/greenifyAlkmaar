@@ -191,13 +191,13 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         print("In functie van G");
         if(flagPlayer1 == null)
         {
-            flagPlayer1 = PhotonNetwork.InstantiateRoomObject("Flag", player1.transform.position, Quaternion.identity);
+            flagPlayer1 = PhotonNetwork.InstantiateRoomObject("flag-big", player1.transform.position, Quaternion.identity);
 
         }
         else
         {
             PhotonNetwork.Destroy(flagPlayer1);
-            flagPlayer1 = PhotonNetwork.InstantiateRoomObject("Flag", player1.transform.position, Quaternion.identity);
+            flagPlayer1 = PhotonNetwork.InstantiateRoomObject("flag-big", player1.transform.position, Quaternion.identity);
             //flagPlayer1.transform.position = transform.position + new Vector3(player1.transform.position.x, 0, player1.transform.position.z);
 
         }
@@ -208,13 +208,13 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(flagPlayer2 == null)
         {
-            flagPlayer2 = PhotonNetwork.InstantiateRoomObject("Flag", player2.transform.position, Quaternion.identity);
+            flagPlayer2 = PhotonNetwork.InstantiateRoomObject("flag-big", player2.transform.position, Quaternion.identity);
 
         }
         else
         {
             PhotonNetwork.Destroy(flagPlayer2);
-            flagPlayer2 = PhotonNetwork.InstantiateRoomObject("Flag", player2.transform.position, Quaternion.identity);
+            flagPlayer2 = PhotonNetwork.InstantiateRoomObject("flag-big", player2.transform.position, Quaternion.identity);
             //flagPlayer2.transform.position = transform.position + new Vector3(player2.transform.position.x, 0, player2.transform.position.z);
         }
     }
