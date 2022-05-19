@@ -62,18 +62,13 @@ public class raycaster : MonoBehaviour
 
             if (textMeshPro != null && (hasInformationHelper || hasItem))
             {
-
                 if (textMeshPro != null && pressFContainer != null) { 
-
-                textMeshPro.text = "press f to interact";
-                pressFContainer.SetActive(true);
+                    textMeshPro.text = GlobalGameHandler.GetTextByDictionaryKey("press 'f' to interact");
+                    pressFContainer.SetActive(true);
                 }
             }
-
-            else
-            {
-                if (textMeshPro != null && pressFContainer != null)  pressFContainer.SetActive(false);
-            }
+            else if (textMeshPro != null && pressFContainer != null)  pressFContainer.SetActive(false);
+            
 
             if (Input.GetKeyDown(KeyCode.F)) {
                Item item = hitInfo.collider.gameObject.GetComponent<Item>();
