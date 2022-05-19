@@ -172,7 +172,7 @@ public class ObjectivesController : MonoBehaviour
             }
 
              GameDone.text = "Gefeliciteerd!";
-             gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
+             //gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
              gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
              back.gameObject.SetActive(true);
              gameFinnished = true;

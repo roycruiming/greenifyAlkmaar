@@ -95,11 +95,13 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             if (isGrounded && !isJumping)
             {
                 GetComponent<Animator>().Play("Blend Tree");
+                StartCoroutine(WaitForSeconds(0.5f));
             }
             if(!isGrounded)
             {
 
                 GetComponent<Animator>().Play("falling");
+                StartCoroutine(WaitForSeconds(0.5f));
 
             }
             
@@ -130,7 +132,7 @@ public class ThirtPersonPLayerScript : MonoBehaviour
                 
                 //isGrounded = false;
                 rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                StartCoroutine(WaitForSeconds());
+                StartCoroutine(WaitForSeconds(1.4f));
                 
 
             }
@@ -171,10 +173,10 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
 
 
-    IEnumerator WaitForSeconds()
+    IEnumerator WaitForSeconds(float time)
     {
         isJumping = true;
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(time);
         isJumping = false;
     }
 
