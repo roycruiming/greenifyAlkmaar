@@ -87,7 +87,7 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
         if (view.IsMine)
         {
-            GetComponent<Outline>().enabled = false;
+            //GetComponent<Outline>().enabled = false;
 
         }
         if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine && canMoveAndLookAround)

@@ -12,7 +12,7 @@ public class ObjectivesController : MonoBehaviour
     public List<PuzzleController> targets;
     public List<Item> solarPanels;
     public List<GameObject> solarPanelsSpot;
-    public int objectivesCounter = 0;
+    public int objectivesCounter ;
     private int totalObjectives;
 
     private bool testPhaseBooleanVerticalSlice = false; //remove in later stage!
@@ -116,10 +116,21 @@ public class ObjectivesController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //objectivesCounter = 2;
-        solarPanels.Clear();
-        targets.Clear();
+        //objectivesCounter = totalObjectives; 
+        //RedirectToPhotoScoreScreen(); 
+       // StartCoroutine(secondsTest());
+       // solarPanels.Clear();
+       // targets.Clear();
 
+    }
+
+    private IEnumerator secondsTest() {
+
+
+        yield return new WaitForSeconds(3f);
+        objectivesCounter++; 
+    
+    
     }
 
     // Update is called once per frame
@@ -214,8 +225,17 @@ public class ObjectivesController : MonoBehaviour
 
     private void RedirectToPhotoScoreScreen()
     {
+        string score = GameObject.Find("GameTimer").GetComponent<Text>().text;
+        GameObject OnSceneLoaded = GameObject.Find("OnSceneLoaded");
 
-        SceneManager.LoadScene(18); 
+        OnSceneLoaded.GetComponent<SceneLoaded>().Time = score; 
+
+        Object.DontDestroyOnLoad(GameObject.Find("3RD Person"));
+        Object.DontDestroyOnLoad(GameObject.Find("OnSceneLoaded"));
+        SceneManager.LoadScene(18);
+
+        
+       //loader1.onSceneLoaded += MySceneLoadHandler;
 
         //throw new System.NotImplementedException();
     }

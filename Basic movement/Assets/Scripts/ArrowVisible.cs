@@ -16,13 +16,14 @@ public class ArrowVisible : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (arrowVisible)
-        {
-            arrow.SetActive(true);
-        }
-        else
-        {
-            arrow.SetActive(false);
-        }
+        //    if (arrowVisible)
+        //    {
+        //        arrow.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        arrow.SetActive(false);
+        //    }
+        //}
     }
 }

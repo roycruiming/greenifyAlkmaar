@@ -21,8 +21,14 @@ public class GlobalGameHandler : MonoBehaviour
 
     private int totalPlayerCoints;
 
+
+
+
+
     private void Awake() 
-    { 
+    {
+        
+
         // If there is an instance, and it's not me, delete myself.
         if (instance != null && instance != this) Destroy(this); 
         else {
@@ -120,6 +126,23 @@ public class GlobalGameHandler : MonoBehaviour
         PlayerPrefs.SetInt("UnlockableCount",instance.allUnlockables.Count);
         
         //GlobalGameHandler.GivePlayerCoints(1900);
+    }
+
+
+
+    //USED TO LOAD NEXT SCENE AFTER THE SOCIAL LAYER SCREENSHOT FUNCTION. 
+    private static string SceneName; 
+    public static void SetPreviousScneneName(string name) {
+        SceneName = name; 
+    }
+
+    //
+    public static string GetNextSceneName() {
+
+        if (SceneName == "Tutorial-Level") return "DeMeentV2";
+        if (SceneName == "DeMeentv2") return "DeKaasMarkt";
+        else return "MainMenu";
+       
     }
 
     public static int GetTotalPlayerCointsAmount() {
