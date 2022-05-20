@@ -117,7 +117,7 @@ public class ObjectivesController : MonoBehaviour
     void Start()
     {
         //objectivesCounter = totalObjectives; 
-        //RedirectToPhotoScoreScreen(); 
+        RedirectToPhotoScoreScreen(); 
        // StartCoroutine(secondsTest());
        // solarPanels.Clear();
        // targets.Clear();
