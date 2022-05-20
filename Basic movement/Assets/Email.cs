@@ -75,6 +75,7 @@ public class Email : MonoBehaviour
             message.IsBodyHtml = true; //to make message body as html
 
             string path = Application.persistentDataPath + "/FotoTemp.jpg";
+            print("path");
 
             message.AlternateViews.Add(GetEmbeddedImage(path));
        
