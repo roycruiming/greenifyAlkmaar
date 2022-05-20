@@ -44,10 +44,17 @@ public class SceneLoaded : MonoBehaviour
         GameObject.Find("GameTimer").GetComponent<Text>().text = Time; 
 
         GameObject player = GameObject.Find("3RD Person");
+        
+
         GameObject placeholder = GameObject.Find("player placeholder");
 
 
         foreach (Transform c in placeholder.transform) Destroy(c.gameObject);
+
+
+        //set animator to our custom animator
+        Animator animator = player.GetComponent<Animator>();
+        animator.runtimeAnimatorController = Resources.Load("ScoreBoardAnim") as RuntimeAnimatorController;
 
 
 
