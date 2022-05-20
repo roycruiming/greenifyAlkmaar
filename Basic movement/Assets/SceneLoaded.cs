@@ -44,6 +44,7 @@ public class SceneLoaded : MonoBehaviour
         GameObject.Find("GameTimer").GetComponent<Text>().text = Time; 
 
         GameObject player = GameObject.Find("3RD Person");
+        if (player == null) GameObject.Find("player"); 
         
 
         GameObject placeholder = GameObject.Find("player placeholder");
