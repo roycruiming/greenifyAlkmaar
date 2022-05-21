@@ -37,7 +37,6 @@ public class SceneLoaded : MonoBehaviour
     void OnSocialLayerLoaded()
     {
 
-
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 

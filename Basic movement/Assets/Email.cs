@@ -1,6 +1,8 @@
+using SFB;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
@@ -33,32 +35,69 @@ public class Email : MonoBehaviour
     }
 
 
-    public void SendEmailWithPicture() {
-        bool parametersAreMissing =  SenderPassword.Length == 0 || SenderEmail.Length == 0 || ProviderPort == 0 || SendToMail == null || SendToName == null;
+    public static Texture2D LoadPNG(string filePath)
+    {
+
+        Texture2D tex = null;
+        byte[] fileData;
+
+        if (File.Exists(filePath))
+        {
+            fileData = File.ReadAllBytes(filePath);
+            tex = new Texture2D(2, 2);
+
+
+
+            tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+            RawImage image = GameObject.Find("RawImage").GetComponent<RawImage>();
+            image.color = new Color32(255, 255, 225, 255);
+            image.texture = tex;
+            image.enabled = true;
+
+        }
+        return tex;
+    }
+
+
+
+    public void SavePictureAs() {
+
+        //var path = StandaloneFileBrowser.SaveFilePanel("Save File", "", "", "");
+
+        // Save file async
+        StandaloneFileBrowser.SaveFilePanelAsync("Save File", "", "", "jpg", (string path) => {
+
+            byte[] arr = File.ReadAllBytes(Application.persistentDataPath + "/FotoTemp.jpg");
+
+            System.IO.File.WriteAllBytes(path, arr);
+
+            //byte[] bytes =  System.IO.ReadAll
+
+            //System.IO.File.Copy(s, path, true);
+
+        });
+
+
+    } 
+
+    public void MailPicture() {
+
+
+        bool parametersAreMissing = SenderPassword.Length == 0 || SenderEmail.Length == 0 || ProviderPort == 0 || SendToMail == null || SendToName == null;
         Debug.Assert(!parametersAreMissing, "parameters missing");
         Debug.Assert(IsEmail(SendToMail.text), "not a valid email");
 
         if (parametersAreMissing) return;
 
-        
-
-
         string mailReciever = SendToMail.text.Trim();
 
-     
         if (!IsEmail(mailReciever))
         {
             print(SendToMail.text); return;
         }
 
-        camera.GetComponent<TakeScreenshot>().TakeScreenShot();
-
-
-
         try
         {
-         
-
             SmtpClient smtp = new SmtpClient();
             smtp.Port = ProviderPort;
             smtp.Host = "smtp.gmail.com"; //for gmail host
@@ -66,31 +105,18 @@ public class Email : MonoBehaviour
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new NetworkCredential(SenderEmail, SenderPassword);
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-
-
             MailMessage message = new MailMessage();
             message.From = new MailAddress(SenderEmail);
             message.To.Add(new MailAddress(mailReciever));
             message.Subject = "Come play Greenify Alkmaar with me!";
             message.IsBodyHtml = true; //to make message body as html
-
             string path = Application.persistentDataPath + "/FotoTemp.jpg";
-            print("path");
-
             message.AlternateViews.Add(GetEmbeddedImage(path));
-       
-
             string name = SendToName.text.Trim();
-
-
             message.Body = getBody(name);
-
-
-
             smtp.Send(message);
             SendToName.text = "";
             SendToMail.text = "";
-
 
 
         }
@@ -102,13 +128,16 @@ public class Email : MonoBehaviour
 
 
 
-     
 
 
 
+    }
 
 
+    public void SavePicture() {
 
+        camera.GetComponent<TakeScreenshot>().TakeScreenShot();
+        LoadPNG(Application.persistentDataPath + "/FotoTemp.jpg"); 
     }
 
     private AlternateView GetEmbeddedImage(string filePath)
