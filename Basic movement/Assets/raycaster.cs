@@ -118,7 +118,7 @@ public class raycaster : MonoBehaviour
                 if (chargerSpot != null)
                 {
                     Item charger = InventoryController.GetItem();
-                    if (chargerSpot.InstallCharger(charger)) return;
+                    if (!chargerSpot.InstallCharger(charger)) return;
                     InventoryController.ClearInventory();
                 }
 

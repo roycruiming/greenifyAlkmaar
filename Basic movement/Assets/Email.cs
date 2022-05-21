@@ -71,12 +71,7 @@ public class Email : MonoBehaviour
 
             System.IO.File.WriteAllBytes(path, arr);
 
-            //byte[] bytes =  System.IO.ReadAll
-
-            //System.IO.File.Copy(s, path, true);
-
         });
-
 
     } 
 

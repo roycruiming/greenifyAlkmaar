@@ -191,7 +191,7 @@ public class HUDController : MonoBehaviour
 
 
     public void RemoveImage() {
-        Image image = this.gameObject.transform.Find("Panel").GetComponent<Image>();
+        Image image = gameObject.transform.Find("Panel").GetComponent<Image>();
         Destroy(image);
     }
 
