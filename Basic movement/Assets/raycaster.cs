@@ -59,9 +59,10 @@ public class raycaster : MonoBehaviour
 
 
 
-            bool playerHasItem = invItem != null;    
-            if (playerHasItem) { 
-                if(invItem.unlockAbles.Contains(gameObject)) 
+            bool playerHasItem = false; 
+
+            if (invItem != null) { 
+               if(invItem.unlockAbles.Contains(gameobj)) 
                     playerHasItem = true; 
             }
 
@@ -69,7 +70,10 @@ public class raycaster : MonoBehaviour
             bool hasItem = gameobj.GetComponent<Item>() != null;
             bool  hasInformationHelper = gameobj.GetComponent<InformationHelper>() != null;
             bool isChargerSpot = hitInfo.collider.gameObject.GetComponent<ChargerSpot>() != null;
-            //bool hasItem = hitInfo.collider.gameObject.GetComponent<Item>();
+            bool isSolarSpot = hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null;
+            bool isTreeSpot = hitInfo.collider.gameObject.GetComponent<Treespot>() != null;
+
+            bool isPlacementSpotAndPlayerHasItem = (isChargerSpot || isSolarSpot || isTreeSpot) && playerHasItem; 
 
 
 
@@ -77,7 +81,7 @@ public class raycaster : MonoBehaviour
 
             //= hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
 
-            if (textMeshPro != null && (hasInformationHelper || hasItem || (isChargerSpot && playerHasItem)))
+            if (textMeshPro != null && (hasInformationHelper || hasItem || isPlacementSpotAndPlayerHasItem)) 
             {
                 if (textMeshPro != null && pressFContainer != null) { 
                     textMeshPro.text = GlobalGameHandler.GetTextByDictionaryKey("press 'f' to interact");
