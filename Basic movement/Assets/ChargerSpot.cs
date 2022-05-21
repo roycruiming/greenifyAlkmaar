@@ -25,6 +25,7 @@ public class ChargerSpot : MonoBehaviour
 
     public bool InstallCharger(Item charger)
     {
+        if (charger == null) return false; 
         print("ffs"); 
 
         if (charger.unlockAbles.Contains(this.gameObject))
