@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SceneLoaded : MonoBehaviour
 {
-    public string Time;
+    public string TimeScore;
     //private Scene PreviousScene;
     //private readonly string[] Levels = {"Tutorial-Level", "DeMeentV2", "DeKaasMarkt"};
 
@@ -37,10 +37,12 @@ public class SceneLoaded : MonoBehaviour
     void OnSocialLayerLoaded()
     {
 
+
+        Time.timeScale = 1; 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        GameObject.Find("GameTimer").GetComponent<Text>().text = Time; 
+        GameObject.Find("GameTimer").GetComponent<Text>().text = TimeScore; 
 
         GameObject player = GameObject.Find("3RD Person");
         if (player == null) GameObject.Find("player"); 

@@ -24,7 +24,7 @@ public class GoToNextScreen : MonoBehaviour
         string score = GameObject.Find("GameTimer").GetComponent<Text>().text;
         GameObject OnSceneLoaded = GameObject.Find("OnSceneLoaded");
 
-        OnSceneLoaded.GetComponent<SceneLoaded>().Time = score;
+        OnSceneLoaded.GetComponent<SceneLoaded>().TimeScore = score;
 
         Object.DontDestroyOnLoad(GameObject.Find("3RD Person"));
         Object.DontDestroyOnLoad(GameObject.Find("OnSceneLoaded"));
