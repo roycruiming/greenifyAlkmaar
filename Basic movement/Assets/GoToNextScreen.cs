@@ -18,4 +18,9 @@ public class GoToNextScreen : MonoBehaviour
         
         }
     }
+
+    public void GoToPhotoScene() {
+        
+    
+    }
 }
