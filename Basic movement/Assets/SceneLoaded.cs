@@ -56,6 +56,7 @@ public class SceneLoaded : MonoBehaviour
         Animator animator = player.GetComponent<Animator>();
         animator.applyRootMotion = false;
         animator.runtimeAnimatorController = Resources.Load("ScoreBoardAnim") as RuntimeAnimatorController;
+      
 
 
 
