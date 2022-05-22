@@ -10,7 +10,9 @@ public class AnimationSlider : MonoBehaviour
 
     private Animator anim;
     private Slider slider;
+    public bool secondPlayer; 
 
+    private GameObject player;
     private bool Pause = false; 
 
 
@@ -19,13 +21,26 @@ public class AnimationSlider : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        GameObject player = GameObject.Find("3RD Person");
+
+        if (!secondPlayer) { 
+        player = GameObject.Find("3RD Person");
         if (player == null) player = GameObject.Find("player");
         if(player == null) { Debug.Assert(false, "no player found"); }
 
         anim = player.GetComponent<Animator>();
         anim.applyRootMotion = false; 
-        slider = this.GetComponent<Slider>(); 
+        slider = this.GetComponent<Slider>();
+        }
+
+        else if (secondPlayer) {
+            player = GameObject.Find("3RD Person");
+            if (player == null) player = GameObject.Find("player2");
+            if (player == null) { Debug.Assert(false, "no player found"); }
+
+            anim = player.GetComponent<Animator>();
+            anim.applyRootMotion = false;
+            slider = this.GetComponent<Slider>();
+        }
     }
 
     public void NextAnimation()
@@ -42,13 +57,9 @@ public class AnimationSlider : MonoBehaviour
 
         string nextAnimationName = clips[nextIndex];
         anim.Play(nextAnimationName); 
-       
-
-
-  
-
-
     }
+
+
 
 
 

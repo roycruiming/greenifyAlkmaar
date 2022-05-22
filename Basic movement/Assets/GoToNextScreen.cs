@@ -29,5 +29,7 @@ public class GoToNextScreen : MonoBehaviour
         Object.DontDestroyOnLoad(GameObject.Find("3RD Person"));
         Object.DontDestroyOnLoad(GameObject.Find("OnSceneLoaded"));
 
+        SceneManager.LoadScene(18);
+
     }
 }

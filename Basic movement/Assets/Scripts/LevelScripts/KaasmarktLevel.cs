@@ -29,7 +29,7 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
         
         initLevel();
         
-        //StartCoroutine(showcaseIntroCutscene());
+        StartCoroutine(showcaseIntroCutscene());
 
 
         //intro cutscene
