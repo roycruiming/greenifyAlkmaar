@@ -117,7 +117,7 @@ public class ObjectivesController : MonoBehaviour
     void Start()
     {
         //objectivesCounter = totalObjectives; 
-        RedirectToPhotoScoreScreen(); 
+        //RedirectToPhotoScoreScreen(); 
        // StartCoroutine(secondsTest());
        // solarPanels.Clear();
        // targets.Clear();
@@ -172,8 +172,8 @@ public class ObjectivesController : MonoBehaviour
             {
 
 
-                RedirectToPhotoScoreScreen(); 
-                return; 
+                //RedirectToPhotoScoreScreen(); 
+                //return; 
 
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
