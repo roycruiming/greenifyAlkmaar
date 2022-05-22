@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GoToNextScreen : MonoBehaviour
 {
@@ -20,7 +21,13 @@ public class GoToNextScreen : MonoBehaviour
     }
 
     public void GoToPhotoScene() {
-        
-    
+        string score = GameObject.Find("GameTimer").GetComponent<Text>().text;
+        GameObject OnSceneLoaded = GameObject.Find("OnSceneLoaded");
+
+        OnSceneLoaded.GetComponent<SceneLoaded>().Time = score;
+
+        Object.DontDestroyOnLoad(GameObject.Find("3RD Person"));
+        Object.DontDestroyOnLoad(GameObject.Find("OnSceneLoaded"));
+
     }
 }
