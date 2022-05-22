@@ -17,10 +17,22 @@ public class SpawnPlayers : MonoBehaviour
         GameObject player;
         if(player1Active == false) {
             player = PhotonNetwork.Instantiate("Mp1", spawnPoint.position, spawnPoint.rotation);
+            player.AddComponent(typeof(PlayerSaver));
         }
         else {
             player = PhotonNetwork.Instantiate("Mp2", spawnPoint.position, spawnPoint.rotation);
+            
+
         }
+
+        GameObject clonecontainer = GameObject.Find("clonecontainer");  
+        GameObject clone = Instantiate(player, GameObject.Find("clonecontainer").transform);
+        clone.name = "player1"; 
+        clone.SetActive(false);
+            
+            
+            //GameObject.Find("playercontainer").trans
+
 
         dirArrow = GameObject.Find("DirectionalArrow");
         dirArrow.SetActive(false);
