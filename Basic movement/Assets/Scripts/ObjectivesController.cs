@@ -12,7 +12,7 @@ public class ObjectivesController : MonoBehaviour
     public List<PuzzleController> targets;
     public List<Item> solarPanels;
     public List<GameObject> solarPanelsSpot;
-    public int objectivesCounter ;
+    public int objectivesCounter = 0;
     private int totalObjectives;
 
     private bool testPhaseBooleanVerticalSlice = false; //remove in later stage!
@@ -35,7 +35,7 @@ public class ObjectivesController : MonoBehaviour
     public GameObject objectivesObject;
     public GameObject GameTimerObject;
 
-    public int chargingStationCounter = 0;
+    public int chargingStationCounter = 0; 
 
     public Button back;
 
@@ -45,7 +45,7 @@ public class ObjectivesController : MonoBehaviour
     public Canvas puzzleCanvas;
 
     private bool progression1PhaseDone = false;
-    private bool progression2PhaseDone = false;
+      private bool progression2PhaseDone = false;
 
     public void Awake()
     {
@@ -97,7 +97,7 @@ public class ObjectivesController : MonoBehaviour
 
 
 
-        if (GameObject.Find("Kaasmarkt scenery") != null)
+        if(GameObject.Find("Kaasmarkt scenery") != null)
         {
             totalObjectives = targets.Count + 1;
         }
@@ -116,21 +116,7 @@ public class ObjectivesController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //objectivesCounter = totalObjectives; 
-        RedirectToPhotoScoreScreen(); 
-       // StartCoroutine(secondsTest());
-       // solarPanels.Clear();
-       // targets.Clear();
-
-    }
-
-    private IEnumerator secondsTest() {
-
-
-        yield return new WaitForSeconds(3f);
-        objectivesCounter++; 
-    
-    
+        //objectivesCounter = 2; 
     }
 
     // Update is called once per frame
@@ -159,85 +145,60 @@ public class ObjectivesController : MonoBehaviour
         // Set how many objectives are done
         TextUiCounter.text = objectivesCounter + "/" + totalObjectives;
 
-        if (GameObject.Find("AzStadion") == null)
+        if(GameObject.Find("AzStadion") == null)
         {
             AmmountCoins.text = GlobalGameHandler.GetTotalPlayerCointsAmount().ToString();
 
+        
 
 
-
-            this.CheckNextProgressionPhase();
-            //when objectivesList == emtpy - game is finished
-            if (targets.Count == 0 && solarPanels.Count == 0 && objectivesCounter == totalObjectives)
+        this.CheckNextProgressionPhase();
+        //when objectivesList == emtpy - game is finished
+         if(targets.Count == 0 && solarPanels.Count == 0 && objectivesCounter == totalObjectives)
+         {
+             Cursor.lockState = CursorLockMode.Confined;
+             Cursor.visible = true;
+             Time.timeScale = 0;
+            pauseMenu.SetActive(false);
+            puzzleCanvass.SetActive(false);
+             blackBarArroundScoreScreen.gameObject.SetActive(true);
+            if (GameObject.Find("TutorialLevel"))
             {
 
+            }
+            else
+            {
+                nameInputBar.gameObject.SetActive(true);
+            }
 
-                RedirectToPhotoScoreScreen(); 
-                return; 
+             GameDone.text = "Gefeliciteerd!";
+             //gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
+             gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
+             back.gameObject.SetActive(true);
+             gameFinnished = true;
 
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
-                Time.timeScale = 0;
-                pauseMenu.SetActive(false);
-                puzzleCanvass.SetActive(false);
-                blackBarArroundScoreScreen.gameObject.SetActive(true);
-                if (GameObject.Find("TutorialLevel"))
-                {
+             if(!analyticsSend){
+               if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>())
+               {
+                 levelName = GameObject.Find("LevelHandler").GetComponent<MeentLevel>().levelName;
+               } else if (GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>())
+               {
+                 levelName = GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().levelName;
+               } else if (GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>())
+               {
+                 levelName = GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>().levelName;
+               }
 
-                }
-                else
-                {
-                    nameInputBar.gameObject.SetActive(true);
-                }
-
-                GameDone.text = "Gefeliciteerd!";
-                gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
-                gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
-                back.gameObject.SetActive(true);
-                gameFinnished = true;
-
-                if (!analyticsSend)
-                {
-                    if (GameObject.Find("LevelHandler").GetComponent<MeentLevel>())
-                    {
-                        levelName = GameObject.Find("LevelHandler").GetComponent<MeentLevel>().levelName;
-                    }
-                    else if (GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>())
-                    {
-                        levelName = GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().levelName;
-                    }
-                    else if (GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>())
-                    {
-                        levelName = GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>().levelName;
-                    }
-
-                    AnalyticsResult analyticsResult = Analytics.CustomEvent(
-                      "LevelWin ",
-                      new Dictionary<string, object> {
+               AnalyticsResult analyticsResult = Analytics.CustomEvent(
+                 "LevelWin ",
+                 new Dictionary<string, object> {
                    {"level", levelName},
                    {"time", minutemark + ":" + Mathf.Round(secondsTimer)}
-                        });
-                    analyticsSend = true;
-                }
-            }
+                   });
+               analyticsSend = true;
+             }
+         }
         }
-    }
-
-    private void RedirectToPhotoScoreScreen()
-    {
-        string score = GameObject.Find("GameTimer").GetComponent<Text>().text;
-        GameObject OnSceneLoaded = GameObject.Find("OnSceneLoaded");
-
-        OnSceneLoaded.GetComponent<SceneLoaded>().Time = score; 
-
-        Object.DontDestroyOnLoad(GameObject.Find("3RD Person"));
-        Object.DontDestroyOnLoad(GameObject.Find("OnSceneLoaded"));
-        SceneManager.LoadScene(18);
-
-        
-       //loader1.onSceneLoaded += MySceneLoadHandler;
-
-        //throw new System.NotImplementedException();
     }
 
     private void OnDisable()
@@ -245,19 +206,16 @@ public class ObjectivesController : MonoBehaviour
         string str = UnityEngine.StackTraceUtility.ExtractStackTrace();
     }
 
-    private void CheckNextProgressionPhase()
-    {
-        if (objectivesCounter == 2 && progression1PhaseDone == false)
-        {
+    private void CheckNextProgressionPhase() {
+        if(objectivesCounter == 2 && progression1PhaseDone == false)  {
             progression1PhaseDone = true;
-            if (GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
-            else if (GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
+            if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
+            else if(GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
         }
-        else if (objectivesCounter == 4 && progression2PhaseDone == false)
-        {
+        else if(objectivesCounter == 4 && progression2PhaseDone == false) {
             progression2PhaseDone = true;
-            if (GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
-            else if (GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
+            if(GameObject.Find("LevelHandler").GetComponent<MeentLevel>() != null) GameObject.Find("LevelHandler").GetComponent<MeentLevel>().showcaseLevelProgression();
+            else if(GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>() != null) GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().showcaseLevelProgression();
         }
     }
 
@@ -313,7 +271,7 @@ public class ObjectivesController : MonoBehaviour
             SubmitScore.AddNewHighscore(nameInput.GetComponent<InputField>().text, result + secondsFinal);*/
         }
 
-
+        
 
         SceneManager.LoadScene("Mainmap-Scene");
     }

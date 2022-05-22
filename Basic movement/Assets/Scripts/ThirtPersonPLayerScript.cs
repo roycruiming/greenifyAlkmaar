@@ -38,7 +38,6 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
     private Quaternion camRotation;
 
-    bool canMoveAndLookAround = true;
 
 
     private void Awake()
@@ -63,9 +62,6 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
     }
 
-    public void toggleCanMoveAndLookAround() {
-        canMoveAndLookAround = !canMoveAndLookAround;
-    }
 
         // Start is called before the first frame update
         void Start()
@@ -87,10 +83,9 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
         if (view.IsMine)
         {
-            //GetComponent<Outline>().enabled = false;
-
+            if(GetComponent<Outline>() !=  null) GetComponent<Outline>().enabled = false;
         }
-        if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine && canMoveAndLookAround)
+        if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine)
         {
 
 
@@ -100,11 +95,13 @@ public class ThirtPersonPLayerScript : MonoBehaviour
             if (isGrounded && !isJumping)
             {
                 GetComponent<Animator>().Play("Blend Tree");
+                StartCoroutine(WaitForSeconds(0.5f));
             }
             if(!isGrounded)
             {
 
                 GetComponent<Animator>().Play("falling");
+                StartCoroutine(WaitForSeconds(0.5f));
 
             }
             
@@ -119,9 +116,12 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                vertical *= 2f;
-                speed = runSpeed;
-                animSpeed = runAnimatonSpeed;
+                if(!Input.GetKey(KeyCode.S))
+                {
+                    vertical *= 2f;
+                    speed = runSpeed;
+                    animSpeed = runAnimatonSpeed;
+                }
             }
 
             var translation = transform.forward * (vertical * Time.deltaTime);
@@ -135,7 +135,7 @@ public class ThirtPersonPLayerScript : MonoBehaviour
                 
                 //isGrounded = false;
                 rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                StartCoroutine(WaitForSeconds());
+                StartCoroutine(WaitForSeconds(1.4f));
                 
 
             }
@@ -176,10 +176,10 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
 
 
-    IEnumerator WaitForSeconds()
+    IEnumerator WaitForSeconds(float time)
     {
         isJumping = true;
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(time);
         isJumping = false;
     }
 

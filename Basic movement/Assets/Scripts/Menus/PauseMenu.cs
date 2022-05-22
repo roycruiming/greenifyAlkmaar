@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -84,7 +85,13 @@ public class PauseMenu : MonoBehaviour
             AudioListener.pause = false;
             Time.timeScale = 1f;
             Cursor.lockState = CursorLockMode.None;
-            SceneManager.LoadScene(ExitTo);
+
+        if (PhotonNetwork.InRoom)
+        {
+            Debug.Log("Leave Room");
+            PhotonNetwork.Disconnect();
+        }
+        SceneManager.LoadScene(ExitTo);
         }
 
         public void ExitGame()

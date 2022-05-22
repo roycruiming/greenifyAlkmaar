@@ -21,14 +21,27 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public Text turbineCounterText;
     public Text treeCounterText;
     public Text totalCounterText;
+    public Text gefeliciteerd;
     public GameObject bridge;
     public ScoreFootball1 sc1;
     public ScoreFootball sc;
     public GameObject football;
     public GameObject addingTreeAfterProgress;
     private int totalPlayerCount = 0;
+    public bool player1IsSet = false;
+    public bool player2IsSet = false;
 
     public HUDController hud;
+
+    public GameObject player1;
+    public GameObject player2;
+
+    public GameObject flagPlayer1;
+    public GameObject flagPlayer2;
+
+    public Button mpBackButton;
+    public GameObject medalIcon;
+
 
 
     public float y = 0;
@@ -77,9 +90,12 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         turbineCounterText = GameObject.Find("WindCounter").GetComponent<Text>();
         treeCounterText = GameObject.Find("TreeCounter").GetComponent<Text>();
         totalCounterText = GameObject.Find("TotalCounter").GetComponent<Text>();
+        gefeliciteerd = GameObject.Find("Gefeliciteerd").GetComponent<Text>();
         PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(129.43f, 2.39f, 360.32f), Quaternion.identity);
         football = GameObject.Find("soccer-ball (3)");
-        addingTreeAfterProgress = GameObject.Find("Adding");
+        mpBackButton = GameObject.Find("mpExitButton").GetComponent<Button>();
+        print(mpBackButton);
+        medalIcon = GameObject.Find("MedalIcon");
 
 
         totalTurbineCount = GameObject.FindGameObjectsWithTag("TurbineMultiplayer").Length;
@@ -87,12 +103,27 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         totalTreeCount = GameObject.FindGameObjectsWithTag("TreeMultiplayer").Length;
         totalCounter = totalTurbineCount + totalSolarCount + totalTreeCount;
 
-        addingTreeAfterProgress.SetActive(false);
+        player1 = GameObject.FindGameObjectWithTag("Mp1");
+        player2 = GameObject.FindGameObjectWithTag("Mp2");
+
+        gefeliciteerd.enabled = false;
+        mpBackButton.gameObject.SetActive(false);
+        medalIcon.SetActive(false);
+
+        
+        
+
+
+
+
+
     }
 
     // Update is called once per frame  
     void Update()
     {
+        player1 = GameObject.FindGameObjectWithTag("Mp1");
+        player2 = GameObject.FindGameObjectWithTag("Mp2");
         solarCounterText.text = solarCounter.ToString() + "/" + totalSolarCount;
         turbineCounterText.text = TurbineCounter.ToString() + "/" + totalTurbineCount;
         treeCounterText.text = treeCounter.ToString() + "/" + totalTreeCount;
@@ -108,18 +139,35 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 
         if (brScript.bridgeUps)
         {
-            bridgeActivate();
+            photonView.RPC("bridgeActivate", RpcTarget.All);
+            //bridgeActivate();
         }
         else
         {
-            bridgeDeActivate();
+            photonView.RPC("bridgeDeActivate", RpcTarget.All);
+            //bridgeDeActivate();
         }
 
-
-        if(totalCount > 5)
+        if (Input.GetKeyDown("h"))
         {
-            AddTreesAfterObject();
+            print("H is pressed!");
+            photonView.RPC("CallFriend", RpcTarget.All);
         }
+
+        if (Input.GetKeyDown("g"))
+        {
+            print("G is pressed!! ");
+            if (photonView.IsMine)
+            {
+                photonView.RPC("PlaceFlagPlayer1", RpcTarget.All);
+
+            }
+            if (!photonView.IsMine)
+            {
+                photonView.RPC("PlaceFlagPlayer2", RpcTarget.All);
+            }
+        }
+
 
         //check if a new player has joined and set activate his intro cutscene
         // if(this.totalPlayerCount != this.GetTotalPlayerCount()) {
@@ -135,6 +183,13 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         //     }
         // }
 
+
+        if(totalCount == totalCounter)
+        {
+
+            photonView.RPC("WinConditie", RpcTarget.All);
+        }
+
     }
 
     IEnumerator showcaseIntroCutscene(string playerTag) {
@@ -149,24 +204,59 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         // this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(false);
         // this.mainCamera.SetActive(true);
         // yield return null;
-        if (Input.GetKeyDown("h"))
-        {
-
-            photonView.RPC("CallFriend", RpcTarget.All);
-        }
-
-
+        
     }
 
     [PunRPC]
-    public void test()
+    public void WinConditie()
     {
-        solarCounter++;
+        Cursor.lockState = CursorLockMode.None;
+        gefeliciteerd.enabled = true;
+        mpBackButton.gameObject.SetActive(true);
+        medalIcon.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    [PunRPC]
+    [System.Obsolete]
+    public void PlaceFlagPlayer1()
+    {
+        print("In functie van G");
+        if(flagPlayer1 == null)
+        {
+            flagPlayer1 = PhotonNetwork.InstantiateRoomObject("flag-big", player1.transform.position, Quaternion.identity);
+
+        }
+        else
+        {
+            PhotonNetwork.Destroy(flagPlayer1);
+            flagPlayer1 = PhotonNetwork.InstantiateRoomObject("flag-big", player1.transform.position, Quaternion.identity);
+            //flagPlayer1.transform.position = transform.position + new Vector3(player1.transform.position.x, 0, player1.transform.position.z);
+
+        }
+    }
+    [PunRPC]
+    [System.Obsolete]
+    public void PlaceFlagPlayer2()
+    {
+        if(flagPlayer2 == null)
+        {
+            flagPlayer2 = PhotonNetwork.InstantiateRoomObject("flag-big", player2.transform.position, Quaternion.identity);
+
+        }
+        else
+        {
+            PhotonNetwork.Destroy(flagPlayer2);
+            flagPlayer2 = PhotonNetwork.InstantiateRoomObject("flag-big", player2.transform.position, Quaternion.identity);
+            //flagPlayer2.transform.position = transform.position + new Vector3(player2.transform.position.x, 0, player2.transform.position.z);
+        }
     }
 
     [PunRPC]
     public void CallFriend()
     {
+        print("In functie van H");
+
         GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("ask for help multiplayer"));
     }
 
@@ -240,11 +330,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         sc.SpawnConfeti(other);
     }
 
-    [PunRPC]
-    public void AddTreesAfterObject()
-    {
-        addingTreeAfterProgress.SetActive(true);
-    }
+
 
 
 }

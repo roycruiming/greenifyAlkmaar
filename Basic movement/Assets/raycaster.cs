@@ -52,28 +52,44 @@ public class raycaster : MonoBehaviour
 
         if (Physics.Raycast(ray, out hitInfo, rayLength, layerMask, QueryTriggerInteraction.Collide))
         {
-            bool hasItem = hitInfo.collider.gameObject.GetComponent<Item>() != null;
-            bool  hasInformationHelper = hitInfo.collider.gameObject.GetComponent<InformationHelper>() != null;
-            //bool hasItem = hitInfo.collider.gameObject.GetComponent<Item>();
+
+            GameObject gameobj = hitInfo.collider.gameObject;
+
+            Item invItem =  InventoryController.GetItem();
 
 
+
+            bool playerHasItem = false; 
+
+            if (invItem != null) { 
+               if(invItem.unlockAbles.Contains(gameobj)) 
+                    playerHasItem = true; 
+            }
+
+
+            bool hasItem = gameobj.GetComponent<Item>() != null;
+            bool  hasInformationHelper = gameobj.GetComponent<InformationHelper>() != null;
+            bool isChargerSpot = hitInfo.collider.gameObject.GetComponent<ChargerSpot>() != null;
+            bool isSolarSpot = hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null;
+            bool isTreeSpot = hitInfo.collider.gameObject.GetComponent<Treespot>() != null;
+
+            bool isPlacementSpotAndPlayerHasItem = (isChargerSpot || isSolarSpot || isTreeSpot) && playerHasItem; 
+
+
+
+            if (playerHasItem) { print("player has item"); }
 
             //= hitInfo.collider.gameObject.GetComponent<OnScreenDescription>();
 
-            if (textMeshPro != null && (hasInformationHelper || hasItem))
+            if (textMeshPro != null && (hasInformationHelper || hasItem || isPlacementSpotAndPlayerHasItem)) 
             {
-
                 if (textMeshPro != null && pressFContainer != null) { 
-
-                textMeshPro.text = "press f to interact";
-                pressFContainer.SetActive(true);
+                    textMeshPro.text = GlobalGameHandler.GetTextByDictionaryKey("press 'f' to interact");
+                    pressFContainer.SetActive(true);
                 }
             }
-
-            else
-            {
-                if (textMeshPro != null && pressFContainer != null)  pressFContainer.SetActive(false);
-            }
+            else if (textMeshPro != null && pressFContainer != null)  pressFContainer.SetActive(false);
+            
 
             if (Input.GetKeyDown(KeyCode.F)) {
                Item item = hitInfo.collider.gameObject.GetComponent<Item>();
@@ -187,15 +203,7 @@ public class raycaster : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            //if (textUI != null)
-            //{
-            //    textUI.gameObject.SetActive(false);
 
-            //}
-
-            }
         }
 
     }

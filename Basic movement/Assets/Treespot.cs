@@ -6,6 +6,8 @@ public class Treespot : MonoBehaviour
 {
     public bool PlantTree(Item item) {
 
+        if (item == null) return false;
+
         if (item.unlockAbles.Contains(this.gameObject))
         {
             Transform burrier = transform.parent.Find("burrier");
