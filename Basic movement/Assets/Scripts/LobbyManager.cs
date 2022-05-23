@@ -21,7 +21,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
 
 
-
         if (createInput.text != "")
         {
             //Sends the analytics that multiplayer has started

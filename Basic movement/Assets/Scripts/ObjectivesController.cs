@@ -52,10 +52,9 @@ public class ObjectivesController : MonoBehaviour
         TextUiCounter = GameObject.Find("ObjectivesCounter").GetComponent<Text>();
         GameTimer = GameObject.Find("GameTimer").GetComponent<Text>();
         GameDone = GameObject.Find("EndScreen").GetComponent<Text>();
-        gameEndScore = GameObject.Find("EndTime").GetComponent<Text>();
         gameEndTime = GameObject.Find("EndTime").GetComponent<Text>();
         nameInput = GameObject.Find("InputFieldName");
-        nameInputBar = GameObject.Find("EndScore");
+        //nameInputBar = GameObject.Find("EndScore");
         blackBarArroundScoreScreen = GameObject.Find("BlackBar");
         back = GameObject.Find("ExitLevelButton").GetComponent<Button>();
         AmmountCoins = GameObject.Find("MoneyAmount").GetComponent<Text>();
@@ -70,12 +69,11 @@ public class ObjectivesController : MonoBehaviour
         targets = Resources.FindObjectsOfTypeAll<PuzzleController>().ToList();
         solarPanels = Resources.FindObjectsOfTypeAll<Item>().ToList();
         solarPanelsSpot = GameObject.FindGameObjectsWithTag("SolarSpot").ToList();
-        GameDone.text = "";
+        GameDone.gameObject.SetActive(false);
         gameEndTime.text = "";
-        gameEndScore.text = "";
         blackBarArroundScoreScreen.gameObject.SetActive(false);
         nameInput.gameObject.SetActive(false);
-        nameInputBar.gameObject.SetActive(false);
+        //nameInputBar.gameObject.SetActive(false);
         back.gameObject.SetActive(false);
 
         if (GameObject.Find("MeentV2") != null)
@@ -168,13 +166,13 @@ public class ObjectivesController : MonoBehaviour
             }
             else
             {
-                nameInputBar.gameObject.SetActive(true);
+                //nameInputBar.gameObject.SetActive(true);
             }
 
-             GameDone.text = "Gefeliciteerd!";
+                GameDone.gameObject.SetActive(true);
              //gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
-             gameEndTime.text = "Tijd = " + minutemark + ":" + Mathf.Round(secondsTimer);
-             back.gameObject.SetActive(true);
+             gameEndTime.text = "Tijd = " + minutemark.ToString("00") + ":" + Mathf.Round(secondsTimer).ToString("00");
+                back.gameObject.SetActive(true);
              gameFinnished = true;
 
              if(!analyticsSend){
