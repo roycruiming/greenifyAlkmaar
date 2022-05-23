@@ -39,7 +39,7 @@ public class MeentLevel : MonoBehaviour, LevelBasis
     }
 
     IEnumerator showcaseIntroCutscene() {
-        
+        if(GameObject.Find("3RD Person") != null) GameObject.Find("3RD Person").GetComponent<ThirtPersonPLayerScript>().TogglePlayerMovementDisabled();
         this.mainCamera.SetActive(false);
         this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
@@ -48,8 +48,9 @@ public class MeentLevel : MonoBehaviour, LevelBasis
 
         this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(false);
         this.mainCamera.SetActive(true);
+        if(GameObject.Find("3RD Person") != null) GameObject.Find("3RD Person").GetComponent<ThirtPersonPLayerScript>().TogglePlayerMovementDisabled();
         yield return null;
-
+        
     }
 
     public void initLevel()
@@ -107,6 +108,7 @@ public class MeentLevel : MonoBehaviour, LevelBasis
             //add rewards if needed=
 
             if(progressionPhase == 0) {
+                if(GameObject.Find("3RD Person") != null) GameObject.Find("3RD Person").GetComponent<ThirtPersonPLayerScript>().TogglePlayerMovementDisabled();
                 SwitchCamera(this.cutsceneParent.transform.Find("Progression1Phase").gameObject,this.mainCamera);
                 GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("the meent text phase 1"));
                 //reward the player
@@ -117,6 +119,7 @@ public class MeentLevel : MonoBehaviour, LevelBasis
                 GlobalGameHandler.GivePlayerCoints(Random.Range(801,870));
             }
             else if(progressionPhase == 1) {
+                if(GameObject.Find("3RD Person") != null) GameObject.Find("3RD Person").GetComponent<ThirtPersonPLayerScript>().TogglePlayerMovementDisabled();
                 SwitchCamera(this.cutsceneParent.transform.Find("Progression2Phase").gameObject,this.mainCamera);
                 GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("the meent text phase 2"));
 
@@ -153,6 +156,8 @@ public class MeentLevel : MonoBehaviour, LevelBasis
             //switch camera back
             if(progressionPhase == 0) this.SwitchCamera(this.mainCamera, this.cutsceneParent.transform.Find("Progression1Phase").gameObject);
             else if(progressionPhase == 1) this.SwitchCamera(this.mainCamera, this.cutsceneParent.transform.Find("Progression2Phase").gameObject);
+
+            if(GameObject.Find("3RD Person") != null) GameObject.Find("3RD Person").GetComponent<ThirtPersonPLayerScript>().TogglePlayerMovementDisabled(true,false);
         }
     }
 

@@ -90,6 +90,8 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
             //switch camera back
             if(progressionPhase == 0) this.SwitchCamera(this.mainCamera, this.cutsceneParent.transform.Find("Progression1Phase").gameObject);
             else if(progressionPhase == 1) this.SwitchCamera(this.mainCamera, this.cutsceneParent.transform.Find("Progression2Phase").gameObject);
+
+            if(GameObject.Find("3RD Person") != null) GameObject.Find("3RD Person").GetComponent<ThirtPersonPLayerScript>().TogglePlayerMovementDisabled(true,false);
         }
     }
 
@@ -98,7 +100,7 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
     }
 
     IEnumerator showcaseIntroCutscene() {
-        
+        if(GameObject.Find("3RD Person") != null) GameObject.Find("3RD Person").GetComponent<ThirtPersonPLayerScript>().TogglePlayerMovementDisabled();
         this.mainCamera.SetActive(false);
         this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
@@ -107,6 +109,7 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
 
         this.cutsceneParent.transform.Find("introCutscene").gameObject.SetActive(false);
         this.mainCamera.SetActive(true);
+        if(GameObject.Find("3RD Person") != null) GameObject.Find("3RD Person").GetComponent<ThirtPersonPLayerScript>().TogglePlayerMovementDisabled();
         yield return null;
 
     }
@@ -146,6 +149,7 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
             
 
             if(progressionPhase == 0) {
+                if(GameObject.Find("3RD Person") != null) GameObject.Find("3RD Person").GetComponent<ThirtPersonPLayerScript>().TogglePlayerMovementDisabled();
                 this.cutsceneParent.transform.Find("Progression1Phase").GetComponent<Animator>().SetTrigger("phase1");
                 this.amountOfBlinks = 26;
                 SwitchCamera(this.cutsceneParent.transform.Find("Progression1Phase").gameObject,this.mainCamera);
@@ -155,6 +159,7 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
                 GlobalGameHandler.GivePlayerCoints(Random.Range(801,870));
             }
             else if(progressionPhase == 1) {
+                if(GameObject.Find("3RD Person") != null) GameObject.Find("3RD Person").GetComponent<ThirtPersonPLayerScript>().TogglePlayerMovementDisabled();
                 this.cutsceneParent.transform.Find("Progression2Phase").GetComponent<Animator>().SetTrigger("phase2");
                 SwitchCamera(this.cutsceneParent.transform.Find("Progression2Phase").gameObject,this.mainCamera);
 
