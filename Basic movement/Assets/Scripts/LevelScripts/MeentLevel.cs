@@ -110,7 +110,7 @@ public class MeentLevel : MonoBehaviour, LevelBasis
                 SwitchCamera(this.cutsceneParent.transform.Find("Progression1Phase").gameObject,this.mainCamera);
                 GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("the meent text phase 1"));
                 //reward the player
-                if(GameObject.Find("HUDCanvas").GetComponent<HUDController>() != null) GameObject.Find("HUDCanvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(1);
+                if(GameObject.Find("HUDCanvas").GetComponent<HUDController>() != null) GameObject.Find("HUDCanvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(2);
                 GlobalGameHandler.GivePlayerCoints(Random.Range(801,870));
             }
             else if(progressionPhase == 1) {
@@ -118,7 +118,7 @@ public class MeentLevel : MonoBehaviour, LevelBasis
                 GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("the meent text phase 2"));
 
                 //reward the player
-                if(GameObject.Find("HUDCanvas").GetComponent<HUDController>() != null) GameObject.Find("HUDCanvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(2);
+                if(GameObject.Find("HUDCanvas").GetComponent<HUDController>() != null) GameObject.Find("HUDCanvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(3);
                 GlobalGameHandler.GivePlayerCoints(Random.Range(801,870));
             }
         }

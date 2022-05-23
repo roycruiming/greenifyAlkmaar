@@ -29,7 +29,7 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
         
         initLevel();
         
-        StartCoroutine(showcaseIntroCutscene());
+        //StartCoroutine(showcaseIntroCutscene());
 
 
         //intro cutscene
@@ -152,7 +152,7 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
                 SwitchCamera(this.cutsceneParent.transform.Find("Progression1Phase").gameObject,this.mainCamera);
                 GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("cheesemarket phase 1 text"));
                 //reward the player
-                if(GameObject.Find("HUDCanvas").GetComponent<HUDController>() != null) GameObject.Find("HUDCanvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(3);
+                if(GameObject.Find("HUDCanvas").GetComponent<HUDController>() != null) GameObject.Find("HUDCanvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(4);
                 GlobalGameHandler.GivePlayerCoints(Random.Range(801,870));
             }
             else if(progressionPhase == 1) {
@@ -160,7 +160,7 @@ public class KaasmarktLevel : MonoBehaviour, LevelBasis
                 SwitchCamera(this.cutsceneParent.transform.Find("Progression2Phase").gameObject,this.mainCamera);
 
                 //reward the player
-                if(GameObject.Find("HUDCanvas").GetComponent<HUDController>() != null) GameObject.Find("HUDCanvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(4);
+                if(GameObject.Find("HUDCanvas").GetComponent<HUDController>() != null) GameObject.Find("HUDCanvas").GetComponent<HUDController>().showcaseAndUnlockUnlockable(5);
                 GlobalGameHandler.GivePlayerCoints(Random.Range(801,870));
             }
         }

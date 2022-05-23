@@ -46,7 +46,7 @@ public class raycaster : MonoBehaviour
 
     void Update()
     {
-        print(this.transform.tag);
+        //print(this.transform.tag);
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hitInfo;
 
