@@ -13,8 +13,9 @@ public class GoToNextScreen : MonoBehaviour
     public void next() {
         if (GlobalGameHandler.GetInstance() != null)
         {
-            string scene = GlobalGameHandler.GetNextSceneName();
-            SceneManager.LoadScene(scene);
+            //string scene = GlobalGameHandler.GetNextSceneName();
+            SceneManager.LoadScene(5);
+
         }
         else {
             Debug.Assert(false, "Start from scene to use this button");
