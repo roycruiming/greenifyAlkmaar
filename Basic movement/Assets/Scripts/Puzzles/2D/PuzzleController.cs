@@ -14,6 +14,7 @@ public class PuzzleController : MonoBehaviour
   public int MoneyRange = 10;
   int SelectedPuzzle;
   public static bool PuzzlePlaying = false;
+    public bool isCompleted; 
 
   public WordGuesserDifficulty wordGuesserDifficulty = WordGuesserDifficulty.easy;
 
@@ -68,6 +69,9 @@ public class PuzzleController : MonoBehaviour
 
   public void PuzzleCompleted(string PuzzleName)
   {
+
+        isCompleted = true; 
+
     //Disables the smoke of the object
     if(transform.Find("Smoke")){
         transform.Find("Smoke").gameObject.SetActive(false);

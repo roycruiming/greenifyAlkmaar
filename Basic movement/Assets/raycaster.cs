@@ -72,8 +72,17 @@ public class raycaster : MonoBehaviour
             bool isChargerSpot = hitInfo.collider.gameObject.GetComponent<ChargerSpot>() != null;
             bool isSolarSpot = hitInfo.collider.gameObject.GetComponent<SolarSpot>() != null;
             bool isTreeSpot = hitInfo.collider.gameObject.GetComponent<Treespot>() != null;
+            PuzzleController pc = hitInfo.collider.gameObject.GetComponent<PuzzleController>();
 
-            bool isPlacementSpotAndPlayerHasItem = (isChargerSpot || isSolarSpot || isTreeSpot) && playerHasItem; 
+            bool hasUnsolvedPuzzle = pc != null;
+            if (hasUnsolvedPuzzle)
+            {
+                hasUnsolvedPuzzle = !pc.isCompleted;
+            }
+
+
+
+            bool isPlacementSpotAndPlayerHasItem =  ((isChargerSpot || isSolarSpot || isTreeSpot) && playerHasItem) || hasUnsolvedPuzzle; 
 
 
 
