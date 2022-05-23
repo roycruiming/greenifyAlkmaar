@@ -21,7 +21,7 @@ public class GlobalGameHandler : MonoBehaviour
 
     private int totalPlayerCoints;
 
-    private void Awake() 
+    public void Awake() 
     { 
         // If there is an instance, and it's not me, delete myself.
         if (instance != null && instance != this) Destroy(this); 
