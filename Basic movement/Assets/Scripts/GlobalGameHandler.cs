@@ -27,7 +27,7 @@ public class GlobalGameHandler : MonoBehaviour
     
 
 
-    private void Awake() 
+    public void Awake() 
     {
 
 
@@ -140,11 +140,13 @@ public class GlobalGameHandler : MonoBehaviour
 
 
     //
-    public static string GetNextSceneName() {
+    public static string GetNextSceneName()
+    {
 
         if (SceneName == "Tutorial-Level") return "DeMeentV2";
         if (SceneName == "DeMeentv2") return "DeKaasMarkt";
         else return "MainMenu";
+    }
        
     public static List<Unlockable> GetAllUnlockables() {
         List<Unlockable> allLoadedUnlockables = new List<Unlockable>();
