@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using UnityEngine.SceneManagement;
 
 public class GlobalGameHandler : MonoBehaviour
 {
@@ -23,11 +24,14 @@ public class GlobalGameHandler : MonoBehaviour
 
 
 
+    
 
 
     private void Awake() 
     {
-        
+
+
+        //SceneManager.sceneLoaded += onSceneLoaded;
 
         // If there is an instance, and it's not me, delete myself.
         if (instance != null && instance != this) Destroy(this); 

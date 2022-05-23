@@ -9,19 +9,25 @@ public class SceneLoaded : MonoBehaviour
     public string TimeScore;
     //private Scene PreviousScene;
     //private readonly string[] Levels = {"Tutorial-Level", "DeMeentV2", "DeKaasMarkt"};
-    private string previousName = ""; 
+    private string previousName = "";
+    private bool isFirst = true; 
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += onSceneLoaded;
+        if (isFirst) {
+            isFirst = false;
+          GlobalGameHandler.SetPreviousScneneName(SceneManager.GetActiveScene().name);         
+        }
 
     }
 
     private void Awake()
     {
-        
+        //onSceneLoaded; 
     }
 
+    
 
 
     // Start is called before the first frame update
