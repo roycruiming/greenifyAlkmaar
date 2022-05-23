@@ -72,15 +72,13 @@ public class AnimationSlider : MonoBehaviour
 
 
         anim.Play(animationName, -1, slider.normalizedValue);
-        anim.speed = 1; 
+        //anim.speed = 1; 
 
     }
 
     public void onUseSliderToggled(bool isToggled) {
 
         print(isToggled);
-
-        string animationName = anim.GetCurrentAnimatorClipInfo(0)[0].clip.name;
 
         if (!isToggled)
         {
