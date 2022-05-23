@@ -14,7 +14,6 @@ public class OptionsMenu : MonoBehaviour
     public Toggle ToggleCheckBox;
     public GameObject AreYouSure;
 
-    public bool DoubleClicked = false;
     public string LanguageSelected;
     int LanguageSelectedIndex;
     List<string> languages;
@@ -79,18 +78,24 @@ public class OptionsMenu : MonoBehaviour
 
     public void ResetGame()
     {
-      if(!DoubleClicked){
-        DoubleClicked = true;
-        AreYouSure.SetActive(true);
-      } else {
+      AreYouSure.SetActive(true);
+    }
+
+    public void ResetYes()
+    {
         PlayerPrefs.DeleteAll();
         GameObject.Find("GlobalGameHandler").GetComponent<GlobalGameHandler>().Awake();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-      }
+    }
+
+    public void ResetNo()
+    {
+      AreYouSure.SetActive(false);
     }
 
     public void CloseOptions()
     {
+      AreYouSure.SetActive(false);
       optionMenu.SetActive(false);
     }
 
