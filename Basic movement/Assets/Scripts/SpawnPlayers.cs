@@ -15,36 +15,28 @@ public class SpawnPlayers : MonoBehaviour
         bool player1Active = GameObject.Find("MultiPlayerHandler").GetComponent<MultiPlayerHandler>().isPlayer1Set();
         
         GameObject player;
+        GameObject clone;
 
         //string name = ""; 
 
-        if(player1Active == false) {
+        if (player1Active == false) {
             player = PhotonNetwork.Instantiate("Mp1", spawnPoint.position, spawnPoint.rotation);
-           
+            clone = PhotonNetwork.Instantiate("Mp1", spawnPoint.position, spawnPoint.rotation); 
+
+
         }
         else {
             player = PhotonNetwork.Instantiate("Mp2", spawnPoint.position, spawnPoint.rotation);
-            
+            clone = PhotonNetwork.Instantiate("Mp2", spawnPoint.position, spawnPoint.rotation);
 
         }
 
-        GameObject clonecontainer = GameObject.Find("clonecontainer"); 
-        GameObject clone = Instantiate(player, clonecontainer.transform);
+        clone.SetActive(false); 
+        clone.transform.parent = GameObject.Find("clonecontainer").transform;
 
-        if (GameObject.Find("player1") == null || GameObject.Find("player2") == null) {
 
-            if (GameObject.Find("player1") != null)
-            {
-                clone.name = "player2";
-            }
-            else {
-                clone.name = "player1"; 
-            
-            }
-         
-        clone.SetActive(false);
 
-        }
+
 
 
         //GameObject.Find("playercontainer").trans
