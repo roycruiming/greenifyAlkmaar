@@ -44,6 +44,7 @@ public class TutorialLevel : MonoBehaviour, LevelBasis
 
     public void initLevel()
     {
+        this.levelName = GlobalGameHandler.GetTextByDictionaryKey("tutorial");
         throw new System.NotImplementedException();
     }
 

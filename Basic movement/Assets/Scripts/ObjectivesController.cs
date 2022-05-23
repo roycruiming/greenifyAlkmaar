@@ -184,18 +184,22 @@ public class ObjectivesController : MonoBehaviour
                } else if (GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>())
                {
                  levelName = GameObject.Find("LevelHandler").GetComponent<KaasmarktLevel>().levelName;
-               } else if (GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>())
+               } else if (GameObject.Find("LevelHandler").GetComponent<TutorialLevel>())
                {
-                 levelName = GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>().levelName;
+                 levelName = GameObject.Find("LevelHandler").GetComponent<TutorialLevel>().levelName;
                }
 
-               AnalyticsResult analyticsResult = Analytics.CustomEvent(
-                 "LevelWin ",
-                 new Dictionary<string, object> {
+                if(levelName != null)
+                {
+                    AnalyticsResult analyticsResult = Analytics.CustomEvent(
+                    "LevelWin ",
+                    new Dictionary<string, object> {
                    {"level", levelName},
                    {"time", minutemark + ":" + Mathf.Round(secondsTimer)}
                    });
-               analyticsSend = true;
+                    analyticsSend = true;
+                }
+               
              }
          }
         }
