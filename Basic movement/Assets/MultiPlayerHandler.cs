@@ -42,6 +42,10 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public Button mpBackButton;
     public GameObject medalIcon;
 
+    public float secondsTimer;
+    public int minutemark;
+    public Text GameTimer;
+
 
 
     public float y = 0;
@@ -56,6 +60,9 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             stream.SendNext(TurbineCounter);
             stream.SendNext(treeCounter);
             stream.SendNext(totalCount);
+            stream.SendNext(secondsTimer);
+            stream.SendNext(minutemark);
+
         }
         if (stream.IsReading)
         {
@@ -63,6 +70,8 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             TurbineCounter = (int)stream.ReceiveNext();
             treeCounter = (int)stream.ReceiveNext();
             totalCount = (int)stream.ReceiveNext();
+            secondsTimer = (float)stream.ReceiveNext();
+            minutemark = (int)stream.ReceiveNext();
         }
     }
 
@@ -109,8 +118,10 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         mpBackButton.gameObject.SetActive(false);
         medalIcon.SetActive(false);
 
-        
-        
+
+        GameTimer = GameObject.Find("GameTimerMP").GetComponent<Text>();
+
+
 
 
 
@@ -203,6 +214,16 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 
             photonView.RPC("WinConditie", RpcTarget.All);
         }
+
+
+        //timer in game.
+        secondsTimer += Time.deltaTime;
+        if (secondsTimer > 59.45)
+        {
+            secondsTimer = 0;
+            minutemark++;
+        }
+        GameTimer.text = minutemark.ToString("00") + ":" + Mathf.Round(secondsTimer).ToString("00");
 
     }
 
