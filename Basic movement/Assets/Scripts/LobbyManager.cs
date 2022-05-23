@@ -18,18 +18,28 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void CreateButton()
     {
-        //Sends the analytics that multiplayer has started
-        AnalyticsResult analyticsResult = Analytics.CustomEvent(
- 	    "LevelStart",
-        new Dictionary<string, object> {
+        
+        
+        if(createInput.text != "")
+        {
+            //Sends the analytics that multiplayer has started
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(
+             "LevelStart",
+            new Dictionary<string, object> {
             {"level", levelName}
-        });
+            });
 
 
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = maxPlayers;
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = maxPlayers;
 
-        PhotonNetwork.CreateRoom(createInput.text, roomOptions);
+            PhotonNetwork.CreateRoom(createInput.text, roomOptions);
+        }
+        else
+        {
+            createInput.text = "Enter room Name";
+        }
+
     }
     public void JoinButton()
     {

@@ -94,7 +94,6 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         PhotonNetwork.InstantiateRoomObject("soccer-ball (3)", new Vector3(129.43f, 2.39f, 360.32f), Quaternion.identity);
         football = GameObject.Find("soccer-ball (3)");
         mpBackButton = GameObject.Find("mpExitButton").GetComponent<Button>();
-        print(mpBackButton);
         medalIcon = GameObject.Find("MedalIcon");
 
 
@@ -155,10 +154,12 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             if (photonView.IsMine)
             {
                 photonView.RPC("CallFriend2", RpcTarget.All);
+                GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("friend is called"));
             }
             if (!photonView.IsMine)
             {
                 photonView.RPC("CallFriend1", RpcTarget.All);
+                GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("friend is called"));
             }
 
         }
