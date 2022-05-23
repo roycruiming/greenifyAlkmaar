@@ -24,13 +24,12 @@ public class SpawnPlayers : MonoBehaviour
 
         if (player1Active == false) {
             player = PhotonNetwork.Instantiate("Mp1", spawnPoint.position, spawnPoint.rotation);
-            prefb = "Mp1";
-            //clone = PhotonNetwork.Instantiate("Mp1", spawnPoint.position, spawnPoint.rotation); 
+            clone = PhotonNetwork.Instantiate("info1", spawnPoint.position, spawnPoint.rotation); 
 
         }
         else {
             player = PhotonNetwork.Instantiate("Mp2", spawnPoint.position, spawnPoint.rotation);
-            //clone = PhotonNetwork.Instantiate("Mp2", spawnPoint.position, spawnPoint.rotation);
+            clone = PhotonNetwork.Instantiate("info2", spawnPoint.position, spawnPoint.rotation);
             prefb = "Mp2";
 
         }
