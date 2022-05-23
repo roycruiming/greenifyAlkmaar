@@ -36,6 +36,8 @@ public class ThirtPersonPLayerScript : MonoBehaviour
     public MultiPlayerHandler mp;
     private bool playerMovementDisabled = false;
 
+    private bool doubleJumpCounter = false;
+
 
     private Quaternion camRotation;
 
@@ -138,12 +140,17 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
-                GetComponent<Animator>().Play("jumping") ;
+
+                    doubleJumpCounter = true;
+
+                    GetComponent<Animator>().Play("jumping");
+
+                    //isGrounded = false;
+                    rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                    StartCoroutine(WaitForSeconds(1.4f));
+
                 
-                //isGrounded = false;
-                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                StartCoroutine(WaitForSeconds(1.4f));
-                
+
 
             }
 
@@ -190,5 +197,5 @@ public class ThirtPersonPLayerScript : MonoBehaviour
         isJumping = false;
     }
 
-    
+
 }

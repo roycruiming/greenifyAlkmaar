@@ -274,6 +274,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     [System.Obsolete]
     public void PlaceFlagPlayer2()
     {
+        print(player2);
         if(flagPlayer2 == null)
         {
             flagPlayer2 = PhotonNetwork.InstantiateRoomObject("flag-big", player2.transform.position, Quaternion.identity);
