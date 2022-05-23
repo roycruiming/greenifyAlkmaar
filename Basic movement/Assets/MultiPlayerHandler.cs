@@ -151,7 +151,16 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         if (Input.GetKeyDown("h"))
         {
             print("H is pressed!");
-            photonView.RPC("CallFriend", RpcTarget.All);
+
+            if (photonView.IsMine)
+            {
+                photonView.RPC("CallFriend2", RpcTarget.All);
+            }
+            if (!photonView.IsMine)
+            {
+                photonView.RPC("CallFriend1", RpcTarget.All);
+            }
+
         }
 
         if (Input.GetKeyDown("g"))
@@ -253,11 +262,28 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    public void CallFriend()
+    public void CallFriend1()
+    {
+        print("In functie van H");
+        if (photonView.IsMine)
+        {
+            GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("ask for help multiplayer"));
+
+        }
+
+        
+    }
+
+    [PunRPC]
+    public void CallFriend2()
     {
         print("In functie van H");
 
-        GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("ask for help multiplayer"));
+        if (!photonView.IsMine)
+        {
+            GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(GlobalGameHandler.GetTextByDictionaryKey("ask for help multiplayer"));
+
+        }
     }
 
     [PunRPC]
