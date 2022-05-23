@@ -10,7 +10,7 @@ public class TutorialMenu : MonoBehaviour
     public GameObject HowToPlayUI;
     public GameObject WhatDoIDoUI;
 
-    public GameObject Player;
+    public static GameObject Player;
     public Vector3 StartPosition;
 
     void Start()

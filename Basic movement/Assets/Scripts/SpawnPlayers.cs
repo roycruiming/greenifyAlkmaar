@@ -17,9 +17,11 @@ public class SpawnPlayers : MonoBehaviour
         GameObject player;
         if(player1Active == false) {
             player = PhotonNetwork.Instantiate("Mp1", spawnPoint.position, spawnPoint.rotation);
+            TutorialMenu.Player = player;
         }
         else {
             player = PhotonNetwork.Instantiate("Mp2", spawnPoint.position, spawnPoint.rotation);
+            TutorialMenu.Player = player;
         }
 
         dirArrow = GameObject.Find("DirectionalArrow");
