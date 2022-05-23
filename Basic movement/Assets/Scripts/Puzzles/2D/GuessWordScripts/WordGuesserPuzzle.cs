@@ -166,10 +166,12 @@ public class WordGuesserPuzzle : MonoBehaviour
     private void SetAndDiplayInputLetters() {
         List<char> allLetters = currentWord.ToCharArray().ToList();
         List<char> alphabet = ("AAABCDEEEFGHIIJKLMNNOOPQRSTUUVWXYZ").ToCharArray().ToList();
-        
-        for(int i = 0; i < UnityEngine.Random.Range(2,5); i++) {
-            allLetters.Add(alphabet[UnityEngine.Random.Range(0,alphabet.Count)]);
-        }
+        bool addRandomLetters = false;
+
+        if(addRandomLetters)
+            for(int i = 0; i < UnityEngine.Random.Range(2,5); i++) {
+                allLetters.Add(alphabet[UnityEngine.Random.Range(0,alphabet.Count)]);
+            }
 
         this.RandomlySetLetters(allLetters);
 

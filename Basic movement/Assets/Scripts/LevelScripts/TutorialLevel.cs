@@ -36,7 +36,9 @@ public class TutorialLevel : MonoBehaviour, LevelBasis
     }
 
     public void showcaseGeneralHelperExplanation() {
-        if(helperHasBeenExplained == false) GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("tutorial helper text"));
+        if(helperHasBeenExplained == false) {
+            GameObject.Find("HUDCanvas").GetComponent<HUDController>().ShowcaseMessage(null,null,GlobalGameHandler.GetSentencesByDictionaryKey("tutorial helper text"));
+        }
         helperHasBeenExplained = true;
     }
 
