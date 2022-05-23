@@ -12,7 +12,7 @@ public class WalkingSound : MonoBehaviour
     AudioSource walkLeft;
     AudioSource walkRight;
 
-    // Start is called before the first frame update
+    //Sets all the correct references
     void Start()
     {
       parent = gameObject.transform.parent.GetComponent<ThirtPersonPLayerScript>();
@@ -27,19 +27,22 @@ public class WalkingSound : MonoBehaviour
       PlaySound();
     }
 
+    //checks if the player is moving
     void IsPlayerMoving(){
       if((parent.horizontalMove != 0 || parent.vertical != 0) && parent.isGrounded){
-        if(Input.GetKey(KeyCode.LeftShift)){
+        if(Input.GetKey(KeyCode.LeftShift) && parent.vertical > 0){
           waitTime = 0.3f;
         } else {
           waitTime = 0.5f;
         }
+        
         isMoving = true;
       } else {
         isMoving = false;
       }
     }
 
+    //Plays the sound
     void PlaySound(){
       if(isMoving && canPlay){
         if(!walkLeft.isPlaying || !walkRight.isPlaying){
