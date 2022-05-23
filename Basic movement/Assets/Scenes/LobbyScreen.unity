@@ -1658,7 +1658,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.28315237, g: 0.47421297, b: 0.5943396, a: 1}
+    m_NormalColor: {r: 0.21176471, g: 0.45490196, b: 0.91764706, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1808,7 +1808,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.27058825, g: 0.454902, b: 0.57254905, a: 1}
+    m_NormalColor: {r: 0.21176471, g: 0.45490196, b: 0.91764706, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1973,7 +1973,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.27058825, g: 0.454902, b: 0.57254905, a: 1}
+    m_NormalColor: {r: 0.21176471, g: 0.45490196, b: 0.91764706, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -2109,9 +2109,11 @@ MonoBehaviour:
   SenderPassword: 
   SenderEmail: 
   ProviderPort: 0
+  sendWithPicture: 0
   SendToName: {fileID: 0}
   SendToMail: {fileID: 0}
   RoomName: {fileID: 0}
+  camera: {fileID: 0}
 --- !u!1 &1292109048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2840,7 +2842,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.27058825, g: 0.454902, b: 0.57254905, a: 1}
+    m_NormalColor: {r: 0.21176471, g: 0.45490196, b: 0.91764706, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
