@@ -136,6 +136,12 @@ public class GlobalGameHandler : MonoBehaviour
         SceneName = name; 
     }
 
+    public static string  GetPreviousScneneName()
+    {
+        return SceneName;
+    }
+
+
     //
     public static string GetNextSceneName() {
 

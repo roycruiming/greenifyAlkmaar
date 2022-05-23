@@ -20,6 +20,13 @@ public class RotateCharacter : MonoBehaviour
     {
         player = GameObject.Find("3RD Person");
 
+        if (player == null && IsSecondPlayer)
+            player = GameObject.Find("player2");
+        else if(player == null && !IsSecondPlayer)
+            player = GameObject.Find("player");
+        
+
+
         startingRotation = player.transform.rotation.eulerAngles;
         
     }

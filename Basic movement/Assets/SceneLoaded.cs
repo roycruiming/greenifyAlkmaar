@@ -9,6 +9,7 @@ public class SceneLoaded : MonoBehaviour
     public string TimeScore;
     //private Scene PreviousScene;
     //private readonly string[] Levels = {"Tutorial-Level", "DeMeentV2", "DeKaasMarkt"};
+    private string previousName = ""; 
 
     private void OnEnable()
     {
@@ -27,18 +28,31 @@ public class SceneLoaded : MonoBehaviour
     // called second
 
     private void onSceneLoaded(Scene scene, LoadSceneMode mode) {
-        print(scene.name); 
+        print(scene.name);
+        Time.timeScale = 1;
         if (scene.name == "socl") OnSocialLayerLoaded(); 
-        else  GlobalGameHandler.SetPreviousScneneName(scene.name);  
-        
+        else  GlobalGameHandler.SetPreviousScneneName(scene.name);
     }
 
 
     void OnSocialLayerLoaded()
     {
+        if (GlobalGameHandler.GetPreviousScneneName() != "Multiplayer") {
+            if(GameObject.Find("LevelTitle") != null)
+            {
+                string title = GlobalGameHandler.GetPreviousScneneName();
 
+                if (title == "Tutorial-Level") title = "Tutorial";
+                if (title == "DeMeentv2") title = "De Meent";
+                if (title == "DeKaasmarkt") title = "Kaasmarkt";
 
-        Time.timeScale = 1; 
+                GameObject.Find("LevelTitle").GetComponent<Text>().text = title ; 
+
+            }
+        }
+       
+
+        
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
