@@ -7,7 +7,15 @@ public class LoadingMultiplayer : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        if (PhotonNetwork.InRoom)
+        {
+            Debug.Log("Leave Room");
+            PhotonNetwork.Disconnect();
+        }
+
         PhotonNetwork.ConnectUsingSettings();
+
+
     }
 
     public override void OnConnectedToMaster()

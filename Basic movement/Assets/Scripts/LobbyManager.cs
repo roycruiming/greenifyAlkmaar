@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
 using System.Collections.Generic;
+using System.Linq;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
@@ -18,9 +19,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void CreateButton()
     {
-        
-        
-        if(createInput.text != "")
+
+
+
+        if (createInput.text != "")
         {
             //Sends the analytics that multiplayer has started
             AnalyticsResult analyticsResult = Analytics.CustomEvent(
