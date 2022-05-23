@@ -1877,6 +1877,8 @@ MonoBehaviour:
   LanguageDropdown: {fileID: 0}
   optionMenu: {fileID: 1902358047602297432}
   ToggleCheckBox: {fileID: 0}
+  AreYouSure: {fileID: 0}
+  DoubleClicked: 0
   LanguageSelected: 
 --- !u!1 &1902358047618483888
 GameObject:
@@ -2256,7 +2258,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1902358047602297436}
+        m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
+        m_MethodName: SetFullscreen
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1902358047969826317
 GameObject:
@@ -3561,6 +3575,7 @@ MonoBehaviour:
   arrow: {fileID: 0}
   OpenSound: {fileID: 5157645024989314736}
   ClickSound: {fileID: 0}
+  players: []
 --- !u!114 &2413332687370415573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3577,7 +3592,6 @@ MonoBehaviour:
   PauseMenuUI: {fileID: 5004430294314800882}
   HowToPlayUI: {fileID: 9023980069596394414}
   WhatDoIDoUI: {fileID: 5566164789271688264}
-  Player: {fileID: 0}
   StartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &2413332687370415572
 MonoBehaviour:

@@ -17,6 +17,15 @@ public class PauseMenu : MonoBehaviour
     public AudioSource OpenSound;
     public AudioSource ClickSound;
 
+    public List<GameObject> players;
+
+
+
+    void Start()
+    {
+        
+    }
+
 
     // Update is called once per frame
     void Update()

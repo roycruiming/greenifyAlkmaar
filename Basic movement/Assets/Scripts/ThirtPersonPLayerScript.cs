@@ -34,6 +34,7 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
     public HUDController hud;
     public MultiPlayerHandler mp;
+    private bool playerMovementDisabled = false;
 
 
     private Quaternion camRotation;
@@ -77,6 +78,11 @@ public class ThirtPersonPLayerScript : MonoBehaviour
         mp = GameObject.FindObjectOfType<MultiPlayerHandler>();
     }
 
+    public void TogglePlayerMovementDisabled(bool forcedState = false, bool isDisabled = false) {
+        if(forcedState) playerMovementDisabled = isDisabled;
+        else playerMovementDisabled = !playerMovementDisabled;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -85,7 +91,8 @@ public class ThirtPersonPLayerScript : MonoBehaviour
         {
             if(GetComponent<Outline>() !=  null) GetComponent<Outline>().enabled = false;
         }
-        if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine)
+
+        if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine && playerMovementDisabled != true)
         {
 
 
