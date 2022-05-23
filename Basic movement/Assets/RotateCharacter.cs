@@ -24,17 +24,17 @@ public class RotateCharacter : MonoBehaviour
             player = GameObject.Find("player2");
         else if(player == null && !IsSecondPlayer)
             player = GameObject.Find("player");
-        
 
 
-        startingRotation = player.transform.rotation.eulerAngles;
+
+        startingRotation = player.transform.localEulerAngles;
         
     }
 
 
     public void rotate(float r) {
         r = -r;
-        player.transform.localEulerAngles = new Vector3(0f, startingRotation.y + 180 +  r * 180, 0f);   
+        player.transform.localEulerAngles = new Vector3(0f, startingRotation.y + r * 180, 0f);   
         }
 
 
