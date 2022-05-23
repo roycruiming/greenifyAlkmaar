@@ -12,7 +12,9 @@ public class OptionsMenu : MonoBehaviour
     public Dropdown LanguageDropdown;
     public GameObject optionMenu;
     public Toggle ToggleCheckBox;
+    public GameObject AreYouSure;
 
+    public bool DoubleClicked = false;
     public string LanguageSelected;
     int LanguageSelectedIndex;
     List<string> languages;
@@ -22,7 +24,6 @@ public class OptionsMenu : MonoBehaviour
     void Start()
     {
       ToggleCheckBox = transform.Find("ArrowToggle").GetComponent<Toggle>();
-
       //checks if the player has toggled on/off the directional arrow from the save game
       if(ToggleCheckBox){
         if(GlobalGameHandler.PlayerWantsDirectionalArrow()){
@@ -76,9 +77,21 @@ public class OptionsMenu : MonoBehaviour
       }
     }
 
+    public void ResetGame()
+    {
+      if(!DoubleClicked){
+        DoubleClicked = true;
+        AreYouSure.SetActive(true);
+      } else {
+        PlayerPrefs.DeleteAll();
+        GameObject.Find("GlobalGameHandler").GetComponent<GlobalGameHandler>().Awake();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      }
+    }
+
     public void CloseOptions()
     {
-        optionMenu.SetActive(false);
+      optionMenu.SetActive(false);
     }
 
 }
