@@ -52,6 +52,10 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     bool up = true;
     bool down = false;
 
+    public float liftY = 0;
+    bool liftUp = true;
+    bool liftDown = true;
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -151,7 +155,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("test", RpcTarget.All);
         }
 
-        if (brScript.bridgeUps)
+/*        if (brScript.bridgeUps)
         {
             photonView.RPC("bridgeActivate", RpcTarget.All);
             //bridgeActivate();
@@ -160,7 +164,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
         {
             photonView.RPC("bridgeDeActivate", RpcTarget.All);
             //bridgeDeActivate();
-        }
+        }*/
 
         if (Input.GetKeyDown("h"))
         {
@@ -317,13 +321,12 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
     public void bridgeActivate()
     {
         bridge.SetActive(true);
-        
     }
 
     [PunRPC]
     public void bridgeDeActivate()
     {
-        bridge.SetActive(false);
+        bridge.SetActive(false);    
     }
 
     [PunRPC]
@@ -369,6 +372,30 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
             down = false;
         }
 
+    }
+
+    [PunRPC]
+    public void MoveLift()
+    {
+        if (liftY < 12f && liftUp)
+        {
+            liftY += 0.01f;
+        }
+        if (liftY >= 12)
+        {
+            liftUp = false;
+            liftDown = true;
+
+        }
+        if (liftY > 0f && liftDown)
+        {
+            liftY -= 0.01f;
+        }
+        if (liftY <= 0)
+        {
+            liftUp = true;
+            liftDown = false;
+        }
     }
 
     [PunRPC]
