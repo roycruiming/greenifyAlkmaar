@@ -35,6 +35,8 @@ public class ObjectivesController : MonoBehaviour
     public GameObject objectivesObject;
     public GameObject GameTimerObject;
 
+    public GameObject splash; 
+
     public int chargingStationCounter = 0; 
 
     public Button back;
@@ -63,6 +65,7 @@ public class ObjectivesController : MonoBehaviour
         puzzleCanvass = GameObject.Find("PuzzleCanvas");
         objectivesObject = GameObject.Find("ObjectivesCounter");
         GameTimerObject = GameObject.Find("GameTimer");
+        splash = GameObject.Find("Splash Effect UI");
 
         AmmountCoins.text = "0";
 
@@ -168,6 +171,11 @@ public class ObjectivesController : MonoBehaviour
             {
                 //nameInputBar.gameObject.SetActive(true);
             }
+
+                if (GameObject.Find("Kaasmarkt scenery"))
+                {
+                    splash.SetActive(false);
+                }
 
                 GameDone.gameObject.SetActive(true);
              //gameEndScore.text = objectivesCounter.ToString() + "/" + totalObjectives;
