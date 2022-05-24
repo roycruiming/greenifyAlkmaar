@@ -33,16 +33,19 @@ public class OptionsMenu : MonoBehaviour
       }
 
       //Makes the dropdown empty and adds the correct languages
-      languages = GlobalGameHandler.GetLanguagesList();
-      LanguageDropdown.ClearOptions();
-      LanguageDropdown.AddOptions(languages);
-
-      //Checks for the current language and sets the value to that language
-      for (int i = 0; i < languages.Count; i++)
+      if(LanguageDropdown)
       {
-        if(languages[i] == GlobalGameHandler.GetCurrentLanguage())
+        languages = GlobalGameHandler.GetLanguagesList();
+        LanguageDropdown.ClearOptions();
+        LanguageDropdown.AddOptions(languages);
+
+        //Checks for the current language and sets the value to that language
+        for (int i = 0; i < languages.Count; i++)
         {
-          LanguageDropdown.value = i;
+          if(languages[i] == GlobalGameHandler.GetCurrentLanguage())
+          {
+            LanguageDropdown.value = i;
+          }
         }
       }
     }
@@ -95,7 +98,10 @@ public class OptionsMenu : MonoBehaviour
 
     public void CloseOptions()
     {
-      AreYouSure.SetActive(false);
+      if(AreYouSure)
+      {
+        AreYouSure.SetActive(false);
+      }
       optionMenu.SetActive(false);
     }
 
