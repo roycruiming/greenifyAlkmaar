@@ -223,13 +223,13 @@ public class Email : MonoBehaviour
         if (lang == "nederlands") {
 
             return "Hallo, " +  name + "! Heb jij toevallig zin om samen greenify alkmaar te spelen? De joincode is: " +
-                roomname + " en het spel kan worden gedownload via: testwebsite.nl";
+                roomname + " en het spel kan worden gedownload via: https://drive.google.com/drive/folders/1ixO7WjGG6PoE7e2mYd4s0v1dHKs4U9d1?usp=sharing";
         }
 
         if (lang == "english") {
             return "Hallo,"  +  name +
                "! Do you want to play greenify Alkmaar with me? My Joincode is:, " + roomname + "and the game can be downloaded on: " +
-                "testwebsite.nl";
+                "https://drive.google.com/drive/folders/1ixO7WjGG6PoE7e2mYd4s0v1dHKs4U9d1?usp=sharing";
         }
 
         return "something went wrong, ignore this message ";

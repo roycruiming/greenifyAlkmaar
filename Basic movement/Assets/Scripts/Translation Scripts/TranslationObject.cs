@@ -13,8 +13,7 @@ public class TranslationObject : MonoBehaviour
     void Start()
     {
         //check of text os TextMesh3d component
-        if (GetComponent<TextMesh>() != null)
-        {
+        if (GetComponent<TextMesh>() != null)       {
             //Debug.Log("TextMesh");
             GetComponent<TextMesh>().text = GlobalGameHandler.GetTextByDictionaryKey(this.translationKey);
         }
