@@ -33,28 +33,6 @@ public class ForkliftUp : MonoBehaviour
         MPH.MoveVork();
     }
         
-   /* private void MoveVork()
-    {
-        if (y < 2f && up)
-        {
-            y += 0.01f;
-        }
-        if(y >= 2)
-        {
-            up = false;
-            down = true;
 
-        }
-        if(y> 0f && down)
-        {
-            y -= 0.01f;
-        }
-        if(y <= 0)
-        {
-            up = true;
-            down = false;
-        }*/
-        
-    //}
     
 }
