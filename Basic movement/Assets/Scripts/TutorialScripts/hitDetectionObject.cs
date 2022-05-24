@@ -9,7 +9,7 @@ public class hitDetectionObject : MonoBehaviour
     public bool generalHelperExplanation;
 
     private void OnCollisionEnter(Collision other) {
-        TutorialLevel tutorialHandler = GameObject.Find("TutorialLevelHandler").GetComponent<TutorialLevel>();
+        TutorialLevel tutorialHandler = GameObject.Find("LevelHandler").GetComponent<TutorialLevel>();
 
         if(other.gameObject.name == "C_man_1_FBX2013" || other.gameObject.name == "3RD Person") {
             
