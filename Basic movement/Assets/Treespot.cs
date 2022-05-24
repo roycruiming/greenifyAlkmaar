@@ -21,7 +21,7 @@ public class Treespot : MonoBehaviour
             item.transform.position = burrier.transform.position;
             item.gameObject.SetActive(true);
             
-            GlobalGameHandler.GivePlayerCoints(Random.Range(1, 3)); 
+            GlobalGameHandler.GivePlayerCoints(Random.Range(10, 40)); 
             return true;
             
         }

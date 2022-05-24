@@ -13,7 +13,7 @@ public class ObjectivesController : MonoBehaviour
     public List<Item> solarPanels;
     public List<GameObject> solarPanelsSpot;
     public int objectivesCounter = 0;
-    private int totalObjectives;
+    public int totalObjectives;
 
     private bool testPhaseBooleanVerticalSlice = false; //remove in later stage!
 
