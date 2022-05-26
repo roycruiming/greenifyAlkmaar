@@ -71,7 +71,7 @@ public class SceneLoaded : MonoBehaviour
         GameObject placeholder = GameObject.Find("player placeholder");
 
 
-        foreach (Transform c in placeholder.transform) Destroy(c.gameObject);
+        //foreach (Transform c in placeholder.transform) Destroy(c.gameObject);
 
 
         //set animator to our custom animator

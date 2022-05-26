@@ -8,12 +8,17 @@ public class GoToNextScreen : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public GameObject myPrefab;
+    
+
+     public void start()
+    {
+     
+    }
 
     public void next() {
         if (GlobalGameHandler.GetInstance() != null)
         {
-            //string scene = GlobalGameHandler.GetNextSceneName();
+            DontDestroyOnLoad(GameObject.Find("OnSceneLoaded")); 
             SceneManager.LoadScene(5);
 
         }
@@ -28,20 +33,29 @@ public class GoToNextScreen : MonoBehaviour
         GameObject OnSceneLoaded = GameObject.Find("OnSceneLoaded");
 
         if (OnSceneLoaded == null) {
-           GameObject pref =  Instantiate(myPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            pref.gameObject.name = "OnSceneLoaded"; 
-            OnSceneLoaded =   GameObject.Find("OnSceneLoaded");
-            OnSceneLoaded.gameObject.name = "OnSceneLoaded"; 
+
+            GameObject pref = Resources.Load("OnSceneLoaded", typeof(GameObject)) as GameObject;
+            pref.gameObject.name = "OnSceneLoaded";
+            DontDestroyOnLoad(pref); 
+
+
+           
+            
 
 
         }
 
         SceneLoaded sl = OnSceneLoaded.GetComponent<SceneLoaded>();
-        if(sl != null) sl.TimeScore = score;
+        if (sl != null) sl.TimeScore = score;
 
 
-        Object.DontDestroyOnLoad(GameObject.Find("3RD Person"));
-        Object.DontDestroyOnLoad(OnSceneLoaded);
+        GameObject PLAYER = GameObject.Find("3RD Person"); 
+
+
+
+
+        DontDestroyOnLoad(PLAYER);
+        DontDestroyOnLoad(OnSceneLoaded);
 
         SceneManager.LoadScene(18);
 
