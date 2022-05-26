@@ -54,7 +54,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void BackButton()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("LobbyScreen");
     
     }
 

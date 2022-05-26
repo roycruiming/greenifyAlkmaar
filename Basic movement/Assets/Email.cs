@@ -94,13 +94,15 @@ public class Email : MonoBehaviour
         try
         {
             SmtpClient smtp = new SmtpClient();
+            smtp.TargetName = "STARTTLS/smtp.office365.com";
             smtp.Port = ProviderPort;
-            smtp.Host = "smtp.gmail.com"; //for gmail host
+            smtp.Host = "smtp.office365.com"; //for outlook test
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new NetworkCredential(SenderEmail, SenderPassword);
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             MailMessage message = new MailMessage();
+            print(SenderEmail); 
             message.From = new MailAddress(SenderEmail);
             message.To.Add(new MailAddress(mailReciever));
             message.Subject = "Come play Greenify Alkmaar with me!";
@@ -117,7 +119,7 @@ public class Email : MonoBehaviour
         }
         catch (Exception e)
         {
-
+            print(e);
 
         }
 
