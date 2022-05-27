@@ -17,12 +17,19 @@ public class GoToNextScreen : MonoBehaviour
 
     public void next() {
 
-       
-
        // DontDestroyOnLoad(GameObject.Find("OnSceneLoaded"));
         SceneManager.LoadScene(5);
 
     }
+
+    public void nextMp()
+    {
+
+        // DontDestroyOnLoad(GameObject.Find("OnSceneLoaded"));
+        SceneManager.LoadScene(0);
+
+    }
+
 
     public void GoToPhotoScene() {
         string score = GameObject.Find("GameTimer").GetComponent<Text>().text;
