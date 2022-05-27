@@ -16,16 +16,12 @@ public class GoToNextScreen : MonoBehaviour
     }
 
     public void next() {
-        if (GlobalGameHandler.GetInstance() != null)
-        {
-            DontDestroyOnLoad(GameObject.Find("OnSceneLoaded")); 
-            SceneManager.LoadScene(5);
 
-        }
-        else {
-            Debug.Assert(false, "Start from scene to use this button");
-        
-        }
+       
+
+       // DontDestroyOnLoad(GameObject.Find("OnSceneLoaded"));
+        SceneManager.LoadScene(5);
+
     }
 
     public void GoToPhotoScene() {
