@@ -20,7 +20,7 @@ public class GoToNextScreen : MonoBehaviour
 
 
     public void GoToPhotoScene() {
-
+        GameObject.Find("GlobalGameHandler").GetComponent<SceneLoaded>().TimeScore = GameObject.Find("GameTimer").GetComponent<Text>().text; 
         GameObject p = GameObject.Find("3RD Person"); 
         DontDestroyOnLoad(p);
         SceneManager.LoadScene(18);

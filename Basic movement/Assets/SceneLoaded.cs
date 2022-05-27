@@ -24,6 +24,8 @@ public class SceneLoaded : MonoBehaviour
 
 
 
+
+
     private void onSceneLoaded(Scene scene, LoadSceneMode mode) {
         print(scene.name);
         Time.timeScale = 1;

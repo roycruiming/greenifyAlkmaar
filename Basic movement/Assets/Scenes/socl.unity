@@ -1202,6 +1202,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &293257313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1293736854754748987, guid: 1cfa14b7190e97f4b94266b6f659c16f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1293736854893815517}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &293257314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293257313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d05a4ad1cd40524ab194533f59cc807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: name receiver
 --- !u!1 &389709886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2283,6 +2302,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134332408}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1163825429 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1293736855957067356, guid: 1cfa14b7190e97f4b94266b6f659c16f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1293736854893815517}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1163825430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163825429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d05a4ad1cd40524ab194533f59cc807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: email receiver
 --- !u!1 &1231801101
 GameObject:
   m_ObjectHideFlags: 0
@@ -4071,7 +4109,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PhotoPanel
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1293736855538727457, guid: 1cfa14b7190e97f4b94266b6f659c16f, type: 3}
+    - {fileID: 1293736854562366193, guid: 1cfa14b7190e97f4b94266b6f659c16f, type: 3}
+    - {fileID: 1293736855315282502, guid: 1cfa14b7190e97f4b94266b6f659c16f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1cfa14b7190e97f4b94266b6f659c16f, type: 3}
 --- !u!114 &3849858815729867984
 MonoBehaviour:
