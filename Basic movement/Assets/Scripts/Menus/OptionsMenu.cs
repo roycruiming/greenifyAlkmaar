@@ -66,6 +66,7 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetFullscreen(bool isFullscreen)
     {
+        Screen.SetResolution(1920, 1080, true);
         Screen.fullScreen = isFullscreen;
     }
 
