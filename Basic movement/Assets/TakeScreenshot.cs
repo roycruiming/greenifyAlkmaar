@@ -14,6 +14,7 @@ public class TakeScreenshot : MonoBehaviour
     public int width;
     public int heigth;
     public TextureFormat textureFormat;
+    public bool UseForSocialLayerFunction = false; 
 
     private void Awake()
     {
@@ -29,6 +30,30 @@ public class TakeScreenshot : MonoBehaviour
     [ContextMenu("Take Screenshot")]
     public void TakeScreenShot() {
 
+
+        if (UseForSocialLayerFunction == true) {
+
+            GameObject pp = GameObject.Find("Uncaptureable UI");
+            Transform gg = pp.transform.Find("PhotoPanel");
+
+            if (gg == null) return;
+
+            GameObject obj = gg.gameObject;
+
+            if (!obj.activeInHierarchy)
+            {
+                gg.gameObject.SetActive(true);
+            }
+
+            // 
+
+            //MainMenuItems.transform.Find("PlayButton").gameObject;
+
+           //GameObject pp = GameObject.Find("PhotoPanel");
+           
+           
+        
+        }
 
         if (camera == null) camera = this.GetComponent<Camera>();
 

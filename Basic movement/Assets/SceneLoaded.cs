@@ -19,17 +19,12 @@ public class SceneLoaded : MonoBehaviour
             isFirst = false;
           GlobalGameHandler.SetPreviousScneneName(SceneManager.GetActiveScene().name);         
         }
-
     }
-
-
-
-
 
     private void onSceneLoaded(Scene scene, LoadSceneMode mode) {
         print(scene.name);
         Time.timeScale = 1;
-        if (scene.name == "socl") OnSocialLayerLoaded(); 
+        if (scene.name == "socl" || scene.name == "socl 1") OnSocialLayerLoaded();
         else  GlobalGameHandler.SetPreviousScneneName(scene.name);
     }
 
@@ -44,15 +39,22 @@ public class SceneLoaded : MonoBehaviour
                 if (title == "DeMeentv2") title = "De Meent";
                 if (title == "DeKaasmarkt") title = "Kaasmarkt";
 
-                GameObject.Find("LevelTitle").GetComponent<Text>().text = title ; 
+                GameObject.Find("LevelTitle").GetComponent<Text>().text = title ;
+                GameObject.Find("GameTimer").GetComponent<Text>().text = TimeScore;
 
             }
+        }
+        else
+        {
+            GameObject obj = GameObject.Find("GameTimer");  //.GetComponent<Text>().text = TimeScore;
+            Text x = obj.GetComponent<Text>();
+            x.text = TimeScore; 
         }
 
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        GameObject.Find("GameTimer").GetComponent<Text>().text = TimeScore; 
+
         GameObject player = GameObject.Find("3RD Person");
         if (player == null) GameObject.Find("player"); 
         GameObject placeholder = GameObject.Find("player placeholder");

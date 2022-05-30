@@ -15,6 +15,7 @@ public class GoToNextScreen : MonoBehaviour
 
     public void nextMp()
     {
+
         SceneManager.LoadScene(0);
     }
 
@@ -29,6 +30,7 @@ public class GoToNextScreen : MonoBehaviour
 
     public void GoToPhotoSceneMultiPlayer()
     {
+        GameObject.Find("GlobalGameHandler").GetComponent<SceneLoaded>().TimeScore = GameObject.Find("GameTimerMP").GetComponent<Text>().text;
         SceneManager.LoadScene(19);
     }
 
