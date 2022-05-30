@@ -3741,6 +3741,7 @@ MonoBehaviour:
   width: 1000
   heigth: 993
   textureFormat: 4
+  UseForSocialLayerFunction: 1
 --- !u!81 &1999726030
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4108,6 +4109,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PhotoPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7756014739556305707, guid: 1cfa14b7190e97f4b94266b6f659c16f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1293736855538727457, guid: 1cfa14b7190e97f4b94266b6f659c16f, type: 3}
@@ -4519,6 +4525,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: controlpanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637891920985836686, guid: eab5419e40915dc4db7e0c8212b03604,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4637891921309310433, guid: eab5419e40915dc4db7e0c8212b03604,
         type: 3}
