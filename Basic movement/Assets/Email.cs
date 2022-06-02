@@ -12,8 +12,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
+
 public class Email : MonoBehaviour
 {
+
+
+
+    private enum EmailSuccessOrFailure{ Success, No_Parameters, Could_Not_Reach, Invalid_Mail }
+
+    
 
 
 
@@ -79,16 +88,27 @@ public class Email : MonoBehaviour
 
 
         bool parametersAreMissing = SenderPassword.Length == 0 || SenderEmail.Length == 0 || ProviderPort == 0 || SendToMail == null || SendToName == null;
-        Debug.Assert(!parametersAreMissing, "parameters missing");
-        Debug.Assert(IsEmail(SendToMail.text), "not a valid email");
 
-        if (parametersAreMissing) return;
+        if (parametersAreMissing) { Debug.Assert(!parametersAreMissing, "parameters missing");
+            return; 
+        }
+
+
+        if (SendToMail.text == "" || SendToName.text == "") {
+
+            StartCoroutine(ShowMailStatus(EmailSuccessOrFailure.No_Parameters));
+            return;
+
+        }
+
+        
 
         string mailReciever = SendToMail.text.Trim();
 
         if (!IsEmail(mailReciever))
         {
-            print(SendToMail.text); return;
+            StartCoroutine(ShowMailStatus(EmailSuccessOrFailure.Invalid_Mail));
+            return;
         }
 
         try
@@ -114,12 +134,13 @@ public class Email : MonoBehaviour
             smtp.Send(message);
             SendToName.text = "";
             SendToMail.text = "";
+            StartCoroutine(ShowMailStatus(EmailSuccessOrFailure.Success));
 
 
         }
         catch (Exception e)
         {
-            print(e);
+            StartCoroutine(ShowMailStatus(EmailSuccessOrFailure.Could_Not_Reach));
 
         }
 
@@ -128,6 +149,54 @@ public class Email : MonoBehaviour
 
 
 
+    }
+
+
+
+    private IEnumerator ShowMailStatus(EmailSuccessOrFailure e ) {
+
+        GameObject g = GameObject.Find("Uncaptureable UI");
+        if (g == null) 
+            yield return null;
+
+
+        Transform messageContainer = g.transform.Find("PressFContainer");
+        if (messageContainer == null) 
+            yield return null;
+
+
+
+        SetMailMessageContainerValues(messageContainer.gameObject, e); 
+
+       messageContainer.gameObject.SetActive(true);
+
+         
+
+       yield return new WaitForSeconds(3);
+
+        g.transform.Find("PressFContainer").gameObject.SetActive(false); 
+    }
+
+
+    private void SetMailMessageContainerValues(GameObject g,  EmailSuccessOrFailure e) {
+
+        if (e == EmailSuccessOrFailure.Success)
+        {
+            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = "success";
+        }
+        else if (e == EmailSuccessOrFailure.Could_Not_Reach)
+        {
+            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = "failure";
+        }
+
+        else if (e == EmailSuccessOrFailure.No_Parameters)
+        {
+            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = "parameters are mmissing";
+        }
+
+        else {
+            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = "invalid mail";
+        }
     }
 
 
