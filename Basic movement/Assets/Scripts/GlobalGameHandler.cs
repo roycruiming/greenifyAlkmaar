@@ -33,6 +33,16 @@ public class GlobalGameHandler : MonoBehaviour
 
         //SceneManager.sceneLoaded += onSceneLoaded;
 
+        if (GameObject.Find("GlobalGameHandler"))
+        {
+            GlobalGameHandler go = GameObject.Find("GlobalGameHandler").GetComponent<GlobalGameHandler>();
+
+            if (go == GetInstance())
+            {
+                Destroy(this.transform.gameObject);
+            }
+        }
+
         // If there is an instance, and it's not me, delete myself.
         if (instance != null && instance != this) Destroy(this); 
         else {
