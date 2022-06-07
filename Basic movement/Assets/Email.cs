@@ -286,26 +286,33 @@ public class Email : MonoBehaviour
              RegexOptions.IgnoreCase);
     }
 
+
     public string getBody(string name, string roomname)
     {
         string lang = GlobalGameHandler.GetCurrentLanguage();
 
 
-        if (lang == "nederlands") {
 
-            return "Hallo, " +  name + "! Heb jij toevallig zin om samen greenify alkmaar te spelen? De joincode is: " +
-                roomname + " en het spel kan worden gedownload via: https://drive.google.com/drive/folders/1ixO7WjGG6PoE7e2mYd4s0v1dHKs4U9d1?usp=sharing";
+        if (lang == "Nederlands")
+            {
+
+                return "<h1 style=font-family:verdana; align=center> Hallo, " + char.ToUpper(name[0]) + name.Substring(1) + "! </h1> " +
+                    "<h2 align=center> Heb jij toevallig zin om samen greenify Alkmaar te spelen? </h2>  <p align=center> De joincode is: <b>" +
+                    roomname + " </b> </p>  <p align=center>  Het spel kan worden gedownload via:  <a href=https://drive.google.com/drive/folders/1ixO7WjGG6PoE7e2mYd4s0v1dHKs4U9d1?usp=sharing> deze link </a> </p>";
+            }
+
+            if (lang == "English")
+            {
+                return "<h1 style=font-family:verdana; align=center> Hello, " + char.ToUpper(name[0]) + name.Substring(1) + "! </h1> " +
+                    "<h2 align=center> Do you want to play Greenify Alkmaar with me?</h2>  <p align=center> The roomname is: <b>" +
+                    roomname + " </b> </p> " +
+                    " <p align=center> and the game can be download with <a href=https://drive.google.com/drive/folders/1ixO7WjGG6PoE7e2mYd4s0v1dHKs4U9d1?usp=sharing> this link </a> </p>";
+            }
+
+            return "something went wrong, ignore this message ";
+
         }
 
-        if (lang == "english") {
-            return "Hallo,"  +  name +
-               "! Do you want to play greenify Alkmaar with me? My Joincode is:, " + roomname + "and the game can be downloaded on: " +
-                "https://drive.google.com/drive/folders/1ixO7WjGG6PoE7e2mYd4s0v1dHKs4U9d1?usp=sharing";
-        }
-
-        return "something went wrong, ignore this message ";
-
-    }
 
     public string getBody(string name)
     {
@@ -328,4 +335,12 @@ public class Email : MonoBehaviour
         return "something went wrong, ignore this message ";
 
     }
+
+
+
+
+
 }
+
+   
+
