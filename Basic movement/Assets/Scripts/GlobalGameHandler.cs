@@ -41,7 +41,7 @@ public class GlobalGameHandler : MonoBehaviour
             {
                 Destroy(this.transform.gameObject);
             }
-        }
+        }   
 
         // If there is an instance, and it's not me, delete myself.
         if (instance != null && instance != this) Destroy(this); 

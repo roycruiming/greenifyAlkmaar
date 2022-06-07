@@ -58,7 +58,14 @@ public class SceneLoaded : MonoBehaviour
         GameObject player = GameObject.Find("3RD Person");
         if (player == null) GameObject.Find("player"); 
         GameObject placeholder = GameObject.Find("player placeholder");
-        foreach (Transform c in placeholder.transform) Destroy(c.gameObject);
+
+        if(placeholder != null)
+        {
+            foreach (Transform c in placeholder.transform) Destroy(c.gameObject);
+
+
+        }
+
         Animator animator = player.GetComponent<Animator>();
         animator.applyRootMotion = false;
         animator.runtimeAnimatorController = Resources.Load("ScoreBoardAnim") as RuntimeAnimatorController;
