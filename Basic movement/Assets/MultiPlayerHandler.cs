@@ -145,9 +145,7 @@ public class MultiPlayerHandler : MonoBehaviourPunCallbacks, IPunObservable
 
         totalCount = solarCounter + TurbineCounter + treeCounter;
 
-        if (Input.GetKey(KeyCode.Backspace)){
-            WinConditie(); 
-        }
+
 
         if (Input.GetKeyDown("k"))
         {
