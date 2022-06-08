@@ -88,7 +88,7 @@ public class OptionsMenu : MonoBehaviour
     public void ResetYes()
     {
         PlayerPrefs.DeleteAll();
-        GameObject.Find("GlobalGameHandler").GetComponent<GlobalGameHandler>().Awake();
+        GameObject.Find("GlobalGameHandler").GetComponent<GlobalGameHandler>().Reset();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

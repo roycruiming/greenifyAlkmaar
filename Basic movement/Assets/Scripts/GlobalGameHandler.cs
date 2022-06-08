@@ -60,11 +60,14 @@ public class GlobalGameHandler : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
             InitTranslationDictionaryBuildFunctional();
             InitUnlockAbles();
-
             LoadSaveGameInfo();
-
-
         }
+    }
+
+    public void Reset()
+    {
+        InitUnlockAbles();
+        LoadSaveGameInfo();
     }
 
     private void LoadSaveGameInfo() {
