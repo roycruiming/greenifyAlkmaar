@@ -96,9 +96,24 @@ public class ThirtPersonPLayerScript : MonoBehaviour
 
         if (!PauseMenu.GameIsPaused && !PuzzleController.PuzzlePlaying && view.IsMine && playerMovementDisabled != true)
         {
+            Vector3 offset = new Vector3(0.0f, 1.0f, 0.0f);
+            RaycastHit HitInfo;
+            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+            Vector3 lft = transform.TransformDirection(Vector3.left);
+            Vector3 rght = transform.TransformDirection(Vector3.right);
+            Debug.DrawRay(transform.position + offset, fwd * 5, Color.green);
+            if (Physics.Raycast(transform.position + offset, fwd, out HitInfo, 0.5f) || Physics.Raycast(transform.position + offset, fwd * -1, out HitInfo, 0.5f) || Physics.Raycast(transform.position + offset, lft, out HitInfo, 0.4f) || Physics.Raycast(transform.position + offset, rght, out HitInfo, 0.4f))
+            {
+                walkSpeed = 1;
+                runSpeed = 1;
+            }
+            else
+            {
+                walkSpeed = 3;
+                runSpeed = 5;
+            }
 
-
-            Debug.DrawRay(transform.position, -Vector3.up, Color.red);
+                Debug.DrawRay(transform.position, -Vector3.up, Color.red);
 
             isGrounded = Grounded();
             if (isGrounded && !isJumping)
