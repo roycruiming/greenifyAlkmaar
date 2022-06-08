@@ -180,22 +180,25 @@ public class Email : MonoBehaviour
 
     private void SetMailMessageContainerValues(GameObject g,  EmailSuccessOrFailure e) {
 
+        GlobalGameHandler.GetTextByDictionaryKey("Mailsuccess");
+        
+
         if (e == EmailSuccessOrFailure.Success)
         {
-            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = "success";
+            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("mail success"); ;
         }
         else if (e == EmailSuccessOrFailure.Could_Not_Reach)
         {
-            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = "failure";
+            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("mail could not reach"); ;
         }
 
         else if (e == EmailSuccessOrFailure.No_Parameters)
         {
-            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = "parameters are mmissing";
+            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("mail missing param"); ;
         }
 
         else {
-            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = "invalid mail";
+            g.transform.Find("ScreenDisplayText").GetComponent<TextMeshProUGUI>().text = GlobalGameHandler.GetTextByDictionaryKey("mail not valid"); ;
         }
     }
 
@@ -256,8 +259,9 @@ public class Email : MonoBehaviour
             message.Body = getBody(name, pin);
 
 
+            smtp.TargetName = "STARTTLS/smtp.office365.com";
             smtp.Port = ProviderPort;
-            smtp.Host = "smtp.gmail.com"; //for gmail host
+            smtp.Host = "smtp.office365.com";
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new NetworkCredential(SenderEmail, SenderPassword);
@@ -270,7 +274,7 @@ public class Email : MonoBehaviour
 
         }
         catch (Exception e) {
-
+            print(e.Message); 
 
         }
     }
