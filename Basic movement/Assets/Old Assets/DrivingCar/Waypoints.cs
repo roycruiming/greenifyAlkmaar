@@ -99,19 +99,9 @@ public class Waypoints : MonoBehaviour
         return wayPoint == transform.GetChild(0); 
     }
 
-
-
-    public Vector3 GetNextCurvePoint() {
-
-        return new Vector3(); 
-    
-    }
-
-    
-
-
     public Transform GetNextWayPoint(Transform currentWaypoint)
     {
+        //
         if (currentWaypoint == null || currentWaypoint.GetSiblingIndex() >= transform.childCount-1){
             return transform.GetChild(0);
         }

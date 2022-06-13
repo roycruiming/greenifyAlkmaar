@@ -22,7 +22,8 @@ public class NPCScript : MonoBehaviour
         Move();
     }
 
-    List<Vector3> curvePoints = new List<Vector3>();
+    
+    private List<Vector3> curvePoints = new List<Vector3>();
 
 
     //TODO: IMPROVE THIS CODE.
