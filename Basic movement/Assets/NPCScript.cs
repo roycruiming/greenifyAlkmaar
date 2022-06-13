@@ -14,9 +14,9 @@ public class NPCScript : MonoBehaviour
     public Transform StartingWaypoint;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+        animator.SetFloat("Vertical", 1, 0.1f, Time.fixedDeltaTime);
         animator.SetFloat("WalkSpeed", walkAnimationSpeed);
         Move();
     }
@@ -40,39 +40,36 @@ public class NPCScript : MonoBehaviour
             for (int i = 1; i < 50 + 1; i++)
             {
                 float t = i / (float)50;
-                Vector3 pointPos = waypoints.CalculateQuadraticBezierPoint(t, currentWaypoint.position, curveControl.position, waypoints.GetNextWayPoint(currentWaypoint).position);
-                pointPos.y = waypoints.GetNextWayPoint(currentWaypoint).position.y; 
+                Vector3 pointPos = waypoints.CalculateQuadraticBezierPoint(t, currentWaypoint.position, curveControl.position, waypoints.GetNextWayPoint(currentWaypoint).position); 
                 curvePoints.Add(pointPos);
-
-            }
-
-   
-
+            } 
         }
 
         else if (curvePoints.Count > 0)
         {
-            rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.deltaTime));
+            rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.fixedDeltaTime));
 
             if (Vector3.Distance(transform.position, curvePoints[0]) < 0.5)
             {
-                transform.LookAt(curvePoints[0]);
+                Vector3 lookat = curvePoints[0];
                 curvePoints.RemoveAt(0);
+                LookAt(lookat);
             }
 
             if (curvePoints.Count == 0)
             {
                 currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
+                LookAt(currentWaypoint.position); 
             }
         }
     }
 
-
-
-
-
-
-
+    private void LookAt(Vector3 lookat)
+    {
+        lookat.y = transform.position.y;
+        transform.LookAt(lookat);
+        
+    }
 
     private void Move()
     {
@@ -84,28 +81,26 @@ public class NPCScript : MonoBehaviour
         if (waypoints.IsCurve(currentWaypoint))
         {
             MoveCurve();
-            return; 
+            return;
         }
 
-        else rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentWaypoint.position, moveSpeed * Time.deltaTime));
+        else {
+
+            LookAt(currentWaypoint.position); 
+            rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentWaypoint.position, moveSpeed * Time.fixedDeltaTime)); 
+
+        }
 
         if (Vector3.Distance(transform.position, currentWaypoint.position) < 0.5)
         {
             currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
-            Lookat(); 
         }
-    }
-
-
-    private void Lookat() {
-        Vector3 lookhere = currentWaypoint.position;
-        transform.LookAt(lookhere);
     }
 
 
     private void Awake()
     {
-        animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+        animator.SetFloat("Vertical", 1, 0.1f, Time.fixedDeltaTime);
         animator.SetFloat("WalkSpeed", walkAnimationSpeed);
 
         if (StartingWaypoint == null)
@@ -115,11 +110,6 @@ public class NPCScript : MonoBehaviour
         else { currentWaypoint = StartingWaypoint; }
 
         transform.position = currentWaypoint.position;
- 
-        Lookat();
-
-
-
     }
 
 

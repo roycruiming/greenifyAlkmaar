@@ -50,6 +50,8 @@ public class ItemPickUp : MonoBehaviour
         {
             MoveObject();
         }
+
+        
     }
 
     void MoveObject()
