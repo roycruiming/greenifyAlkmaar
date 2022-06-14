@@ -35,11 +35,12 @@ public class NPCScript : MonoBehaviour
     }
 
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        //set animation 
         animator.SetFloat("Vertical", 1, 0.1f, Time.fixedDeltaTime);
         animator.SetFloat("WalkSpeed", walkAnimationSpeed);
+        //start moving the npc
         Move();
     }
 
@@ -63,15 +64,16 @@ public class NPCScript : MonoBehaviour
 
     private void MoveLine()
     {
+        //move rigid body towards the waypoint 
         rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentWaypoint.position, moveSpeed * Time.fixedDeltaTime));
 
+        //if npc is nearby the currentwaypoint set a new one... 
         if (Vector3.Distance(transform.position, currentWaypoint.position) < 0.5)
         {
-
             currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
-            LookAt(currentWaypoint.position);
+            //..and also look at the new waypoint (but ignore the y-axis.
+            LookAtIgnoreYaxis(currentWaypoint.position);
         }
-
     }
 
 
@@ -81,42 +83,51 @@ public class NPCScript : MonoBehaviour
 
     private List<Vector3> curvePoints = new List<Vector3>();
 
-
-    //TODO: IMPROVE THIS CODE.
     private void MoveCurve() {
-        //first item in the curve is curvecontrol 
+        //first item in the curve is the controlpoint 
         Transform curveControl = currentWaypoint.GetChild(0);
-        //initiate curvePoints 
+        
+        //if the curveline isn't broken into multiple fragments 
         if (curvePoints.Count == 0 )
         {
             for (int i = 1; i < amountOfPointsCurve + 1; i++)
             {
-                float t = i / (float)amountOfPointsCurve;
-                Vector3 pointPos = waypoints.CalculateQuadraticBezierPoint(t, currentWaypoint.position, curveControl.position, waypoints.GetNextWayPoint(currentWaypoint).position); 
+                //didnt know how to name this variable.. naming could be incorrect mathematically 
+                float fractionOfLine = i / (float)amountOfPointsCurve;
+                
+                //by looking at the current waypoint (the position of the curvecontrol and the next waypoint, a point in a curve is calculated and added to the list,
+                //a point is saved to the curvepoints list
+                Vector3 pointPos = waypoints.CalculateQuadraticBezierPoint(fractionOfLine, currentWaypoint.position, curveControl.position, waypoints.GetNextWayPoint(currentWaypoint).position); 
                 curvePoints.Add(pointPos);
             } 
         }
 
+        //if there are more than one points left. 
         else if (curvePoints.Count > 0)
         {
+            //move towards the first point 
             rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.fixedDeltaTime));
 
+            // if npc comes close to curvepoint
             if (Vector3.Distance(transform.position, curvePoints[0]) < 0.5)
             {
+                //lookat 
                 Vector3 lookat = curvePoints[0];
                 curvePoints.RemoveAt(0);
-                LookAt(lookat);
+                LookAtIgnoreYaxis(lookat);
             }
 
+            //if npc completed the curve
             if (curvePoints.Count == 0)
             {
+                //look at next
                 currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
-                LookAt(currentWaypoint.position); 
+                LookAtIgnoreYaxis(currentWaypoint.position); 
             }
         }
     }
 
-    private void LookAt(Vector3 lookat)
+    private void LookAtIgnoreYaxis(Vector3 lookat)
     {
         lookat.y = transform.position.y;
         transform.LookAt(lookat);

@@ -11,42 +11,34 @@ public enum RouteType
 
 public class Waypoints : MonoBehaviour
 {
-    public RouteType RouteType;
+    public RouteType RouteType = RouteType.circular;
     public int amountOfPointsCurve = 50;
 
-    private void Awake()
-    {
-        //default is circular. 
-        if (RouteType == RouteType.Undefined) {
-            RouteType = RouteType.circular;     
-        }
-    }
 
+
+    //draw wireframes of the route
     private void DrawWireFrames() {
 
         foreach (Transform t in transform)
         {
            Gizmos.color = Color.blue;
             
+            //if curve
             if (IsCurve(t))
             {
-                Gizmos.color = Color.blue; 
                 Gizmos.DrawWireSphere(t.position, 1f);
+                //curvecontrol must be black 
                 Gizmos.color = Color.black;
                 Gizmos.DrawWireSphere(t.GetChild(0).position, 1f);
-                Gizmos.color = Color.blue;
+                
             }
             else {
-
-                
-                //Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(t.position, 1f);
-                //Gizmos.color = Color.blue;
             }
         }
     }
 
-
+    //
     private void OnDrawGizmos()
     {
         DrawWireFrames(); 
@@ -62,10 +54,8 @@ public class Waypoints : MonoBehaviour
     }
 
     public void DrawGizmoLine(Transform from, Transform towards) {
+
         //if the line is from a curve, draw small spheres to form a dotted line.
-
-        
-
         if (IsCurve(from))
         {
             for (int i = 1; i < amountOfPointsCurve + 1; i++)
@@ -79,13 +69,10 @@ public class Waypoints : MonoBehaviour
         else {
             Gizmos.color = Color.blue; 
             Gizmos.DrawLine(from.position, towards.position);
-        }
-    
-        //if the line is drawn towards a curve, connect to the first child instead of the father 
-
-        
+        }        
     }
 
+    //dont ask me about math details, but this works
     public Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
         float u = 1 - t;
         float uSquared = u * u; 
@@ -95,16 +82,20 @@ public class Waypoints : MonoBehaviour
     }
 
 
+    //checks if child is the first child
     public bool IsFirstChild(Transform wayPoint) {
         return wayPoint == transform.GetChild(0); 
     }
 
+
+    //Returns the next waypoint
     public Transform GetNextWayPoint(Transform currentWaypoint)
     {
         //
         if (currentWaypoint == null || currentWaypoint.GetSiblingIndex() >= transform.childCount-1){
             return transform.GetChild(0);
         }
+        //
         else
         {
             return transform.GetChild(currentWaypoint.GetSiblingIndex() + 1);
