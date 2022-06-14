@@ -5,7 +5,7 @@ public class NPCScript : MonoBehaviour
 {
     public float walkAnimationSpeed; 
     public Animator animator;
-    public new Rigidbody rigidbody;
+    public  Rigidbody _rigidbody;
     
 
     [SerializeField] private Waypoints waypoints;
@@ -22,6 +22,11 @@ public class NPCScript : MonoBehaviour
 
     private void Awake()
     {
+
+        _rigidbody = this.GetComponent<Rigidbody>();
+
+        if (_rigidbody == null) return; 
+
         //If no startingwaypoint is defined, get startingwaypoint from waypoints. 
         if (StartingWaypoint == null)
         {
@@ -65,7 +70,7 @@ public class NPCScript : MonoBehaviour
     private void MoveLine()
     {
         //move rigid body towards the waypoint 
-        rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentWaypoint.position, moveSpeed * Time.fixedDeltaTime));
+        _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentWaypoint.position, moveSpeed * Time.fixedDeltaTime));
 
         //if npc is nearby the currentwaypoint set a new one... 
         if (Vector3.Distance(transform.position, currentWaypoint.position) < 0.5)
@@ -106,7 +111,7 @@ public class NPCScript : MonoBehaviour
         else if (curvePoints.Count > 0)
         {
             //move towards the first point 
-            rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.fixedDeltaTime));
+            _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.fixedDeltaTime));
 
             // if npc comes close to curvepoint
             if (Vector3.Distance(transform.position, curvePoints[0]) < 0.5)

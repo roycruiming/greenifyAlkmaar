@@ -53,7 +53,7 @@ public class Waypoints : MonoBehaviour
 
     }
 
-    public void DrawGizmoLine(Transform from, Transform towards) {
+    private void DrawGizmoLine(Transform from, Transform towards) {
 
         //if the line is from a curve, draw small spheres to form a dotted line.
         if (IsCurve(from))
