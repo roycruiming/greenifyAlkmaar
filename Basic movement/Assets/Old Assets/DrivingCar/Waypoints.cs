@@ -76,11 +76,11 @@ public class Waypoints : MonoBehaviour
         Vector3 p = uSquared * p0 + 2 * u * t * p1 + tSquared * p2;
         return p; 
     }
-    public bool IsFirstChild(Transform wayPoint) {
+    private bool IsFirstChild(Transform wayPoint) {
         return wayPoint == transform.GetChild(0); 
     }
 
-    public bool IsCurve(Transform fromWaypoint) {
+    private bool IsCurve(Transform fromWaypoint) {
         return !(fromWaypoint.childCount == 0);
     }
 
@@ -107,7 +107,7 @@ public class Waypoints : MonoBehaviour
              //... this gameobject will act as a controlpoint for the curve
             Transform curveControlPoint = currentWaypoint.GetChild(0); 
             
-            //break up the line in 
+            //break up the line in the amount of points
             for (int i = 1; i < amountOfPointsCurve + 1; i++)
             {
                 float fractionOfLine = i / (float)amountOfPointsCurve;

@@ -53,7 +53,7 @@ public class NPCScript : MonoBehaviour
     }
 
 
-    private void LookAtIgnoreYaxis(Vector3 lookat)
+    private void LookAtButIgnoreYaxis(Vector3 lookat)
     {
         lookat.y = transform.position.y;
         transform.LookAt(lookat);
@@ -70,7 +70,7 @@ public class NPCScript : MonoBehaviour
             return;
         }
 
-        LookAtIgnoreYaxis(currentRoute[0]);
+        LookAtButIgnoreYaxis(currentRoute[0]);
         _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentRoute[0], moveSpeed * Time.fixedDeltaTime));
 
 
