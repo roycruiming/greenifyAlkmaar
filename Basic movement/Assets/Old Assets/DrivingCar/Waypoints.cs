@@ -71,7 +71,7 @@ public class Waypoints : MonoBehaviour
 
 
     //dont ask me about math details, but this works
-    public Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
+    private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
         float u = 1 - t;
         float uSquared = u * u; 
         float tSquared = t * t;
@@ -96,7 +96,8 @@ public class Waypoints : MonoBehaviour
 
         //int currentWayPointIndex = destinationWaypoint.GetSiblingIndex();
         int currentIndex = destinationWaypoint.GetSiblingIndex() - 1;
-        if (currentIndex == -1) { currentIndex = transform.childCount - 1; }
+        if (currentIndex == -1) { 
+            currentIndex = transform.childCount - 1; }
 
 
         Transform currentWaypoint = transform.GetChild(currentIndex);
@@ -127,7 +128,9 @@ public class Waypoints : MonoBehaviour
         return list; 
     }
 
-    public Transform GetNextWayPoint(Transform currentWaypoint)
+
+    //returns the next waypoint, or the first one when null in parameter. 
+    public Transform GetFirstOrNextWayPoint(Transform currentWaypoint = null)
     {
         if (currentWaypoint == null || currentWaypoint.GetSiblingIndex() >= transform.childCount - 1)
         {

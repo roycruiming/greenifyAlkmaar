@@ -13,7 +13,7 @@ public class NPCScript : MonoBehaviour
     [SerializeField] private Waypoints waypoints;
     [SerializeField] private float moveSpeed = 8f;
     private Animator animator;
-    private  Rigidbody _rigidbody;
+    private Rigidbody _rigidbody;
     //the waypoint the npc is walking towards
     private Transform destinationWayPoint;
     //the path between waypoints the npc is traversing. 
@@ -22,29 +22,34 @@ public class NPCScript : MonoBehaviour
     public Transform StartingWaypoint;
 
 
-
-    private void SetupAnimation() {
-        if (animator == null) return; 
-        animator.SetFloat("WalkSpeed", walkAnimationSpeed);
-        animator.SetFloat("Vertical", 1);
-    }
-
-    //private void 
-
-
     private void Awake()
     {
         _rigidbody = this.GetComponent<Rigidbody>();
         animator = this.GetComponent<Animator>();
-        SetupAnimation(); 
-        InitRoute(); 
+        SetupAnimation();
+        InitRoute();
     }
+
+    private void SetupAnimation()
+    {
+        if (animator == null) return;
+        animator.SetFloat("WalkSpeed", walkAnimationSpeed);
+        animator.SetFloat("Vertical", 1);
+    }
+
 
     private void InitRoute()
     {
-        destinationWayPoint = waypoints.GetNextWayPoint(StartingWaypoint); 
+        if (StartingWaypoint == null)
+        {
+            this.transform.position = waypoints.GetFirstOrNextWayPoint().position;
+        }
+        else
+        {
+            this.transform.position = StartingWaypoint.position;
+        }
+        destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint);
         currentRoute = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
-        this.transform.position = destinationWayPoint.position; 
     }
 
 
@@ -58,27 +63,21 @@ public class NPCScript : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (currentRoute.Count > 0)
+        if (currentRoute.Count == 0)
         {
-
-            LookAtIgnoreYaxis(currentRoute[0]); 
-            _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentRoute[0], moveSpeed * Time.fixedDeltaTime));
-
-            if (Vector3.Distance(transform.position, currentRoute[0]) < 0.1)
-            {
-
-                currentRoute.RemoveAt(0);
-            }
+            destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
+            currentRoute = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
+            return;
         }
 
-        else
-        {
-            destinationWayPoint = waypoints.GetNextWayPoint(destinationWayPoint);
-            currentRoute = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);    
-        }
+        LookAtIgnoreYaxis(currentRoute[0]);
+        _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentRoute[0], moveSpeed * Time.fixedDeltaTime));
 
 
+        if (Vector3.Distance(transform.position, currentRoute[0]) < 0.1)
+            currentRoute.RemoveAt(0);
 
-    }    
-    
+    }
 }
+
+
