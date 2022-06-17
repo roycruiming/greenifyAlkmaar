@@ -14,12 +14,12 @@ public class WaypointMover : MonoBehaviour
 
 
     public void Move() {
-        if (waypoints.RouteType == RouteType.Linear && waypoints.IsFirstChild(currentWaypoint))
+        if (waypoints.RouteType == RouteType.Linear && waypoints.MustTeleportBack(currentWaypoint))
         {
             transform.position = currentWaypoint.position;
         }
 
-        if (waypoints.IsCurve(currentWaypoint))
+        if (true) //(waypoints.IsCurve(currentWaypoint))
         {
             MoveCurve();
             return;

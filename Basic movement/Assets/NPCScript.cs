@@ -16,11 +16,10 @@ public class NPCScript : MonoBehaviour
     private Rigidbody _rigidbody;
     //the waypoint the npc is walking towards
     private Transform destinationWayPoint;
-    //the path between waypoints the npc is traversing. 
+    //the path between waypoints the npc is traversing towards the next waypoint. 
     private List<Vector3> currentRoute;
     //the waypoint that functions as the spawn/ startingwaypoint 
-    public Transform StartingWaypoint;
-
+    public waypoint StartingWaypoint;
 
     private void Awake()
     {
@@ -40,43 +39,56 @@ public class NPCScript : MonoBehaviour
 
     private void InitRoute()
     {
+        //if startingwaypoint is null..., 
         if (StartingWaypoint == null)
         {
+            //... get startingwaypoint from getnextwaypoint method, and spawn player there
             this.transform.position = waypoints.GetFirstOrNextWayPoint().position;
         }
         else
         {
-            this.transform.position = StartingWaypoint.position;
+            //else spawn on starting wayingpoint.  
+            this.transform.position = StartingWaypoint.transform.position;
         }
-        destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint);
+        //set destination on next waypoint
+        destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint.transform);
+        //ask for the road towards the destination waypoint. (straight line if no curve, curve if curve) 
         currentRoute = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
-    }
-
-
-    private void LookAtButIgnoreYaxis(Vector3 lookat)
-    {
-        lookat.y = transform.position.y;
-        transform.LookAt(lookat);
     }
 
 
     private void FixedUpdate()
     {
 
-        if (currentRoute.Count == 0)
-        {
-            destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
-            currentRoute = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
-            return;
+        if (waypoints.MustTeleportBack(destinationWayPoint)) {
+            transform.position = destinationWayPoint.position;
+            currentRoute.Clear(); 
         }
 
+        // if the path toward the next waypoint is traversed, 
+         if (currentRoute.Count == 0)
+        {
+            //set next destination
+            destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
+            //ask for next route towards destination
+            currentRoute = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
+        }
+
+        //look at the coordinates but ignore height 
         LookAtButIgnoreYaxis(currentRoute[0]);
+        //move npc towards coordinates; 
         _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentRoute[0], moveSpeed * Time.fixedDeltaTime));
-
-
+        //if player is close remove coordinate from list 
         if (Vector3.Distance(transform.position, currentRoute[0]) < 0.1)
             currentRoute.RemoveAt(0);
+    }
 
+
+    //look at the next waypoint
+    private void LookAtButIgnoreYaxis(Vector3 lookat)
+    {
+        lookat.y = transform.position.y;
+        transform.LookAt(lookat);
     }
 }
 

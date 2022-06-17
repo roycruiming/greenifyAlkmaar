@@ -113,7 +113,7 @@ public class Waypoints : MonoBehaviour
         return list; 
     }
 
-    //returns the next waypoint, or the first one when null in parameter. 
+    //returns the next waypoint, or the first one when parameter is null. 
     public Transform GetFirstOrNextWayPoint(Transform currentWaypoint = null)
     {
         if (currentWaypoint == null || currentWaypoint.GetSiblingIndex() >= transform.childCount - 1)
@@ -123,6 +123,25 @@ public class Waypoints : MonoBehaviour
         else
         {
             return transform.GetChild(currentWaypoint.GetSiblingIndex() + 1);
+        }
+    }
+
+    public bool MustTeleportBack(Transform t)
+    {
+        if (this.RouteType == RouteType.Linear && t == transform.GetChild(0))  return true; 
+        else return false; 
+    }
+
+    
+
+
+  
+    private void OnValidate()
+    {
+        foreach(Transform t in transform)
+        {
+            if(t.GetComponent<waypoint>() == null)
+            t.gameObject.AddComponent(typeof(waypoint)); 
         }
     }
 }
