@@ -14,8 +14,6 @@ public class Waypoints : MonoBehaviour
     public RouteType RouteType = RouteType.circular;
     public int amountOfPointsCurve = 50;
 
-
-
     //draw wireframes of the route
     private void DrawWireFrames() {
         foreach (Transform t in transform)
@@ -35,7 +33,6 @@ public class Waypoints : MonoBehaviour
             }
         }
     }
-
 
     private void OnDrawGizmos()
     {
@@ -67,7 +64,6 @@ public class Waypoints : MonoBehaviour
         }        
     }
 
-
     //dont ask me about math details, but this works
     private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
         float u = 1 - t;
@@ -84,22 +80,14 @@ public class Waypoints : MonoBehaviour
         return !(fromWaypoint.childCount == 0);
     }
 
-
- 
-
-    //Returns the next waypoint
     public List<Vector3> GetRouteTowardsWaypoint(Transform destinationWaypoint)
     {
         List<Vector3> list = new List<Vector3>();
-
-        //int currentWayPointIndex = destinationWaypoint.GetSiblingIndex();
         int currentIndex = destinationWaypoint.GetSiblingIndex() - 1;
         if (currentIndex == -1) { 
             currentIndex = transform.childCount - 1; }
 
-
         Transform currentWaypoint = transform.GetChild(currentIndex);
-
 
         //If the waypoint contains another gameobject...
         if (IsCurve(currentWaypoint)) 
@@ -115,7 +103,6 @@ public class Waypoints : MonoBehaviour
                 list.Add(pointPos);
             }
         }
-
         else
         {
             //when the 
@@ -125,7 +112,6 @@ public class Waypoints : MonoBehaviour
         }
         return list; 
     }
-
 
     //returns the next waypoint, or the first one when null in parameter. 
     public Transform GetFirstOrNextWayPoint(Transform currentWaypoint = null)
