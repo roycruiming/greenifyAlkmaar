@@ -56,12 +56,10 @@ public class Waypoints : MonoBehaviour
         //if the line is from a curve, draw small spheres to form a dotted line.
         if (IsCurve(from))
         {
-            for (int i = 1; i < amountOfPointsCurve + 1; i++)
-            {
-                float t = i / (float)amountOfPointsCurve;
+            foreach (Vector3 coordinate in GetRouteTowardsWaypoint(towards)) {
                 Gizmos.color = Color.red;
-                Gizmos.DrawSphere(CalculateQuadraticBezierPoint(t, from.position, from.GetChild(0).position, towards.position), 0.1f);
-            }       
+                Gizmos.DrawSphere(coordinate, 0.1f); 
+            }     
         }
         else {
             Gizmos.color = Color.blue; 
