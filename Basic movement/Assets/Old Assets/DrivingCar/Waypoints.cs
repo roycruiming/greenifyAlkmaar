@@ -69,6 +69,10 @@ public class Waypoints : MonoBehaviour
         }        
     }
 
+
+
+
+
     //dont ask me about math details, but this works
     public Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
         float u = 1 - t;
@@ -86,12 +90,15 @@ public class Waypoints : MonoBehaviour
 
 
 
+    public Transform GetNextWaypoint(Transform currentWayPoint) {
+        throw new NotImplementedException();     
+    }
  
 
     //Returns the next waypoint
-    public Vector3 GetRouteTowardsNextWaypoint(Transform nextWaypoint)
+    public List<Vector3> GetRouteTowardsNextWaypoint(Transform nextWaypoint)
     {
-        return new Vector3(); 
+        return new List<Vector3>();
     }
 
     public bool IsCurve(Transform t)

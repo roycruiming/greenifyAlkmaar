@@ -13,7 +13,7 @@ public class NPCScript : MonoBehaviour
     [SerializeField] private float moveSpeed = 8f;
 
     //the waypoint the npc is walking towards
-    private Transform destenationWayPoint;
+    private Transform destinationWayPoint;
     //the path between waypoints the npc is traversing. 
     private List<Vector3> currentRoute;
     //the waypoint that functions as the spawn/ startingwaypoint 
@@ -25,7 +25,10 @@ public class NPCScript : MonoBehaviour
     private void Awake()
     {
         _rigidbody = this.GetComponent<Rigidbody>();
-        StartCoroutine(Move());
+
+        animator.SetFloat("Vertical", 1, 0.1f, Time.fixedDeltaTime);
+        animator.SetFloat("WalkSpeed", walkAnimationSpeed);
+
     }
 
 
@@ -36,25 +39,24 @@ public class NPCScript : MonoBehaviour
     }
 
 
-     private IEnumerator Move() {
+    private void FixedUpdate()
+    {
 
-        animator.SetFloat("Vertical", 1, 0.1f, Time.fixedDeltaTime);
-        animator.SetFloat("WalkSpeed", walkAnimationSpeed);
-
-
-        while (true)
+        if (currentRoute.Count > 0)
         {
-            //path isnt traversed
-            if (currentRoute.Count > 0)
-            {
-                _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentRoute[0], moveSpeed * Time.fixedDeltaTime));
-                currentRoute.RemoveAt(0); 
-            }
-
-            //path is traversed, set next destenationWaypoint and get next route,   
-            else {
-                currentRoute = waypoints.GetRouteTowardsNextWaypoint(); 
-            }  
+            _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentRoute[0], moveSpeed * Time.fixedDeltaTime));
+            if (Vector3.Distance(transform.position, currentRoute[0]) < 0.5)  currentRoute.RemoveAt(0);
         }
-    }
+
+        else
+        {
+            destinationWayPoint = waypoints.GetNextWaypoint(destinationWayPoint); 
+            currentRoute = waypoints.GetRouteTowardsNextWaypoint(destinationWayPoint); 
+            
+        }
+
+
+
+    }    
+    
 }
