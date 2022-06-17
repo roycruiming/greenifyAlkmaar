@@ -1,17 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class NPCScript : MonoBehaviour
 {
-    public float walkAnimationSpeed; 
-    public Animator animator;
-    public  Rigidbody _rigidbody;
-    
-
+    [SerializeField] private float walkAnimationSpeed;
     [SerializeField] private Waypoints waypoints;
     [SerializeField] private float moveSpeed = 8f;
-
+    private Animator animator;
+    private  Rigidbody _rigidbody;
     //the waypoint the npc is walking towards
     private Transform destinationWayPoint;
     //the path between waypoints the npc is traversing. 
@@ -21,14 +23,28 @@ public class NPCScript : MonoBehaviour
 
 
 
+    private void SetupAnimation() {
+        if (animator == null) return; 
+        animator.SetFloat("WalkSpeed", walkAnimationSpeed);
+        animator.SetFloat("Vertical", 1);
+    }
+
+    //private void 
+
 
     private void Awake()
     {
         _rigidbody = this.GetComponent<Rigidbody>();
+        animator = this.GetComponent<Animator>();
+        SetupAnimation(); 
+        InitRoute(); 
+    }
 
-        animator.SetFloat("Vertical", 1, 0.1f, Time.fixedDeltaTime);
-        animator.SetFloat("WalkSpeed", walkAnimationSpeed);
-
+    private void InitRoute()
+    {
+        destinationWayPoint = waypoints.GetNextWayPoint(StartingWaypoint); 
+        currentRoute = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
+        this.transform.position = destinationWayPoint.position; 
     }
 
 
@@ -44,15 +60,21 @@ public class NPCScript : MonoBehaviour
 
         if (currentRoute.Count > 0)
         {
+
+            LookAtIgnoreYaxis(currentRoute[0]); 
             _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentRoute[0], moveSpeed * Time.fixedDeltaTime));
-            if (Vector3.Distance(transform.position, currentRoute[0]) < 0.5)  currentRoute.RemoveAt(0);
+
+            if (Vector3.Distance(transform.position, currentRoute[0]) < 0.1)
+            {
+
+                currentRoute.RemoveAt(0);
+            }
         }
 
         else
         {
-            destinationWayPoint = waypoints.GetNextWaypoint(destinationWayPoint); 
-            currentRoute = waypoints.GetRouteTowardsNextWaypoint(destinationWayPoint); 
-            
+            destinationWayPoint = waypoints.GetNextWayPoint(destinationWayPoint);
+            currentRoute = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);    
         }
 
 

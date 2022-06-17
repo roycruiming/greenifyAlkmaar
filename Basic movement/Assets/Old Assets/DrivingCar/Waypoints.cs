@@ -18,16 +18,14 @@ public class Waypoints : MonoBehaviour
 
     //draw wireframes of the route
     private void DrawWireFrames() {
-
         foreach (Transform t in transform)
         {
            Gizmos.color = Color.blue;
             
-            //if curve
+            //if curve (gameobject is parent of child)
             if (IsCurve(t))
             {
                 Gizmos.DrawWireSphere(t.position, 1f);
-                //curvecontrol must be black 
                 Gizmos.color = Color.black;
                 Gizmos.DrawWireSphere(t.GetChild(0).position, 1f);
                 
@@ -37,6 +35,8 @@ public class Waypoints : MonoBehaviour
             }
         }
     }
+
+
     private void OnDrawGizmos()
     {
         DrawWireFrames(); 
@@ -70,9 +70,6 @@ public class Waypoints : MonoBehaviour
     }
 
 
-
-
-
     //dont ask me about math details, but this works
     public Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
         float u = 1 - t;
@@ -81,102 +78,67 @@ public class Waypoints : MonoBehaviour
         Vector3 p = uSquared * p0 + 2 * u * t * p1 + tSquared * p2;
         return p; 
     }
-
-    
-    //checks if child is the first child
     public bool IsFirstChild(Transform wayPoint) {
         return wayPoint == transform.GetChild(0); 
     }
 
-
-
-    public Transform GetNextWaypoint(Transform currentWayPoint) {
-        throw new NotImplementedException();     
+    public bool IsCurve(Transform fromWaypoint) {
+        return !(fromWaypoint.childCount == 0);
     }
+
+
  
 
     //Returns the next waypoint
-    public List<Vector3> GetRouteTowardsNextWaypoint(Transform nextWaypoint)
+    public List<Vector3> GetRouteTowardsWaypoint(Transform destinationWaypoint)
     {
-        return new List<Vector3>();
+        List<Vector3> list = new List<Vector3>();
+
+        //int currentWayPointIndex = destinationWaypoint.GetSiblingIndex();
+        int currentIndex = destinationWaypoint.GetSiblingIndex() - 1;
+        if (currentIndex == -1) { currentIndex = transform.childCount - 1; }
+
+
+        Transform currentWaypoint = transform.GetChild(currentIndex);
+
+
+        //If the waypoint contains another gameobject...
+        if (IsCurve(currentWaypoint)) 
+        {
+             //... this gameobject will act as a controlpoint for the curve
+            Transform curveControlPoint = currentWaypoint.GetChild(0); 
+            
+            //break up the line in 
+            for (int i = 1; i < amountOfPointsCurve + 1; i++)
+            {
+                float fractionOfLine = i / (float)amountOfPointsCurve;
+                Vector3 pointPos = CalculateQuadraticBezierPoint(fractionOfLine, currentWaypoint.position, curveControlPoint.position, destinationWaypoint.position);
+                list.Add(pointPos);
+            }
+        }
+
+        else
+        {
+            //when the 
+            transform.GetChild(0);
+            //when route to next waypoint is empty
+            list.Add(destinationWaypoint.position);
+        }
+        return list; 
     }
 
-    public bool IsCurve(Transform t)
+    public Transform GetNextWayPoint(Transform currentWaypoint)
     {
-        return t.childCount == 1;         
+        if (currentWaypoint == null || currentWaypoint.GetSiblingIndex() >= transform.childCount - 1)
+        {
+            return transform.GetChild(0);
+        }
+        else
+        {
+            return transform.GetChild(currentWaypoint.GetSiblingIndex() + 1);
+        }
     }
-
-
-
-
 }
-
-
-//
-//private void MoveLine()
-//{
-//    //move rigid body towards the waypoint 
-//    _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentDestination.position, moveSpeed * Time.fixedDeltaTime));
-
-//    //if npc is nearby the currentwaypoint set a new one... 
-//    if (Vector3.Distance(transform.position, currentDestination.position) < 0.5)
-//    {
-//        currentDestination = waypoints.GetNextCoordinates(currentDestination);
-//        //..and also look at the new waypoint (but ignore the y-axis.
-//        LookAtIgnoreYaxis(currentDestination.position);
-//    }
-//}
-
-
-
-
-
-
-//private List<Vector3> curvePoints = new List<Vector3>();
-
-//private void MoveCurve() {
-//    //first item in the curve is the controlpoint 
-//    //Transform curveControl = currentDestination.GetChild(0);
-
-//    //if the curveline isn't broken into multiple fragments 
-//    if (curvePoints.Count == 0 )
-//    {
-//        for (int i = 1; i < amountOfPointsCurve + 1; i++)
-//        {
-//            //didnt know how to name this variable.. naming could be incorrect mathematically 
-//            float fractionOfLine = i / (float)amountOfPointsCurve;
-
-//            //by looking at the current waypoint (the position of the curvecontrol and the next waypoint, a point in a curve is calculated and added to the list,
-//            //a point is saved to the curvepoints list
-//            Vector3 pointPos = waypoints.CalculateQuadraticBezierPoint(fractionOfLine, currentDestination.position, curveControl.position, waypoints.GetNextCoordinates(currentDestination).position); 
-//            curvePoints.Add(pointPos);
-//        } 
-//    }
-
-//    //if there are more than one points left. 
-//    else if (curvePoints.Count > 0)
-//    {
-//        //move towards the first point 
-//        _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, curvePoints[0], moveSpeed * Time.fixedDeltaTime));
-
-//        // if npc comes close to curvepoint
-//        if (Vector3.Distance(transform.position, curvePoints[0]) < 0.5)
-//        {
-//            //lookat 
-//            Vector3 lookat = curvePoints[0];
-//            curvePoints.RemoveAt(0);
-//            LookAtIgnoreYaxis(lookat);
-//        }
-
-//        //if npc completed the curve
-//        if (curvePoints.Count == 0)
-//        {
-//            //look at next
-//            currentDestination = waypoints.GetNextCoordinates(currentDestination);
-//           //LookAtIgnoreYaxis(currentDestination.position); 
-//        }
-//    }
-//}
 
 
 
