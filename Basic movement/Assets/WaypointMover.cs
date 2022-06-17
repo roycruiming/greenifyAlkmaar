@@ -29,7 +29,7 @@ public class WaypointMover : MonoBehaviour
 
         if (Vector3.Distance(transform.position, currentWaypoint.position) < 0.5)
         {
-            currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
+           // currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
             lookat(currentWaypoint);
         }
 
@@ -51,8 +51,8 @@ public class WaypointMover : MonoBehaviour
             for (int i = 1; i < 50 + 1; i++)
             {
                 float t = i / (float)50;
-                Vector3 pointPos = waypoints.CalculateQuadraticBezierPoint(t, currentWaypoint.position, curveControl.position, waypoints.GetNextWayPoint(currentWaypoint).position);
-                curvePoints.Add(pointPos);
+                //Vector3 pointPos = waypoints.CalculateQuadraticBezierPoint(t, currentWaypoint.position, curveControl.position, waypoints.GetNextWayPoint(currentWaypoint).position);
+                //curvePoints.Add(pointPos);
 
             }
 
@@ -72,7 +72,7 @@ public class WaypointMover : MonoBehaviour
 
             if (curvePoints.Count == 0)
             {
-                currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
+                //currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
               
             }
         }
@@ -88,7 +88,7 @@ public class WaypointMover : MonoBehaviour
     {
         if (StartingWaypoint == null)
         {
-            currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
+            //currentWaypoint = waypoints.GetNextWayPoint(currentWaypoint);
         }
         else { currentWaypoint = StartingWaypoint; }
 
