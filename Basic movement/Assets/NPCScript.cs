@@ -16,8 +16,8 @@ public class NPCScript : MonoBehaviour
     private Rigidbody _rigidbody;
     //the waypoint the npc is walking towards
     private Transform destinationWayPoint;
-    //the path between waypoints the npc is traversing towards the next waypoint. 
-    private List<Vector3> currentRoute;
+    //list of positions  
+    private List<Vector3> CoordinatesTowardsDestination;
     //the waypoint that functions as the spawn/ startingwaypoint 
     public waypoint StartingWaypoint;
 
@@ -26,7 +26,7 @@ public class NPCScript : MonoBehaviour
         _rigidbody = this.GetComponent<Rigidbody>();
         animator = this.GetComponent<Animator>();
         SetupAnimation();
-        InitRoute();
+        InitFirstRoute();
     }
 
     private void SetupAnimation()
@@ -37,50 +37,42 @@ public class NPCScript : MonoBehaviour
     }
 
 
-    private void InitRoute()
+    private void InitFirstRoute()
     {
-        //if startingwaypoint is null..., 
-        if (StartingWaypoint == null)
-        {
-            //... get startingwaypoint from getnextwaypoint method, and spawn player there
-            this.transform.position = waypoints.GetFirstOrNextWayPoint().position;
-        }
-        else
-        {
-            //else spawn on starting wayingpoint.  
-            this.transform.position = StartingWaypoint.transform.position;
-        }
+        //if startingwaypoint is null get startingwaypoint from getnextwaypoint method, and spawn player there 
+        if (StartingWaypoint == null) this.transform.position = waypoints.GetFirstOrNextWayPoint().position;
+        //else spawn on starting wayingpoint.  
+        else this.transform.position = StartingWaypoint.transform.position;
         //set destination on next waypoint
         destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint.transform);
-        //ask for the road towards the destination waypoint. (straight line if no curve, curve if curve) 
-        currentRoute = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
+        //ask for the route towards the destination waypoint. 
+        CoordinatesTowardsDestination = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
     }
 
 
     private void FixedUpdate()
     {
-
-        if (waypoints.MustTeleportBack(destinationWayPoint)) {
+        //if route is linear and destination is first waypoint in hierarchy
+        if (waypoints.IsRouteTypeLinearAndDestinationFirstChildInHierarchy(destinationWayPoint)) {
+            //teleport player to destination
             transform.position = destinationWayPoint.position;
-            currentRoute.Clear(); 
+            CoordinatesTowardsDestination.Clear(); 
         }
-
-        // if the path toward the next waypoint is traversed, 
-         if (currentRoute.Count == 0)
+        // if the path toward the next waypoint is completed. 
+         if (CoordinatesTowardsDestination.Count == 0)
         {
             //set next destination
             destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
-            //ask for next route towards destination
-            currentRoute = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
+            //and ask for for a new path 
+            CoordinatesTowardsDestination = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
         }
-
         //look at the coordinates but ignore height 
-        LookAtButIgnoreYaxis(currentRoute[0]);
+        LookAtButIgnoreYaxis(CoordinatesTowardsDestination[0]);
         //move npc towards coordinates; 
-        _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, currentRoute[0], moveSpeed * Time.fixedDeltaTime));
+        _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, CoordinatesTowardsDestination[0], moveSpeed * Time.fixedDeltaTime));
         //if player is close remove coordinate from list 
-        if (Vector3.Distance(transform.position, currentRoute[0]) < 0.1)
-            currentRoute.RemoveAt(0);
+        if (Vector3.Distance(transform.position, CoordinatesTowardsDestination[0]) < 0.1)
+            CoordinatesTowardsDestination.RemoveAt(0);
     }
 
 

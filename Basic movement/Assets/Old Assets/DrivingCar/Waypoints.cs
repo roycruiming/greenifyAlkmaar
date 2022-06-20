@@ -12,7 +12,7 @@ public enum RouteType
 public class Waypoints : MonoBehaviour
 {
     public RouteType RouteType = RouteType.circular;
-    public int amountOfPointsCurve = 50;
+    public int amountOfPointsCurve = 20;
 
     //draw wireframes of the route
     private void DrawWireFrames() {
@@ -84,9 +84,7 @@ public class Waypoints : MonoBehaviour
     {
         List<Vector3> list = new List<Vector3>();
         int currentIndex = destinationWaypoint.GetSiblingIndex() - 1;
-        if (currentIndex == -1) { 
-            currentIndex = transform.childCount - 1; }
-
+        if (currentIndex == -1) { currentIndex = transform.childCount - 1; }
         Transform currentWaypoint = transform.GetChild(currentIndex);
 
         //If the waypoint contains another gameobject...
@@ -103,45 +101,28 @@ public class Waypoints : MonoBehaviour
                 list.Add(pointPos);
             }
         }
-        else
-        {
-            //when the 
-            transform.GetChild(0);
-            //when route to next waypoint is empty
-            list.Add(destinationWaypoint.position);
-        }
+        else list.Add(destinationWaypoint.position);
+ 
         return list; 
     }
 
     //returns the next waypoint, or the first one when parameter is null. 
     public Transform GetFirstOrNextWayPoint(Transform currentWaypoint = null)
     {
-        if (currentWaypoint == null || currentWaypoint.GetSiblingIndex() >= transform.childCount - 1)
-        {
-            return transform.GetChild(0);
-        }
-        else
-        {
-            return transform.GetChild(currentWaypoint.GetSiblingIndex() + 1);
-        }
+        if (currentWaypoint == null || currentWaypoint.GetSiblingIndex() >= transform.childCount - 1) return transform.GetChild(0);
+        else return transform.GetChild(currentWaypoint.GetSiblingIndex() + 1);
     }
 
-    public bool MustTeleportBack(Transform t)
+    public bool IsRouteTypeLinearAndDestinationFirstChildInHierarchy(Transform t)
     {
-        if (this.RouteType == RouteType.Linear && t == transform.GetChild(0))  return true; 
-        else return false; 
+        return this.RouteType == RouteType.Linear && t == transform.GetChild(0); 
     }
 
-    
-
-
-  
     private void OnValidate()
     {
         foreach(Transform t in transform)
         {
-            if(t.GetComponent<waypoint>() == null)
-            t.gameObject.AddComponent(typeof(waypoint)); 
+            if(t.GetComponent<waypoint>() == null) t.gameObject.AddComponent(typeof(waypoint)); 
         }
     }
 }

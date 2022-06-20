@@ -14,7 +14,7 @@ public class WaypointMover : MonoBehaviour
 
 
     public void Move() {
-        if (waypoints.RouteType == RouteType.Linear && waypoints.MustTeleportBack(currentWaypoint))
+        if (waypoints.RouteType == RouteType.Linear) //&& waypoints.IsFirstChild(currentWaypoint))
         {
             transform.position = currentWaypoint.position;
         }
