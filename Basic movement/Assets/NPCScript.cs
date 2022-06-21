@@ -15,10 +15,7 @@ public class NPCScript : MonoBehaviour
     private Animator animator;
     private Rigidbody _rigidbody;
     //the waypoint the npc is walking towards
-    private Transform destinationWayPoint;
-    //list of positions  
-    private List<Vector3> CoordinatesTowardsDestination;
-    //the waypoint that functions as the spawn/ startingwaypoint 
+    public Transform destinationWayPoint;
     public waypoint StartingWaypoint;
 
     private void Awake()
@@ -45,34 +42,31 @@ public class NPCScript : MonoBehaviour
         else this.transform.position = StartingWaypoint.transform.position;
         //set destination on next waypoint
         destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint.transform);
-        //ask for the route towards the destination waypoint. 
-        CoordinatesTowardsDestination = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
+        //ask for the route towards the destination waypoint.
+        //
     }
+
 
 
     private void FixedUpdate()
     {
         //if route is linear and destination is first waypoint in hierarchy
-        if (waypoints.IsRouteTypeLinearAndDestinationFirstChildInHierarchy(destinationWayPoint)) {
+        if (waypoints.IsRouteTypeLinearAndDestinationFirstChildInHierarchy(destinationWayPoint))
+        {
             //teleport player to destination
             transform.position = destinationWayPoint.position;
-            CoordinatesTowardsDestination.Clear(); 
         }
-        // if the path toward the next waypoint is completed. 
-         if (CoordinatesTowardsDestination.Count == 0)
-        {
-            //set next destination
+
+
+        float dist = Vector3.Distance(transform.position, destinationWayPoint.position);
+
+        if (Vector3.Distance(transform.position, destinationWayPoint.position) < 0.5)
             destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
-            //and ask for for a new path 
-            CoordinatesTowardsDestination = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
-        }
-        //look at the coordinates but ignore height 
-        LookAtButIgnoreYaxis(CoordinatesTowardsDestination[0]);
-        //move npc towards coordinates; 
-        _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, CoordinatesTowardsDestination[0], moveSpeed * Time.fixedDeltaTime));
-        //if player is close remove coordinate from list 
-        if (Vector3.Distance(transform.position, CoordinatesTowardsDestination[0]) < 0.1)
-            CoordinatesTowardsDestination.RemoveAt(0);
+
+
+        
+
+
     }
 
 

@@ -80,7 +80,7 @@ public class Waypoints : MonoBehaviour
         return !(fromWaypoint.childCount == 0);
     }
 
-    public List<Vector3> GetRouteTowardsWaypoint(Transform destinationWaypoint)
+    private List<Vector3> GetRouteTowardsWaypoint(Transform destinationWaypoint)
     {
         List<Vector3> list = new List<Vector3>();
         int currentIndex = destinationWaypoint.GetSiblingIndex() - 1;
