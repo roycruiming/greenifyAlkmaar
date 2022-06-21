@@ -6,12 +6,12 @@ using UnityEngine;
 
 public enum RouteType
 {
-    Undefined, Linear, circular
+     Linear, circular
 }
 
 public class Waypoints : MonoBehaviour
 {
-    public RouteType RouteType = RouteType.circular;
+    public RouteType RouteType =  RouteType.circular;
     public int amountOfPointsCurve = 20;
 
     //draw wireframes of the route
@@ -36,6 +36,7 @@ public class Waypoints : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+       
         DrawWireFrames(); 
 
         for (int i = 0; i < transform.childCount - 1; i++) {
@@ -54,8 +55,9 @@ public class Waypoints : MonoBehaviour
         if (IsCurve(from))
         {
             //... this gameobject will act as a controlpoint for the curve
-            Transform curveControlPoint = FindCurrentWaypoint(from);
+            Transform curveControlPoint = from.GetChild(0);
 
+            Gizmos.color = Color.red; 
             //break up the line in the amount of points
             for (int i = 1; i < amountOfPointsCurve + 1; i++)
             {

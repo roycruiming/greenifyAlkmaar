@@ -18,6 +18,7 @@ public class NPCScript : MonoBehaviour
     //the waypoint the npc is walking towards
     public Transform destinationWayPoint;
     public Transform StartingWaypoint;
+    public float MovementSpeed = 4f; 
 
     private void Awake()
     {
@@ -51,26 +52,24 @@ public class NPCScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        //find the next position to walk to. 
         Vector3 interpolResult = waypoints.GetPosition(destinationWayPoint, interpolFraction);
-        
+        //look at the position (but ignore y)
         LookAtButIgnoreYaxis(interpolResult); 
-
+        //move towards the position (at constant speed) 
         _rigidbody.MovePosition(
-               Vector3.MoveTowards(this.transform.position, interpolResult , 2f * Time.fixedDeltaTime));
-
-
+               Vector3.MoveTowards(this.transform.position, interpolResult , MovementSpeed * Time.fixedDeltaTime));
+        //if close towards destination
         if (Vector3.Distance(transform.position, destinationWayPoint.position) < 0.1) {
+            //go to next waypoint
             destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
+            //set fraction to zero
             interpolFraction = 0;      
         }
-
-        else if (Vector3.Distance(transform.position, interpolResult) < 0.01) {
+        //else add 0.1 to fraction
+        else if (Vector3.Distance(transform.position, interpolResult) < 0.5) {
             interpolFraction = interpolFraction + 0.1f;
         }
-
-
-        
     }
 
 
