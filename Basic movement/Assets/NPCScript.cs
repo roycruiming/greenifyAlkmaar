@@ -55,17 +55,15 @@ public class NPCScript : MonoBehaviour
     private void FixedUpdate()
     {
 
-        t = (t + Time.fixedDeltaTime);
-        Vector3 c = waypoints.GetPosition(destinationWayPoint, t);
-        LookAtButIgnoreYaxis(c);
-        _rigidbody.MovePosition(c);
-        if (Vector3.Distance(transform.position, destinationWayPoint.position) < 0.5)
-        {
-            destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
+        t = t + Time.deltaTime % 1;
 
+        _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, waypoints.GetPosition(destinationWayPoint, t/100), 4f * Time.fixedDeltaTime));
+
+        if (Vector3.Distance(transform.position, destinationWayPoint.position) < 0.01) {
             t = 0;
-
+            destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint); 
         }
+
 
 
 
