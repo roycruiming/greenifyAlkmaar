@@ -43,32 +43,34 @@ public class NPCScript : MonoBehaviour
         else this.transform.position = StartingWaypoint.transform.position;
         //set destination on next waypoint
         destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint);
-        //ask for the route towards the destination waypoint.
-        //
     }
 
 
 
-    private float t; 
-
+    private float interpolFraction = 0.1f; 
 
     private void FixedUpdate()
     {
 
-        t = t + Time.deltaTime % 1;
+        Vector3 interpolResult = waypoints.GetPosition(destinationWayPoint, interpolFraction);
+        
+        LookAtButIgnoreYaxis(interpolResult); 
 
-        _rigidbody.MovePosition(Vector3.MoveTowards(this.transform.position, waypoints.GetPosition(destinationWayPoint, t/100), 4f * Time.fixedDeltaTime));
+        _rigidbody.MovePosition(
+               Vector3.MoveTowards(this.transform.position, interpolResult , 2f * Time.fixedDeltaTime));
 
-        if (Vector3.Distance(transform.position, destinationWayPoint.position) < 0.01) {
-            t = 0;
-            destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint); 
+
+        if (Vector3.Distance(transform.position, destinationWayPoint.position) < 0.1) {
+            destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
+            interpolFraction = 0;      
+        }
+
+        else if (Vector3.Distance(transform.position, interpolResult) < 0.01) {
+            interpolFraction = interpolFraction + 0.1f;
         }
 
 
-
-
-
-
+        
     }
 
 

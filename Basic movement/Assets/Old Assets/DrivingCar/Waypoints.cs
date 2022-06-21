@@ -85,6 +85,8 @@ public class Waypoints : MonoBehaviour
 
     public Vector3 GetPosition(Transform destinationWaypoint, float t)
     {
+        
+
         Transform  currentWaypoint =  FindCurrentWaypoint(destinationWaypoint);
 
         if (!IsCurve(currentWaypoint))
