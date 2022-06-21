@@ -54,9 +54,8 @@ public class NPCScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        print("wtf"); 
         //if route is linear and destination is first waypoint in hierarchy
-        if (waypoints.IsRouteTypeLinearAndDestinationFirstChildInHierarchy(destinationWayPoint)) {
+        if (waypoints.IsRouteTypeLinearAndIsDestinationFirstChildInHierarchy(destinationWayPoint)) {
             //teleport player to destination
             transform.position = destinationWayPoint.position;
             CoordinatesTowardsDestination.Clear(); 
