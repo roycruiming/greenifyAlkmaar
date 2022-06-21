@@ -9,23 +9,30 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class NPCScript : MonoBehaviour
 {
+    
     [SerializeField] private float walkAnimationSpeed;
     [SerializeField] private Waypoints waypoints;
+    [SerializeField] private float MovementSpeed = 4f;
+    [SerializeField] private float CurveSharpness = 20;
 
 
     private Animator animator;
     private Rigidbody _rigidbody;
     //the waypoint the npc is walking towards
-    public Transform destinationWayPoint;
+    private Transform destinationWayPoint;
     public Transform StartingWaypoint;
-    public float MovementSpeed = 4f; 
+
+
+    private const double MaxDistance = 0.1;
+     
+    
 
     private void Awake()
     {
-        _rigidbody = this.GetComponent<Rigidbody>();
-        animator = this.GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         SetupAnimation();
-        InitFirstRoute();
+        SpawnAndSetFirstDestination();
     }
 
     private void SetupAnimation()
@@ -36,7 +43,7 @@ public class NPCScript : MonoBehaviour
     }
 
 
-    private void InitFirstRoute()
+    private void SpawnAndSetFirstDestination()
     {
         //if startingwaypoint is null get startingwaypoint from getnextwaypoint method, and spawn player there 
         if (StartingWaypoint == null) this.transform.position = waypoints.GetFirstOrNextWayPoint().position;
@@ -48,27 +55,30 @@ public class NPCScript : MonoBehaviour
 
 
 
-    private float interpolFraction = 0.0f; 
+    private float interpolFraction = 0f; 
 
     private void FixedUpdate()
     {
         //find the next position to walk to. 
-        Vector3 interpolResult = waypoints.GetPosition(destinationWayPoint, interpolFraction);
+        Vector3 interpolResult = waypoints.GetInterpolatedPosition(destinationWayPoint, interpolFraction);
+
         //look at the position (but ignore y)
         LookAtButIgnoreYaxis(interpolResult); 
         //move towards the position (at constant speed) 
         _rigidbody.MovePosition(
                Vector3.MoveTowards(this.transform.position, interpolResult , MovementSpeed * Time.fixedDeltaTime));
+        
         //if close towards destination
-        if (Vector3.Distance(transform.position, destinationWayPoint.position) < 0.1) {
+        if (Vector3.Distance(transform.position, destinationWayPoint.position) < MaxDistance) {
+            //set fraction to zero
+            interpolFraction = 0; 
             //go to next waypoint
             destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
-            //set fraction to zero
-            interpolFraction = 0;      
+;      
         }
-        //else add 0.1 to fraction
-        else if (Vector3.Distance(transform.position, interpolResult) < 0.5) {
-            interpolFraction = interpolFraction + 0.1f;
+        //else add 1/Curvesharpness to fraction
+        else if (Vector3.Distance(transform.position, interpolResult) < MaxDistance) {
+            interpolFraction = interpolFraction +  1/CurveSharpness;
         }
     }
 
