@@ -11,12 +11,13 @@ public class NPCScript : MonoBehaviour
 {
     [SerializeField] private float walkAnimationSpeed;
     [SerializeField] private Waypoints waypoints;
-    [SerializeField] private float moveSpeed = 8f;
+
+
     private Animator animator;
     private Rigidbody _rigidbody;
     //the waypoint the npc is walking towards
     public Transform destinationWayPoint;
-    public waypoint StartingWaypoint;
+    public Transform StartingWaypoint;
 
     private void Awake()
     {
@@ -41,30 +42,42 @@ public class NPCScript : MonoBehaviour
         //else spawn on starting wayingpoint.  
         else this.transform.position = StartingWaypoint.transform.position;
         //set destination on next waypoint
-        destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint.transform);
+        destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint);
         //ask for the route towards the destination waypoint.
         //
     }
 
 
 
+    private float t; 
+
+
     private void FixedUpdate()
     {
-        //if route is linear and destination is first waypoint in hierarchy
-        if (waypoints.IsRouteTypeLinearAndDestinationFirstChildInHierarchy(destinationWayPoint))
-        {
-            //teleport player to destination
-            transform.position = destinationWayPoint.position;
-        }
 
+        t = (t + Time.fixedDeltaTime);
+
+
+
+
+        Vector3 c = waypoints.GetPosition(destinationWayPoint, t);
+
+        LookAtButIgnoreYaxis(c);
+
+        _rigidbody.MovePosition(c);
 
         float dist = Vector3.Distance(transform.position, destinationWayPoint.position);
 
         if (Vector3.Distance(transform.position, destinationWayPoint.position) < 0.5)
+        {
             destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
 
+            t = 0;
 
-        
+        }
+
+
+
 
 
     }

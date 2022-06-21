@@ -53,10 +53,13 @@ public class Waypoints : MonoBehaviour
         //if the line is from a curve, draw small spheres to form a dotted line.
         if (IsCurve(from))
         {
-            foreach (Vector3 coordinate in GetRouteTowardsWaypoint(towards)) {
-                Gizmos.color = Color.red;
-                Gizmos.DrawSphere(coordinate, 0.1f); 
-            }     
+            //for () { 
+            
+            //}
+            //foreach (Vector3 coordinate in GetRouteTowardsWaypoint(towards)) {
+            //    Gizmos.color = Color.red;
+            //    Gizmos.DrawSphere(coordinate, 0.1f); 
+            //}     
         }
         else {
             Gizmos.color = Color.blue; 
@@ -80,31 +83,26 @@ public class Waypoints : MonoBehaviour
         return !(fromWaypoint.childCount == 0);
     }
 
-    private List<Vector3> GetRouteTowardsWaypoint(Transform destinationWaypoint)
+    public Vector3 GetPosition(Transform destinationWaypoint, float t)
     {
-        List<Vector3> list = new List<Vector3>();
+        Transform  currentWaypoint =  FindCurrentWaypoint(destinationWaypoint);
+
+        if (!IsCurve(currentWaypoint))
+        {
+            return Vector3.Lerp(currentWaypoint.position, destinationWaypoint.position, t);
+        }
+        else {
+            return CalculateQuadraticBezierPoint(t, currentWaypoint.position, currentWaypoint.GetChild(0).position, destinationWaypoint.position);        
+        }
+    }
+
+    Transform FindCurrentWaypoint(Transform destinationWaypoint)
+    {
         int currentIndex = destinationWaypoint.GetSiblingIndex() - 1;
         if (currentIndex == -1) { currentIndex = transform.childCount - 1; }
-        Transform currentWaypoint = transform.GetChild(currentIndex);
-
-        //If the waypoint contains another gameobject...
-        if (IsCurve(currentWaypoint)) 
-        {
-             //... this gameobject will act as a controlpoint for the curve
-            Transform curveControlPoint = currentWaypoint.GetChild(0); 
-            
-            //break up the line in the amount of points
-            for (int i = 1; i < amountOfPointsCurve + 1; i++)
-            {
-                float fractionOfLine = i / (float)amountOfPointsCurve;
-                Vector3 pointPos = CalculateQuadraticBezierPoint(fractionOfLine, currentWaypoint.position, curveControlPoint.position, destinationWaypoint.position);
-                list.Add(pointPos);
-            }
-        }
-        else list.Add(destinationWaypoint.position);
- 
-        return list; 
+        return transform.GetChild(currentIndex);
     }
+
 
     //returns the next waypoint, or the first one when parameter is null. 
     public Transform GetFirstOrNextWayPoint(Transform currentWaypoint = null)
