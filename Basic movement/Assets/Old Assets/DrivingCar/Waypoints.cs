@@ -64,7 +64,7 @@ public class Waypoints : MonoBehaviour
         }        
     }
 
-    
+    //dont ask me about math details, but this works
     private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2) {
         float u = 1 - t;
         float uSquared = u * u; 
@@ -72,8 +72,9 @@ public class Waypoints : MonoBehaviour
         Vector3 p = uSquared * p0 + 2 * u * t * p1 + tSquared * p2;
         return p; 
     }
-
-
+    private bool IsFirstChild(Transform wayPoint) {
+        return wayPoint == transform.GetChild(0); 
+    }
 
     private bool IsCurve(Transform fromWaypoint) {
         return !(fromWaypoint.childCount == 0);
@@ -112,7 +113,7 @@ public class Waypoints : MonoBehaviour
         else return transform.GetChild(currentWaypoint.GetSiblingIndex() + 1);
     }
 
-    public bool IsRouteTypeLinearAndIsDestinationFirstChildInHierarchy(Transform t)
+    public bool IsRouteTypeLinearAndDestinationFirstChildInHierarchy(Transform t)
     {
         return this.RouteType == RouteType.Linear && t == transform.GetChild(0); 
     }
