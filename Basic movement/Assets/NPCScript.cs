@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 
@@ -19,7 +17,7 @@ public class NPCScript : MonoBehaviour
     private Animator animator;
     private Rigidbody _rigidbody;
     //the waypoint the npc is walking towards
-    private Transform destinationWayPoint;
+    public Transform destinationWayPoint;
     public Transform StartingWaypoint;
 
 
@@ -59,14 +57,25 @@ public class NPCScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //if the destination is the first waypoint in the hierarchy, and 
+        //the route type is linear,  teleport player to first waypoint
+        if (waypoints.RoutTypeIsLinearAndTransformIsFirstInHierarchy(destinationWayPoint))
+        {
+            interpolFraction = 0;
+            _rigidbody.position = destinationWayPoint.position;
+            destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
+            return;
+        }
+
         //find the next position to walk to. 
-        Vector3 interpolResult = waypoints.GetInterpolatedPosition(destinationWayPoint, interpolFraction);
+        Vector3 interpolatedPosition = waypoints.GetInterpolatedPosition(destinationWayPoint, interpolFraction);
 
         //look at the position (but ignore y)
-        LookAtButIgnoreYaxis(interpolResult); 
-        //move towards the position (at constant speed) 
+        LookAtButIgnoreYaxis(interpolatedPosition);
+
+        //move towards the position 
         _rigidbody.MovePosition(
-               Vector3.MoveTowards(this.transform.position, interpolResult , MovementSpeed * Time.fixedDeltaTime));
+               Vector3.MoveTowards(this.transform.position, interpolatedPosition , MovementSpeed * Time.fixedDeltaTime));
         
         //if close towards destination
         if (Vector3.Distance(transform.position, destinationWayPoint.position) < MaxDistance) {
@@ -74,12 +83,14 @@ public class NPCScript : MonoBehaviour
             interpolFraction = 0; 
             //go to next waypoint
             destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
-;      
+            
         }
-        //else add 1/Curvesharpness to fraction
-        else if (Vector3.Distance(transform.position, interpolResult) < MaxDistance) {
+        //else if not close to destination, but close to the interpolated point...
+        else if (Vector3.Distance(transform.position, interpolatedPosition) < MaxDistance) {
+            //... Add to interpolFraction
             interpolFraction = interpolFraction +  1/CurveSharpness;
         }
+
     }
 
 
