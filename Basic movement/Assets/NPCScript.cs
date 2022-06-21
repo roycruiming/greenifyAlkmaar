@@ -56,18 +56,9 @@ public class NPCScript : MonoBehaviour
     {
 
         t = (t + Time.fixedDeltaTime);
-
-
-
-
         Vector3 c = waypoints.GetPosition(destinationWayPoint, t);
-
         LookAtButIgnoreYaxis(c);
-
         _rigidbody.MovePosition(c);
-
-        float dist = Vector3.Distance(transform.position, destinationWayPoint.position);
-
         if (Vector3.Distance(transform.position, destinationWayPoint.position) < 0.5)
         {
             destinationWayPoint = waypoints.GetFirstOrNextWayPoint(destinationWayPoint);
