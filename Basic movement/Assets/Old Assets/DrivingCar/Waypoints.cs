@@ -118,13 +118,7 @@ public class Waypoints : MonoBehaviour
         return this.RouteType == RouteType.Linear && t == transform.GetChild(0); 
     }
 
-    private void OnValidate()
-    {
-        foreach(Transform t in transform)
-        {
-            if(t.GetComponent<waypoint>() == null) t.gameObject.AddComponent(typeof(waypoint)); 
-        }
-    }
+  
 }
 
 

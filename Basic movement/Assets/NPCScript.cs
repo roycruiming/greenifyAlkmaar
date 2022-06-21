@@ -19,7 +19,7 @@ public class NPCScript : MonoBehaviour
     //list of positions  
     private List<Vector3> CoordinatesTowardsDestination;
     //the waypoint that functions as the spawn/ startingwaypoint 
-    public waypoint StartingWaypoint;
+    public Transform StartingWaypoint;
 
     private void Awake()
     {
@@ -40,11 +40,13 @@ public class NPCScript : MonoBehaviour
     private void InitFirstRoute()
     {
         //if startingwaypoint is null get startingwaypoint from getnextwaypoint method, and spawn player there 
-        if (StartingWaypoint == null) this.transform.position = waypoints.GetFirstOrNextWayPoint().position;
+        if (StartingWaypoint == null)
+            this.transform.position = waypoints.GetFirstOrNextWayPoint().position;
         //else spawn on starting wayingpoint.  
-        else this.transform.position = StartingWaypoint.transform.position;
+        else
+            this.transform.position = StartingWaypoint.position;
         //set destination on next waypoint
-        destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint.transform);
+        destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint);
         //ask for the route towards the destination waypoint. 
         CoordinatesTowardsDestination = waypoints.GetRouteTowardsWaypoint(destinationWayPoint);
     }
@@ -52,6 +54,7 @@ public class NPCScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        print("wtf"); 
         //if route is linear and destination is first waypoint in hierarchy
         if (waypoints.IsRouteTypeLinearAndDestinationFirstChildInHierarchy(destinationWayPoint)) {
             //teleport player to destination
