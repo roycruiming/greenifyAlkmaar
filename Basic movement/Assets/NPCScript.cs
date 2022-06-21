@@ -47,7 +47,7 @@ public class NPCScript : MonoBehaviour
 
 
 
-    private float interpolFraction = 0.1f; 
+    private float interpolFraction = 0.0f; 
 
     private void FixedUpdate()
     {
