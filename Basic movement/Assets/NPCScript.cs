@@ -1,8 +1,4 @@
-
 using UnityEngine;
-
-
-
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
 public class NPCScript : MonoBehaviour
@@ -12,19 +8,13 @@ public class NPCScript : MonoBehaviour
     [SerializeField] private Waypoints waypoints;
     [SerializeField] private float MovementSpeed = 4f;
     [SerializeField] private float CurveSharpness = 20;
-
-
     private Animator animator;
     private Rigidbody _rigidbody;
     //the waypoint the npc is walking towards
     public Transform destinationWayPoint;
     public Transform StartingWaypoint;
-
-
-    private const double MaxDistance = 0.1;
+    private const double MaxDistance = 0.3;
      
-    
-
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -40,7 +30,6 @@ public class NPCScript : MonoBehaviour
         animator.SetFloat("Vertical", 1);
     }
 
-
     private void SpawnAndSetFirstDestination()
     {
         //if startingwaypoint is null get startingwaypoint from getnextwaypoint method, and spawn player there 
@@ -51,10 +40,7 @@ public class NPCScript : MonoBehaviour
         destinationWayPoint = waypoints.GetFirstOrNextWayPoint(StartingWaypoint);
     }
 
-
-
     private float interpolFraction = 0f; 
-
     private void FixedUpdate()
     {
         //if the destination is the first waypoint in the hierarchy, and 
@@ -69,10 +55,8 @@ public class NPCScript : MonoBehaviour
 
         //find the next position to walk to. 
         Vector3 interpolatedPosition = waypoints.GetInterpolatedPosition(destinationWayPoint, interpolFraction);
-
         //look at the position (but ignore y)
         LookAtButIgnoreYaxis(interpolatedPosition);
-
         //move towards the position 
         _rigidbody.MovePosition(
                Vector3.MoveTowards(this.transform.position, interpolatedPosition , MovementSpeed * Time.fixedDeltaTime));
@@ -90,10 +74,7 @@ public class NPCScript : MonoBehaviour
             //... Add to interpolFraction
             interpolFraction = interpolFraction +  1/CurveSharpness;
         }
-
     }
-
-
     //look at the next waypoint
     private void LookAtButIgnoreYaxis(Vector3 lookat)
     {
