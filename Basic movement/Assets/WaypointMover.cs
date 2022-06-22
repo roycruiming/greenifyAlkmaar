@@ -37,7 +37,7 @@ public class WaypointMover : MonoBehaviour
     {
         //if the destination is the first waypoint in the hierarchy, and 
         //the route type is linear,  teleport player to first waypoint
-        if (waypoints.RoutTypeIsLinearAndTransformIsFirstInHierarchy(destinationWayPoint))
+        if (waypoints.RoutTypeIsLinearAndTransformIsFirstChildInHierarchy(destinationWayPoint))
         {
             interpolFraction = 0;
             transform.position = destinationWayPoint.position;

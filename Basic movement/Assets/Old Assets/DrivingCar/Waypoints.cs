@@ -17,7 +17,7 @@ public class Waypoints : MonoBehaviour
         {
            Gizmos.color = Color.blue;
 
-            bool transformLastInHierarchyWhileRouteLinear =  RoutTypeIsLinearAndTransformIsFirstInHierarchy(
+            bool transformLastInHierarchyWhileRouteLinear =  RoutTypeIsLinearAndTransformIsFirstChildInHierarchy(
                 GetFirstOrNextWayPoint(transform));
 
 
@@ -112,7 +112,7 @@ public class Waypoints : MonoBehaviour
         else return transform.GetChild(currentWaypoint.GetSiblingIndex() + 1);
     }
 
-    public bool RoutTypeIsLinearAndTransformIsFirstInHierarchy(Transform t)
+    public bool RoutTypeIsLinearAndTransformIsFirstChildInHierarchy(Transform t)
     {
         return RouteType == RouteType.Linear && t == transform.GetChild(0); 
     }
